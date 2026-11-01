@@ -51,3 +51,13 @@ storage is specific to the browser and origin; separate devices do not share dat
 
 Automated browser checks: `npm test`. Production check: `npm run build`.
 See [VERIFICATION.md](VERIFICATION.md) for the six passing browser checks, screenshots, and observed limits.
+
+## Hosted presentation
+
+On 2026-11-01 the owner authorized ChatGPT Sites publication for phone access,
+superseding the original local-only constraint. GitHub remains the source history:
+`https://github.com/invicta-ctrl/qrmenu/tree/feature/kawing-interactive-prototype`.
+The tracked `.openai/hosting.json` identifies the Site and static build directory.
+Build with `npm run build`; publish the exact committed build through Sites.
+The Site begins owner-private and requires the same ChatGPT account on your phone.
+Browser-local demo data remains independent on each device and origin.
