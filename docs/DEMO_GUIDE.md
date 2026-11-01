@@ -18,7 +18,7 @@ Open the local URL printed by Vite. For a production bundle, run `npm run build`
 
 ## Five-minute presentation
 
-1. **Start with the owner.** Open Overview. Explain the daily sales, active orders,
+1. **Start with the guided demo.** The new Start here page explains all three roles. Tap Start guided demo to follow the connected story, or open Overview to explore freely. Explain the daily sales, active orders,
    and business snapshot. Point out that baseline figures are illustrative.
 2. **Become the customer.** Open the customer menu, explore a category or search,
    and add a dish. Adjust its quantity to show that the total changes. Choose a
@@ -59,5 +59,21 @@ superseding the original local-only constraint. GitHub remains the source histor
 `https://github.com/invicta-ctrl/qrmenu/tree/feature/kawing-interactive-prototype`.
 The tracked `.openai/hosting.json` identifies the Site and static build directory.
 Build with `npm run build`; publish the exact committed build through Sites.
-The Site begins owner-private and requires the same ChatGPT account on your phone.
+The owner has authorized public access. Anyone with the Site URL can open it without signing in.
 Browser-local demo data remains independent on each device and origin.
+
+
+## Self-guided partner experience
+
+Start at the Site root, tap **Start guided demo**, and follow the eight action cards.
+Continue unlocks after the relevant action; Skip step allows free exploration.
+Pause keeps progress. Demo home always returns to the role chooser and complete
+feature map. Resume continues the saved step. Restart resets walkthrough progress
+without clearing existing demo data. Use confirmed Reset demo for a fresh restaurant.
+On a phone, a Next action appears at the bottom when the current step is complete.
+
+The walkthrough follows a new order through customer checkout, staff service,
+owner totals, branding, menu availability, analytics, offline queue/reconnect, and
+the proposed ecosystem. The last screen offers prompts for the founder discussion.
+Links between views explain how changes connect. Hash links support reload and
+browser Back/Forward, so you can bookmark individual features.

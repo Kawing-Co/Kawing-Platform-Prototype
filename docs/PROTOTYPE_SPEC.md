@@ -33,3 +33,15 @@ numbers are illustrative assumptions, not actual traction. Local assets and brow
 ## Verification
 Production build; Playwright interaction checks at desktop and mobile widths; screenshots
 and visual review. Validate calculations and repeated offline/reconnect behavior.
+
+## Partner navigation improvement — 2026-11-01
+Authorized: improve the existing hosted demo and republish under its current audience.
+- Default entry is a plain-language Start here page with three roles and a complete feature map.
+- Eight-step action-based walkthrough retains progress, supports pause/resume/skip/back,
+  tracks a real demo order, and ends with founder discussion prompts.
+- Every product view explains its purpose and suggests a connected next action.
+- Receipt links directly to kitchen; staff can return to the same receipt.
+- Mobile has visible Demo home navigation and touch-friendly controls.
+- URL hash navigation supports reload, deep links and browser Back/Forward.
+- A dedicated payment/offline explanation walks through queue, reconnect, and limits.
+- Verify complete guided journey, resume/back/deep links, mobile map and existing flows.

@@ -53,3 +53,23 @@ passed. Remote main remained at baseline
 `f5bbb084d3fd60f1771c49b20125e8c3922eb998` at final verification. Root visual review
 also passed desktop/mobile overview and desktop customer menu. Work remains on
 the isolated feature branch, with no production deployment or remote push.
+
+## Partner navigation release — 2026-11-01
+
+`npm test`: **9 passed**, 24.7 seconds. All six original workflow regressions remain
+green. New checks complete the eight-step story using real demo actions, including
+an order served by staff and a second queued/reconnected order. Mobile checks cover
+pause/resume after reload, skipping, backward steps, deep links, browser Back, and
+a reachable floating Next action after checkout. No horizontal overflow at 390px.
+
+`npm run build` and `git diff --check` passed. Visually reviewed the new desktop
+Start here page and mobile guided customer view. Additional screenshots:
+[Desktop home](screenshots/desktop-demo-home.png),
+[Mobile home](screenshots/mobile-demo-home.png),
+[Desktop walkthrough](screenshots/desktop-guided-demo.png),
+[Mobile walkthrough](screenshots/mobile-guided-demo.png).
+
+The user explicitly authorized anyone-with-link access. Sites access was changed
+to public and confirmed by its access tool. Republishing uses the same Site ID and
+URL, preserving this audience. Browser-local storage and simulated-payment limits
+remain unchanged. Walkthrough progress is separate from restaurant demo data.

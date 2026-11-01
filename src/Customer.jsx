@@ -9,7 +9,7 @@ const cxStyle = `
 @media(prefers-reduced-motion:reduce){.cx-food,.cx-food img{transition:none}.cx-food:hover{transform:none}}
 `;
 
-export default function Customer({ menu = [], brand = {name:'Salo'}, onSubmit, orders = [], offline = false }) {
+export default function Customer({ menu = [], brand = {name:'Salo'}, onSubmit, orders = [], offline = false, onNavigate }) {
   const [category, setCategory] = useState('All');
   const [search, setSearch] = useState('');
   const [cart, setCart] = useState({});
@@ -64,8 +64,8 @@ export default function Customer({ menu = [], brand = {name:'Salo'}, onSubmit, o
       <p>{status === 'queued' ? 'Your order is saved on this device. Reconnect the demo to send it to the kitchen.' : statusIndex === 3 ? 'Your order has been served. Thank you for supporting a local table.' : 'Stay a little, make yourself at home. Your table is connected to our kitchen.'}</p>
       <div className="cx-success-ref">Order <strong>#{liveOrder?.id}</strong> · Table 05 · <strong>{peso(liveOrder?.total || 0)}</strong><br/><small>{liveOrder?.payment === 'GCash' ? 'GCash payment simulated — no money was charged.' : 'Pay at the counter · demo order only'}</small></div>
       <div className="cx-progress">{['Received','Preparing','Ready','Served'].map((step,index) => <div className={`cx-step ${index <= statusIndex && status !== 'queued' ? 'done' : ''}`} key={step}><i>{index <= statusIndex && status !== 'queued' ? <Check size={13}/> : index+1}</i>{step}</div>)}</div>
-      <p>Switch to the <strong>Kitchen</strong> view to move this order along. Its progress updates here.</p>
-      <button className="cx-primary" onClick={clearReceipt}>Explore the menu <ArrowUpRight size={15}/></button>
+      <p>Your order is shared with the restaurant team. Follow it in the kitchen, then come back to see its progress.</p>{onNavigate&&<button className="cx-primary" onClick={()=>onNavigate('Orders')}>Follow this order in the kitchen <ArrowUpRight size={15}/></button>}
+      <button className="cx-back" onClick={clearReceipt}>Explore the menu <ArrowUpRight size={15}/></button>
     </section> : <>
       <header className="cx-hero"><div className="cx-hero-copy"><div className="cx-eyebrow"><Leaf size={13}/> Made local. Shared together.</div><h1>A seat at<br/>the {brand.name || 'Salo'} table.</h1><p>{brand.tagline || 'Good food, thoughtfully made.'}<br/>A little familiar. A little extraordinary.</p><div className="cx-hero-meta"><span><MapPin size={12}/> Poblacion, Makati</span><span><Clock3 size={12}/> 15–25 min</span></div></div><div className="cx-table"><span>You’re at</span><strong>Table 05</strong></div></header>
       {offline && <div className="cx-offline"><WifiOff size={15}/> Offline simulation · Your order will be saved here and synced when reconnected.</div>}
