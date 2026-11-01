@@ -77,3 +77,11 @@ owner totals, branding, menu availability, analytics, offline queue/reconnect, a
 the proposed ecosystem. The last screen offers prompts for the founder discussion.
 Links between views explain how changes connect. Hash links support reload and
 browser Back/Forward, so you can bookmark individual features.
+
+## Customer-engagement source upgrade
+
+The local prototype now includes the merchant hub, Owner Studio, payment-verification
+states and engagement tools. See [UPGRADE_PARTNER_SCRIPT.md](UPGRADE_PARTNER_SCRIPT.md)
+for the expanded demonstration and [STOREFRONT_ARCHITECTURE.md](STOREFRONT_ARCHITECTURE.md)
+for contracts and limits. This task explicitly does **not** authorize publication;
+the existing public Site remains on its prior version until a separate release request.

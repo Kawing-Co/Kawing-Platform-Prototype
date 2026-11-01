@@ -53,3 +53,17 @@ that make the metrics harder to inspect.
 
 The presenter should be able to follow this journey through visible buttons rather
 than needing hidden routes or a memorized script.
+
+## Storefront upgrade
+
+The reference informed the value of quick guest services; Kawing's composition and
+identity remain independent. The primary order action stays prominent, with service
+modules secondary. Quick Actions uses compact identity/service rows, Visual Storefront
+adds cover photography and featured dishes, and Minimal Utility removes large imagery
+for concise shortcuts. Studio reuses the hub renderer rather than a disconnected mock.
+
+Customer content has larger text, 44px primary actions, context/status strips, inline
+module pages, visible keyboard focus and a bottom customer navigation. Cart actions,
+module entrances, loyalty stamps and confirmations use short transform/opacity effects;
+reduced motion disables transitions. Merchant colors receive computed foregrounds.
+No looping animation, review incentives, checkout ads or forced account enrollment.

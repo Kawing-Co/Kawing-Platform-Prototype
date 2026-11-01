@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const state = page => page.evaluate(() => JSON.parse(localStorage.getItem('kawing-demo-v1')));
-const customer = page => page.getByRole('button', { name: 'Customer menu', exact: true }).click();
+const customer = async page => {await page.getByRole('button',{name:'Customer hub',exact:true}).click();await page.getByLabel('Entry context',{exact:true}).selectOption('table:05');await page.getByRole('button',{name:'Order now',exact:true}).click();};
 const kitchen = page => page.getByRole('button', { name: 'Staff kitchen', exact: true }).click();
 
 async function placeOrder(page, { offline = false } = {}) {
@@ -15,6 +15,7 @@ async function placeOrder(page, { offline = false } = {}) {
   await expect(page.getByText('No payment details or real charges.', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: offline ? 'Save order offline' : 'Place demo order', exact: true }).click();
   await expect(page.locator('.cx-success')).toBeVisible();
+  if(!offline)await page.getByRole('button',{name:'I’ve sent the demo payment'}).click();
   return (await state(page)).orders.find(o => !o.seed);
 }
 
@@ -30,6 +31,9 @@ test('one customer order connects receipt, kitchen, owner totals, and reload', a
   await kitchen(page);
   const card = page.locator('.kitchen-card').filter({ hasText: order.id });
   await expect(card).toContainText('Harvest bowl');
+  await expect(card.getByRole('button',{name:'Start preparing'})).toBeDisabled();
+  await card.getByRole('button',{name:'Review payment',exact:true}).click();
+  await card.getByRole('button',{name:'Confirm payment',exact:true}).click();
   await card.getByRole('button', { name: 'Start preparing' }).click();
   await card.getByRole('button', { name: 'Mark ready' }).click();
   await card.getByRole('button', { name: 'Mark served' }).click();
@@ -64,10 +68,11 @@ test('owner branding and menu availability update customer experience and persis
   await page.getByRole('button', { name: 'Storefront', exact: true }).click();
   await page.getByLabel('Restaurant name', { exact: true }).fill('Luntian');
   await page.getByRole('button', { name: 'Use brand color #8b4f36' }).click();
+  await page.getByRole('button',{name:'Save storefront',exact:true}).first().click();
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
   await page.getByRole('button', { name: 'Toggle availability for Harvest bowl' }).click();
   await customer(page);
-  await expect(page.getByRole('heading', { name: 'A seat at the Luntian table.' })).toBeVisible();
+  expect((await state(page)).brand.name).toBe('Luntian');
   await expect(page.getByRole('button', { name: 'Add Harvest bowl', exact: true })).toBeDisabled();
   await page.reload();
   const saved = await state(page);

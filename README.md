@@ -20,3 +20,14 @@ The prototype includes a merchant dashboard, customer menu and simulated checkou
 staff kitchen queue, menu availability, storefront branding, illustrative analytics,
 CSV order export, guided tour, and proposed ecosystem roadmap. It uses browser
 storage only; payments and offline operation are simulations. No deployment.
+
+### Customer engagement upgrade (source only)
+
+Owner Studio now configures three customer hub layouts, branding, approved modules,
+promotions, loyalty and guest links. Customer ordering connects to explicit cashier
+verification, fulfillment and a loyalty ledger. Feedback, review/social demonstrations,
+Wi-Fi guidance, a small memory puzzle and local engagement reporting are included.
+See the [partner script](docs/UPGRADE_PARTNER_SCRIPT.md),
+[architecture](docs/STOREFRONT_ARCHITECTURE.md), and
+[upgrade verification](docs/STOREFRONT_VERIFICATION.md).
+The public Site remains on the earlier version until separately authorized for release.

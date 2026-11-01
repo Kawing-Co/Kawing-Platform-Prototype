@@ -1,38 +1,556 @@
-import React from 'react';
-import {ArrowRight, ArrowLeft, Check, Play, ShoppingBag, UtensilsCrossed, LayoutDashboard, Palette, ChartNoAxesCombined, WifiOff, Network, Map, X, ReceiptText, RotateCcw} from 'lucide-react';
-import './demo.css';
+import React from "react";
+import {
+  ArrowRight,
+  ArrowLeft,
+  Check,
+  Play,
+  ShoppingBag,
+  UtensilsCrossed,
+  LayoutDashboard,
+  Palette,
+  ChartNoAxesCombined,
+  WifiOff,
+  Network,
+  Map,
+  X,
+  ReceiptText,
+  RotateCcw,
+} from "lucide-react";
+import "./demo.css";
 export const steps = [
- {page:'Customer',title:'Order as a customer',role:'Customer',action:'Choose an available dish, review your order, then place a demo order. Try GCash or cash—no real payment is taken.',why:'A guest orders from their table without an account. That same order reaches the kitchen.',icon:ShoppingBag},
- {page:'Orders',title:'Follow it through the kitchen',role:'Staff',action:'Find your highlighted order. Tap Start preparing, Mark ready, then Mark served.',why:'The team works from one queue, while the guest’s receipt follows the same status.',icon:UtensilsCrossed},
- {page:'Overview',title:'See the owner’s view',role:'Owner',action:'Look at Total sales and Orders. Your submitted order is now included in both.',why:'Owners get a shared view of activity instead of piecing it together by hand. Starting figures are illustrative.',icon:LayoutDashboard},
- {page:'Storefront',title:'Make the storefront yours',role:'Owner',action:'Change the restaurant name or choose a different brand color. The phone preview updates immediately.',why:'Each establishment keeps its own identity. Changes also appear in the customer menu.',icon:Palette},
- {page:'Menu',title:'Keep the menu up to date',role:'Owner',action:'Toggle any dish between Available and Sold out. Preview the customer menu to see the result.',why:'Guests can only add available dishes. The owner controls the menu in one place.',icon:ReceiptText},
- {page:'Analytics',title:'Understand what’s working',role:'Owner',action:'Change the reporting period to This week or This month. You can also export demo orders as CSV.',why:'Revenue, order totals, and trends help explain the business. Baseline figures and charts are illustrative.',icon:ChartNoAxesCombined},
- {page:'Payments & offline',title:'Try a connection interruption',role:'Shared workflow',action:'Enable offline simulation, create a new customer order, then reconnect. The saved order enters the kitchen once.',why:'This demonstrates the intended workflow using browser storage. It is not real payment processing or production offline infrastructure.',icon:WifiOff},
- {page:'Ecosystem',title:'See where Kawing could go',role:'Founders',action:'Explore the proposed pilot, neighborhood, and ecosystem stages. Use this view to discuss the next business decisions.',why:'Start with 3–5 establishments, learn from operators, then consider broader local commerce. These are proposals, not traction claims.',icon:Network},
+  {
+    page: "Customer",
+    title: "Order as a customer",
+    role: "Customer",
+    action:
+      "From the hub, open the menu. Choose a dish and payment preference, then place a demo order. For a wallet, record your simulated payment claim. No money moves.",
+    why: "A guest orders from their table without an account. That same order reaches the kitchen.",
+    icon: ShoppingBag,
+  },
+  {
+    page: "Orders",
+    title: "Follow it through the kitchen",
+    role: "Staff",
+    action:
+      "Find your highlighted order. Review and confirm its simulated payment, then tap Start preparing, Mark ready, and Mark served.",
+    why: "The team works from one queue, while the guest’s receipt follows the same status.",
+    icon: UtensilsCrossed,
+  },
+  {
+    page: "Overview",
+    title: "See the owner’s view",
+    role: "Owner",
+    action:
+      "Look at Total sales and Orders. Your submitted order is now included in both.",
+    why: "Owners get a shared view of activity instead of piecing it together by hand. Starting figures are illustrative.",
+    icon: LayoutDashboard,
+  },
+  {
+    page: "Storefront",
+    title: "Make the storefront yours",
+    role: "Owner",
+    action:
+      "Choose a hub template and theme, or change the name. Preview your draft, then Save storefront to update customer mode.",
+    why: "Each establishment keeps its own identity. Changes also appear in the customer menu.",
+    icon: Palette,
+  },
+  {
+    page: "Menu",
+    title: "Keep the menu up to date",
+    role: "Owner",
+    action:
+      "Toggle any dish between Available and Sold out. Preview the customer menu to see the result.",
+    why: "Guests can only add available dishes. The owner controls the menu in one place.",
+    icon: ReceiptText,
+  },
+  {
+    page: "Analytics",
+    title: "Understand what’s working",
+    role: "Owner",
+    action:
+      "Change the reporting period to This week or This month. You can also export demo orders as CSV.",
+    why: "Revenue, order totals, and trends help explain the business. Baseline figures and charts are illustrative.",
+    icon: ChartNoAxesCombined,
+  },
+  {
+    page: "Payments & offline",
+    title: "Try a connection interruption",
+    role: "Shared workflow",
+    action:
+      "Enable offline simulation, create a new customer order, then reconnect. The saved order enters the kitchen once.",
+    why: "This demonstrates the intended workflow using browser storage. It is not real payment processing or production offline infrastructure.",
+    icon: WifiOff,
+  },
+  {
+    page: "Ecosystem",
+    title: "See where Kawing could go",
+    role: "Founders",
+    action:
+      "Explore the proposed pilot, neighborhood, and ecosystem stages. Use this view to discuss the next business decisions.",
+    why: "Start with 3–5 establishments, learn from operators, then consider broader local commerce. These are proposals, not traction claims.",
+    icon: Network,
+  },
 ];
-export function DemoHome({navigate,startGuide,guide,resumeGuide}){
- return <section className="demo-home">
-  <div className="intro-heading"><span className="eyebrow">WELCOME TO THE KAWING PRODUCT DEMO</span><h1>One order.<br/>A whole business, connected.</h1><p>Kawing brings customers, restaurant teams, and owners into one shared workflow. Step inside <strong>Salo</strong>, our sample restaurant, and try it for yourself.</p><div className="intro-actions"><button className="button primary" onClick={guide?resumeGuide:startGuide}><Play size={16}/>{guide?'Resume guided demo':'Start guided demo'}<ArrowRight size={16}/></button><span>8 short steps · About 5–8 minutes</span></div><div className="demo-boundary">Interactive concept · No real payments · Changes stay in this browser</div></div>
-  <div className="role-intro" aria-label="Three connected perspectives">{[[ShoppingBag,'01','Be the customer','Browse food, build a basket, and place a simulated order.','Customer','Try customer ordering'],[UtensilsCrossed,'02','Join the restaurant team','Prepare and serve the same order from the shared kitchen queue.','Orders','Open the staff kitchen'],[LayoutDashboard,'03','Think like the owner','Watch sales, shape your brand, and manage what’s available.','Overview','Explore the owner dashboard']].map(([Icon,n,t,d,p,label])=><button className="role-intro-card" key={n} onClick={()=>navigate(p)}><div><span className="intro-icon"><Icon size={23}/></span><span className="intro-number">{n}</span></div><h2>{t}</h2><p>{d}</p><span className="intro-card-link">{label}<ArrowRight size={15}/></span></button>)}</div>
-  <div className="feature-map-heading"><div><span className="eyebrow">EXPLORE AT YOUR OWN PACE</span><h2>Your map to Kawing</h2><p>Every feature is interactive. Pick a view, or follow the guided story above.</p></div>{guide&&<button className="text-button" onClick={startGuide}><RotateCcw size={14}/> Restart walkthrough</button>}</div>
-  <div className="feature-map">{steps.map(({page,title,role,why,icon:Icon},i)=><button key={page} onClick={()=>navigate(page)}><span className="feature-map-icon"><Icon size={19}/></span><div><small>{role} · {String(i+1).padStart(2,'0')}</small><h3>{title}</h3><p>{why}</p></div><ArrowRight size={16}/></button>)}</div>
-  <div className="connection-explainer"><span>THE CONNECTED STORY</span><div><b>Customer places an order</b><ArrowRight size={17}/><b>Staff prepares & serves</b><ArrowRight size={17}/><b>Owner sees the activity</b></div><p>Switching perspectives changes the view—not the order. Each device has its own separate demo data.</p></div>
- </section>
+export function DemoHome({ navigate, startGuide, guide, resumeGuide }) {
+  return (
+    <section className="demo-home">
+      <div className="intro-heading">
+        <span className="eyebrow">WELCOME TO THE KAWING PRODUCT DEMO</span>
+        <h1>
+          One order.
+          <br />A whole business, connected.
+        </h1>
+        <p>
+          From one scan to a lasting customer relationship: Kawing connects a
+          branded hub, rewards, customer convenience, and restaurant operations.
+          Step inside <strong>Salo</strong>, our sample restaurant, and try it
+          for yourself.
+        </p>
+        <div className="intro-actions">
+          <button
+            className="button primary"
+            onClick={guide ? resumeGuide : startGuide}
+          >
+            <Play size={16} />
+            {guide ? "Resume guided demo" : "Start guided demo"}
+            <ArrowRight size={16} />
+          </button>
+          <span>8 short steps · About 5–8 minutes</span>
+        </div>
+        <div className="demo-boundary">
+          Interactive concept · No real payments · Changes stay in this browser
+        </div>
+      </div>
+      <div className="role-intro" aria-label="Three connected perspectives">
+        {[
+          [
+            ShoppingBag,
+            "01",
+            "Be the customer",
+            "Browse food, build a basket, and place a simulated order.",
+            "Customer",
+            "Try customer ordering",
+          ],
+          [
+            UtensilsCrossed,
+            "02",
+            "Join the restaurant team",
+            "Prepare and serve the same order from the shared kitchen queue.",
+            "Orders",
+            "Open the staff kitchen",
+          ],
+          [
+            LayoutDashboard,
+            "03",
+            "Think like the owner",
+            "Watch sales, shape your brand, and manage what’s available.",
+            "Overview",
+            "Explore the owner dashboard",
+          ],
+        ].map(([Icon, n, t, d, p, label]) => (
+          <button
+            className="role-intro-card"
+            key={n}
+            onClick={() => navigate(p)}
+          >
+            <div>
+              <span className="intro-icon">
+                <Icon size={23} />
+              </span>
+              <span className="intro-number">{n}</span>
+            </div>
+            <h2>{t}</h2>
+            <p>{d}</p>
+            <span className="intro-card-link">
+              {label}
+              <ArrowRight size={15} />
+            </span>
+          </button>
+        ))}
+      </div>
+      <div className="feature-map-heading">
+        <div>
+          <span className="eyebrow">EXPLORE AT YOUR OWN PACE</span>
+          <h2>Your map to Kawing</h2>
+          <p>
+            Every feature is interactive. Pick a view, or follow the guided
+            story above.
+          </p>
+        </div>
+        {guide && (
+          <button className="text-button" onClick={startGuide}>
+            <RotateCcw size={14} /> Restart walkthrough
+          </button>
+        )}
+      </div>
+      <div className="feature-map">
+        {steps.map(({ page, title, role, why, icon: Icon }, i) => (
+          <button key={page} onClick={() => navigate(page)}>
+            <span className="feature-map-icon">
+              <Icon size={19} />
+            </span>
+            <div>
+              <small>
+                {role} · {String(i + 1).padStart(2, "0")}
+              </small>
+              <h3>{title}</h3>
+              <p>{why}</p>
+            </div>
+            <ArrowRight size={16} />
+          </button>
+        ))}
+      </div>
+      <div className="connection-explainer">
+        <span>BEYOND A QR MENU</span>
+        <h2>One scan is only the beginning.</h2>
+        <p>
+          Explore loyalty, neutral reviews, private feedback, promotions, Wi-Fi
+          assistance, and a little play. These tools connect to the same
+          operational demo—not a page of disconnected links.
+        </p>
+        <div>
+          <button
+            className="button primary"
+            onClick={() => navigate("Engagement")}
+          >
+            Explore Customer Engagement <ArrowRight size={15} />
+          </button>
+          <button
+            className="button secondary"
+            onClick={() => navigate("Storefront")}
+          >
+            Open Owner Studio
+          </button>
+        </div>
+      </div>
+      <div className="connection-explainer">
+        <span>THE CONNECTED STORY</span>
+        <div>
+          <b>Customer places an order</b>
+          <ArrowRight size={17} />
+          <b>Staff prepares & serves</b>
+          <ArrowRight size={17} />
+          <b>Owner sees the activity</b>
+        </div>
+        <p>
+          Switching perspectives changes the view—not the order. Each device has
+          its own separate demo data.
+        </p>
+      </div>
+    </section>
+  );
 }
-export function GuideRail({guide,done,navigate,advanceGuide,leaveGuide,order}){
- const step=steps[guide.step],Icon=step.icon;
- return <section className="guide-rail" aria-label="Interactive walkthrough"><div className="guide-top"><span><Play size={12}/> GUIDED DEMO · STEP {guide.step+1} OF {steps.length}</span><button onClick={leaveGuide} aria-label="Pause guided demo"><X size={16}/><span>Pause</span></button></div><div className="guide-body"><span className="guide-icon"><Icon size={20}/></span><div className="guide-copy"><h2>{step.title}<span>{step.role}</span></h2><p>{step.action}</p>{order&&guide.step<3&&<small className="guide-order">Your order: #{order.id} · Table {order.table} · {order.status==='served'?'Served':order.status==='queued'?'Waiting to sync':order.status==='new'?'Received':order.status}</small>}</div><div className="guide-controls"><button className="button secondary" onClick={()=>navigate(step.page)}>Open this view</button><button className="button primary" disabled={!done} onClick={()=>advanceGuide(false)}>{guide.step===7?'Finish walkthrough':'Continue'}{done?<Check size={15}/>:<ArrowRight size={15}/>}</button></div></div><div className="guide-bottom"><span role="status">{done?<><Check size={13}/> {guide.step===7?'You’ve explored the connected story.':guide.step===2?'Your order is reflected in the dashboard.':'Ready for the next step.'}</>:<>Try the action above, or skip to explore freely.</>}</span><div>{guide.step>0&&<button onClick={()=>advanceGuide(false,-1)}><ArrowLeft size={12}/> Back</button>}{guide.step<7&&<button onClick={()=>advanceGuide(true)}>Skip step <ArrowRight size={12}/></button>}</div></div><div className="guide-progress" aria-label={`Step ${guide.step+1} of ${steps.length}`}><span style={{width:((guide.step+1)/steps.length*100)+'%'}}/></div></section>
+export function GuideRail({
+  guide,
+  done,
+  navigate,
+  advanceGuide,
+  leaveGuide,
+  order,
+}) {
+  const step = steps[guide.step],
+    Icon = step.icon;
+  return (
+    <section className="guide-rail" aria-label="Interactive walkthrough">
+      <div className="guide-top">
+        <span>
+          <Play size={12} /> GUIDED DEMO · STEP {guide.step + 1} OF{" "}
+          {steps.length}
+        </span>
+        <button onClick={leaveGuide} aria-label="Pause guided demo">
+          <X size={16} />
+          <span>Pause</span>
+        </button>
+      </div>
+      <div className="guide-body">
+        <span className="guide-icon">
+          <Icon size={20} />
+        </span>
+        <div className="guide-copy">
+          <h2>
+            {step.title}
+            <span>{step.role}</span>
+          </h2>
+          <p>{step.action}</p>
+          {order && guide.step < 3 && (
+            <small className="guide-order">
+              Your order: #{order.id} · Table {order.table} ·{" "}
+              {order.status === "served"
+                ? "Served"
+                : order.status === "queued"
+                  ? "Waiting to sync"
+                  : order.status === "new"
+                    ? "Received"
+                    : order.status}
+            </small>
+          )}
+        </div>
+        <div className="guide-controls">
+          <button
+            className="button secondary"
+            onClick={() => navigate(step.page)}
+          >
+            Open this view
+          </button>
+          <button
+            className="button primary"
+            disabled={!done}
+            onClick={() => advanceGuide(false)}
+          >
+            {guide.step === 7 ? "Finish walkthrough" : "Continue"}
+            {done ? <Check size={15} /> : <ArrowRight size={15} />}
+          </button>
+        </div>
+      </div>
+      <div className="guide-bottom">
+        <span role="status">
+          {done ? (
+            <>
+              <Check size={13} />{" "}
+              {guide.step === 7
+                ? "You’ve explored the connected story."
+                : guide.step === 2
+                  ? "Your order is reflected in the dashboard."
+                  : "Ready for the next step."}
+            </>
+          ) : (
+            <>Try the action above, or skip to explore freely.</>
+          )}
+        </span>
+        <div>
+          {guide.step > 0 && (
+            <button onClick={() => advanceGuide(false, -1)}>
+              <ArrowLeft size={12} /> Back
+            </button>
+          )}
+          {guide.step < 7 && (
+            <button onClick={() => advanceGuide(true)}>
+              Skip step <ArrowRight size={12} />
+            </button>
+          )}
+        </div>
+      </div>
+      <div
+        className="guide-progress"
+        aria-label={`Step ${guide.step + 1} of ${steps.length}`}
+      >
+        <span
+          style={{ width: ((guide.step + 1) / steps.length) * 100 + "%" }}
+        />
+      </div>
+    </section>
+  );
 }
-export const contexts={
- Overview:['OWNER WORKSPACE','See the business at a glance.','Create an order as a customer, then come back to see sales and order totals update.','Customer','Try customer ordering'],
- Customer:['CUSTOMER EXPERIENCE','You’re a guest at Table 05.','Browse, add a dish, and review your order. GCash and cash are simulations; no money moves.','Orders','Open staff kitchen'],
- Orders:['STAFF KITCHEN','One queue for your restaurant team.','Customer orders arrive here. Move an order through preparing, ready, and served.','Customer','Check the customer receipt'],
- Storefront:['OWNER · BRANDING','Make the sample restaurant your own.','Edit the name, welcome message, or color. Your customer menu follows these settings.','Customer','Preview your storefront'],
- Menu:['OWNER · MENU MANAGEMENT','Control what guests can order.','Mark a dish sold out, then open the customer menu. Its add button will be disabled.','Customer','See the customer menu'],
- Analytics:['OWNER · BUSINESS INSIGHTS','Explore the numbers behind the day.','Switch periods or export orders. Starting metrics and charts are sample data; your orders add to totals.','Overview','Return to the dashboard'],
- Ecosystem:['FOUNDERS · THE OPPORTUNITY','From a kitchen to a neighborhood.','Explore a proposed growth path. Start small, validate the core workflow, then decide what to build next.','Start here','Back to the demo map'],
+export const contexts = {
+  Overview: [
+    "OWNER WORKSPACE",
+    "See the business at a glance.",
+    "Create an order as a customer, then come back to see sales and order totals update.",
+    "Customer",
+    "Try customer ordering",
+  ],
+  Customer: [
+    "CUSTOMER EXPERIENCE",
+    "Your restaurant’s customer hub.",
+    "A shared link opens the hub. Choose table or pickup context, then order or explore rewards and guest services. All payments are simulated.",
+    "Orders",
+    "Open staff kitchen",
+  ],
+  Orders: [
+    "STAFF KITCHEN",
+    "One queue for your restaurant team.",
+    "Customer orders arrive here. Move an order through preparing, ready, and served.",
+    "Customer",
+    "Check the customer receipt",
+  ],
+  Storefront: [
+    "OWNER · BRANDING",
+    "Make the sample restaurant your own.",
+    "Edit the name, welcome message, or color. Your customer menu follows these settings.",
+    "Customer",
+    "Preview your storefront",
+  ],
+  Menu: [
+    "OWNER · MENU MANAGEMENT",
+    "Control what guests can order.",
+    "Mark a dish sold out, then open the customer menu. Its add button will be disabled.",
+    "Customer",
+    "See the customer menu",
+  ],
+  Analytics: [
+    "OWNER · BUSINESS INSIGHTS",
+    "Explore the numbers behind the day.",
+    "Switch periods or export orders. Starting metrics and charts are sample data; your orders add to totals.",
+    "Overview",
+    "Return to the dashboard",
+  ],
+  Ecosystem: [
+    "FOUNDERS · THE OPPORTUNITY",
+    "From a kitchen to a neighborhood.",
+    "Explore a proposed growth path. Start small, validate the core workflow, then decide what to build next.",
+    "Start here",
+    "Back to the demo map",
+  ],
 };
-export function ViewContext({page,navigate}){const c=contexts[page];return c&&<section className="view-context"><div><span>{c[0]}</span><h2>{c[1]}</h2><p>{c[2]}</p></div><button onClick={()=>navigate(c[3])}>{c[4]}<ArrowRight size={15}/></button></section>}
-export function OfflineExperience({data,toggleConnection,navigate,prepareOrder}){const queued=data.orders.filter(o=>o.status==='queued');return <section className="offline-experience"><span className="eyebrow">PAYMENTS & CONNECTIONS · SIMULATED</span><h1>Keep the story moving,<br/>even when the connection doesn’t.</h1><p>This demo models how a local order queue could work. Try the sequence below, then see that same order in the kitchen.</p><div className="offline-steps"><article><span>01</span><h2>Simulate going offline</h2><p>The connection control changes demo state. You do not need to turn off Wi-Fi on your phone.</p><button className="button primary" disabled={data.offline} onClick={toggleConnection}>{data.offline?<><Check size={15}/> Offline simulation enabled</>:'Enable offline simulation'}</button></article><article><span>02</span><h2>Place a new order</h2><p>Choose an available dish, review it, then tap Save order offline. It stays in this browser’s local queue.</p><button className="button secondary" onClick={prepareOrder}>Create an offline demo order <ArrowRight size={15}/></button></article><article><span>03</span><h2>Reconnect & follow it</h2><p>{queued.length?`${queued.length} order${queued.length>1?'s':''} waiting locally. Reconnect to send to the kitchen.`:'Reconnect to move saved orders into the kitchen once. Repeated toggles do not duplicate them.'}</p><button className="button primary" disabled={!data.offline} onClick={toggleConnection}>Reconnect & sync orders <ArrowRight size={15}/></button></article></div><button className="button secondary" onClick={()=>navigate('Orders')}>Inspect the kitchen queue <ArrowRight size={15}/></button><div className="payment-explainer"><h2>What about payments?</h2><div><p><strong>GCash · simulated</strong>A demo label confirms the payment choice. No provider is contacted and no money is charged.</p><p><strong>Cash at counter</strong>The kitchen marks it “Collect at counter.” This prototype does not collect or reconcile real cash.</p></div><p className="simulation-note">This is a workflow demonstration. It does not provide production offline caching, shared data between devices, payment settlement, or a live payment integration.</p></div></section>}
-export function WalkthroughComplete({navigate,restart}){return <section className="walkthrough-complete"><span className="intro-icon"><Check size={30}/></span><span className="eyebrow">YOU’VE SEEN THE CONNECTED STORY</span><h1>That’s Kawing.<br/>One business, working together.</h1><p>You’ve reached the end of the walkthrough. Any skipped features are still available from the demo map.</p><div className="completion-takeaways"><p><strong>For the customer</strong>A simple way to browse, order, and follow progress.</p><p><strong>For the team</strong>One shared kitchen workflow from received to served.</p><p><strong>For the owner</strong>Control the storefront and see business activity in one place.</p></div><div className="founder-prompt"><h2>A good place to start the conversation</h2><p>Which 3–5 establishments would make a useful pilot? What would we need to validate before asking them to rely on Kawing?</p></div><div className="intro-actions"><button className="button primary" onClick={()=>navigate('Start here')}>Explore the feature map <Map size={16}/></button><button className="button secondary" onClick={restart}>Restart walkthrough <RotateCcw size={15}/></button></div></section>}
+export function ViewContext({ page, navigate }) {
+  const c = contexts[page];
+  return (
+    c && (
+      <section className="view-context">
+        <div>
+          <span>{c[0]}</span>
+          <h2>{c[1]}</h2>
+          <p>{c[2]}</p>
+        </div>
+        <button onClick={() => navigate(c[3])}>
+          {c[4]}
+          <ArrowRight size={15} />
+        </button>
+      </section>
+    )
+  );
+}
+export function OfflineExperience({
+  data,
+  toggleConnection,
+  navigate,
+  prepareOrder,
+}) {
+  const queued = data.orders.filter((o) => o.status === "queued");
+  return (
+    <section className="offline-experience">
+      <span className="eyebrow">PAYMENTS & CONNECTIONS · SIMULATED</span>
+      <h1>
+        Keep the story moving,
+        <br />
+        even when the connection doesn’t.
+      </h1>
+      <p>
+        This demo models how a local order queue could work. Try the sequence
+        below, then see that same order in the kitchen.
+      </p>
+      <div className="offline-steps">
+        <article>
+          <span>01</span>
+          <h2>Simulate going offline</h2>
+          <p>
+            The connection control changes demo state. You do not need to turn
+            off Wi-Fi on your phone.
+          </p>
+          <button
+            className="button primary"
+            disabled={data.offline}
+            onClick={toggleConnection}
+          >
+            {data.offline ? (
+              <>
+                <Check size={15} /> Offline simulation enabled
+              </>
+            ) : (
+              "Enable offline simulation"
+            )}
+          </button>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>Place a new order</h2>
+          <p>
+            Choose an available dish, review it, then tap Save order offline. It
+            stays in this browser’s local queue.
+          </p>
+          <button className="button secondary" onClick={prepareOrder}>
+            Create an offline demo order <ArrowRight size={15} />
+          </button>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>Reconnect & follow it</h2>
+          <p>
+            {queued.length
+              ? `${queued.length} order${queued.length > 1 ? "s" : ""} waiting locally. Reconnect to send to the kitchen.`
+              : "Reconnect to move saved orders into the kitchen once. Repeated toggles do not duplicate them."}
+          </p>
+          <button
+            className="button primary"
+            disabled={!data.offline}
+            onClick={toggleConnection}
+          >
+            Reconnect & sync orders <ArrowRight size={15} />
+          </button>
+        </article>
+      </div>
+      <button className="button secondary" onClick={() => navigate("Orders")}>
+        Inspect the kitchen queue <ArrowRight size={15} />
+      </button>
+      <div className="payment-explainer">
+        <h2>What about payments?</h2>
+        <div>
+          <p>
+            <strong>GCash · simulated</strong>A demo label confirms the payment
+            choice. No provider is contacted and no money is charged.
+          </p>
+          <p>
+            <strong>Cash at counter</strong>The kitchen marks it “Collect at
+            counter.” This prototype does not collect or reconcile real cash.
+          </p>
+        </div>
+        <p className="simulation-note">
+          This is a workflow demonstration. It does not provide production
+          offline caching, shared data between devices, payment settlement, or a
+          live payment integration.
+        </p>
+      </div>
+    </section>
+  );
+}
+export function WalkthroughComplete({ navigate, restart }) {
+  return (
+    <section className="walkthrough-complete">
+      <span className="intro-icon">
+        <Check size={30} />
+      </span>
+      <span className="eyebrow">YOU’VE SEEN THE CONNECTED STORY</span>
+      <h1>
+        That’s Kawing.
+        <br />
+        One business, working together.
+      </h1>
+      <p>
+        You’ve reached the end of the walkthrough. Any skipped features are
+        still available from the demo map.
+      </p>
+      <div className="completion-takeaways">
+        <p>
+          <strong>For the customer</strong>A simple way to browse, order, and
+          follow progress.
+        </p>
+        <p>
+          <strong>For the team</strong>One shared kitchen workflow from received
+          to served.
+        </p>
+        <p>
+          <strong>For the owner</strong>Control the storefront and see business
+          activity in one place.
+        </p>
+      </div>
+      <div className="founder-prompt">
+        <h2>A good place to start the conversation</h2>
+        <p>
+          Which 3–5 establishments would make a useful pilot? What would we need
+          to validate before asking them to rely on Kawing?
+        </p>
+      </div>
+      <div className="intro-actions">
+        <button
+          className="button primary"
+          onClick={() => navigate("Start here")}
+        >
+          Explore the feature map <Map size={16} />
+        </button>
+        <button className="button secondary" onClick={restart}>
+          Restart walkthrough <RotateCcw size={15} />
+        </button>
+      </div>
+    </section>
+  );
+}

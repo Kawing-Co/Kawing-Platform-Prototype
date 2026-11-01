@@ -73,3 +73,9 @@ The user explicitly authorized anyone-with-link access. Sites access was changed
 to public and confirmed by its access tool. Republishing uses the same Site ID and
 URL, preserving this audience. Browser-local storage and simulated-payment limits
 remain unchanged. Walkthrough progress is separate from restaurant demo data.
+
+## Customer storefront and engagement source upgrade
+
+See [STOREFRONT_VERIFICATION.md](STOREFRONT_VERIFICATION.md) for the 21-test suite,
+final targeted checks/build, upgraded screenshots, architecture limits and source-only
+release boundary. The existing hosted Site was not republished by this enhancement.

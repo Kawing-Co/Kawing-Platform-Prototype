@@ -11,10 +11,13 @@ test('partner completes the eight-step story with one shared order and an offlin
  await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Place demo order',exact:true}).click();
+ await page.getByRole('button',{name:'I’ve sent the demo payment'}).click();
  await expect(rail(page)).toContainText('Ready for the next step');
  await next(page);
  const card=page.locator('.kitchen-card.guide-highlight');
  await expect(card).toHaveCount(1);
+ await card.getByRole('button',{name:'Review payment',exact:true}).click();
+ await card.getByRole('button',{name:'Confirm payment',exact:true}).click();
  await card.getByRole('button',{name:'Start preparing'}).click();
  await card.getByRole('button',{name:'Mark ready'}).click();
  await card.getByRole('button',{name:'Mark served'}).click();
@@ -22,6 +25,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await expect(page.locator('.stat-card').first()).toContainText('13,125');
  await next(page);
  await page.getByLabel('Restaurant name',{exact:true}).fill('Salo & Friends');
+ await page.getByRole('button',{name:'Save storefront',exact:true}).first().click();
  await next(page);
  await page.getByRole('button',{name:'Toggle availability for Salo garden salad'}).click();
  await next(page);
@@ -30,6 +34,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await expect(rail(page)).toContainText('STEP 7 OF 8');
  await page.getByRole('button',{name:'Enable offline simulation',exact:true}).click();
  await page.getByRole('button',{name:'Create an offline demo order'}).click();
+ await page.getByRole('button',{name:'Order now',exact:true}).click();
  await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Save order offline',exact:true}).click();
@@ -79,6 +84,7 @@ test('mobile completed action offers a reachable next step',async({page})=>{
  await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Place demo order',exact:true}).click();
+ await page.getByRole('button',{name:'I’ve sent the demo payment'}).click();
  const next=page.getByRole('button',{name:'Next: Follow it through the kitchen'});
  await expect(next).toBeInViewport();await next.click();
  await expect(rail(page)).toContainText('STEP 2 OF 8');
