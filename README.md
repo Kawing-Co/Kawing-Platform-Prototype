@@ -31,3 +31,7 @@ See the [partner script](docs/UPGRADE_PARTNER_SCRIPT.md),
 [architecture](docs/STOREFRONT_ARCHITECTURE.md), and
 [upgrade verification](docs/STOREFRONT_VERIFICATION.md).
 The public Site remains on the earlier version until separately authorized for release.
+
+Current release policy (2026-11-02): keep the existing public ChatGPT Site aligned
+with GitHub `main` as part of the agent workflow. This supersedes earlier source-only
+release notes. See [AGENTS.md](AGENTS.md).

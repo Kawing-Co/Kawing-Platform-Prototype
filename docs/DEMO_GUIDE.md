@@ -85,3 +85,10 @@ states and engagement tools. See [UPGRADE_PARTNER_SCRIPT.md](UPGRADE_PARTNER_SCR
 for the expanded demonstration and [STOREFRONT_ARCHITECTURE.md](STOREFRONT_ARCHITECTURE.md)
 for contracts and limits. This task explicitly does **not** authorize publication;
 the existing public Site remains on its prior version until a separate release request.
+
+## Current release policy — 2026-11-02
+
+The owner now authorizes publishing the existing public Site to match GitHub `main`
+after changes are completed and merged. This supersedes the previous source-only
+restriction. See `AGENTS.md` for the standing workflow. A verified Sites deployment
+is required before calling a main-branch update live; no unattended CI sync is claimed.
