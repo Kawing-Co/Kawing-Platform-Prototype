@@ -98,3 +98,31 @@ html body .page-heading .eyebrow { color: var(--k-moss); }
   html body .demo-bar .role-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; order: 3; }
   html body .demo-bar .role-tabs button { padding: 10px 4px; min-height: 40px; font-size: 11.5px; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
+
+/* ── phones: a two-line session bar (wordmark + current view / four equal actions) ── */
+@media (max-width: 750px) {
+  html body .space-session-header { height: auto; min-height: 0; padding-block: 10px 8px; gap: 8px 10px; align-items: center; }
+  html body .space-session-header .session-context { margin: 0 0 0 auto; flex: 0 1 auto; justify-content: flex-end; }
+  html body .space-session-header .session-context > span { display: none; }     /* scenario · tier: shown on the view picker instead */
+  html body .space-session-header .session-context strong { font-size: 13px; color: var(--k-forest); }
+  html body .space-session-header nav { flex-basis: 100%; gap: 6px; }
+  html body .space-session-header nav > * { min-width: 0; }
+  html body .space-session-header nav > * > button, html body .space-session-header nav > button:not(.command-trigger) {
+    background: color-mix(in srgb, var(--k-ink) 5%, transparent); border-radius: 12px;
+  }
+  /* the workspace strips shrink: helper paragraph is secondary on a small screen */
+  html body .view-context { padding: 10px 14px; gap: 10px; }
+  html body .view-context p { display: none; }
+  html body .view-context > button { min-height: 44px; }
+  html body .demo-bar { padding: 8px 14px; gap: 6px 10px; }
+  html body .demo-bar > .tour-link, html body .demo-bar > button, html body .demo-bar .demo-home-link { font-size: 12px; }
+}
+
+/* desktop: the context strip becomes one calm line instead of a second banner */
+@media (min-width: 1000px) {
+  html body .view-context { padding: 8px 14px; align-items: center; }
+  html body .view-context > div { display: flex; align-items: baseline; gap: 12px; min-width: 0; flex-wrap: wrap; }
+  html body .view-context > div > span { margin: 0; white-space: nowrap; }
+  html body .view-context h2 { margin: 0; white-space: nowrap; }
+  html body .view-context p { flex: 1 1 100%; margin: 0; }
+}
