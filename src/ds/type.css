@@ -1,0 +1,24 @@
+/* Type floor. The audit found 7–10 px text in ~60 places; every one of them is raised here
+   (labels 11px, controls 12px, supporting text 12.5px). Selectors come from a DOM census. */
+
+/* controls and buttons */
+html body :is(.session-disclosure button, .space-session-header nav button, .session-wide button, .market-pager button,
+  .view-context button, .role-tabs button, .studio-presets button, .pilot-card button, .studio-save-bar .button,
+  .tour-link, .connection, .toggle-label, .demo-bar button, .command-trigger, .command-trigger span, .admin-action-grid button span,
+  main.content > footer button, button.button) { font-size: 12px; }
+html body :is(.command-trigger kbd, kbd) { font-size: 11px; }
+
+/* eyebrows, tags, status chips: small caps labels */
+html body :is(.eyebrow, .spaces-eyebrow, .premium-eyebrow, .art-label, .space-role-tag, .prototype-tag, .nav-label, .soon,
+  .market-lifecycle, .market-simulation, .status, .studio-draft-label, .story-visual-label, .canvas-caption, .readiness-badge,
+  .scenario-card-copy > span, .cx-eyebrow, .cx-food-label, .page-heading .eyebrow, .menu-card .eyebrow, .map-legend span, .map-pan span,
+  .map-toolbar span, .kitchen-card-head span, .kitchen-total span) { font-size: 11px; letter-spacing: 0.12em; }
+
+/* supporting text */
+html body :is(small, .stat-card small, .workspace small, .profile small, .kitchen-card small, .booth-list small, .booth-list button small,
+  .session-context span, .session-context small, .session-context strong, .session-tier, .complete strong, .view-context span,
+  .market-command-summary span, .admin-command-metrics span, .admin-business-card dt, .readiness-grid strong, .breadcrumb span,
+  .breadcrumb strong, .top-actions .connection, .studio-help, p.story-boundary, .cx-disclaimer, .cx-note, .menu-card p) { font-size: 12px; }
+html body :is(.menu-card-footer .toggle-label, main.content > footer span, footer.spaces-footer span, ol.spaces-step li, .avatar) { font-size: 11.5px; }
+html body .cx-food p, html body .cx-cart-sub, html body .cx-empty p, html body .cx-inline-notice { font-size: 12.5px; }
+html body .cx-category { font-size: 12px !important; }

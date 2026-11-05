@@ -1,0 +1,59 @@
+/* Kawing design system — base components. Merchant theme colours (--brand, --sf-primary,
+   --cx-accent) are never overridden here: components keep following the merchant's choice. */
+
+/* ── tactile primary actions (behaviour in tactile.js) ── */
+html body .k-tactile {
+  will-change: transform;
+  background-image: radial-gradient(150px circle at var(--lx, 50%) var(--ly, 50%), rgba(222, 240, 170, calc(0.42 * var(--lg, 0))), transparent 65%);
+  box-shadow: 0 14px 28px -16px color-mix(in srgb, currentColor 0%, rgba(20, 50, 34, 0.7)), inset 0 0 0 1px rgba(255, 255, 255, calc(0.08 + 0.25 * var(--lg, 0)));
+  transition: box-shadow 0.3s var(--k-ease), background-color 0.25s;
+}
+html body .k-tactile.k-pressed { box-shadow: 0 6px 12px -10px rgba(20, 50, 34, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
+html body .k-tactile:disabled { background-image: none; box-shadow: none; }
+
+/* shared primary / secondary shape (colour stays with the context) */
+html body :is(button.primary, a.primary, .sf-primary, .space-primary, .cx-primary) {
+  min-height: 44px;
+  border-radius: 14px;
+  font-weight: 650;
+  letter-spacing: 0.005em;
+}
+html body :is(button.secondary, .space-secondary) { min-height: 44px; border-radius: 14px; }
+
+/* ── form controls: a calm default wherever a context has not styled them ── */
+:where(select, textarea, input:not([type="checkbox"]):not([type="radio"]):not([type="color"]):not([type="range"]):not([type="file"])) {
+  border: 1.5px solid var(--k-line-strong);
+  border-radius: 12px;
+  background: var(--k-surface);
+  color: var(--k-ink);
+  min-height: 44px;
+  padding-inline: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+:where(select, textarea, input):where(:focus-visible, :focus) { border-color: var(--k-forest-2); box-shadow: 0 0 0 4px color-mix(in srgb, var(--k-forest-2) 18%, transparent); outline: none; }
+::placeholder { color: color-mix(in srgb, var(--k-ink-2) 80%, transparent); }
+::selection { background: var(--k-sage-2); color: var(--k-ink); }
+
+/* readable focus everywhere */
+:focus-visible { outline: 2px solid var(--k-forest-2) !important; outline-offset: 3px !important; border-radius: 8px; }
+
+/* thin, quiet scrollbars */
+* { scrollbar-width: thin; scrollbar-color: var(--k-line-strong) transparent; }
+
+/* ── scroll reveal (content is visible unless JS confirms motion is allowed) ── */
+.k-motion [data-k-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--k-ease), transform 0.85s var(--k-ease); transition-delay: calc(var(--k-i, 0) * 70ms); }
+.k-motion [data-k-reveal].k-in { opacity: 1; transform: none; }
+
+/* skeletons */
+.k-skel { position: relative; overflow: hidden; background: color-mix(in srgb, var(--k-ink) 8%, transparent); border-radius: 12px; }
+.k-skel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.6) 50%, transparent 80%); transform: translateX(-100%); animation: k-shimmer 1.3s infinite; }
+@keyframes k-shimmer { to { transform: translateX(100%); } }
+
+/* balanced, quiet display headline utility */
+.k-display { font-family: var(--k-serif); font-weight: 500; letter-spacing: -0.012em; line-height: 1.02; text-wrap: balance; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-k-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html body .k-tactile { transform: none !important; }
+  .k-skel::after { animation: none; }
+}

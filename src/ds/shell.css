@@ -1,0 +1,100 @@
+/* Kawing design system — shell: session bar, workspace sidebar, page chrome.
+   Goal: fewer, quieter layers. The measured chrome stack above the page heading was 246px
+   (session 65 + breadcrumb 55 + demo bar 53 + context 73); this brings it to ~150px. */
+
+/* ── session bar ── */
+html body .space-session-header {
+  height: calc(60px + var(--k-sat));
+  padding-inline: clamp(16px, 2.4vw, 32px);
+  background: color-mix(in srgb, var(--k-surface) 84%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border-bottom: 1px solid var(--k-line);
+}
+html body .space-wordmark { font-size: 23px; color: var(--k-forest); }
+html body .space-wordmark > span { color: var(--k-moss); }
+html body .space-session-header .session-context { color: var(--k-ink-2); font-size: 12.5px; gap: 4px 10px; }
+html body .space-session-header .session-context strong { color: var(--k-ink); font-weight: 650; }
+html body .space-session-header .session-tier { color: var(--k-ink-2); }
+html body .space-session-header small {
+  font-size: 11px; letter-spacing: 0.1em; color: var(--k-amber);
+  border: 1px solid color-mix(in srgb, var(--k-amber) 40%, transparent);
+  background: color-mix(in srgb, var(--k-amber) 8%, transparent);
+  padding: 3px 8px; border-radius: 99px;
+}
+html body .space-session-header nav { gap: 4px; }
+html body .space-session-header nav button {
+  background: transparent; color: var(--k-ink-2); font-size: 12.5px; font-weight: 600;
+  min-height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid transparent;
+}
+html body .space-session-header nav button:hover { background: var(--k-sage); color: var(--k-ink); filter: none; }
+html body .space-session-header nav button[aria-expanded="true"] { background: var(--k-sage); color: var(--k-forest); }
+html body .command-trigger {
+  background: var(--k-surface); border: 1px solid var(--k-line-strong); border-radius: 12px; color: var(--k-ink-2);
+  min-height: 40px; font-size: 12.5px; box-shadow: var(--k-shadow-1);
+}
+html body .command-trigger kbd { background: var(--k-paper); border-color: var(--k-line-strong); color: var(--k-ink-2); border-radius: 6px; }
+html body .space-session-header .session-menu { border-radius: var(--k-r); box-shadow: var(--k-shadow-2); border: 1px solid var(--k-line); }
+
+/* phones: icons give way to words so every action keeps a 44px target and nothing overflows */
+@media (max-width: 750px) {
+  html body .space-session-header { padding-inline: 14px; }
+  html body .space-session-header nav { gap: 6px; }
+  html body .space-session-header nav > * > button,
+  html body .space-session-header nav > button:not(.command-trigger) { padding-inline: 8px; gap: 4px; font-size: 12px; min-height: 44px; min-width: 0; }
+  html body .space-session-header nav > .session-disclosure > button > svg:not(:first-child),
+  html body .space-session-header nav > button:not(.command-trigger) > svg,
+  html body .space-session-header nav > .session-disclosure > button > svg { display: none; }
+  html body .space-session-header .session-context { font-size: 11.5px; }
+}
+
+/* ── workspace sidebar ── */
+html body .sidebar { background: var(--k-surface); border-right: 1px solid var(--k-line); }
+html body .sidebar .workspace { border-radius: var(--k-r-s); background: var(--k-paper); border-color: var(--k-line); }
+html body .sidebar .workspace strong { font-size: 13px; }
+html body .sidebar .nav-label { font-size: 11px; letter-spacing: 0.14em; color: var(--k-ink-2); margin-bottom: 10px; }
+html body .sidebar nav { gap: 2px; }
+html body .sidebar nav button {
+  position: relative; min-height: 42px; padding: 0 14px; border-radius: var(--k-r-s);
+  color: var(--k-ink-2); font-size: 13px; font-weight: 600; letter-spacing: 0.002em;
+  transition: background-color 0.2s, color 0.2s, transform 0.3s var(--k-spring);
+}
+html body .sidebar nav button svg { width: 18px; height: 18px; stroke-width: 1.7; }
+html body .sidebar nav button:hover { background: color-mix(in srgb, var(--k-sage) 60%, transparent); color: var(--k-ink); filter: none; }
+html body .sidebar nav button.active { background: var(--k-sage); color: var(--k-forest); font-weight: 700; }
+html body .sidebar nav button.active::before {
+  content: ""; position: absolute; left: -9px; top: 10px; bottom: 10px; width: 3px; border-radius: 3px; background: var(--brand, var(--k-forest-2));
+}
+html body .sidebar nav button .soon, html body .sidebar nav button .new { border-radius: 99px; }
+
+/* ── page chrome (desktop): breadcrumb and role tabs share one row ── */
+@media (min-width: 1000px) {
+  html body .main {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "top demo" "ctx ctx" "content content";
+    align-content: start;
+  }
+  html body .main > .topbar { grid-area: top; height: 56px; background: transparent; border: 0; padding: 0 0 0 clamp(23px, 2.4vw, 35px); }
+  html body .main > .demo-bar { grid-area: demo; background: transparent; border: 0; min-height: 56px; padding: 0 clamp(23px, 2.4vw, 35px) 0 0; font-size: 12px; }
+  html body .main > .context-wrap { grid-area: ctx; margin: 4px clamp(23px, 2.4vw, 35px) 0; }
+  html body .main > main.content, html body .main > .content { grid-area: content; width: 100%; box-sizing: border-box; }
+}
+html body .breadcrumb { font-size: 12px; color: var(--k-ink-2); }
+html body .view-context { border-left: 0; padding: 12px 16px; background: color-mix(in srgb, var(--k-sage) 55%, var(--k-surface)); border-radius: var(--k-r); }
+html body .view-context h2 { font-size: 15px; margin-bottom: 2px; }
+html body .view-context p { font-size: 12.5px; line-height: 1.55; color: var(--k-ink-2); }
+html body .view-context > div > span { font-size: 11px; color: var(--k-moss); letter-spacing: 0.12em; margin-bottom: 4px; }
+html body .view-context > button { border-radius: 12px; border-color: var(--k-line-strong); background: var(--k-surface); font-size: 12px; color: var(--k-forest); min-height: 40px; padding: 0 14px; }
+html body .demo-bar .role-tabs { gap: 2px; background: color-mix(in srgb, var(--k-ink) 5%, transparent); border-radius: 99px; padding: 3px; }
+html body .demo-bar .role-tabs button { border-radius: 99px; font-size: 12px; font-weight: 600; padding: 8px 14px; color: var(--k-ink-2); }
+html body .demo-bar .role-tabs button.selected { background: var(--k-surface); color: var(--k-forest); box-shadow: var(--k-shadow-1); }
+
+/* page headings use the display serif */
+html body .page-heading h1 { font-family: var(--k-serif); font-weight: 500; font-size: clamp(30px, 3.2vw, 42px); line-height: 1.04; letter-spacing: -0.015em; margin: 6px 0 6px; }
+html body .page-heading p { font-size: 13.5px; color: var(--k-ink-2); line-height: 1.55; }
+html body .page-heading .eyebrow { color: var(--k-moss); }
+
+/* phones: role tabs share the row equally (never wider than the screen) */
+@media (max-width: 700px) {
+  html body .demo-bar .role-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; order: 3; }
+  html body .demo-bar .role-tabs button { padding: 10px 4px; min-height: 40px; font-size: 11.5px; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
