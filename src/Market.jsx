@@ -1,6 +1,7 @@
 import { CustomerPreview } from "./Viewport";
 import { VendorDesk } from "./VendorDesk";
 import { normalizeMarket, vendorReadiness } from "./operations";
+import { useCustomize } from "./session";
 import React, { useState, useEffect } from "react";
 import {
   MapPin,
@@ -206,6 +207,10 @@ export default function Market({ role }) {
     );
     setNotice("Layout draft changed. Publish locally when ready.");
   }
+  useCustomize(() => {
+    if (role === "admin") changeTab("Event setup");
+    else if (role === "merchant") changeTab("My participation");
+  });
   function changeTab(t) {
     if (
       draft &&

@@ -9,7 +9,8 @@ import {
 } from "lucide-react";
 import StorefrontHub from "./StorefrontHub";
 import { config, moduleTypes } from "./commerce";
-import { devices, tiers } from "./experience";
+import { devices, tiers, businessKey } from "./experience";
+import { tierOf, TIER_LABELS } from "./session";
 export function DeviceFrame({
   device = "phone",
   src,
@@ -152,9 +153,18 @@ export function CustomerPreview({
   merchantName = "Salo",
   onBack,
 }) {
+  // Customer View opens the finished experience at once, using the merchant's saved
+  // package. Device and package previews stay optional and never change saved records.
+  const savedTier = (() => {
+    try {
+      return tierOf(JSON.parse(localStorage.getItem(businessKey(merchantId))));
+    } catch {
+      return "growth";
+    }
+  })();
   const [device, setDevice] = useState("phone"),
-    [tier, setTier] = useState("growth"),
-    [started, setStarted] = useState(false);
+    [tier, setTier] = useState(savedTier),
+    [started, setStarted] = useState(true);
   const q = new URLSearchParams({
     surface: "guest",
     merchant: merchantId,
@@ -167,12 +177,13 @@ export function CustomerPreview({
       <header className="customer-lab-heading">
         <div>
           <span className="spaces-eyebrow">
-            CUSTOMER EXPERIENCE LAB {boothId ? "· BOOTH " + boothId : ""}
+            {started ? "CUSTOMER VIEW" : "PREVIEW OPTIONS"}
+            {boothId ? " · BOOTH " + boothId : ""}
           </span>
           <h1>{started ? merchantName : "Choose your point of view."}</h1>
           <p>
             {started
-              ? "Browse, order, and track your visit in the selected screen."
+              ? "Browse, order, and track your visit. Fictional business · No real payments."
               : "Pick a standard screen, then a package to explore. Preview choices never change the merchant’s saved plan or prices."}
           </p>
         </div>
@@ -199,7 +210,7 @@ export function CustomerPreview({
           </select>
         </label>
         <label>
-          Preview tier
+          Package preview
           <select
             aria-label="Customer preview tier"
             value={tier}
@@ -207,7 +218,8 @@ export function CustomerPreview({
           >
             {tiers.map((t) => (
               <option value={t} key={t}>
-                {t[0].toUpperCase() + t.slice(1)}
+                {TIER_LABELS[t]}
+                {t === savedTier ? " (saved)" : ""}
               </option>
             ))}
           </select>
@@ -215,12 +227,12 @@ export function CustomerPreview({
         <span>Preview only · Not a subscription change</span>
         {!started ? (
           <button className="space-primary" onClick={() => setStarted(true)}>
-            Start customer preview <ArrowRight size={16} />
+            Show customer experience <ArrowRight size={16} />
           </button>
         ) : (
           <button className="space-secondary" onClick={() => setStarted(false)}>
             <SlidersHorizontal size={15} />
-            Choose again
+            Preview options
           </button>
         )}
       </div>

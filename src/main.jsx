@@ -6,6 +6,7 @@ import {
   eventOrderError,
 } from "./experience";
 import Spaces from "./Spaces";
+import { announceLocalChange, useCustomize } from "./session";
 import AdminSpace from "./AdminSpace";
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
@@ -284,7 +285,14 @@ function App({
     [entryContext, writeEntryContext] = useState(() =>
       marketContext ? { kind: "counter", table: null } : contextFromUrl(),
     ),
-    [customerVisit, setCustomerVisit] = useState(0);
+    [customerVisit, setCustomerVisit] = useState(0),
+    [customizeTick, setCustomizeTick] = useState(0);
+  // Session header "Customize": Merchant View opens Kawing Studio at Media & tier.
+  useCustomize(() => {
+    if (space !== "merchant" || merchantId !== "salo") return;
+    navigate("Customization");
+    setCustomizeTick((t) => t + 1);
+  });
   useEffect(() => {
     const onHash = () => {
       setPage(readPage());
@@ -308,6 +316,7 @@ function App({
   useEffect(() => {
     try {
       localStorage.setItem(businessKey(merchantId), JSON.stringify(data));
+      announceLocalChange();
     } catch {
       setToast("Browser storage unavailable. Changes last for this session.");
     }
@@ -1437,7 +1446,12 @@ function App({
               </>
             )}
             {page === "Storefront" && (
-              <Studio data={data} update={setData} navigate={navigate} />
+              <Studio
+                data={data}
+                update={setData}
+                navigate={navigate}
+                customizeTick={customizeTick}
+              />
             )}
             {page === "Engagement" && (
               <Engagement data={data} update={setData} />

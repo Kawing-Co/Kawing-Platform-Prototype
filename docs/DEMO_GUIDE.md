@@ -95,8 +95,9 @@ is required before calling a main-branch update live; no unattended CI sync is c
 
 ## Current navigation — 2026-11-05
 
-The landing page now starts with Merchant Setup or Booth Setup, followed by Merchant,
-Admin or Customer View. Creator navigation is **Customization**, opening **Kawing
+The landing page now starts with **Standard Merchant** or **Pop-up Market**, followed by
+Merchant, Customer or Admin View (renamed from Merchant Setup / Booth Setup by
+[KAWING-DEMO-UX-002](DEMO_UX_002_AMENDMENT.md)). Creator navigation is **Customization**, opening **Kawing
 Studio**. See [SPACES_STUDIO_GUIDE.md](SPACES_STUDIO_GUIDE.md) for both walkthroughs,
 state boundaries and the payment-provider matrix, and
 [SPACES_STUDIO_VERIFICATION.md](SPACES_STUDIO_VERIFICATION.md) for tests/screenshots.

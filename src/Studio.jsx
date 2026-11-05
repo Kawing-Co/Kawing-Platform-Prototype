@@ -17,7 +17,7 @@ import {
   Image,
 } from "lucide-react";
 import { defaults, config, safeUrl, labels } from "./commerce";
-export default function Studio({ data, update, navigate }) {
+export default function Studio({ data, update, navigate, customizeTick = 0 }) {
   const retained = () => {
     try {
       return JSON.parse(localStorage.getItem("kawing-studio-draft"));
@@ -34,6 +34,12 @@ export default function Studio({ data, update, navigate }) {
     [selectedEdit, setSelectedEdit] = useState("brand"),
     [mobilePane, setMobilePane] = useState("edit"),
     [message, setMessage] = useState("");
+  useEffect(() => {
+    if (!customizeTick) return;
+    setTab("Media & tier");
+    setMobilePane("edit");
+    setSelectedEdit("gallery");
+  }, [customizeTick]);
   const dirty =
     JSON.stringify(draft) !== JSON.stringify(data.storefront) ||
     JSON.stringify(brand) !== JSON.stringify(data.brand);

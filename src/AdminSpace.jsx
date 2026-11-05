@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useCustomize } from "./session";
 import {
   Check,
   ArrowRight,
@@ -68,6 +69,7 @@ export default function AdminSpace({ data, update }) {
     [summary, setSummary] = useState("Cannot access the ordering flow"),
     [priority, setPriority] = useState("blocking"),
     [resolution, setResolution] = useState("");
+  useCustomize(() => setTab("Packages"));
   const ops = {
     subscription: "existing",
     reviewed: false,
