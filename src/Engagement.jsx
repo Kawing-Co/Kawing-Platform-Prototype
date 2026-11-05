@@ -42,7 +42,7 @@ export default function Engagement({ data, update }) {
       </p>
       <div className="engagement-grid">
         {[
-          ["Storefront opens", count("storefront_visit")],
+          ["Business Profile opens", count("storefront_visit")],
           ["Menu opens", count("menu_open")],
           ["Cart starts", count("cart_start")],
           ["Orders submitted", data.orders.filter((o) => !o.seed).length],
@@ -72,7 +72,7 @@ export default function Engagement({ data, update }) {
         <h2>The connected order journey</h2>
         <div className="engagement-flow">
           {[
-            ["Storefront", "storefront_visit"],
+            ["Business Profile", "storefront_visit"],
             ["Menu", "menu_open"],
             ["Cart", "cart_start"],
           ].map(([name, type]) => (

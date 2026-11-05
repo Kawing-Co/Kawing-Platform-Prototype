@@ -39,11 +39,18 @@ release notes. See [AGENTS.md](AGENTS.md).
 
 ### Interactive spaces and Studio
 
-Choose Merchant Setup or Booth Setup, then Merchant, Admin or Customer View. Studio
-supports actual device-size previews and direct section editing. Customer previews
-choose device/tier; the event workspace connects vendor readiness, logistics, issues
+Choose **Standard Merchant** or **Pop-up Market**, then **Merchant View**, **Customer
+View** or **Admin View**. The session header shows `Scenario · Tier · View` with Switch
+View, Customize, Change Scenario and Reset. Studio supports actual device-size previews
+and direct section editing. Customer View opens the finished experience at once, with
+optional device/package previews; the event workspace connects vendor readiness, logistics, issues
 and booth-specific ordering. See the [current partner guide](docs/INTERACTIVE_WORKSPACES_GUIDE.md),
 [architecture notes](docs/INTERACTIVE_WORKSPACES_ARCHITECTURE.md), and
-[verification](docs/INTERACTIVE_WORKSPACES_VERIFICATION.md).
+[verification](docs/INTERACTIVE_WORKSPACES_VERIFICATION.md). The current amendment is
+[KAWING-DEMO-UX-002](docs/DEMO_UX_002_AMENDMENT.md); its integration is covered by the
+[branch and PR reconciliation record](docs/BRANCH_RECONCILIATION.md).
+
+Local browser checks: `npm test` uses `/usr/bin/chromium` when present; elsewhere set
+`CHROMIUM_PATH` to a Chromium executable or install Playwright's managed browser.
 
 [Open the public Kawing demo](https://kawing-connected-kitchen.adrianoearl04.chatgpt.site).

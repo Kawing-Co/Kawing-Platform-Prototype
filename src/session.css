@@ -1,0 +1,259 @@
+/* Demo session entry and header (KAWING-DEMO-UX-002 · UX-01). Reuses spaces.css tokens. */
+.spaces-step {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+}
+.spaces-step > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.spaces-step > li > span {
+  display: grid;
+  place-items: center;
+  border: 1px solid #dce4d4;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  font-size: 9px;
+}
+.spaces-step > li > .current,
+.spaces-step > li > .done {
+  color: #fff;
+  background: var(--sp-green);
+  border-color: var(--sp-green);
+}
+.spaces-step > li[aria-current] {
+  color: var(--sp-ink);
+  font-weight: 600;
+}
+
+.space-session-header .session-context {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  margin: 0 auto 0 0;
+  color: #7f8f74;
+  font-size: 11px;
+  line-height: 1.3;
+}
+.space-session-header .session-tier {
+  color: #5d7352;
+}
+.space-session-header nav {
+  align-items: center;
+}
+.space-session-header nav button {
+  white-space: nowrap;
+  min-height: 40px;
+}
+.session-wide {
+  display: contents;
+}
+.session-more {
+  display: none;
+}
+.session-disclosure {
+  position: relative;
+}
+.space-session-header nav button[aria-expanded="true"] {
+  background: #e3ebdb;
+  color: #2f563e;
+}
+.space-session-header .session-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 224px;
+  display: grid;
+  gap: 2px;
+  padding: 6px;
+  background: #fffefa;
+  border: 1px solid #dce5d5;
+  border-radius: 10px;
+  box-shadow: 0 14px 40px #1d302a1f;
+  z-index: 70;
+  transform-origin: top right;
+  animation: session-menu-in 0.16s ease-out;
+}
+.space-session-header .session-menu button {
+  width: 100%;
+  justify-content: flex-start;
+  min-height: 44px;
+  padding: 10px 12px;
+  background: transparent;
+  color: #2f563e;
+  font-size: 12px;
+}
+.space-session-header .session-menu button:hover {
+  background: #f2f5eb;
+}
+.space-session-header .session-menu button[aria-current] {
+  background: #eaf0e5;
+  font-weight: 700;
+}
+.space-session-header .session-menu button > svg:last-child:not(:first-child) {
+  margin-left: auto;
+}
+@keyframes session-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+
+.session-status {
+  margin: 0;
+  padding: 10px 28px;
+  background: #eaf0e5;
+  color: #2f563e;
+  font-size: 12px;
+}
+.session-status:empty {
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.session-dialog {
+  width: min(490px, calc(100vw - 32px));
+  border: 0;
+  border-radius: 17px;
+  padding: 36px;
+  background: #fffefa;
+  color: var(--sp-ink);
+  box-shadow: 0 25px 100px #192a3020;
+}
+.session-dialog::backdrop {
+  background: #1d302a65;
+  backdrop-filter: blur(5px);
+}
+.session-dialog h2 {
+  font-size: 24px;
+  letter-spacing: -0.8px;
+  line-height: 1.35;
+  margin: 14px 0 12px;
+}
+.session-dialog p {
+  color: #6f7f66;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.session-dialog .session-note {
+  font-size: 11px;
+  margin-top: 12px;
+}
+.session-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: #3d5134;
+}
+.session-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sp-green);
+}
+.session-dialog .modal-buttons button {
+  min-height: 44px;
+}
+
+@media (max-width: 1000px) {
+  .session-wide {
+    display: none;
+  }
+  .session-more {
+    display: block;
+  }
+  /* Tablet widths are usually touch: full 44px targets. */
+  .space-session-header nav button {
+    min-height: 44px;
+  }
+}
+@media (max-width: 750px) {
+  .space-session-header .session-context {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+    justify-content: flex-end;
+    text-align: right;
+    gap: 2px 6px;
+    font-size: 10px;
+  }
+  .space-session-header .session-context small {
+    display: none;
+  }
+  .space-session-header nav > * {
+    flex: 1;
+  }
+  .space-session-header nav > * > button,
+  .space-session-header nav > button {
+    width: 100%;
+    justify-content: center;
+  }
+  .space-session-header nav > .session-disclosure:first-child .session-menu {
+    left: 0;
+    right: auto;
+    transform-origin: top left;
+  }
+  .session-status {
+    padding: 10px 17px;
+  }
+  .session-dialog {
+    padding: 28px 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .space-session-header .session-menu {
+    animation: none;
+  }
+}
+
+/* Kawing Studio · Review & publish checklist (UX-02). */
+.studio-check-summary {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--sp-ink);
+  font-weight: 600;
+}
+.studio-review-list.studio-checklist {
+  list-style: none;
+  padding: 0;
+  line-height: 1.5;
+  display: grid;
+  gap: 10px;
+}
+.studio-checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: #4f6a40;
+}
+.studio-checklist li > svg {
+  margin-top: 3px;
+  color: var(--sp-green);
+}
+.studio-checklist li[data-ok="false"] {
+  color: #7a5426;
+}
+.studio-checklist small {
+  display: block;
+  font-size: 11px;
+  color: #8a6a3e;
+}
+.studio-check-flag {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f7eedc;
+  color: #7a5426;
+  font-size: 11px;
+  font-weight: 800;
+}

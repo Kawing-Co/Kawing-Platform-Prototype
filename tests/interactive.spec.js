@@ -3,7 +3,7 @@ const frame = (p) => p.frameLocator('iframe[title^="Customer "]');
 const view = async (p, role) => {
   await p.getByRole("button", { name: "Switch View", exact: true }).click();
   await p
-    .getByRole("button", { name: new RegExp("Enter " + role + " View") })
+    .getByRole("button", { name: role + " View", exact: true })
     .click();
 };
 const store = (p) =>
@@ -14,9 +14,6 @@ async function openShop(p, booth) {
     .click();
   await p
     .getByRole("button", { name: "Open Business Profile", exact: false })
-    .click();
-  await p
-    .getByRole("button", { name: "Start customer preview", exact: false })
     .click();
   return frame(p);
 }
@@ -100,8 +97,10 @@ test("customer device and tier selection affect only the preview; keyboard and 3
   await page.setViewportSize({ width: 360, height: 800 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?workspace=customer&scenario=standard");
+  // Customer View opens the finished experience at once; preview controls are optional.
+  await expect(page.getByRole("heading", { name: "Salo", exact: true })).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Choose your point of view." }),
+    page.getByRole("button", { name: "Preview options", exact: true }),
   ).toBeVisible();
   await page
     .getByLabel("Customer preview tier", { exact: true })
@@ -109,9 +108,6 @@ test("customer device and tier selection affect only the preview; keyboard and 3
   await page
     .getByLabel("Customer screen size", { exact: true })
     .selectOption("compact");
-  await page
-    .getByRole("button", { name: "Start customer preview", exact: false })
-    .click();
   const f = frame(page);
   await expect
     .poll(() => f.locator("body").evaluate(() => innerWidth))
@@ -349,9 +345,6 @@ test("a craft booth uses its own catalog, cart and receipt instead of another me
   await page.getByRole("button", { name: "B02 Occupied", exact: true }).click();
   await page
     .getByRole("button", { name: "Open Business Profile", exact: false })
-    .click();
-  await page
-    .getByRole("button", { name: "Start customer preview", exact: false })
     .click();
   await frame(page)
     .getByRole("button", { name: "Order now", exact: true })

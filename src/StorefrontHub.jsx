@@ -444,7 +444,7 @@ export default function StorefrontHub({
       ) : (
         <section className="sf-module-page" key={pane}>
           <button className="sf-back" onClick={() => setPane("home")}>
-            <ArrowLeft size={16} /> Back to storefront
+            <ArrowLeft size={16} /> Back to Business Profile
           </button>
           <h2 tabIndex={-1} ref={focus} className="sf-module-title">
             {pane === "order"
@@ -659,7 +659,7 @@ export default function StorefrontHub({
           <Check size={16} />
           {notice}
           <button
-            aria-label="Dismiss storefront notice"
+            aria-label="Dismiss notice"
             onClick={() => setNotice("")}
           >
             ×

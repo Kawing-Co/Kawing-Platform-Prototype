@@ -39,7 +39,7 @@ async function order(p) {
     .getByRole("button", { name: "Review your order", exact: true })
     .click();
   await p
-    .getByRole("button", { name: "Maya · simulated", exact: true })
+    .getByRole("button", { name: "Maya (formerly PayMaya) · simulated", exact: true })
     .click();
   await p
     .getByRole("button", { name: "Place demo order", exact: true })
@@ -118,7 +118,7 @@ test("three compositions, saved theme, module ordering and preview isolation", a
   const initial = (await state(page)).events.length;
   await page.getByRole("tab", { name: "Layout", exact: true }).click();
   for (const [title, cls] of [
-    ["Visual Storefront", "sf-visual"],
+    ["Visual Showcase", "sf-visual"],
     ["Minimal Utility", "sf-minimal"],
     ["Quick Actions", "sf-quick"],
   ]) {
@@ -190,7 +190,7 @@ test("studio rejects unsafe social destinations, negative private feedback never
     .getByRole("button", { name: "Send private demo feedback" })
     .click();
   await page
-    .getByRole("button", { name: "Back to storefront", exact: true })
+    .getByRole("button", { name: "Back to Business Profile", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Review us on Google", exact: true })
@@ -282,7 +282,7 @@ test("recovery requires simulated proof; Wi-Fi is honest and the complete puzzle
     .click();
   expect((await state(page)).guestId).toBe(null);
   await page
-    .getByRole("button", { name: "Back to storefront", exact: true })
+    .getByRole("button", { name: "Back to Business Profile", exact: true })
     .click();
   await page.getByRole("button", { name: "Guest Wi-Fi", exact: true }).click();
   await expect(
@@ -292,7 +292,7 @@ test("recovery requires simulated proof; Wi-Fi is honest and the complete puzzle
     ),
   ).toBeVisible();
   await page
-    .getByRole("button", { name: "Back to storefront", exact: true })
+    .getByRole("button", { name: "Back to Business Profile", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Play while you wait", exact: true })
@@ -367,7 +367,7 @@ test("360px hub templates and modules support keyboard and reduced motion withou
     .click();
   expect(await fits()).toBe(true);
   await page.getByRole("tab", { name: "Layout", exact: true }).click();
-  for (const title of ["Visual Storefront", "Minimal Utility"]) {
+  for (const title of ["Visual Showcase", "Minimal Utility"]) {
     await page.getByRole("button", { name: new RegExp(title) }).click();
     await save(page);
     await customer(page);

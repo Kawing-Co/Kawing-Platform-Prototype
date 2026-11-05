@@ -69,7 +69,7 @@ test('mobile guide pauses, resumes, skips, and preserves progress across refresh
  await expect(rail(page)).toContainText('STEP 1 OF 8');
  await rail(page).getByRole('button',{name:'Pause guided demo'}).click();
  await page.getByRole('button',{name:'Demo home',exact:true}).click();
- await page.locator('.feature-map').getByRole('button',{name:/Make the storefront yours/}).click();
+ await page.locator('.feature-map').getByRole('button',{name:/Make the Business Profile yours/}).click();
  await expect(page).toHaveURL(/#Storefront$/);
  await page.reload();
  await expect(page.getByLabel('Restaurant name',{exact:true})).toBeVisible();

@@ -12,10 +12,10 @@ test("two simulations lead immediately to exactly three spaces", async ({
 }) => {
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Merchant Setup", exact: true }),
+    page.getByRole("heading", { name: "Standard Merchant", exact: true }),
   ).toBeVisible();
   await expect(
-    page.getByRole("heading", { name: "Booth Setup", exact: true }),
+    page.getByRole("heading", { name: "Pop-up Market", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: /Explore a business/ }).click();
   await expect(page.locator(".space-role-cards>button")).toHaveCount(3);
@@ -27,15 +27,15 @@ test("two simulations lead immediately to exactly three spaces", async ({
     page.getByRole("button", { name: "Customization", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Customer View/ }).click();
+  await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: "Start customer preview", exact: false }),
+    page.getByRole("button", { name: "Preview options", exact: true }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Customization", exact: true }),
   ).toHaveCount(0);
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Admin View/ }).click();
+  await page.getByRole("button", { name: "Admin View", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "A clear view of the whole." }),
   ).toBeVisible();
@@ -59,14 +59,14 @@ test("shared booth assignment propagates across merchant, customer and admin", a
     .click();
   await expect(page.getByRole("status")).toContainText("confirmed locally");
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Customer View/ }).click();
+  await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await page.getByRole("button", { name: "B01 Occupied", exact: true }).click();
   await expect(page.locator(".booth-detail")).toContainText("Salo");
   await expect(
     page.getByRole("button", { name: "Confirm demo booth", exact: false }),
   ).toHaveCount(0);
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Admin View/ }).click();
+  await page.getByRole("button", { name: "Admin View", exact: true }).click();
   await page
     .getByRole("button", { name: "Layout Editor", exact: true })
     .click();
@@ -133,7 +133,7 @@ test("temporary profile and lifecycle are real local interactions", async ({
     .getByLabel("Event lifecycle", { exact: true })
     .selectOption("ended");
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Customer View/ }).click();
+  await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await page.getByRole("button", { name: "B03 Occupied", exact: true }).click();
   await expect(page.locator(".booth-detail")).toContainText(
     "no longer publicly discoverable",
@@ -169,17 +169,14 @@ test("Studio drafts survive view changes and package media limits are functional
     .fill("Draft Coffee");
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Customer View/ }).click();
-  await page
-    .getByRole("button", { name: "Start customer preview", exact: false })
-    .click();
+  await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await expect(
     page
       .frameLocator('iframe[title^="Customer "]')
       .getByRole("heading", { name: "Salo", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Merchant View/ }).click();
+  await page.getByRole("button", { name: "Merchant View", exact: true }).click();
   await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue(
     "Draft Coffee",
   );
@@ -212,10 +209,7 @@ test("Studio drafts survive view changes and package media limits are functional
     .first()
     .click();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
-  await page.getByRole("button", { name: /Enter Customer View/ }).click();
-  await page
-    .getByRole("button", { name: "Start customer preview", exact: false })
-    .click();
+  await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await expect(
     page
       .frameLocator('iframe[title^="Customer "]')

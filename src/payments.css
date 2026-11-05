@@ -1,0 +1,76 @@
+/* Provider-aware payment panel (KAWING-DEMO-UX-002 · UX-05). */
+.cx-pay {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid #e2e6dc;
+  border-radius: 14px;
+  background: #fafbf6;
+  text-align: left;
+}
+.cx-pay-badge {
+  justify-self: start;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #7a6431;
+  background: #f7eedc;
+  border-radius: 20px;
+  padding: 5px 9px;
+}
+.cx-pay .cx-primary {
+  min-height: 44px;
+  text-decoration: none;
+}
+.cx-pay-fallback {
+  background: #fff;
+  border: 1px solid #e6e8df;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #4d5f50;
+  animation: cx-pay-in 0.18s ease-out;
+}
+.cx-pay-fallback:focus-visible {
+  outline: 2px solid var(--cx-accent);
+  outline-offset: 2px;
+}
+.cx-pay-fallback p {
+  margin: 6px 0;
+  font-size: 12px;
+  color: #4d5f50;
+}
+.cx-pay-fallback ol {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+.cx-pay-fallback li {
+  margin: 4px 0;
+}
+.cx-pay-fallback .cx-back {
+  margin: 8px 0 0;
+  min-height: 44px;
+}
+.cx-pay-claim {
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid #dfe5d7;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--cx-accent);
+  font-size: 12px;
+}
+@keyframes cx-pay-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx-pay-fallback {
+    animation: none;
+  }
+}

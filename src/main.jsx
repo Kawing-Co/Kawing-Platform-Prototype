@@ -6,6 +6,7 @@ import {
   eventOrderError,
 } from "./experience";
 import Spaces from "./Spaces";
+import { announceLocalChange, useCustomize } from "./session";
 import AdminSpace from "./AdminSpace";
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
@@ -284,7 +285,14 @@ function App({
     [entryContext, writeEntryContext] = useState(() =>
       marketContext ? { kind: "counter", table: null } : contextFromUrl(),
     ),
-    [customerVisit, setCustomerVisit] = useState(0);
+    [customerVisit, setCustomerVisit] = useState(0),
+    [customizeTick, setCustomizeTick] = useState(0);
+  // Session header "Customize": Merchant View opens Kawing Studio at Media & tier.
+  useCustomize(() => {
+    if (space !== "merchant" || merchantId !== "salo") return;
+    navigate("Customization");
+    setCustomizeTick((t) => t + 1);
+  });
   useEffect(() => {
     const onHash = () => {
       setPage(readPage());
@@ -297,7 +305,8 @@ function App({
   }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = `Kawing · ${page}`;
+    // "Storefront" is the legacy internal page id; the public name is Kawing Studio.
+    document.title = `Kawing · ${page === "Storefront" ? "Kawing Studio" : page}`;
   }, [page]);
   useEffect(() => {
     try {
@@ -308,6 +317,7 @@ function App({
   useEffect(() => {
     try {
       localStorage.setItem(businessKey(merchantId), JSON.stringify(data));
+      announceLocalChange();
     } catch {
       setToast("Browser storage unavailable. Changes last for this session.");
     }
@@ -1437,7 +1447,12 @@ function App({
               </>
             )}
             {page === "Storefront" && (
-              <Studio data={data} update={setData} navigate={navigate} />
+              <Studio
+                data={data}
+                update={setData}
+                navigate={navigate}
+                customizeTick={customizeTick}
+              />
             )}
             {page === "Engagement" && (
               <Engagement data={data} update={setData} />
@@ -1643,7 +1658,7 @@ function App({
                       "Meet Kawing: a proposed commerce workspace bringing guests, teams, and local business owners together. Everything here is an interactive simulation.",
                       "Explore the customer menu, build a basket, and place a simulated order. No accounts or real payments are needed.",
                       "Open Staff kitchen to move the same order from received to preparing, ready, and served. Toggle offline to try a local queue.",
-                      "Change your storefront name and colors, manage menu availability, and explore illustrative analytics that include your demo orders.",
+                      "Change your Business Profile name and colors, manage menu availability, and explore illustrative analytics that include your demo orders.",
                       "Start with 3–5 pilot establishments, learn with operators, and explore a connected neighborhood. The ecosystem page shares the proposed path.",
                     ][tour]
                   }
