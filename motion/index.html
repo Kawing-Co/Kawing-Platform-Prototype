@@ -1,8 +1,98 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kawing · One connected visit</title><style>
-@font-face{font-family:DM;src:url('assets/fonts/dm-sans-400.ttf')}@font-face{font-family:DM;src:url('assets/fonts/dm-sans-600.ttf');font-weight:600}*{box-sizing:border-box}html,body{margin:0;background:#f5f3eb;color:#283b2e;font-family:DM,sans-serif}#root{position:relative;width:1280px;height:720px;overflow:hidden;background:#f5f3eb}.top{position:absolute;top:47px;left:62px;right:62px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:2px}.logo{font-size:30px;letter-spacing:-1.5px;font-weight:600}.scene{position:absolute;inset:0;opacity:0}.copy{position:absolute;left:62px;top:225px;width:510px}.eyebrow{font-size:10px;letter-spacing:2px;color:#6b7d61}.copy h1{font:400 66px/1.03 Georgia,serif;letter-spacing:-2.8px;margin:20px 0 23px}.copy p{font-size:17px;line-height:1.7;color:#62725a;max-width:440px}.visual{position:absolute;right:65px;top:155px;width:490px;height:440px;background:#e4e8d9;border:1px solid #d8decd;border-radius:27px;overflow:hidden}.phone{width:253px;height:375px;position:absolute;left:120px;top:33px;background:#fffefa;border:6px solid #304733;border-radius:28px;padding:20px;box-shadow:0 18px 32px #33492c19}.phone img{width:100%;height:145px;object-fit:cover;border-radius:12px;margin:16px 0}.phone h2{font:28px Georgia;margin:7px 0}.phone small{font-size:10px;color:#607953}.pill{background:#245642;color:#fffefa;font-size:11px;padding:13px 17px;border-radius:7px;text-align:center;margin-top:15px}.status{padding:17px;background:#f0f4e8;border:1px solid #dce4d0;border-radius:10px;margin:11px 0;font-size:13px}.status b{display:block;margin-bottom:7px}.status small{font-size:10px;color:#59764b}.order{position:absolute;top:62px;left:42px;right:42px;padding:27px;background:#fffefa;border:1px solid #d9e0ce;border-radius:17px;box-shadow:0 12px 32px #33492c0c}.order-head{display:flex;justify-content:space-between;margin-bottom:23px;font-size:13px}.tag{font-size:9px;background:#e8eddd;padding:6px 8px;border-radius:5px}.stamps{display:flex;gap:11px;flex-wrap:wrap;margin:28px 0}.stamp{border-radius:50%;width:44px;height:44px;background:#245642;color:white;display:grid;place-items:center;font-size:19px}.stamp:last-child{background:#f3f5ec;border:1px dashed #bdcbb0;color:#879c74}.bottom{position:absolute;bottom:43px;left:62px;right:62px;display:flex;justify-content:space-between;font-size:10px;color:#6c7b61}.line{position:absolute;left:62px;bottom:76px;height:2px;background:#cbd6bf;width:1156px}.progress{height:100%;width:0;background:#597a43}
-#return .order{top:42px}</style></head><body><div id="root" data-composition-id="root" data-width="1280" data-height="720" data-duration="12" data-fps="30">
-<section id="guest" class="scene"><div class="copy"><span class="eyebrow">01 / A WARM WELCOME</span><h1>Every visit starts<br>with a connection.</h1><p>A beautiful menu. A simple order.<br>A little more time to enjoy the moment.</p></div><div class="visual"><div class="phone"><small>YOUR NEIGHBORHOOD TABLE</small><h2>Salo</h2><img src="assets/images/bowl.jpg" alt="Harvest bowl"><b style="font-size:13px">Something good starts here.</b><div class="pill">Order now →</div></div></div></section>
-<section id="team" class="scene"><div class="copy"><span class="eyebrow">02 / A TEAM IN SYNC</span><h1>One order.<br>The whole team.</h1><p>Cashier confirmation comes first.<br>Then preparation, ready, and served.</p></div><div class="visual"><div class="order"><div class="order-head"><b>Table 05 · Harvest bowl</b><span class="tag">DEMO ORDER</span></div><div class="status"><b>✓ Cashier confirmed</b><small>Selected → claimed → reviewed → confirmed</small></div><div class="status"><b>✓ Preparing</b><small>The kitchen receives the same order.</small></div><div class="status"><b>Ready for your table →</b><small>The guest follows the same status.</small></div></div></div></section>
-<section id="return" class="scene"><div class="copy"><span class="eyebrow">03 / A REASON TO RETURN</span><h1>A good visit.<br>A lasting relationship.</h1><p>Verified, completed visits connect<br>to rewards and business insight.</p></div><div class="visual"><div class="order"><div class="order-head"><b>Your little thank-you</b><span class="tag">ILLUSTRATIVE</span></div><h2 style="font:35px Georgia;font-weight:400">Welcome back, Alex.</h2><div class="stamps"><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">9</span></div><small style="font-size:12px;color:#59764b">One eligible completed order. One stamp.</small><div class="pill">Good business, connected.</div></div></div></section>
-<div class="top"><span class="logo">kawing<span style="color:#7c965f">✳</span></span><span>ONE CONNECTED VISIT</span></div><div class="line"><div class="progress"></div></div><div class="bottom"><span>MENU · ORDERING · OPERATIONS · LOYALTY</span><span>Fictional business · Simulated transactions</span></div>
-</div><script src="gsap.min.js"></script><script>const tl=gsap.timeline({paused:true});for(const [id,time]of[['guest',0],['team',4],['return',8]]){tl.fromTo('#'+id,{opacity:0,y:16},{opacity:1,y:0,duration:.55,ease:'power2.out'},time);if(time<8)tl.to('#'+id,{opacity:0,y:-12,duration:.35},time+3.65)}tl.to('.progress',{width:'100%',duration:12,ease:'none'},0);window.__timelines={root:tl};</script></body></html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1280, height=720">
+<style>
+@font-face{font-family:DM;src:url('assets/fonts/dm-sans-400.ttf')}
+@font-face{font-family:DM;src:url('assets/fonts/dm-sans-600.ttf');font-weight:600}
+@font-face{font-family:Cormorant;src:url('assets/fonts/cormorant-garamond-latin-500-normal.woff2');font-weight:500}
+@font-face{font-family:Cormorant;src:url('assets/fonts/cormorant-garamond-latin-400-italic.woff2');font-style:italic}
+*{box-sizing:border-box}
+html,body{margin:0;background:#f5f3eb;color:#1f2e26;font-family:DM,sans-serif}
+#root{position:relative;width:1280px;height:720px;overflow:hidden;background:#f5f3eb}
+.top{position:absolute;top:47px;left:62px;right:62px;display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:2px;color:#4b5d52}
+.logo{font-size:30px;letter-spacing:-1.5px;font-weight:600;color:#1f4d3a}
+.scene{position:absolute;inset:0;opacity:0}
+.copy{position:absolute;left:62px;top:215px;width:560px}
+.eyebrow{font-size:12px;letter-spacing:2.4px;color:#5f7d52;font-weight:600}
+.copy h1{font:500 74px/0.98 Cormorant,Georgia,serif;letter-spacing:-1.5px;margin:20px 0 24px;color:#1f2e26}
+.copy p{font-size:18px;line-height:1.65;color:#4b5d52;max-width:460px;margin:0}
+.visual{position:absolute;right:65px;top:155px;width:490px;height:440px;background:#14231a;border-radius:30px;overflow:hidden;box-shadow:0 30px 60px -28px rgba(20,35,26,.5)}
+.visual .bg{position:absolute;inset:-6%;width:112%;height:112%;object-fit:cover;opacity:.55;filter:blur(2px)}
+.visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,26,19,.2),rgba(14,26,19,.7))}
+.phone{position:absolute;z-index:2;left:118px;top:30px;width:254px;height:392px;background:#fffdf8;border:6px solid #0c1811;border-radius:32px;overflow:hidden;box-shadow:0 24px 40px rgba(0,0,0,.35)}
+.phone .hero{position:relative;height:218px;background:#14231a;overflow:hidden}
+.phone .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.12)}
+.phone .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,24,17,.92),rgba(12,24,17,.1) 70%)}
+.phone .hero div{position:absolute;z-index:2;left:16px;bottom:14px;color:#f1f6e4}
+.phone .hero small{display:block;font-size:8px;letter-spacing:2px;color:#cfe79a;margin-bottom:5px}
+.phone .hero h2{font:500 31px/1 Cormorant,Georgia,serif;margin:0}
+.phone .row{display:flex;gap:8px;padding:14px 14px 0}
+.phone .row span{flex:1;height:58px;border-radius:12px;background:#e4ecdf}
+.phone .row span:first-child{background:#1f4d3a}
+.pill{background:#1f4d3a;color:#fffdf8;font-size:12px;font-weight:600;padding:13px 17px;border-radius:12px;text-align:center;margin:14px 14px 0}
+.order{position:absolute;z-index:2;top:28px;left:40px;right:40px;padding:22px 24px;background:#fffdf8;border-radius:22px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.order-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:14px}
+.order-head b{font-weight:600}
+.tag{font-size:10px;letter-spacing:1px;background:#e4ecdf;padding:6px 9px;border-radius:6px;color:#1f4d3a;font-weight:600}
+.item{display:flex;gap:14px;align-items:center;padding:10px 0 14px;border-bottom:1px solid rgba(31,46,38,.12);margin-bottom:8px}
+.item img{width:50px;height:62px;object-fit:cover;border-radius:10px;transform:scale(1)}
+.item b{font-size:15px;font-weight:600;display:block}
+.item small{font-size:12px;color:#4b5d52}
+.item em{margin-left:auto;font-style:normal;font-weight:600;font-size:15px}
+.status{padding:10px 14px;background:#eef3e6;border-radius:12px;margin:6px 0;font-size:13px}
+.status b{display:block;font-weight:600;margin-bottom:3px}
+.status small{font-size:11px;color:#4b5d52}
+.card-title{font:500 36px/1.05 Cormorant,Georgia,serif;margin:10px 0 0;color:#1f2e26}
+.stamps{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0}
+.stamp{border-radius:50%;width:40px;height:40px;background:#1f4d3a;color:#fff;display:grid;place-items:center;font-size:17px}
+.stamp:last-child{background:transparent;border:1.5px dashed #9bb28b;color:#6b8a5e;font-weight:600}
+.bottom{position:absolute;bottom:43px;left:62px;right:62px;display:flex;justify-content:space-between;font-size:11px;color:#4b5d52;letter-spacing:.4px}
+.line{position:absolute;left:62px;bottom:76px;height:2px;background:#cbd6bf;width:1156px}
+.progress{height:100%;width:0;background:#1f4d3a}
+</style></head><body>
+<div id="root" data-composition-id="root" data-width="1280" data-height="720" data-duration="12" data-fps="30">
+
+<section id="guest" class="scene">
+  <div class="copy"><span class="eyebrow">01 / A WARM WELCOME</span><h1>Every visit starts<br>with a connection.</h1><p>A beautiful menu. A simple order.<br>A little more time to enjoy the moment.</p></div>
+  <div class="visual"><img class="bg" src="assets/images/matcha/latte-iced.jpg" alt="">
+    <div class="phone"><div class="hero"><img id="heroimg" src="assets/images/matcha/ritual.jpg" alt="Matcha Mood"><div><small>YOUR NEIGHBORHOOD TABLE</small><h2>Matcha Mood</h2></div></div>
+      <div class="row"><span></span><span></span><span></span></div><div class="pill">Order now →</div></div></div>
+</section>
+
+<section id="team" class="scene">
+  <div class="copy"><span class="eyebrow">02 / A TEAM IN SYNC</span><h1>One order.<br>The whole team.</h1><p>Cashier confirmation comes first.<br>Then preparation, ready, and served.</p></div>
+  <div class="visual"><img class="bg" src="assets/images/matcha/berrycake-candle.jpg" alt="">
+    <div class="order"><div class="order-head"><b>Table 05</b><span class="tag">DEMO ORDER</span></div>
+      <div class="item"><img src="assets/images/matcha/latte-iced-sm.jpg" alt=""><span><b>Matcha Latte</b><small>Large · Oat</small></span><em>₱840</em></div>
+      <div class="status"><b>✓ Cashier confirmed</b><small>Selected → claimed → reviewed → confirmed</small></div>
+      <div class="status"><b>✓ Preparing</b><small>The kitchen receives the same order, options included.</small></div>
+      <div class="status"><b>Ready for your table →</b><small>The guest follows the same status.</small></div></div></div>
+</section>
+
+<section id="return" class="scene">
+  <div class="copy"><span class="eyebrow">03 / A REASON TO RETURN</span><h1>A good visit.<br>A lasting relationship.</h1><p>Verified, completed visits connect<br>to rewards and business insight.</p></div>
+  <div class="visual"><img class="bg" src="assets/images/matcha/ritual.jpg" alt="">
+    <div class="order" style="top:34px"><div class="order-head"><b>Your little thank-you</b><span class="tag">ILLUSTRATIVE</span></div>
+      <h3 class="card-title">Welcome back, Alex.</h3>
+      <div class="stamps"><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">✓</span><span class="stamp">9</span></div>
+      <small style="font-size:12px;color:#4b5d52">One eligible completed order. One stamp. A matcha latte on the house at nine.</small>
+      <div class="pill" style="margin:18px 0 0">Good business, connected.</div></div></div>
+</section>
+
+<div class="top"><span class="logo">kawing<span style="color:#6b8a5e">✳</span></span><span>ONE CONNECTED VISIT</span></div>
+<div class="line"><div class="progress"></div></div>
+<div class="bottom"><span>MENU · ORDERING · OPERATIONS · LOYALTY</span><span>Fictional business · Simulated transactions</span></div>
+</div>
+<script src="gsap.min.js"></script>
+<script>
+const tl = gsap.timeline({ paused: true });
+for (const [id, time] of [['guest', 0], ['team', 4], ['return', 8]]) {
+  tl.fromTo('#' + id, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .55, ease: 'power2.out' }, time);
+  tl.fromTo('#' + id + ' .bg', { scale: 1 }, { scale: 1.1, duration: 4, ease: 'none' }, time);
+  if (time < 8) tl.to('#' + id, { opacity: 0, y: -12, duration: .35 }, time + 3.65);
+}
+tl.fromTo('#heroimg', { scale: 1.12 }, { scale: 1.26, duration: 4, ease: 'none' }, 0);
+tl.fromTo('#team .status', { opacity: 0, x: 14 }, { opacity: 1, x: 0, duration: .4, stagger: .35, ease: 'power2.out' }, 4.5);
+tl.fromTo('#return .stamp', { scale: 0 }, { scale: 1, duration: .35, stagger: .12, ease: 'back.out(2)' }, 8.6);
+tl.to('.progress', { width: '100%', duration: 12, ease: 'none' }, 0);
+window.__timelines = { root: tl };
+</script></body></html>

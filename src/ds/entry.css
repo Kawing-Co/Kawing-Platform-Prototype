@@ -1,0 +1,81 @@
+/* Entry: scenario and view picker. A dark photographic opening, then photo-led choices. */
+
+html body .premium-landing { --entry-r: 30px; max-width: 1240px; padding-inline: clamp(14px, 3vw, 32px); }
+@supports (corner-shape: squircle) { html body .premium-landing { --entry-r: 56px; } }
+@media (max-width: 760px) { @supports (corner-shape: squircle) { html body .premium-landing { --entry-r: 38px; } } }
+
+html body .premium-landing .spaces-brand { height: 72px; border-bottom: 0; }
+html body .premium-landing .spaces-brand > a { font-size: 27px; color: var(--k-forest); letter-spacing: -1.4px; }
+html body .premium-landing .spaces-brand > span { font-size: 11.5px; letter-spacing: 0.18em; color: var(--k-ink-2); }
+
+/* ── opening: photograph, headline, steps ── */
+html body .premium-landing .spaces-intro { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; align-items: flex-start; max-width: none; min-height: clamp(460px, 62vw, 600px); margin: 8px 0 22px; padding: clamp(24px, 5vw, 64px); border-radius: var(--entry-r); background: var(--k-night); color: #eef3e0; }
+html body .premium-landing .spaces-intro.is-compact { min-height: clamp(300px, 36vw, 380px); }
+.spaces-hero-media { position: absolute; inset: 0; z-index: -2; }
+.spaces-hero-media .progressive-image { position: absolute; inset: 0; }
+.spaces-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; opacity: 0; transform: scale(1.08); transition: opacity 0.8s ease; animation: entry-drift 28s ease-in-out infinite alternate; }
+.spaces-hero-media .image-ready img { opacity: 1; }
+@keyframes entry-drift { to { transform: scale(1.18) translate3d(-2%, -1.5%, 0); } }
+html body .premium-landing .spaces-intro::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12, 24, 17, 0.9) 0%, rgba(12, 24, 17, 0.55) 45%, rgba(12, 24, 17, 0.05) 85%), linear-gradient(0deg, rgba(12, 24, 17, 0.55), transparent 40%); }
+html body .premium-landing .spaces-intro > :not(.spaces-hero-media):not(.spaces-step) { max-width: 620px; }
+html body .premium-landing .spaces-step > li { color: rgba(224, 238, 196, 0.6); }
+html body .premium-landing .spaces-step > li[aria-current="step"] { color: #f4f8e8; font-weight: 600; }
+html body .premium-landing .spaces-step { position: static; margin: 0 0 auto; padding-bottom: 28px; max-width: none; color: rgba(224, 238, 196, 0.85); font-size: 12px; }
+html body .premium-landing .spaces-step > li > span { height: 24px; width: 24px; font-size: 11px; background: rgba(224, 238, 196, 0.16); color: #eef3e0; }
+html body .premium-landing .spaces-step > li > span.current, html body .premium-landing .spaces-step > li > span.done { background: #d6e8b0; color: #14231a; }
+html body .premium-landing .spaces-step > i { background: rgba(224, 238, 196, 0.3); }
+html body .premium-landing .spaces-eyebrow { font-size: 11.5px; letter-spacing: 0.2em; color: rgba(214, 232, 176, 0.9); }
+html body .premium-landing .spaces-intro h1 { font-family: var(--k-serif); font-weight: 500; font-size: clamp(52px, 9.5vw, 104px); line-height: 0.96; letter-spacing: -0.025em; margin: 16px 0 20px; color: #f4f8e8; text-wrap: balance; }
+html body .premium-landing .spaces-intro h1 em { color: #cfe79a; font-weight: 400; }
+html body .premium-landing .spaces-intro > p { font-size: 16px; line-height: 1.7; color: rgba(236, 244, 214, 0.86); max-width: 480px; margin: 0; }
+@media (max-width: 750px) {
+  html body .premium-landing .spaces-intro h1 { font-size: clamp(46px, 14vw, 62px); letter-spacing: -0.02em; }
+  html body .premium-landing .spaces-intro > p { font-size: 14.5px; }
+  html body .premium-landing .spaces-step { font-size: 11.5px; }
+}
+
+/* ── scenario cards: photograph on top, words below ── */
+html body .premium-landing .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+html body .premium-landing .scenario-card { display: flex; flex-direction: column; border: 1px solid var(--k-line); border-radius: var(--entry-r); background: var(--k-surface); box-shadow: var(--k-shadow-1); text-align: left; transition: transform 0.5s var(--k-spring), box-shadow 0.3s; }
+html body .premium-landing .scenario-card:hover { transform: translateY(-5px); box-shadow: var(--k-shadow-2); border-color: var(--k-line); filter: none; }
+html body .premium-landing .scenario-art { position: relative; height: clamp(220px, 26vw, 300px); min-height: 0; border: 0; background: var(--k-night); overflow: hidden; }
+html body .premium-landing .scenario-art .progressive-image { position: absolute; inset: 0; }
+html body .premium-landing .scenario-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(1.04); transition: transform 1.2s var(--k-ease), opacity 0.6s; opacity: 0; }
+html body .premium-landing .scenario-art .image-ready img { opacity: 1; }
+html body .premium-landing .scenario-card:hover .scenario-art img { transform: scale(1.12); }
+html body .premium-landing .scenario-art .art-label { position: absolute; left: 16px; right: auto; top: auto; bottom: 16px; width: max-content; max-width: calc(100% - 32px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 99px; background: rgba(12, 24, 17, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #eef3e0; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; box-shadow: inset 0 0 0 1px rgba(224, 238, 196, 0.2); }
+html body .premium-landing .scenario-card-copy { padding: clamp(22px, 3vw, 32px); align-self: stretch; }
+html body .premium-landing .scenario-card-copy > span { font-size: 11.5px; letter-spacing: 0.16em; color: var(--k-moss); font-weight: 600; }
+html body .premium-landing .scenario-card h2 { font: 500 clamp(30px, 3.4vw, 40px)/1.02 var(--k-serif); letter-spacing: -0.01em; margin: 12px 0 10px; color: var(--k-ink); }
+html body .premium-landing .scenario-card p { font-size: 14px; line-height: 1.65; color: var(--k-ink-2); margin: 0 0 20px; }
+html body .premium-landing .scenario-card strong { font-size: 13.5px; color: var(--k-forest); min-height: 44px; }
+@media (max-width: 760px) {
+  html body .premium-landing .scenario-cards { grid-template-columns: 1fr; gap: 14px; }
+  html body .premium-landing .scenario-card { display: flex; }
+  html body .premium-landing .scenario-art { height: 220px; }
+}
+
+/* ── view cards ── */
+html body .premium-landing .space-role-cards { max-width: none; margin-inline: 0; }
+html body .premium-landing .space-role-cards > button { border-radius: 30px; border: 1px solid var(--k-line); background: var(--k-surface); box-shadow: var(--k-shadow-1); min-height: 300px; padding: 30px; transition: transform 0.5s var(--k-spring), box-shadow 0.3s, border-color 0.3s; }
+@supports (corner-shape: squircle) { html body .premium-landing .space-role-cards > button { corner-shape: squircle; border-radius: 54px; } }
+html body .premium-landing .space-role-cards > button:hover { transform: translateY(-5px); box-shadow: var(--k-shadow-2); border-color: var(--k-line-strong); }
+html body .premium-landing .space-role-cards > button:active { transform: scale(0.98); }
+html body .premium-landing .space-role-cards h2 { font: 500 clamp(30px, 3vw, 36px)/1.05 var(--k-serif); letter-spacing: -0.01em; color: var(--k-ink); }
+html body .premium-landing .space-role-cards p { font-size: 14px; line-height: 1.65; }
+html body .premium-landing .space-role-cards .space-role-tag { font-size: 11.5px; letter-spacing: 0.14em; }
+html body .premium-landing .space-enter { font-size: 13.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spaces-hero-media img { animation: none; transform: none; }
+  html body .premium-landing .scenario-card, html body .premium-landing .scenario-art img, html body .premium-landing .space-role-cards > button { transition: none; }
+}
+
+/* product story: the film still is a dark panel now */
+html body .story-visual { background: #101d16; }
+html body .story-visual > img, html body .spatial-fallback img { object-fit: contain; }
+html body .story-visual-label { font-size: 11px; letter-spacing: 0.1em; }
+@media (max-width: 750px) {
+  html body .premium-landing .space-role-cards > button { padding: 24px; min-height: 0; border-radius: 28px; }
+  html body .premium-landing .space-role-icon { position: static; width: 52px; height: 52px; margin-bottom: 18px; }
+}

@@ -7,9 +7,7 @@ import {
   ShieldCheck,
   Users,
   LayoutGrid,
-  Leaf,
   Check,
-  Compass,
   SlidersHorizontal,
   RotateCcw,
   MoreHorizontal,
@@ -24,6 +22,7 @@ import {
   useEditorialMotion,
 } from "./PremiumExperience";
 import { transitionView } from "./premium";
+import ProgressiveImage from "./ProgressiveImage";
 import {
   SCENARIOS,
   VIEWS,
@@ -222,7 +221,20 @@ export default function Spaces({ Workspace }) {
           <span>THE INTERACTIVE PRODUCT EXPERIENCE</span>
           <CommandTrigger />
         </header>
-        <div className="spaces-intro">
+        <div className={"spaces-intro" + (step === "view" ? " is-compact" : "")}>
+          <div className="spaces-hero-media" aria-hidden="true">
+            <ProgressiveImage
+              key={step === "view" && scenario === "market" ? "m" : "s"}
+              src={
+                step === "view" && scenario === "market"
+                  ? "/images/market-hero.jpg"
+                  : "/images/matcha/ritual.jpg"
+              }
+              alt=""
+              width="1536"
+              height="1024"
+            />
+          </div>
           <ol className="spaces-step" aria-label="Demo entry steps">
             <li aria-current={step === "scenario" ? "step" : undefined}>
               <span className={step === "scenario" ? "current" : "done"}>
@@ -272,17 +284,13 @@ export default function Spaces({ Workspace }) {
               data-magnetic
             >
               <div className="scenario-art" aria-hidden="true">
-                <div className="mini-shop">
-                  <Leaf size={40} />
-                  <span>YOUR DAILY MATCHA</span>
-                  <b>Matcha Mood</b>
-                  <i />
-                  <div>
-                    <span />
-                    <span />
-                    <span />
-                  </div>
-                </div>
+                <ProgressiveImage
+                  src="/images/matcha/latte-iced.jpg"
+                  alt=""
+                  loading="lazy"
+                  width="1024"
+                  height="1280"
+                />
                 <span className="art-label">
                   <Check size={13} /> A beautiful business profile
                 </span>
@@ -305,20 +313,13 @@ export default function Spaces({ Workspace }) {
               onClick={() => go({ scenario: "market" })}
             >
               <div className="scenario-art map-art" aria-hidden="true">
-                <div className="mini-map">
-                  {Array.from({ length: 9 }, (_, i) => (
-                    <i
-                      key={i}
-                      className={i === 4 ? "path" : i === 2 ? "occupied" : ""}
-                    >
-                      {i === 4 ? (
-                        <Compass size={25} />
-                      ) : (
-                        String(i + 1).padStart(2, "0")
-                      )}
-                    </i>
-                  ))}
-                </div>
+                <ProgressiveImage
+                  src="/images/market-stall.jpg"
+                  alt=""
+                  loading="lazy"
+                  width="1536"
+                  height="1024"
+                />
                 <span className="art-label">
                   <Map size={14} /> An interactive shared map
                 </span>
