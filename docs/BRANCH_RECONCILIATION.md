@@ -50,6 +50,7 @@ preserved on package downgrade; this review does not introduce a destructive quo
 
 The existing ten Studio tabs and participation-first market merchant screen are kept.
 Changing those product decisions is deferred; neither is needed to reconcile histories.
+Later, at Earl's direction, Pop-up Merchant View was changed to open on the booth map (see CHANGELOG, Unreleased).
 Payments remain browser-local and no provider checkout or custom URI is enabled.
 
 ## Verification and release
