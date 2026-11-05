@@ -156,7 +156,12 @@ export function config(raw = {}) {
     featured: pick(raw.featured, moduleTypes, "order"),
     logo: pick(
       raw.logo,
-      ["/images/bowl.jpg", "/images/salad.jpg", "/images/plate.jpg"],
+      [
+        "/images/bowl.jpg",
+        "/images/salad.jpg",
+        "/images/plate.jpg",
+        "/images/market-mark.svg",
+      ],
       d.logo,
     ),
     cover: pick(
@@ -305,7 +310,7 @@ export function config(raw = {}) {
     tables: { ...d.tables, ...raw.tables },
   };
 }
-export function extend(base) {
+export function extend(base, merchant = base.merchantId || MERCHANT) {
   const sf = config(
     base.storefront || { theme: { primary: base.brand?.accent } },
   );
@@ -318,7 +323,7 @@ export function extend(base) {
       accent: hex(base.brand?.accent, "#245642"),
     },
     schemaVersion: 2,
-    merchantId: MERCHANT,
+    merchantId: merchant,
     storefront: sf,
     savedStudio: base.savedStudio || null,
     operations: { policy: "prepaid", ...base.operations },
@@ -327,7 +332,7 @@ export function extend(base) {
       : [
           {
             id: "alex",
-            merchantId: MERCHANT,
+            merchantId: merchant,
             name: "Alex",
             email: "alex@example.test",
           },
@@ -339,7 +344,7 @@ export function extend(base) {
           {
             id: "opening:alex",
             guestId: "alex",
-            merchantId: MERCHANT,
+            merchantId: merchant,
             amount: 7,
             reason: "Illustrative opening balance",
           },
@@ -363,7 +368,7 @@ export function extend(base) {
       .filter((o) => o && typeof o.id === "string")
       .map((o) => ({
         ...o,
-        merchantId: MERCHANT,
+        merchantId: merchant,
         paymentStatus: o.seed ? "confirmed" : "selected",
         policy: "prepaid",
         ...o,
@@ -379,26 +384,31 @@ export function extend(base) {
       })),
   };
 }
+export const allowsFoodAddon = (item) =>
+  ["Bowls", "Small plates"].includes(item.category);
 export const uid = () => crypto.randomUUID();
 export function event(d, type, detail = "") {
+  const merchant = d.merchantId || MERCHANT;
   return {
     ...d,
     events: [
       ...d.events,
-      { id: uid(), merchantId: MERCHANT, type, detail, time: Date.now() },
+      { id: uid(), merchantId: merchant, type, detail, time: Date.now() },
     ].slice(-2000),
   };
 }
 export function balance(d, id = d.guestId) {
+  const merchant = d.merchantId || MERCHANT;
   return d.ledger
-    .filter((x) => x.guestId === id && x.merchantId === MERCHANT)
+    .filter((x) => x.guestId === id && x.merchantId === merchant)
     .reduce((s, x) => s + x.amount, 0);
 }
 export function reconcile(d) {
+  const merchant = d.merchantId || MERCHANT;
   let ledger = [...d.ledger];
   for (const o of d.orders) {
-    if (o.merchantId !== MERCHANT) continue;
-    const key = "purchase:" + MERCHANT + ":" + o.id;
+    if (o.merchantId !== merchant) continue;
+    const key = "purchase:" + merchant + ":" + o.id;
     const credited = ledger.find((l) => l.id === key);
     if (
       o.status === "served" &&
@@ -409,7 +419,7 @@ export function reconcile(d) {
     )
       ledger.push({
         id: key,
-        merchantId: MERCHANT,
+        merchantId: merchant,
         guestId: o.guestId,
         orderId: o.id,
         amount: 1,
@@ -422,7 +432,7 @@ export function reconcile(d) {
     )
       ledger.push({
         id: "reverse:" + key,
-        merchantId: MERCHANT,
+        merchantId: merchant,
         guestId: o.guestId,
         orderId: o.id,
         amount: -1,
@@ -432,10 +442,11 @@ export function reconcile(d) {
   return { ...d, ledger };
 }
 export function orderAction(d, id, action) {
+  const merchant = d.merchantId || MERCHANT;
   let changed = false;
   const orders = d.orders.map((o) => {
     if (
-      o.merchantId !== MERCHANT ||
+      o.merchantId !== merchant ||
       o.id !== id ||
       o.status === "queued" ||
       o.status === "refunded"
@@ -503,6 +514,7 @@ export function orderAction(d, id, action) {
     : next;
 }
 export function redeem(d) {
+  const merchant = d.merchantId || MERCHANT;
   const n = d.storefront.loyalty.threshold;
   if (!d.guestId || !d.storefront.loyalty.enabled || balance(d) < n) return d;
   return {
@@ -511,7 +523,7 @@ export function redeem(d) {
       ...d.ledger,
       {
         id: "redemption:" + uid(),
-        merchantId: MERCHANT,
+        merchantId: merchant,
         guestId: d.guestId,
         amount: -n,
         reason: "Redeemed: " + d.storefront.loyalty.reward,

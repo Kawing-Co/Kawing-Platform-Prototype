@@ -1,3 +1,5 @@
+> Updated 2026-11-05: see [Current workspace guide](INTERACTIVE_WORKSPACES_GUIDE.md) for device canvases, operational dossiers and booth-specific ordering. The notes below describe the preceding release.
+
 # Two simulations, three spaces — 2026-11-05
 
 ## Start here

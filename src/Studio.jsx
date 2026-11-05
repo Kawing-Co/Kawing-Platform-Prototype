@@ -1,3 +1,5 @@
+import { DeviceFrame } from "./Viewport";
+import { devices } from "./experience";
 import { TierPanel } from "./AdminSpace";
 import React, { useState, useEffect } from "react";
 import {
@@ -6,8 +8,6 @@ import {
   Check,
   Save,
   RotateCcw,
-  Smartphone,
-  Monitor,
   Plus,
   Trash2,
   Palette,
@@ -16,7 +16,6 @@ import {
   Settings2,
   Image,
 } from "lucide-react";
-import StorefrontHub from "./StorefrontHub";
 import { defaults, config, safeUrl, labels } from "./commerce";
 export default function Studio({ data, update, navigate }) {
   const retained = () => {
@@ -31,7 +30,9 @@ export default function Studio({ data, update, navigate }) {
     ),
     [brand, setBrand] = useState(() => retained()?.brand || { ...data.brand }),
     [tab, setTab] = useState("Brand"),
-    [size, setSize] = useState("mobile"),
+    [size, setSize] = useState("phone"),
+    [selectedEdit, setSelectedEdit] = useState("brand"),
+    [mobilePane, setMobilePane] = useState("edit"),
     [message, setMessage] = useState("");
   const dirty =
     JSON.stringify(draft) !== JSON.stringify(data.storefront) ||
@@ -60,6 +61,38 @@ export default function Studio({ data, update, navigate }) {
     window.addEventListener("beforeunload", h);
     return () => window.removeEventListener("beforeunload", h);
   }, [dirty]);
+  function selectPreview(id) {
+    setSelectedEdit(id);
+    setMobilePane("edit");
+    setTab(
+      {
+        brand: "Brand",
+        business: "Business details",
+        layout: "Layout",
+        gallery: "Media & tier",
+        order: "Menu",
+        loyalty: "Loyalty",
+        wifi: "Content",
+        review: "Content",
+        promotions: "Content",
+        social: "Content",
+      }[id] || "Modules",
+    );
+  }
+  useEffect(() => {
+    if (tab !== "Content") return;
+    const targets = {
+      wifi: "Guest Wi-Fi",
+      review: "Google review",
+      promotions: "Merchant-owned promotion",
+      social: "Social links",
+    };
+    document.querySelectorAll(".studio-controls details").forEach((el) => {
+      el.open = targets[selectedEdit]
+        ? el.querySelector("summary")?.textContent === targets[selectedEdit]
+        : el === document.querySelector(".studio-controls details");
+    });
+  }, [tab, selectedEdit]);
   const change = (k, v) => setDraft((d) => ({ ...d, [k]: v }));
   const theme = (k, v) =>
     setDraft((d) => ({ ...d, theme: { ...d.theme, [k]: v } }));
@@ -143,7 +176,7 @@ export default function Studio({ data, update, navigate }) {
     </label>
   );
   return (
-    <div className="studio">
+    <div className={"studio studio-interactive mobile-pane-" + mobilePane}>
       <div className="studio-heading">
         <div>
           <span className="eyebrow">CUSTOMIZATION</span>
@@ -153,7 +186,10 @@ export default function Studio({ data, update, navigate }) {
               {dirty ? "Unsaved draft" : "Saved design"}
             </span>
           </h1>
-          <p>Shape the welcome. Keep the whole business connected.</p>
+          <p>
+            Design in context. Click a highlighted section in the live preview
+            to edit it.
+          </p>
         </div>
         <button className="button primary" onClick={save}>
           <Save size={16} /> Save design
@@ -188,12 +224,19 @@ export default function Studio({ data, update, navigate }) {
             "Operations",
             "Media & tier",
             "Review",
+            "Menu",
           ].map((t) => (
             <button
               role="tab"
               aria-selected={tab === t}
               key={t}
-              onClick={() => setTab(t)}
+              onClick={() => {
+                setTab(t);
+                setMobilePane("edit");
+                setSelectedEdit(
+                  t === "Brand" ? "brand" : t === "Layout" ? "layout" : null,
+                );
+              }}
             >
               {t}
             </button>
@@ -206,12 +249,75 @@ export default function Studio({ data, update, navigate }) {
           Open customer experience
         </button>
       </div>
+      <div className="studio-mobile-switch">
+        <button
+          aria-pressed={mobilePane === "edit"}
+          onClick={() => setMobilePane("edit")}
+        >
+          Edit settings
+        </button>
+        <button
+          aria-pressed={mobilePane === "preview"}
+          onClick={() => setMobilePane("preview")}
+        >
+          Live preview
+        </button>
+      </div>
       <div className="studio-grid">
         <section
           className="studio-controls"
           aria-label={tab + " settings"}
           key={tab}
         >
+          <div className="inspector-context">
+            <span>EDITING</span>
+            <strong>
+              {selectedEdit && labels[selectedEdit]
+                ? labels[selectedEdit]
+                : tab}
+            </strong>
+            <small>
+              {selectedEdit && labels[selectedEdit]
+                ? "Selected directly from the preview"
+                : "Changes appear in the live draft"}
+            </small>
+          </div>
+          {tab === "Menu" && (
+            <>
+              <h2>What’s on offer.</h2>
+              <p>
+                Menu availability is operational: updates apply immediately to
+                the customer menu. Presentation drafts do not alter prices.
+              </p>
+              {data.menu.map((item) => (
+                <div className="inspector-menu-item" key={item.id}>
+                  <img src={item.image} alt="" />
+                  <div>
+                    <strong>{item.name}</strong>
+                    <small>₱{item.price}</small>
+                  </div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      aria-label={"Studio availability " + item.name}
+                      checked={item.available}
+                      onChange={(e) =>
+                        update((d) => ({
+                          ...d,
+                          menu: d.menu.map((m) =>
+                            m.id === item.id
+                              ? { ...m, available: e.target.checked }
+                              : m,
+                          ),
+                        }))
+                      }
+                    />
+                    Available
+                  </label>
+                </div>
+              ))}
+            </>
+          )}
           {tab === "Business details" && (
             <>
               <h2>Your business, at a glance.</h2>
@@ -605,75 +711,86 @@ export default function Studio({ data, update, navigate }) {
                   .map((m) => [m.type, m.title]),
                 (v) => change("featured", v),
               )}
+              {selectedEdit && (
+                <button
+                  className="button secondary"
+                  onClick={() => setSelectedEdit(null)}
+                >
+                  Show all modules
+                </button>
+              )}
               <div className="studio-module-list">
-                {draft.modules.map((m, i) => (
-                  <article key={m.id}>
-                    <div className="studio-module-title">
-                      <strong>{labels[m.type]}</strong>
-                      <label className="sf-check">
+                {draft.modules
+                  .map((m, i) => ({ ...m, position: i }))
+                  .filter((m) => !selectedEdit || m.type === selectedEdit)
+                  .map((m) => (
+                    <article key={m.id}>
+                      <div className="studio-module-title">
+                        <strong>{labels[m.type]}</strong>
+                        <label className="sf-check">
+                          <input
+                            type="checkbox"
+                            aria-label={"Enable " + labels[m.type]}
+                            disabled={m.type === "order"}
+                            checked={m.enabled}
+                            onChange={(e) =>
+                              moduleChange(m.type, "enabled", e.target.checked)
+                            }
+                          />
+                          {m.type === "order" ? "Always available" : "Visible"}
+                        </label>
+                      </div>
+                      <label>
+                        Module title
                         <input
-                          type="checkbox"
-                          aria-label={"Enable " + labels[m.type]}
-                          disabled={m.type === "order"}
-                          checked={m.enabled}
+                          aria-label={m.type + " module title"}
+                          value={m.title}
+                          maxLength={50}
                           onChange={(e) =>
-                            moduleChange(m.type, "enabled", e.target.checked)
+                            moduleChange(m.type, "title", e.target.value)
                           }
                         />
-                        {m.type === "order" ? "Always available" : "Visible"}
                       </label>
-                    </div>
-                    <label>
-                      Module title
-                      <input
-                        aria-label={m.type + " module title"}
-                        value={m.title}
-                        maxLength={50}
-                        onChange={(e) =>
-                          moduleChange(m.type, "title", e.target.value)
-                        }
-                      />
-                    </label>
-                    <label>
-                      Description
-                      <input
-                        aria-label={m.type + " module description"}
-                        value={m.description}
-                        maxLength={100}
-                        onChange={(e) =>
-                          moduleChange(m.type, "description", e.target.value)
-                        }
-                      />
-                    </label>
-                    <label>
-                      Optional CTA label
-                      <input
-                        aria-label={m.type + " module CTA"}
-                        value={m.cta}
-                        maxLength={45}
-                        onChange={(e) =>
-                          moduleChange(m.type, "cta", e.target.value)
-                        }
-                      />
-                    </label>
-                    <div className="reorder">
-                      <button
-                        aria-label={"Move " + labels[m.type] + " up"}
-                        disabled={i === 0}
-                        onClick={() => move(m.type, -1)}
-                      >
-                        <ArrowUp size={15} /> Up
-                      </button>
-                      <button
-                        aria-label={"Move " + labels[m.type] + " down"}
-                        disabled={i === draft.modules.length - 1}
-                        onClick={() => move(m.type, 1)}
-                      >
-                        <ArrowDown size={15} /> Down
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                      <label>
+                        Description
+                        <input
+                          aria-label={m.type + " module description"}
+                          value={m.description}
+                          maxLength={100}
+                          onChange={(e) =>
+                            moduleChange(m.type, "description", e.target.value)
+                          }
+                        />
+                      </label>
+                      <label>
+                        Optional CTA label
+                        <input
+                          aria-label={m.type + " module CTA"}
+                          value={m.cta}
+                          maxLength={45}
+                          onChange={(e) =>
+                            moduleChange(m.type, "cta", e.target.value)
+                          }
+                        />
+                      </label>
+                      <div className="reorder">
+                        <button
+                          aria-label={"Move " + labels[m.type] + " up"}
+                          disabled={m.position === 0}
+                          onClick={() => move(m.type, -1)}
+                        >
+                          <ArrowUp size={15} /> Up
+                        </button>
+                        <button
+                          aria-label={"Move " + labels[m.type] + " down"}
+                          disabled={m.position === draft.modules.length - 1}
+                          onClick={() => move(m.type, 1)}
+                        >
+                          <ArrowDown size={15} /> Down
+                        </button>
+                      </div>
+                    </article>
+                  ))}
               </div>
             </>
           )}
@@ -1063,35 +1180,44 @@ export default function Studio({ data, update, navigate }) {
             </>
           )}
         </section>
-        <aside className={`studio-preview studio-preview-${size}`}>
+        <aside className="studio-preview studio-viewport">
           <div className="studio-preview-toolbar">
-            <span>LIVE DRAFT PREVIEW · NO EVENTS RECORDED</span>
             <div>
-              <button
-                aria-label="Mobile preview"
-                aria-pressed={size === "mobile"}
-                onClick={() => setSize("mobile")}
-              >
-                <Smartphone size={18} />
-              </button>
-              <button
-                aria-label="Desktop preview"
-                aria-pressed={size === "desktop"}
-                onClick={() => setSize("desktop")}
-              >
-                <Monitor size={18} />
-              </button>
+              <strong>Interactive canvas</strong>
+              <small>
+                Click a section to edit · No customer events recorded
+              </small>
             </div>
+            <label>
+              Screen size
+              <select
+                aria-label="Studio screen size"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
+              >
+                {devices.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name} · {d.detail}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
-          <StorefrontHub
-            data={data}
-            update={() => {}}
-            context={{ kind: "table", table: "05" }}
-            setContext={() => {}}
-            preview
-            configOverride={config(draft)}
-            brandOverride={brand}
+          <DeviceFrame
+            device={size}
+            src="/?surface=studio-preview"
+            title="Interactive Studio preview"
+            payload={{ brand, config: config(draft), menu: data.menu }}
+            selected={selectedEdit}
+            onSelect={selectPreview}
           />
+          <div className="canvas-selection">
+            <span className="online-dot" />{" "}
+            {selectedEdit
+              ? "Selected: " + (labels[selectedEdit] || selectedEdit)
+              : "Select an element on the canvas"}
+            <button onClick={() => selectPreview("layout")}>Edit layout</button>
+          </div>
         </aside>
       </div>
       <div className="studio-save-bar">

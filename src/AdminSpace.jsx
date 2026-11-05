@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Check, ArrowRight, ShieldCheck, Store, LifeBuoy } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  ShieldCheck,
+  Store,
+  AlertTriangle,
+  Clock3,
+  LifeBuoy,
+  Search,
+  CheckCircle2,
+  MessageSquare,
+} from "lucide-react";
 export function TierPanel({ data, update }) {
   const current = data.presentationTier || "growth";
   return (
@@ -37,9 +48,7 @@ export function TierPanel({ data, update }) {
             aria-pressed={current === id}
             onClick={() => update((d) => ({ ...d, presentationTier: id }))}
           >
-            <span>
-              {current === id ? <Check size={18} /> : name.slice(0, 1)}
-            </span>
+            <span>{current === id ? <Check size={18} /> : name[0]}</span>
             <h3>{name}</h3>
             <p>{desc}</p>
             <strong>{n} demo media slots</strong>
@@ -48,162 +57,347 @@ export function TierPanel({ data, update }) {
       </div>
       <small>
         Packages do not activate POS, payment integrations, or the event map.
-        Those are separate decisions.
+        Downgrades retain data while new additions follow the lower quota.
       </small>
     </section>
   );
 }
 export default function AdminSpace({ data, update }) {
   const [tab, setTab] = useState("Overview"),
-    [notice, setNotice] = useState("");
+    [notice, setNotice] = useState(""),
+    [summary, setSummary] = useState("Cannot access the ordering flow"),
+    [priority, setPriority] = useState("blocking"),
+    [resolution, setResolution] = useState("");
+  const ops = {
+    subscription: "existing",
+    reviewed: false,
+    tickets: [],
+    ...data.adminOps,
+  };
+  const issues = ops.tickets.filter((t) => t.status !== "resolved");
+  const checks = [
+    ["Account relationship active", ops.subscription !== "paused"],
+    ["Business name", !!data.brand.name?.trim()],
+    ["Business category", !!data.brand.category?.trim()],
+    ["Event / business contact", !!data.brand.contact?.trim()],
+    ["Available catalog item", data.menu.some((m) => m.available)],
+    [
+      "Payment policy configured",
+      ["prepaid", "counter"].includes(data.operations.policy),
+    ],
+    ["No unresolved blockers", !issues.some((i) => i.priority === "blocking")],
+    ["Operator review complete", ops.reviewed],
+  ];
+  const ready = checks.every(([, ok]) => ok);
+  const patch = (p) => update((d) => ({ ...d, adminOps: { ...ops, ...p } }));
   return (
-    <main className="admin-space">
-      <div className="market-heading">
+    <main className="admin-space admin-command">
+      <header className="admin-command-heading">
         <div>
-          <span className="spaces-eyebrow">
-            KAWING OPERATOR · FICTIONAL WORKSPACE
-          </span>
+          <span className="spaces-eyebrow">KAWING · MERCHANT OPERATIONS</span>
           <h1>A clear view of the whole.</h1>
-          <p>
-            Manage this merchant’s demo setup without mixing customer and
-            creator controls.
-          </p>
+          <p>One business dossier. Setup, package, and support—connected.</p>
         </div>
-        <ShieldCheck size={38} />
+        <span className={"readiness-badge " + (ready ? "ready" : "attention")}>
+          {ready ? <Check size={16} /> : <AlertTriangle size={16} />}{" "}
+          {ready ? "Demo setup ready" : "Setup needs attention"}
+        </span>
+      </header>
+      <div className="admin-command-metrics">
+        <span>
+          <strong>
+            {checks.filter(([, ok]) => ok).length}/{checks.length}
+          </strong>
+          Setup checks
+        </span>
+        <span>
+          <strong>{issues.length}</strong>Open issues
+        </span>
+        <span>
+          <strong>
+            {data.orders.filter((o) => !o.seed && o.status === "served").length}
+          </strong>
+          Completed demo orders
+        </span>
+        <span>
+          <strong>{(data.presentationTier || "growth").toUpperCase()}</strong>
+          Current package
+        </span>
       </div>
-      <nav className="market-tabs">
-        {["Overview", "Packages", "Setup review", "Support"].map((t) => (
-          <button
-            key={t}
-            className={tab === t ? "active" : ""}
-            onClick={() => setTab(t)}
-          >
-            {t}
-          </button>
-        ))}
-      </nav>
-      {notice && (
-        <p className="market-notice" role="status">
-          {notice}
-        </p>
-      )}
-      {tab === "Overview" && (
-        <>
-          <div className="admin-summary">
-            {[
-              ["Business profiles", "1"],
-              ["Sample orders", data.orders.length],
-              [
-                "Open feedback",
-                data.feedback.filter((f) => f.status !== "resolved").length,
-              ],
-              ["Package", (data.presentationTier || "growth").toUpperCase()],
-            ].map(([k, v]) => (
-              <article key={k}>
-                <span>{k}</span>
-                <strong>{v}</strong>
-              </article>
+      <div className="admin-command-layout">
+        <aside className="admin-business-card">
+          <span className="vendor-avatar">
+            <Store size={28} />
+          </span>
+          <h2>{data.brand.name}</h2>
+          <p>{data.brand.tagline}</p>
+          <dl>
+            <dt>Relationship</dt>
+            <dd>
+              {ops.subscription === "existing"
+                ? "Existing demo subscriber"
+                : ops.subscription === "trial"
+                  ? "Trial / prospect"
+                  : "Paused demo account"}
+            </dd>
+            <dt>Profile</dt>
+            <dd>{data.brand.category || "Category not set"}</dd>
+            <dt>Contact</dt>
+            <dd>{data.brand.contact || "Needs contact details"}</dd>
+          </dl>
+          <small>
+            Role switching is a presentation feature, not real authentication.
+            All records remain local.
+          </small>
+        </aside>
+        <section className="admin-task-panel">
+          <nav className="market-tabs">
+            {["Overview", "Packages", "Setup review", "Support"].map((t) => (
+              <button
+                key={t}
+                className={tab === t ? "active" : ""}
+                onClick={() => setTab(t)}
+              >
+                {t}
+                {t === "Support" && <small>{issues.length}</small>}
+              </button>
             ))}
-          </div>
-          <section className="market-panel">
-            <span className="detail-icon">
-              <Store size={26} />
-            </span>
-            <h2>{data.brand.name}</h2>
-            <p>{data.brand.tagline}</p>
-            <div className="admin-checklist">
+          </nav>
+          {notice && (
+            <p className="desk-notice" role="status">
+              {notice}
+            </p>
+          )}
+          {tab === "Overview" && (
+            <>
+              <h2>The next right action.</h2>
+              <p className="admin-task-lead">
+                {ready
+                  ? "All configured demo checks are complete. Keep an eye on customer issues."
+                  : "Complete business details and review the workflow before calling the setup ready."}
+              </p>
+              <div className="admin-action-grid">
+                <button onClick={() => setTab("Setup review")}>
+                  <ShieldCheck size={23} />
+                  <strong>Review setup</strong>
+                  <span>
+                    {checks.filter(([, ok]) => !ok).length} checks remaining
+                  </span>
+                  <ArrowRight size={17} />
+                </button>
+                <button onClick={() => setTab("Support")}>
+                  <LifeBuoy size={23} />
+                  <strong>Handle issues</strong>
+                  <span>{issues.length} unresolved requests</span>
+                  <ArrowRight size={17} />
+                </button>
+              </div>
+              <div className="readiness-grid">
+                {checks.map(([label, ok]) => (
+                  <div className={ok ? "complete" : ""} key={label}>
+                    {ok ? <Check size={16} /> : <Clock3 size={16} />}
+                    <span>{label}</span>
+                    <strong>{ok ? "Met" : "Outstanding"}</strong>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {tab === "Packages" && (
+            <>
+              <TierPanel data={data} update={update} />
+              <label>
+                Demo subscriber relationship
+                <select
+                  aria-label="Merchant subscriber relationship"
+                  value={ops.subscription}
+                  onChange={(e) =>
+                    patch({ subscription: e.target.value, reviewed: false })
+                  }
+                >
+                  <option value="existing">Existing demo subscriber</option>
+                  <option value="trial">Trial / prospect</option>
+                  <option value="paused">Paused demo account</option>
+                </select>
+              </label>
+              <p className="desk-fineprint">
+                Changing a demo relationship never activates billing, payment
+                verification, or a production account.
+              </p>
+            </>
+          )}
+          {tab === "Setup review" && (
+            <>
+              <h2>A review with evidence.</h2>
               <p>
-                <Check size={17} /> Business identity configured
+                These fields update the same Business Profile. Required setup
+                gaps cannot be approved away.
               </p>
-              <p>
-                <Check size={17} /> Customer modules available
-              </p>
-              <p>
-                <Check size={17} /> Cashier verification is separate from
-                customer payment claim
-              </p>
-              <p>
-                <Check size={17} /> Browser-local simulation · No production
-                onboarding
-              </p>
-            </div>
-            <button
-              className="space-primary"
-              onClick={() => setTab("Setup review")}
-            >
-              Review merchant setup <ArrowRight size={16} />
-            </button>
-          </section>
-        </>
-      )}
-      {tab === "Packages" && <TierPanel data={data} update={update} />}{" "}
-      {tab === "Setup review" && (
-        <section className="market-panel">
-          <h2>Ready for a demonstration.</h2>
-          <div className="admin-checklist">
-            {[
-              ["Business name", data.brand.name],
-              ["Business category", data.brand.category || "Restaurant & café"],
-              [
-                "Visible modules",
-                data.storefront.modules.filter((m) => m.enabled).length,
-              ],
-              ["Payment policy", data.operations.policy],
-              [
-                "Table links",
-                Object.entries(data.storefront.tables)
-                  .filter(([_, v]) => v)
-                  .map(([k]) => k)
-                  .join(", "),
-              ],
-            ].map(([k, v]) => (
-              <p key={k}>
-                <Check size={17} />
-                <strong>{k}</strong>
-                <span>{v}</span>
-              </p>
-            ))}
-          </div>
-          <button
-            className="space-primary"
-            onClick={() =>
-              setNotice(
-                "Demo setup marked reviewed in this session. No account was approved or invitation sent.",
-              )
-            }
-          >
-            Mark demo setup reviewed
-          </button>
+              {[
+                ["category", "Business category"],
+                ["contact", "Business contact"],
+              ].map(([key, label]) => (
+                <label key={key}>
+                  {label}
+                  <input
+                    maxLength={100}
+                    value={data.brand[key] || ""}
+                    onChange={(e) =>
+                      update((d) => ({
+                        ...d,
+                        brand: { ...d.brand, [key]: e.target.value },
+                        adminOps: { ...ops, reviewed: false },
+                      }))
+                    }
+                  />
+                </label>
+              ))}
+              <div className="readiness-grid">
+                {checks.map(([label, ok]) => (
+                  <div key={label} className={ok ? "complete" : ""}>
+                    {ok ? <Check size={16} /> : <AlertTriangle size={16} />}
+                    <span>{label}</span>
+                    <strong>{ok ? "Met" : "Outstanding"}</strong>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="space-primary"
+                disabled={!checks.slice(0, -1).every(([, ok]) => ok)}
+                onClick={() => {
+                  patch({ reviewed: true, reviewedAt: Date.now() });
+                  setNotice(
+                    "Demo setup reviewed against the current checklist. No real merchant account was approved.",
+                  );
+                }}
+              >
+                Mark demo setup reviewed <Check size={16} />
+              </button>
+            </>
+          )}
+          {tab === "Support" && (
+            <>
+              <form
+                className="issue-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  patch({
+                    reviewed: false,
+                    tickets: [
+                      {
+                        id: crypto.randomUUID(),
+                        title: summary,
+                        priority,
+                        status: "open",
+                        resolution: "",
+                        createdAt: Date.now(),
+                      },
+                      ...ops.tickets,
+                    ],
+                  });
+                  setNotice(
+                    "Demo issue recorded locally. Blocking issues prevent a ready state. No message was sent externally.",
+                  );
+                }}
+              >
+                <h2>Track the problem to its resolution.</h2>
+                <label>
+                  Issue summary
+                  <input
+                    value={summary}
+                    maxLength={140}
+                    required
+                    onChange={(e) => setSummary(e.target.value)}
+                  />
+                </label>
+                <label>
+                  Priority
+                  <select
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                  >
+                    <option value="blocking">Blocking setup / operation</option>
+                    <option value="normal">Needs attention</option>
+                  </select>
+                </label>
+                <button className="space-primary" disabled={!summary.trim()}>
+                  Record demo issue <MessageSquare size={16} />
+                </button>
+              </form>
+              <div className="vendor-issues">
+                {!ops.tickets.length && (
+                  <div className="desk-empty">
+                    <CheckCircle2 size={28} />
+                    <p>No support issues recorded.</p>
+                  </div>
+                )}
+                {ops.tickets.map((t) => (
+                  <article key={t.id}>
+                    <span className={"issue-priority " + t.priority}>
+                      {t.priority} · {t.status.replace("_", " ")}
+                    </span>
+                    <h3>{t.title}</h3>
+                    {t.resolution && <p>{t.resolution}</p>}
+                    {t.status !== "resolved" && (
+                      <>
+                        <label>
+                          Resolution note
+                          <input
+                            aria-label={"Resolve " + t.title}
+                            maxLength={300}
+                            value={resolution}
+                            onChange={(e) => setResolution(e.target.value)}
+                            placeholder="What was checked and corrected?"
+                          />
+                        </label>
+                        <div>
+                          <button
+                            className="space-secondary"
+                            onClick={() =>
+                              patch({
+                                tickets: ops.tickets.map((v) =>
+                                  v.id === t.id
+                                    ? { ...v, status: "in_progress" }
+                                    : v,
+                                ),
+                              })
+                            }
+                          >
+                            Start handling
+                          </button>
+                          <button
+                            className="space-primary"
+                            disabled={!resolution.trim()}
+                            onClick={() => {
+                              patch({
+                                tickets: ops.tickets.map((v) =>
+                                  v.id === t.id
+                                    ? {
+                                        ...v,
+                                        status: "resolved",
+                                        resolution: resolution.trim(),
+                                      }
+                                    : v,
+                                ),
+                              });
+                              setResolution("");
+                              setNotice(
+                                "Issue resolved with a note. Review setup again to verify readiness.",
+                              );
+                            }}
+                          >
+                            Resolve with note
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </article>
+                ))}
+              </div>
+            </>
+          )}
         </section>
-      )}
-      {tab === "Support" && (
-        <section className="market-panel">
-          <LifeBuoy size={35} />
-          <h2>A little help, clearly handled.</h2>
-          <p>
-            Choose a fictional support topic. This does not contact a team or
-            create a real ticket.
-          </p>
-          <label>
-            Support topic
-            <select>
-              <option>Business setup</option>
-              <option>Customization</option>
-              <option>Ordering workflow</option>
-            </select>
-          </label>
-          <button
-            className="space-primary"
-            onClick={() =>
-              setNotice(
-                "Fictional support request recorded for demonstration only. Nothing was sent externally.",
-              )
-            }
-          >
-            Simulate support request
-          </button>
-        </section>
-      )}
+      </div>
     </main>
   );
 }

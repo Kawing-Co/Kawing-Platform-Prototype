@@ -1,3 +1,4 @@
+import { receiptKey } from "./experience";
 import React, { useState, useEffect, useRef } from "react";
 import {
   ArrowLeft,
@@ -57,6 +58,8 @@ export default function StorefrontHub({
   configOverride,
   brandOverride,
   startMenu = false,
+  onEdit,
+  selectedEdit,
 }) {
   const c = configOverride || data.storefront,
     b = brandOverride || data.brand;
@@ -84,6 +87,10 @@ export default function StorefrontHub({
     if (!preview && pane !== "home") focus.current?.focus();
   }, [pane]);
   function open(type) {
+    if (preview && onEdit) {
+      onEdit(type);
+      return;
+    }
     if (
       type !== "order" &&
       (!c.modules.some((m) => m.type === type && m.enabled) ||
@@ -106,7 +113,9 @@ export default function StorefrontHub({
   }
   const guest = data.accounts.find((a) => a.id === data.guestId),
     points = balance(data),
-    latest = data.orders.find((o) => !o.seed && o.merchantId === "salo");
+    latest = data.orders.find(
+      (o) => !o.seed && o.merchantId === (data.merchantId || "salo"),
+    );
   const enabled = c.modules.filter(
     (m) =>
       m.enabled &&
@@ -117,7 +126,7 @@ export default function StorefrontHub({
   function trackOrder() {
     if (!latest) return;
     try {
-      localStorage.setItem("kawing-last-order", latest.id);
+      localStorage.setItem(receiptKey(data.merchantId), latest.id);
     } catch {}
     setReceiptVersion((v) => v + 1);
     open("order");
@@ -145,8 +154,17 @@ export default function StorefrontHub({
   const count = latest ? latest.items.reduce((s, i) => s + i.qty, 0) : 0;
   return (
     <div
-      className={`sf-shell sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? "sf-preview" : ""}`}
+      className={`sf-shell sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? (onEdit ? "sf-editor-preview" : "sf-preview") : ""}`}
       style={themeTokens(c)}
+      onClickCapture={(e) => {
+        if (!onEdit) return;
+        const node = e.target.closest("[data-edit-id]");
+        if (node) {
+          e.preventDefault();
+          e.stopPropagation();
+          onEdit(node.dataset.editId);
+        }
+      }}
     >
       {!preview && (
         <div className="sf-demo-context">
@@ -202,7 +220,22 @@ export default function StorefrontHub({
       )}
       {pane === "home" ? (
         <>
-          <header className="sf-brand-hero">
+          <header
+            className={
+              "sf-brand-hero " +
+              (selectedEdit === "brand" ? "edit-selected" : "")
+            }
+            data-edit-id="brand"
+          >
+            {onEdit && (
+              <button
+                className="sf-edit-handle"
+                aria-label="Edit business identity"
+                data-edit-id="brand"
+              >
+                Edit identity
+              </button>
+            )}
             {c.layout === "visual" && (
               <img
                 className="sf-cover"
@@ -216,7 +249,11 @@ export default function StorefrontHub({
                 src={c.logo}
                 alt={`${b.name} logo demo`}
               />
-              <div className="sf-kicker">YOUR NEIGHBORHOOD TABLE</div>
+              <div className="sf-kicker">
+                {b.category === "Crafts"
+                  ? "MADE BY YOUR NEIGHBORS"
+                  : "YOUR NEIGHBORHOOD TABLE"}
+              </div>
               <h1>{b.name || "Your restaurant"}</h1>
               <p>{b.tagline}</p>
               <div className="sf-welcome">
@@ -224,7 +261,12 @@ export default function StorefrontHub({
                   ? `Welcome back, ${guest.name}. ${Math.max(0, c.loyalty.threshold - points)} stamps to your next reward.`
                   : "A little familiar. A little extraordinary."}
               </div>
-              <button className="sf-primary" onClick={() => open("order")}>
+              <button
+                className="sf-primary"
+                aria-label="Order now"
+                data-edit-id="order"
+                onClick={() => open("order")}
+              >
                 Order now <ArrowRight size={19} />
               </button>
               {c.layout === "minimal" && (
@@ -235,7 +277,16 @@ export default function StorefrontHub({
             </div>
           </header>
           {(b.bio || b.hours || b.address || b.contact) && (
-            <section className="sf-business-details">
+            <section className="sf-business-details" data-edit-id="business">
+              {onEdit && (
+                <button
+                  className="sf-edit-handle"
+                  aria-label="Edit business details"
+                  data-edit-id="business"
+                >
+                  Edit details
+                </button>
+              )}
               <span>{b.category || "LOCAL BUSINESS"}</span>
               {b.bio && <p>{b.bio}</p>}
               <div>
@@ -263,8 +314,18 @@ export default function StorefrontHub({
           {Array.isArray(c.galleryAssets) && c.galleryAssets.length > 0 && (
             <section
               className="sf-business-gallery"
+              data-edit-id="gallery"
               aria-label="Business gallery"
             >
+              {onEdit && (
+                <button
+                  className="sf-edit-handle"
+                  aria-label="Edit business gallery"
+                  data-edit-id="gallery"
+                >
+                  Edit gallery
+                </button>
+              )}
               {c.galleryAssets
                 .filter((src) =>
                   [
@@ -316,7 +377,11 @@ export default function StorefrontHub({
             c.promotion.placement === "hub" &&
             enabled.some((m) => m.type === "promotions") && (
               <button
-                className="sf-promo-teaser"
+                className={
+                  "sf-promo-teaser " +
+                  (selectedEdit === "promotions" ? "edit-selected" : "")
+                }
+                data-edit-id="promotions"
                 onClick={() => open("promotions")}
               >
                 <img src={c.promotion.image} alt="" />
@@ -343,6 +408,8 @@ export default function StorefrontHub({
               return (
                 <button
                   key={m.id}
+                  data-edit-id={m.type}
+                  className={selectedEdit === m.type ? "edit-selected" : ""}
                   onClick={() => open(m.type)}
                   aria-label={m.cta || m.title}
                 >
@@ -388,6 +455,7 @@ export default function StorefrontHub({
             <Customer
               key={context.kind + context.table + receiptVersion}
               onReceiptChange={setShowReceipt}
+              merchantId={data.merchantId || "salo"}
               menu={data.menu}
               brand={b}
               orders={data.orders}
@@ -569,7 +637,11 @@ export default function StorefrontHub({
         c.promotion.placement === "after-order" &&
         enabled.some((m) => m.type === "promotions") && (
           <button
-            className="sf-promo-teaser"
+            className={
+              "sf-promo-teaser " +
+              (selectedEdit === "promotions" ? "edit-selected" : "")
+            }
+            data-edit-id="promotions"
             onClick={() => open("promotions")}
           >
             <img src={c.promotion.image} alt="" />
@@ -594,7 +666,7 @@ export default function StorefrontHub({
           </button>
         </div>
       )}
-      {!preview && (
+      {(!preview || onEdit) && (
         <nav className="sf-bottom-nav" aria-label="Customer navigation">
           <button
             onClick={() => setPane("home")}

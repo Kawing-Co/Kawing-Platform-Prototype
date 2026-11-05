@@ -13,10 +13,7 @@ import {
 const state = (p) =>
   p.evaluate(() => JSON.parse(localStorage.getItem("kawing-demo-v1")));
 const save = (p) =>
-  p
-    .getByRole("button", { name: "Save design", exact: true })
-    .first()
-    .click();
+  p.getByRole("button", { name: "Save design", exact: true }).first().click();
 const customer = async (p) => {
   await p.getByRole("button", { name: "Customer hub", exact: true }).click();
 };
@@ -126,13 +123,17 @@ test("three compositions, saved theme, module ordering and preview isolation", a
     ["Quick Actions", "sf-quick"],
   ]) {
     await page.getByRole("button", { name: new RegExp(title) }).click();
-    await expect(page.locator(".studio-preview .sf-shell")).toHaveClass(
-      new RegExp(cls),
-    );
+    await expect(
+      page
+        .frameLocator('iframe[title="Interactive Studio preview"]')
+        .locator(".sf-shell"),
+    ).toHaveClass(new RegExp(cls));
     await save(page);
     await customer(page);
     await expect(page.locator(".sf-shell")).toHaveClass(new RegExp(cls));
-    await page.getByRole("button", { name: "Customization", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Customization", exact: true })
+      .click();
     await page.getByRole("tab", { name: "Layout", exact: true }).click();
   }
   await page.getByRole("tab", { name: "Brand", exact: true }).click();
@@ -325,7 +326,9 @@ test("cart and modifiers persist, table context is explicit, and presentation re
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await expect(page.locator(".cx-total")).toContainText("320");
   await expect(page.locator(".cx-cart-sub")).toContainText("Table 03");
-  await page.getByRole("button", { name: "Customization", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Customization", exact: true })
+    .click();
   await save(page);
   await page.getByRole("tab", { name: "Operations", exact: true }).click();
   await page
@@ -359,7 +362,9 @@ test("360px hub templates and modules support keyboard and reduced motion withou
   await page
     .getByRole("button", { name: "Toggle navigation", exact: true })
     .click();
-  await page.getByRole("button", { name: "Customization", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Customization", exact: true })
+    .click();
   expect(await fits()).toBe(true);
   await page.getByRole("tab", { name: "Layout", exact: true }).click();
   for (const title of ["Visual Storefront", "Minimal Utility"]) {
@@ -370,7 +375,9 @@ test("360px hub templates and modules support keyboard and reduced motion withou
     await page
       .getByRole("button", { name: "Toggle navigation", exact: true })
       .click();
-    await page.getByRole("button", { name: "Customization", exact: true }).click();
+    await page
+      .getByRole("button", { name: "Customization", exact: true })
+      .click();
     await page.getByRole("tab", { name: "Layout", exact: true }).click();
   }
   expect(errors).toEqual([]);
@@ -392,7 +399,9 @@ test("promotion scheduling and visibility work, disabled games have no stale rou
   await expect(
     page.getByRole("heading", { name: "Good things are on their way." }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Customization", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Customization", exact: true })
+    .click();
   await page.getByRole("tab", { name: "Modules", exact: true }).click();
   await page
     .getByRole("checkbox", { name: "Enable Play while you wait", exact: true })
@@ -502,7 +511,9 @@ test("review CTR measures clicked views, and studio tabs support arrow keys", as
       .locator(".engagement-grid .panel")
       .filter({ hasText: "Review-link CTR" }),
   ).toContainText("100%");
-  await page.getByRole("button", { name: "Customization", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Customization", exact: true })
+    .click();
   await page.getByRole("tab", { name: "Brand", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
   await expect(

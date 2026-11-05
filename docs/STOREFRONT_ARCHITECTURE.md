@@ -1,3 +1,5 @@
+> Updated 2026-11-05: see [Current workspace architecture](INTERACTIVE_WORKSPACES_ARCHITECTURE.md) for device canvases, operational dossiers and booth-specific ordering. The notes below describe the preceding release.
+
 # Storefront and connected commerce architecture
 
 One merchant (`salo`) is implemented. State remains in `kawing-demo-v1`; its schema

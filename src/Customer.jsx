@@ -1,5 +1,6 @@
+import { receiptKey } from "./experience";
 import React, { useEffect, useMemo, useState, useRef } from "react";
-import { paymentLabel, contextLabel, uid } from "./commerce";
+import { paymentLabel, contextLabel, uid, allowsFoodAddon } from "./commerce";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -43,11 +44,18 @@ export default function Customer({
   policy = "prepaid",
   onCartStart,
   onReceiptChange,
+  merchantId = "salo",
 }) {
+  const craft = brand.category === "Crafts";
   const [category, setCategory] = useState("All");
   const [search, setSearch] = useState("");
   const cartKey =
-    "kawing-cart-v2:salo:" + context.kind + ":" + (context.table || "");
+    "kawing-cart-v2:" +
+    merchantId +
+    ":" +
+    context.kind +
+    ":" +
+    (context.table || "");
   const readCart = () => {
     try {
       return JSON.parse(localStorage.getItem(cartKey)) || {};
@@ -70,9 +78,9 @@ export default function Customer({
   const [payment, setPayment] = useState("GCash");
   const [placed, setPlaced] = useState(() => {
     try {
-      const id = localStorage.getItem("kawing-last-order");
+      const id = localStorage.getItem(receiptKey(merchantId));
       const saved = orders.find((order) => String(order.id) === id);
-      if (!saved) localStorage.removeItem("kawing-last-order");
+      if (!saved) localStorage.removeItem(receiptKey(merchantId));
       return saved || null;
     } catch {
       return null;
@@ -85,7 +93,7 @@ export default function Customer({
     ) {
       setPlaced(null);
       try {
-        localStorage.removeItem("kawing-last-order");
+        localStorage.removeItem(receiptKey(merchantId));
       } catch {
         /* Storage may be unavailable. */
       }
@@ -96,7 +104,7 @@ export default function Customer({
     submission.current = uid();
     setModifiers({});
     try {
-      localStorage.removeItem("kawing-last-order");
+      localStorage.removeItem(receiptKey(merchantId));
     } catch {
       /* Storage may be unavailable. */
     }
@@ -117,12 +125,10 @@ export default function Customer({
     .filter((item) => cart[item.id] && item.available !== false)
     .map((item) => ({
       ...item,
-      modifier: item.category !== "Drinks" ? modifiers[item.id] || "" : "",
+      modifier: allowsFoodAddon(item) ? modifiers[item.id] || "" : "",
       price:
         item.price +
-        (modifiers[item.id] === "avocado" && item.category !== "Drinks"
-          ? 35
-          : 0),
+        (modifiers[item.id] === "avocado" && allowsFoodAddon(item) ? 35 : 0),
       qty: cart[item.id],
     }));
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -178,7 +184,7 @@ export default function Customer({
             };
       setPlaced(created);
       try {
-        localStorage.setItem("kawing-last-order", String(created.id));
+        localStorage.setItem(receiptKey(merchantId), String(created.id));
       } catch {
         /* Keep the current receipt usable without storage. */
       }
@@ -216,7 +222,9 @@ export default function Customer({
                   ? "Salamat. See you again!"
                   : statusIndex === 2
                     ? "Something good is ready."
-                    : "Good food is on its way."}
+                    : craft
+                      ? "Your market order is received."
+                      : "Good food is on its way."}
           </h1>
           <p>
             {status === "refunded"
@@ -224,8 +232,12 @@ export default function Customer({
               : status === "queued"
                 ? "Your order is saved on this device. Reconnect the demo to send it to the kitchen."
                 : statusIndex === 3
-                  ? "Your order has been served. Thank you for supporting a local table."
-                  : "Stay a little, make yourself at home. Your table is connected to our kitchen."}
+                  ? craft
+                    ? "Your order has been collected. Thank you for supporting a local maker."
+                    : "Your order has been served. Thank you for supporting a local table."
+                  : craft
+                    ? "The merchant can verify payment and get your items ready for collection."
+                    : "Stay a little, make yourself at home. Your table is connected to our kitchen."}
           </p>
           <div className="cx-success-ref">
             Order <strong>#{liveOrder?.id}</strong> ·{" "}
@@ -254,7 +266,10 @@ export default function Customer({
               </button>
             )}
           <div className="cx-progress">
-            {["Received", "Preparing", "Ready", "Served"].map((step, index) => (
+            {(craft
+              ? ["Received", "Packing", "Ready", "Collected"]
+              : ["Received", "Preparing", "Ready", "Served"]
+            ).map((step, index) => (
               <div
                 className={`cx-step ${index <= statusIndex && status !== "queued" ? "done" : ""}`}
                 key={step}
@@ -271,8 +286,9 @@ export default function Customer({
             ))}
           </div>
           <p>
-            Your order is shared with the restaurant team. Follow it in the
-            kitchen, then come back to see its progress.
+            {craft
+              ? "Your order is shared with this merchant. Updates appear here as they prepare your pickup."
+              : "Your order is shared with the restaurant team. Follow it in the kitchen, then come back to see its progress."}
           </p>
           {onNavigate && (
             <button className="cx-primary" onClick={() => onNavigate("Orders")}>
@@ -291,9 +307,19 @@ export default function Customer({
                 <Leaf size={13} /> Made local. Shared together.
               </div>
               <h1>
-                A seat at
-                <br />
-                the {brand.name || "Salo"} table.
+                {craft ? (
+                  <>
+                    Made with care,
+                    <br />
+                    by {brand.name}.
+                  </>
+                ) : (
+                  <>
+                    A seat at
+                    <br />
+                    the {brand.name || "Salo"} table.
+                  </>
+                )}
               </h1>
               <p>
                 {brand.tagline || "Good food, thoughtfully made."}
@@ -301,10 +327,12 @@ export default function Customer({
               </p>
               <div className="cx-hero-meta">
                 <span>
-                  <MapPin size={12} /> Poblacion, Makati
+                  <MapPin size={12} />{" "}
+                  {craft ? "Market pickup · fictional" : "Poblacion, Makati"}
                 </span>
                 <span>
-                  <Clock3 size={12} /> 15–25 min
+                  <Clock3 size={12} />{" "}
+                  {craft ? "Arrange at the booth" : "15–25 min"}
                 </span>
               </div>
             </div>
@@ -320,7 +348,9 @@ export default function Customer({
             </div>
           )}
           <div className="cx-layout">
-            <section aria-label="Restaurant menu">
+            <section
+              aria-label={craft ? "Merchant catalog" : "Restaurant menu"}
+            >
               <div className="cx-filter">
                 <div className="cx-categories">
                   {categories.map((cat) => (
@@ -337,8 +367,10 @@ export default function Customer({
                 <label className="cx-search">
                   <Search size={15} />
                   <input
-                    aria-label="Search dishes"
-                    placeholder="Find your craving"
+                    aria-label={craft ? "Search products" : "Search dishes"}
+                    placeholder={
+                      craft ? "Find something lovely" : "Find your craving"
+                    }
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
                   />
@@ -348,7 +380,9 @@ export default function Customer({
                 <h2>
                   {category === "All" ? "A little of everything" : category}
                 </h2>
-                <span>{filtered.length} dishes to discover</span>
+                <span>
+                  {filtered.length} {craft ? "items" : "dishes"} to discover
+                </span>
               </div>
               <div className="cx-grid">
                 {filtered.map((item, index) => (
@@ -489,12 +523,16 @@ export default function Customer({
                         value={note}
                         maxLength={200}
                         onChange={(event) => setNote(event.target.value)}
-                        placeholder="Less spicy, no onions…"
+                        placeholder={
+                          craft
+                            ? "Optional pickup request (demo)"
+                            : "Less spicy, no onions…"
+                        }
                       />
                     </label>
                   )}
                   {items
-                    .filter((item) => item.category !== "Drinks")
+                    .filter((item) => allowsFoodAddon(item))
                     .map((item) => (
                       <label className="cx-modifier" key={"modifier" + item.id}>
                         {item.name} add-on

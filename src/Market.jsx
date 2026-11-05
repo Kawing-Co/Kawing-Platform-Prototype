@@ -1,3 +1,6 @@
+import { CustomerPreview } from "./Viewport";
+import { VendorDesk } from "./VendorDesk";
+import { normalizeMarket, vendorReadiness } from "./operations";
 import React, { useState, useEffect } from "react";
 import {
   MapPin,
@@ -97,13 +100,20 @@ function load() {
       Array.isArray(d.booths) &&
       Array.isArray(d.profiles)
     )
-      return d;
+      return normalizeMarket(d);
   } catch {}
-  return seedMarket();
+  return normalizeMarket(seedMarket());
 }
 export default function Market({ role }) {
   const [data, setData] = useState(load),
-    [tab, setTab] = useState("Map"),
+    [tab, setTab] = useState(
+      role === "admin"
+        ? "Vendor desk"
+        : role === "merchant"
+          ? "My participation"
+          : "Map",
+    ),
+    [customerBusiness, setCustomerBusiness] = useState(null),
     [selected, setSelected] = useState(null),
     [draft, setDraft] = useState(null),
     [undo, setUndo] = useState([]),
@@ -261,10 +271,26 @@ export default function Market({ role }) {
   }
   const tabs =
     role === "admin"
-      ? ["Map", "Layout Editor", "Booths", "Merchants", "Event setup"]
+      ? [
+          "Vendor desk",
+          "Map",
+          "Layout Editor",
+          "Booths",
+          "Merchants",
+          "Event setup",
+        ]
       : role === "merchant"
-        ? ["Map", "My participation"]
+        ? ["My participation", "Map", "Merchants"]
         : ["Map", "Booth list"];
+  if (customerBusiness && role === "customer")
+    return (
+      <CustomerPreview
+        merchantId={customerBusiness.id}
+        merchantName={customerBusiness.name}
+        boothId={customerBusiness.boothId}
+        onBack={() => setCustomerBusiness(null)}
+      />
+    );
   return (
     <main className="market-workspace">
       <div className="market-heading">
@@ -294,6 +320,60 @@ export default function Market({ role }) {
           </button>
         ))}
       </nav>
+      {role !== "customer" && (
+        <div className="market-command-summary">
+          <span>
+            <strong>{data.profiles.length}</strong> Vendors
+          </span>
+          <span>
+            <strong>
+              {
+                data.profiles.filter((p) => vendorReadiness(data, p.id).ready)
+                  .length
+              }
+            </strong>{" "}
+            Ready
+          </span>
+          <span>
+            <strong>
+              {
+                (data.issues || []).filter((i) => i.status !== "resolved")
+                  .length
+              }
+            </strong>{" "}
+            Open issues
+          </span>
+          <span>
+            <strong>
+              {data.booths.filter((b) => !b.merchant && !b.blocked).length}
+            </strong>{" "}
+            Available spots
+          </span>
+          <button
+            onClick={() =>
+              setTab(role === "admin" ? "Vendor desk" : "My participation")
+            }
+          >
+            Open readiness desk <ArrowRight size={15} />
+          </button>
+        </div>
+      )}
+      {["Vendor desk", "My participation"].includes(tab) && (
+        <VendorDesk
+          data={data}
+          update={setData}
+          role={role}
+          selectedId={profile}
+          onSelect={setProfile}
+          commerce={commerce}
+          onMap={() => {
+            setSelected(
+              data.booths.find((b) => b.merchant === profile)?.id || null,
+            );
+            setTab("Map");
+          }}
+        />
+      )}
       {notice && (
         <div className="market-notice" role="status">
           <Check size={17} />
@@ -558,6 +638,20 @@ export default function Market({ role }) {
                           ? "Temporary event profile · Fictional"
                           : "Existing business profile · Fictional"}
                       </small>
+                      {role === "customer" && (
+                        <button
+                          className="space-primary booth-shop-action"
+                          disabled={!active || b.blocked}
+                          onClick={() =>
+                            setCustomerBusiness({
+                              ...publicProfile,
+                              boothId: b.id,
+                            })
+                          }
+                        >
+                          Open Business Profile <ArrowRight size={16} />
+                        </button>
+                      )}
                       <h3>A taste of what’s here</h3>
                       {publicProfile.id === "salo" ? (
                         <div className="booth-products">
@@ -832,7 +926,7 @@ export default function Market({ role }) {
           setPage={setPage}
         />
       )}
-      {(tab === "Merchants" || tab === "My participation") && (
+      {tab === "Merchants" && (
         <section className="market-panel">
           <h2>
             {role === "merchant"
@@ -992,7 +1086,7 @@ export default function Market({ role }) {
                   "Reset the market fixture? Local booth assignments and drafts will be cleared.",
                 )
               ) {
-                setData(seedMarket());
+                setData(normalizeMarket(seedMarket()));
                 setDraft(null);
                 setSelected(null);
                 setNotice(

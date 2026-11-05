@@ -4,6 +4,8 @@ async function enter(page, scenario, role) {
   await page.goto("/");
   await page.getByRole("button", { name: new RegExp(scenario) }).click();
   await page.getByRole("button", { name: new RegExp("Enter " + role) }).click();
+  if (role === "Merchant View" && scenario === "Explore a market")
+    await page.getByRole("button", { name: "Map", exact: true }).click();
 }
 test("two simulations lead immediately to exactly three spaces", async ({
   page,
@@ -27,7 +29,7 @@ test("two simulations lead immediately to exactly three spaces", async ({
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: /Enter Customer View/ }).click();
   await expect(
-    page.getByRole("button", { name: "Order now", exact: true }),
+    page.getByRole("button", { name: "Start customer preview", exact: false }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Customization", exact: true }),
@@ -168,8 +170,13 @@ test("Studio drafts survive view changes and package media limits are functional
   page.once("dialog", (d) => d.accept());
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: /Enter Customer View/ }).click();
+  await page
+    .getByRole("button", { name: "Start customer preview", exact: false })
+    .click();
   await expect(
-    page.getByRole("heading", { name: "Salo", exact: true }),
+    page
+      .frameLocator('iframe[title^="Customer "]')
+      .getByRole("heading", { name: "Salo", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: /Enter Merchant View/ }).click();
@@ -206,10 +213,18 @@ test("Studio drafts survive view changes and package media limits are functional
     .click();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: /Enter Customer View/ }).click();
+  await page
+    .getByRole("button", { name: "Start customer preview", exact: false })
+    .click();
   await expect(
-    page.getByRole("heading", { name: "Draft Coffee", exact: true }),
+    page
+      .frameLocator('iframe[title^="Customer "]')
+      .getByRole("heading", { name: "Draft Coffee", exact: true }),
   ).toBeVisible();
-  await expect(page.getByLabel("Business gallery").locator("img")).toHaveCount(
-    2,
-  );
+  await expect(
+    page
+      .frameLocator('iframe[title^="Customer "]')
+      .getByLabel("Business gallery")
+      .locator("img"),
+  ).toHaveCount(2);
 });

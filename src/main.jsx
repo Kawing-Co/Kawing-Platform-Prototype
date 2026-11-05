@@ -1,3 +1,10 @@
+import { StudioReceiver } from "./Viewport";
+import {
+  businessKey,
+  newBusiness,
+  projectTier,
+  eventOrderError,
+} from "./experience";
 import Spaces from "./Spaces";
 import AdminSpace from "./AdminSpace";
 import React, { useState, useEffect } from "react";
@@ -48,6 +55,7 @@ import {
   orderAction,
   contextFromUrl,
   paymentLabel,
+  allowsFoodAddon,
 } from "./commerce";
 import "./styles.css";
 import "./spaces.css";
@@ -238,8 +246,33 @@ function readGuide() {
     return null;
   }
 }
-function App({ space = "merchant" }) {
-  const [data, setData] = useState(load),
+function App({
+  space = "merchant",
+  merchantId = "salo",
+  merchantProfile = null,
+  marketContext = null,
+  previewTier = null,
+}) {
+  const [data, setData] = useState(() => {
+      if (merchantId === "salo") return load();
+      try {
+        const v = JSON.parse(localStorage.getItem(businessKey(merchantId)));
+        if (v)
+          return extend(
+            {
+              ...v,
+              brand: {
+                ...v.brand,
+                name: merchantProfile.name,
+                tagline: merchantProfile.bio || v.brand.tagline,
+                category: merchantProfile.category,
+              },
+            },
+            merchantId,
+          );
+      } catch {}
+      return newBusiness(merchantProfile);
+    }),
     [page, setPage] = useState(readPage),
     [guide, setGuide] = useState(readGuide),
     [period, setPeriod] = useState("Today"),
@@ -248,7 +281,9 @@ function App({ space = "merchant" }) {
     [tour, setTour] = useState(0),
     [mobile, setMobile] = useState(false),
     [query, setQuery] = useState(""),
-    [entryContext, writeEntryContext] = useState(contextFromUrl),
+    [entryContext, writeEntryContext] = useState(() =>
+      marketContext ? { kind: "counter", table: null } : contextFromUrl(),
+    ),
     [customerVisit, setCustomerVisit] = useState(0);
   useEffect(() => {
     const onHash = () => {
@@ -272,11 +307,27 @@ function App({ space = "merchant" }) {
   }, [guide]);
   useEffect(() => {
     try {
-      localStorage.setItem("kawing-demo-v1", JSON.stringify(data));
+      localStorage.setItem(businessKey(merchantId), JSON.stringify(data));
     } catch {
       setToast("Browser storage unavailable. Changes last for this session.");
     }
   }, [data]);
+  useEffect(() => {
+    const sync = (event) => {
+      if (event.key !== businessKey(merchantId) || !event.newValue) return;
+      try {
+        const next = JSON.parse(event.newValue);
+        if (
+          next.merchantId === merchantId &&
+          Array.isArray(next.orders) &&
+          Array.isArray(next.menu)
+        )
+          setData(extend(next, merchantId));
+      } catch {}
+    };
+    window.addEventListener("storage", sync);
+    return () => window.removeEventListener("storage", sync);
+  }, [merchantId]);
   useEffect(() => {
     if (toast) {
       const t = setTimeout(() => setToast(""), 4200);
@@ -411,6 +462,8 @@ function App({ space = "merchant" }) {
     history.replaceState(null, "", u.pathname + u.search + u.hash);
   }
   function submit(order) {
+    const eventError = eventOrderError(marketContext);
+    if (eventError) throw new Error(eventError);
     const existing = data.orders.find(
       (o) => o.submissionId === order.submissionId,
     );
@@ -429,12 +482,12 @@ function App({ space = "merchant" }) {
         ...menuItem,
         qty: Math.max(1, Math.min(20, i.qty)),
         modifier:
-          i.modifier === "avocado" && menuItem.category !== "Drinks"
+          i.modifier === "avocado" && allowsFoodAddon(menuItem)
             ? "avocado"
             : "",
         price:
           menuItem.price +
-          (i.modifier === "avocado" && menuItem.category !== "Drinks" ? 35 : 0),
+          (i.modifier === "avocado" && allowsFoodAddon(menuItem) ? 35 : 0),
       };
     });
     const created = {
@@ -442,7 +495,8 @@ function App({ space = "merchant" }) {
       items,
       total: items.reduce((s, i) => s + i.qty * i.price, 0),
       id: "KW-" + uid().slice(0, 8),
-      merchantId: "salo",
+      merchantId,
+      sourceEvent: marketContext ? { ...marketContext } : null,
       createdAt: Date.now(),
       guestId: data.guestId,
       loyaltyEligible:
@@ -521,6 +575,9 @@ function App({ space = "merchant" }) {
   const totalBase =
     period === "Today" ? 12840 : period === "This week" ? 84260 : 346800;
   const multiplier = period === "Today" ? 1 : period === "This week" ? 7 : 28;
+  const viewData = previewTier
+    ? { ...data, storefront: projectTier(data.storefront, previewTier) }
+    : data;
   if (space === "admin") return <AdminSpace data={data} update={setData} />;
   // Guest links expose a customer-only presentation; this is not production authentication.
   if (
@@ -533,7 +590,7 @@ function App({ space = "merchant" }) {
           Kawing customer preview · Fictional restaurant · No real payments
         </p>
         <StorefrontHub
-          data={data}
+          data={viewData}
           update={setData}
           onSubmit={submit}
           onAction={act}
@@ -1805,4 +1862,48 @@ function SalesChart({ period }) {
     </div>
   );
 }
-createRoot(document.getElementById("root")).render(<Spaces Workspace={App} />);
+function RoutedWorkspace(props) {
+  const q = new URLSearchParams(location.search),
+    id = props.merchantId || q.get("merchant") || "salo";
+  let profile = props.merchantProfile;
+  let ctx = props.marketContext;
+  try {
+    const m = JSON.parse(localStorage.getItem("kawing-market-v1"));
+    if (id !== "salo" && !profile)
+      profile = m?.profiles.find((p) => p.id === id);
+    if (q.get("marketBooth"))
+      ctx = {
+        boothId: q.get("marketBooth"),
+        merchantId: id,
+        eventId: "commons",
+      };
+  } catch {}
+  if (id !== "salo" && !profile)
+    return (
+      <main className="market-panel">
+        <h1>Business unavailable</h1>
+        <p>
+          This merchant profile is no longer part of the local demo. Return to
+          the market map.
+        </p>
+      </main>
+    );
+  return (
+    <App
+      {...props}
+      merchantId={id}
+      merchantProfile={profile}
+      marketContext={ctx}
+      previewTier={q.get("previewTier")}
+    />
+  );
+}
+createRoot(document.getElementById("root")).render(
+  new URLSearchParams(location.search).get("surface") === "studio-preview" ? (
+    <StudioReceiver />
+  ) : (
+    <Spaces Workspace={RoutedWorkspace} />
+  ),
+);
+
+import "./interactive.css";

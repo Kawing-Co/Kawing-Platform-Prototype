@@ -13,6 +13,7 @@ import {
   Compass,
   SlidersHorizontal,
 } from "lucide-react";
+import { CustomerPreview } from "./Viewport";
 import Market from "./Market";
 
 const roles = [
@@ -111,7 +112,15 @@ export default function Spaces({ Workspace }) {
   if (legacy) return <Workspace />;
   if (step === "inside" && role)
     return (
-      <div className={"space-session space-" + role + (new URLSearchParams(location.search).has("scenario")?" modern-spaces":"")}>
+      <div
+        className={
+          "space-session space-" +
+          role +
+          (new URLSearchParams(location.search).has("scenario")
+            ? " modern-spaces"
+            : "")
+        }
+      >
         <SessionHeader
           scenario={scenario}
           role={role}
@@ -126,7 +135,9 @@ export default function Spaces({ Workspace }) {
           }}
           onScenario={chooseScenario}
         />
-        {scenario === "market" ? (
+        {scenario === "standard" && role === "customer" ? (
+          <CustomerPreview />
+        ) : scenario === "market" ? (
           <Market key={role} role={role} />
         ) : (
           <Workspace key={role} space={role} />
