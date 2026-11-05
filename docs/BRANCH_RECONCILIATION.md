@@ -50,7 +50,8 @@ preserved on package downgrade; this review does not introduce a destructive quo
 
 The existing ten Studio tabs and participation-first market merchant screen are kept.
 Changing those product decisions is deferred; neither is needed to reconcile histories.
-Later, at Earl's direction, Pop-up Merchant View was changed to open on the booth map (see CHANGELOG, Unreleased).
+Later, at Earl's direction, Pop-up Merchant View was changed to open on the booth map
+(PR #2, merge `9b3bcf8`; see CHANGELOG).
 Payments remain browser-local and no provider checkout or custom URI is enabled.
 
 ## Verification and release
@@ -70,3 +71,11 @@ Payments remain browser-local and no provider checkout or custom URI is enabled.
 The source release note records the intended verified integration; native deployment
 results and final refs are reported in the handoff. No unattended GitHub-to-Sites
 pipeline, production authentication, real payments or cross-device data sync is claimed.
+
+## Release state — 2026-11-05
+
+`main` is `9b3bcf8` (PR #2 on top of PR #1). The public Site
+https://kawing-connected-kitchen.adrianoearl04.chatgpt.site serves bundle
+`index-BLmGzimR.js`, which is the production build of that tree. Checked live at 1280 and
+360 px: both scenario cards render, Pop-up Merchant View opens on Map, there is no
+horizontal overflow and there are no console errors. The only remote branch is `main`.
