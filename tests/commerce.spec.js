@@ -39,7 +39,7 @@ async function order(p) {
     .getByRole("button", { name: "Review your order", exact: true })
     .click();
   await p
-    .getByRole("button", { name: "Maya · simulated", exact: true })
+    .getByRole("button", { name: "Maya (formerly PayMaya) · simulated", exact: true })
     .click();
   await p
     .getByRole("button", { name: "Place demo order", exact: true })

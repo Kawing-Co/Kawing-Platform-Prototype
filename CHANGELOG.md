@@ -9,6 +9,11 @@
   tier/setup panel), Change Scenario and a confirmed, scenario-scoped Reset that keeps the
   Kawing Studio draft unless the visitor opts in. Compact header on small screens.
   Customer View opens the finished experience at once with the saved package.
+- UX-05: Checkout offers GCash, Maya (formerly PayMaya), GoTyme Bank, MariBank and Cash.
+  `Continue with <provider>` releases only an approved, order-specific https checkout on
+  a verified provider host; none exists in the demo, so each opens truthful QR Ph
+  instructions. No custom scheme, QR or receiver number; opening, returning, repeating
+  or claiming never confirms payment. Matrix and sources: docs/PAYMENT_PROVIDERS.md.
 - Playwright honours `CHROMIUM_PATH` and only uses `/usr/bin/chromium` when present.
 - See docs/DEMO_UX_002_AMENDMENT.md. Not merged or published.
 

@@ -1,6 +1,8 @@
 import { receiptKey } from "./experience";
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { paymentLabel, contextLabel, uid, allowsFoodAddon } from "./commerce";
+import { PROVIDERS, provider, resolvePaymentRoute } from "./payments";
+import "./payments.css";
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -76,6 +78,8 @@ export default function Customer({
   }, [cart, note, modifiers, cartKey]);
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState("GCash");
+  // Opened only by an explicit "Continue with …" tap; never changes payment status.
+  const [payGuide, setPayGuide] = useState(null);
   const [placed, setPlaced] = useState(() => {
     try {
       const id = localStorage.getItem(receiptKey(merchantId));
@@ -258,12 +262,16 @@ export default function Customer({
           {liveOrder?.payment !== "Cash" &&
             liveOrder?.paymentStatus === "selected" &&
             status !== "queued" && (
-              <button
-                className="cx-primary"
-                onClick={() => onAction?.(liveOrder.id, "claim")}
-              >
-                I’ve sent the demo payment
-              </button>
+              <PayWith
+                order={liveOrder}
+                open={payGuide === liveOrder.id}
+                onContinue={() => setPayGuide(liveOrder.id)}
+                onClose={() => setPayGuide(null)}
+                onClaim={() => {
+                  setPayGuide(null);
+                  onAction?.(liveOrder.id, "claim");
+                }}
+              />
             )}
           <div className="cx-progress">
             {(craft
@@ -575,8 +583,7 @@ export default function Customer({
                         How would you like to pay?
                       </div>
                       <div className="cx-payment">
-                        {["Cash", "GCash", "Maya", "GoTyme", "MariBank"].map(
-                          (method) => (
+                        {PROVIDERS.map(({ id: method, label }) => (
                             <button
                               className={payment === method ? "selected" : ""}
                               aria-pressed={payment === method}
@@ -585,10 +592,9 @@ export default function Customer({
                             >
                               {method === "Cash"
                                 ? "Cash at counter"
-                                : method + " · simulated"}
+                                : label + " · simulated"}
                             </button>
-                          ),
-                        )}
+                        ))}
                       </div>
                     </>
                   )}
@@ -644,5 +650,63 @@ export default function Customer({
         </>
       )}
     </div>
+  );
+}
+
+// "Continue with <provider>": uses only a verified provider route; otherwise shows
+// truthful instructions. Opening, returning or claiming never marks an order paid.
+function PayWith({ order, open, onContinue, onClose, onClaim }) {
+  const p = provider(order.payment);
+  const route = resolvePaymentRoute(order.payment, { orderId: order.id });
+  const panel = React.useRef(null);
+  React.useEffect(() => {
+    if (open) panel.current?.focus();
+  }, [open]);
+  if (!p) return null;
+  return (
+    <section className="cx-pay" aria-label={"Pay with " + p.label}>
+      <span className="cx-pay-badge">Simulation · No real payment</span>
+      {route.kind === "hosted" ? (
+        <a
+          className="cx-primary"
+          href={route.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Continue with {p.label}
+        </a>
+      ) : (
+        <button
+          className="cx-primary"
+          aria-expanded={open}
+          onClick={open ? onClose : onContinue}
+        >
+          Continue with {p.label}
+        </button>
+      )}
+      {open && route.kind === "instructions" && (
+        <div className="cx-pay-fallback" ref={panel} tabIndex={-1}>
+          <p>
+            <strong>{route.reason}</strong>
+          </p>
+          <ol>
+            {p.steps.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ol>
+          <p>
+            This demo shows no QR code or receiver number and collects no money.
+            A screenshot is not proof of payment: only the cashier's check
+            counts.
+          </p>
+          <button className="cx-back" onClick={onClose}>
+            Back to my order
+          </button>
+        </div>
+      )}
+      <button className="cx-pay-claim" onClick={onClaim}>
+        I’ve sent the demo payment
+      </button>
+    </section>
   );
 }
