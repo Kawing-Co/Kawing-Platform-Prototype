@@ -3,7 +3,8 @@
 # KAWING-DEMO-UX-002 — verification record
 
 - Branch: `feature/kawing-demo-ux-002`. Base: `main` `1005b06`.
-- PR: https://github.com/invicta-ctrl/qrmenu/pull/1 (draft). **Not merged, not published.**
+- PR: https://github.com/invicta-ctrl/qrmenu/pull/1, opened as a draft and merged on 2026-11-05
+  (`eca6e07`). The map-first follow-up merged as PR #2 (`9b3bcf8`). Both are live on the Site.
 - Scope and authority: [DEMO_UX_002_AMENDMENT.md](DEMO_UX_002_AMENDMENT.md).
 - Payment matrix: [PAYMENT_PROVIDERS.md](PAYMENT_PROVIDERS.md).
 
