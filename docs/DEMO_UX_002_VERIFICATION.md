@@ -13,7 +13,7 @@
 | --- | --- | --- |
 | UX-01 Scenario → View, session header, Customize, Reset | Done | `4a5e03b` |
 | UX-02 Studio Review & publish checklist, Storefront wording | Done | `5239c76` |
-| UX-03 Pop-up map, customer booth profile, merchant selection | Existing build verified by the existing tests. No new code | — |
+| UX-03 Pop-up map, customer booth profile, merchant selection | Existing build verified by the existing tests. Merchant View now opens on the map | see git log |
 | UX-04 Admin editor, temporary profiles, lifecycle | Existing build verified by the existing tests. No new code | — |
 | UX-05 Provider-aware payment launch and fallback | Done | `1a150c4` |
 | UX-06 Touch targets, responsive sweep, docs | Done | this commit |
@@ -68,7 +68,7 @@
 ```text
 /                      Choose scenario: Standard Merchant | Pop-up Market
 /?scenario=standard    Choose view → Merchant (Kawing Studio) | Customer (Salo page) | Admin (operator)
-/?scenario=market      Choose view → Merchant (participation) | Customer (event map) | Admin (organizer desk)
+/?scenario=market      Choose view → Merchant (booth map) | Customer (event map) | Admin (organizer desk)
 Session header         Scenario · Tier · View   [Switch View] [Customize] [Change Scenario] [Reset]
 ```
 
@@ -93,10 +93,9 @@ Session header         Scenario · Tier · View   [Switch View] [Customize] [Cha
 
 ## Known gaps and decisions for Earl
 
-- **Pop-up Merchant View first screen.** It opens the participation desk, as accepted in
-  `INTERACTIVE_WORKSPACES_SPEC.md`. The brief suggests booth selection directly, which
-  is one click away on the Map tab. Changing the first screen means reversing an
-  accepted spec, so it is left for an explicit decision.
+- **Pop-up Merchant View first screen.** Resolved 2026-11-05 at Earl's direction: it now
+  opens on the booth map. My participation is the second tab. Evidence:
+  `ux03-desktop-merchant-map.png` and `ux03-mobile-merchant-map.png`.
 - **Studio categories.** Merging the 10 tabs into 6 categories is a larger information-
   architecture change. It is not done here.
 - **Header tier in Pop-up Market** shows the demo merchant's (Salo's) platform package.

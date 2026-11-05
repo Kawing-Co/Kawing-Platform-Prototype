@@ -4,8 +4,11 @@ async function enter(page, scenario, role) {
   await page.goto("/");
   await page.getByRole("button", { name: new RegExp(scenario) }).click();
   await page.getByRole("button", { name: new RegExp("Enter " + role) }).click();
+  // Pop-up Merchant View opens on the booth map, with no extra click.
   if (role === "Merchant View" && scenario === "Explore a market")
-    await page.getByRole("button", { name: "Map", exact: true }).click();
+    await expect(
+      page.getByRole("button", { name: "Map", exact: true }),
+    ).toHaveClass(/active/);
 }
 test("two simulations lead immediately to exactly three spaces", async ({
   page,

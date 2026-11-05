@@ -107,13 +107,8 @@ function load() {
 }
 export default function Market({ role }) {
   const [data, setData] = useState(load),
-    [tab, setTab] = useState(
-      role === "admin"
-        ? "Vendor desk"
-        : role === "merchant"
-          ? "My participation"
-          : "Map",
-    ),
+    // Merchant and Customer open on the shared booth map (KAWING-DEMO-UX-002).
+    [tab, setTab] = useState(role === "admin" ? "Vendor desk" : "Map"),
     [customerBusiness, setCustomerBusiness] = useState(null),
     [selected, setSelected] = useState(null),
     [draft, setDraft] = useState(null),
@@ -285,7 +280,7 @@ export default function Market({ role }) {
           "Event setup",
         ]
       : role === "merchant"
-        ? ["My participation", "Map", "Merchants"]
+        ? ["Map", "My participation", "Merchants"]
         : ["Map", "Booth list"];
   if (customerBusiness && role === "customer")
     return (

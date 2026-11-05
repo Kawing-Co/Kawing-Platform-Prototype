@@ -34,7 +34,11 @@
    routes**. The demo has no merchant credentials, provider contract or hosted-checkout
    session, so no order-specific provider URL exists. The truthful result is fallback
    instructions for every provider (UX-05). No scheme is invented and no order is promoted.
-4. **Terminology.** "Merchant Setup" and "Booth Setup" become the public scenario names
+4. **Pop-up Merchant View first screen.** `INTERACTIVE_WORKSPACES_SPEC.md` opened the
+   participation desk first. On 2026-11-05 Earl directed that it open the booth map
+   first. Superseded: Merchant View now lands on **Map**. **My participation** stays
+   one tab away and is still where Customize leads.
+5. **Terminology.** "Merchant Setup" and "Booth Setup" become the public scenario names
    **Standard Merchant** and **Pop-up Market**. Storage keys and internal identifiers
    (`scenario=standard|market`, `workspace=merchant|customer|admin`) are unchanged.
 

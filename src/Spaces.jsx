@@ -54,8 +54,8 @@ const VIEW_COPY = {
   },
   market: {
     merchant: [
-      "Opens your booth participation.",
-      "Choose an open booth on the shared map, then prepare for the event.",
+      "Opens the booth map.",
+      "Choose an open booth on the shared map, then prepare in My participation.",
     ],
     customer: [
       "Opens the event map.",
