@@ -335,6 +335,50 @@ export default function Spaces({ Workspace }) {
                 </strong>
               </div>
             </button>
+            <a
+              href="/matcha-mood/"
+              className="scenario-card matcha-scenario"
+              data-magnetic
+            >
+              <div className="scenario-art matcha-art" aria-hidden="true">
+                <img
+                  src="/matcha-mood/media/photo/latte-iced-sm.webp"
+                  alt=""
+                  width="480"
+                  height="600"
+                  loading="lazy"
+                />
+                <img
+                  src="/matcha-mood/media/photo/softserve-cone-sm.webp"
+                  alt=""
+                  width="480"
+                  height="600"
+                  loading="lazy"
+                />
+                <img
+                  src="/matcha-mood/media/photo/berrycake-sm.webp"
+                  alt=""
+                  width="480"
+                  height="600"
+                  loading="lazy"
+                />
+                <span className="art-label">
+                  <Check size={13} /> A mobile ordering site
+                </span>
+              </div>
+              <div className="scenario-card-copy">
+                <span>03 / MERCHANT PROFILE</span>
+                <h2>Matcha Mood</h2>
+                <p>
+                  A matcha café's mobile ordering experience. Swipe the menu,
+                  customize size and toppings, watch the photograph and price
+                  follow, then order. Demo payment only.
+                </p>
+                <strong>
+                  Open the ordering site <ArrowRight size={18} />
+                </strong>
+              </div>
+            </a>
           </div>
         ) : (
           <>

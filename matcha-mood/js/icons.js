@@ -1,0 +1,23 @@
+const s = (d, extra = "") => `<svg class="ico" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${d}</svg>`;
+export const I = {
+  search: s('<circle cx="11" cy="11" r="6.5"/><path d="m20 20-3.8-3.8"/>'),
+  bag: s('<path d="M5.5 8.5h13l-1 11.5h-11l-1-11.5Z"/><path d="M9 8.5V7.5a3 3 0 0 1 6 0v1"/>'),
+  close: s('<path d="M6 6l12 12M18 6 6 18"/>'),
+  plus: s('<path d="M12 5v14M5 12h14"/>'),
+  minus: s('<path d="M5 12h14"/>'),
+  arrow: s('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  arrowL: s('<path d="M19 12H5M11 6l-6 6 6 6"/>'),
+  chevL: s('<path d="m15 6-6 6 6 6"/>'),
+  chevR: s('<path d="m9 6 6 6-6 6"/>'),
+  check: s('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+  clock: s('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>'),
+  pin: s('<path d="M12 21s6.5-5.6 6.5-11a6.5 6.5 0 1 0-13 0c0 5.4 6.5 11 6.5 11Z"/><circle cx="12" cy="10" r="2.3"/>'),
+  trash: s('<path d="M5 7h14M10 11v6M14 11v6M7 7l.8 12h8.4L17 7M9.5 7V4.5h5V7"/>'),
+  card: s('<rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M3.5 10.5h17"/>'),
+  wallet: s('<path d="M4 8.5V7a2 2 0 0 1 2-2h11v3.5"/><rect x="4" y="8.5" width="16" height="10.5" rx="2.5"/><circle cx="16" cy="13.7" r="1"/>'),
+  store: s('<path d="M4.5 9.5 6 4.5h12l1.5 5"/><path d="M5 9.5v10h14v-10"/><path d="M9.5 19.5v-5h5v5"/>'),
+  cup: s('<path d="M6 8h12l-1.2 11.2a1.5 1.5 0 0 1-1.5 1.3H8.7a1.5 1.5 0 0 1-1.5-1.3L6 8Z"/><path d="M5 8h14M13 8l1.5-4.5"/>'),
+  undo: s('<path d="M9 7 4.5 11.5 9 16"/><path d="M5 11.5h8.5a5 5 0 0 1 0 10H11"/>', 'transform="translate(0 -2)"'),
+  swipe: s('<path d="M3 12h18M7 8l-4 4 4 4M17 8l4 4-4 4"/>'),
+  whisk: s('<path d="M12 21v-8"/><path d="M12 13c-3 0-5-3.5-5-8M12 13c3 0 5-3.5 5-8M12 13c-1.2 0-2-3.5-2-8M12 13c1.2 0 2-3.5 2-8"/>'),
+};
