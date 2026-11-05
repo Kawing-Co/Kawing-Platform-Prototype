@@ -1,3 +1,5 @@
+> Reconciliation update, 2026-11-05: the founder subsequently requested branch and PR reconciliation. See [BRANCH_RECONCILIATION.md](BRANCH_RECONCILIATION.md) for current integration/release authority. The original draft-delivery scope below remains a historical record.
+
 # Demo UX amendment KAWING-DEMO-UX-002 — 2026-11-05, Asia/Manila
 
 ## Authority and baseline

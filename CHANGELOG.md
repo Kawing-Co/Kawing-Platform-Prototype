@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — KAWING-DEMO-UX-002 (branch `feature/kawing-demo-ux-002`)
+## 2026-11-05 — KAWING-DEMO-UX-002 reconciliation
 
 - UX-01: Scenario → View entry uses the public names Standard Merchant and Pop-up Market;
   the view step is addressable (`?scenario=`) so Back/Forward work. Views are ordered
@@ -24,7 +24,9 @@
   acceptance checklist: docs/DEMO_UX_002_VERIFICATION.md. UX-03/UX-04 are verified
   against the existing map, booth, editor and lifecycle tests, with no code change.
 - Playwright honours `CHROMIUM_PATH` and only uses `/usr/bin/chromium` when present.
-- See docs/DEMO_UX_002_AMENDMENT.md. Not merged or published.
+- Reconciled PR #1 with main, preserving the original four commits and historical branches.
+  Studio refuses blank names without discarding the draft or saved configuration.
+  Current authority, checks and release workflow: docs/BRANCH_RECONCILIATION.md.
 
 ## 2026-11-05 — Spaces and Kawing Studio
 

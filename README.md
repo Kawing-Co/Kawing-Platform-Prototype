@@ -47,7 +47,8 @@ optional device/package previews; the event workspace connects vendor readiness,
 and booth-specific ordering. See the [current partner guide](docs/INTERACTIVE_WORKSPACES_GUIDE.md),
 [architecture notes](docs/INTERACTIVE_WORKSPACES_ARCHITECTURE.md), and
 [verification](docs/INTERACTIVE_WORKSPACES_VERIFICATION.md). The current amendment is
-[KAWING-DEMO-UX-002](docs/DEMO_UX_002_AMENDMENT.md).
+[KAWING-DEMO-UX-002](docs/DEMO_UX_002_AMENDMENT.md); its integration is covered by the
+[branch and PR reconciliation record](docs/BRANCH_RECONCILIATION.md).
 
 Local browser checks: `npm test` uses `/usr/bin/chromium` when present; elsewhere set
 `CHROMIUM_PATH` to a Chromium executable or install Playwright's managed browser.

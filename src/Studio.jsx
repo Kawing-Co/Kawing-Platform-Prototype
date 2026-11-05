@@ -124,6 +124,10 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
     );
   }
   function save() {
+    if (!brand.name?.trim()) {
+      setMessage("Add a business name in Brand before saving.");
+      return;
+    }
     if (draft.reviewUrl && !safeUrl(draft.reviewUrl, "Google Review")) {
       setMessage(
         "Enter a valid HTTPS Google review destination, or leave blank for an honest demo.",

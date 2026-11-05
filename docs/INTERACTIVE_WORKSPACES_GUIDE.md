@@ -1,10 +1,12 @@
+> Updated for UX-002 integration; see [BRANCH_RECONCILIATION.md](BRANCH_RECONCILIATION.md) for branch/release evidence.
+
 # Interactive workspaces — partner demonstration
 
 All records, money, package relationships and operational confirmations are fictional
-and stored in this browser. Start at the root: choose Merchant Setup or Booth Setup,
+and stored in this browser. Start at the root: choose Standard Merchant or Pop-up Market,
 then Merchant, Admin or Customer View. Switch View retains local business/event data.
 
-## Merchant Setup
+## Standard Merchant
 
 Merchant View opens Customization → Kawing Studio. The desktop workspace keeps tabs,
 the focused inspector, interactive device canvas and save controls together. Long
@@ -25,13 +27,14 @@ incomplete review prevent a ready status. A paused account also needs attention.
 Support moves from open to in progress to resolved; a resolution note is required.
 These are local review steps, not real account approval, billing or authentication.
 
-Customer View first offers a standard device and Basic/Growth/Bespoke preview.
+Customer View opens immediately using the merchant’s saved package. Screen-size and
+Basic/Growth/Bespoke preview controls remain optional; Preview options opens the chooser.
 Basic presents essential services; Growth adds the configured engagement modules;
 Bespoke shows the full saved presentation. Preview choices do not change the saved
-subscription, products, prices or operational policies. Start customer preview opens
-the real customer hub, menu, cart, simulated checkout and receipt in that viewport.
+subscription, products, prices or operational policies. The customer frame contains the real hub, menu, cart, simulated checkout and receipt
+in the selected viewport.
 
-## Booth Setup
+## Pop-up Market
 
 Merchant View opens My participation. Select a fictional business and review its
 assigned booth, event package, needs and issues. A merchant can request support,
@@ -55,20 +58,20 @@ Map, paged booth list, layout geometry/walkway validation, undo, assignment, tem
 profiles, event lifecycle and confirmed market reset remain available.
 
 Customer View offers map and list. Choose an occupied active booth → Open Business
-Profile → choose device/tier → Start customer preview. Salo reuses its existing catalog;
+Profile → immediately enter the customer experience, with optional device/tier previews. Salo reuses its existing catalog;
 Luna Made has a separate craft catalog, cart, receipt and order store. Closed/reassigned
 or unavailable booths reject new checkout even if the page was already open. Existing
 orders can still be completed after the event ends.
 
 ## Eight-minute partner sequence
 
-1. Merchant Setup → Merchant View. Choose a phone canvas, click Guest Wi-Fi, edit it,
+1. Standard Merchant → Merchant View. Choose a phone canvas, click Guest Wi-Fi, edit it,
    then click Menu. Change a theme/template, save and point to the selected editor.
-2. Customer View. Choose 360×800 and Basic, start, then switch to Growth. Explain that
+2. Customer View. Choose 360×800 and Basic, then switch to Growth. Explain that
    these are preview projections, not subscription or payment changes.
 3. Admin View. Fill missing setup details, review, report a blocker and resolve it with
    a note. Show why readiness changes from the actual configured checks.
-4. Booth Setup → Merchant View. Open Salo's Logistics, request cold storage and report
+4. Pop-up Market → Merchant View. Open Salo's Logistics, request cold storage and report
    a fictional power issue. It remains pending until the organizer verifies it.
 5. Admin View. Select Salo, review current vs event tier, fulfill requested needs, move
    the tent to Installed and checked, then resolve the issue with a note.

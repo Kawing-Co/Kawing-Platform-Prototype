@@ -1,3 +1,5 @@
+> Current integration evidence: [BRANCH_RECONCILIATION.md](BRANCH_RECONCILIATION.md). The draft status and original-machine results below describe the initial PR delivery.
+
 # KAWING-DEMO-UX-002 — verification record
 
 - Branch: `feature/kawing-demo-ux-002`. Base: `main` `1005b06`.
