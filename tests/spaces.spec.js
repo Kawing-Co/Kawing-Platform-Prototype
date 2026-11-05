@@ -64,7 +64,7 @@ test("shared booth assignment propagates across merchant, customer and admin", a
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: "Customer View", exact: true }).click();
   await page.getByRole("button", { name: "B01 Occupied", exact: true }).click();
-  await expect(page.locator(".booth-detail")).toContainText("Salo");
+  await expect(page.locator(".booth-detail")).toContainText("Matcha Mood");
   await expect(
     page.getByRole("button", { name: "Confirm demo booth", exact: false }),
   ).toHaveCount(0);
@@ -176,7 +176,7 @@ test("Studio drafts survive view changes and package media limits are functional
   await expect(
     page
       .frameLocator('iframe[title^="Customer "]')
-      .getByRole("heading", { name: "Salo", exact: true }),
+      .getByRole("heading", { name: "Matcha Mood", exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: "Merchant View", exact: true }).click();

@@ -17,6 +17,7 @@ import {
   Image,
 } from "lucide-react";
 import { defaults, config, safeUrl, labels } from "./commerce";
+import { ASSETS, assetName } from "./merchant";
 import { studioChecks } from "./studio-review";
 import { tierOf } from "./session";
 import { offerUndo } from "./premium";
@@ -426,11 +427,7 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
                   onClick={() =>
                     change("galleryAssets", [
                       ...(draft.galleryAssets || []),
-                      [
-                        "/images/bowl.jpg",
-                        "/images/salad.jpg",
-                        "/images/drink.jpg",
-                      ][(draft.galleryAssets || []).length % 3],
+                      ASSETS.covers[(draft.galleryAssets || []).length % ASSETS.covers.length],
                     ])
                   }
                 >
@@ -614,14 +611,14 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
               <label>
                 Logo from demo library
                 <div className="studio-images">
-                  {["bowl", "salad", "plate"].map((n) => (
+                  {ASSETS.logos.map((src) => (
                     <button
-                      aria-label={"Use " + n + " logo"}
-                      aria-pressed={draft.logo === `/images/${n}.jpg`}
-                      key={n}
-                      onClick={() => change("logo", `/images/${n}.jpg`)}
+                      aria-label={"Use " + assetName(src) + " logo"}
+                      aria-pressed={draft.logo === src}
+                      key={src}
+                      onClick={() => change("logo", src)}
                     >
-                      <img src={`/images/${n}.jpg`} alt={n} />
+                      <img src={src} alt={assetName(src)} />
                     </button>
                   ))}
                 </div>
@@ -629,14 +626,14 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
               <label>
                 Cover image
                 <div className="studio-images">
-                  {["bowl", "salad", "plate", "drink"].map((n) => (
+                  {ASSETS.covers.map((src) => (
                     <button
-                      aria-label={"Use " + n + " cover"}
-                      aria-pressed={draft.cover === `/images/${n}.jpg`}
-                      key={n}
-                      onClick={() => change("cover", `/images/${n}.jpg`)}
+                      aria-label={"Use " + assetName(src) + " cover"}
+                      aria-pressed={draft.cover === src}
+                      key={src}
+                      onClick={() => change("cover", src)}
                     >
-                      <img src={`/images/${n}.jpg`} alt={n} />
+                      <img src={src} alt={assetName(src)} />
                     </button>
                   ))}
                 </div>
@@ -1012,11 +1009,7 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
                 {select(
                   "Promotion image",
                   draft.promotion.image,
-                  [
-                    "/images/bowl.jpg",
-                    "/images/drink.jpg",
-                    "/images/plate.jpg",
-                  ],
+                  ASSETS.promos,
                   (v) => nested("promotion", "image", v),
                 )}
                 {select(

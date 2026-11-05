@@ -103,7 +103,7 @@ export function DemoHome({ navigate, startGuide, guide, resumeGuide }) {
         <p>
           From one scan to a lasting customer relationship: Kawing connects a
           branded hub, rewards, customer convenience, and restaurant operations.
-          Step inside <strong>Salo</strong>, our sample restaurant, and try it
+          Step inside <strong>Matcha Mood</strong>, our sample café, and try it
           for yourself.
         </p>
         <div className="intro-actions">

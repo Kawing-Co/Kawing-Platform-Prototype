@@ -56,7 +56,6 @@ import {
   orderAction,
   contextFromUrl,
   paymentLabel,
-  allowsFoodAddon,
 } from "./commerce";
 import "./styles.css";
 import "./spaces.css";
@@ -68,119 +67,27 @@ import {
   WalkthroughComplete,
   steps,
 } from "./DemoExperience";
+import { BRAND, MENU_ITEMS, orderLine, seedOrderLines } from "./merchant";
 const money = (n) =>
   "₱" +
   n.toLocaleString("en-PH", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
-const initialMenu = [
-  {
-    id: 1,
-    name: "Harvest bowl",
-    description:
-      "Roasted squash, fresh greens, heirloom rice, and our calamansi dressing.",
-    price: 285,
-    category: "Bowls",
-    image: "/images/bowl.jpg",
-    available: true,
-  },
-  {
-    id: 2,
-    name: "Salo garden salad",
-    description:
-      "A bright mix of local greens, cherry tomatoes, and house vinaigrette.",
-    price: 245,
-    category: "Small plates",
-    image: "/images/salad.jpg",
-    available: true,
-  },
-  {
-    id: 3,
-    name: "Green goddess bowl",
-    description:
-      "Avocado, seasonal vegetables, and brown rice with creamy herb sauce.",
-    price: 320,
-    category: "Bowls",
-    image: "/images/plate.jpg",
-    available: true,
-  },
-  {
-    id: 4,
-    name: "Calamansi cooler",
-    description:
-      "Fresh Philippine calamansi, sparkling water, and just a little sweetness.",
-    price: 95,
-    category: "Drinks",
-    image: "/images/drink.jpg",
-    available: true,
-  },
-  {
-    id: 5,
-    name: "Mango sunshine",
-    description:
-      "Sweet local mango blended with coconut milk. A little tropical happiness.",
-    price: 145,
-    category: "Drinks",
-    image: "/images/mango.jpg",
-    available: true,
-  },
-  {
-    id: 6,
-    name: "Market lunch plate",
-    description:
-      "Seasonal vegetables, roasted chickpeas, and our daily rice selection.",
-    price: 295,
-    category: "Small plates",
-    image: "/images/plate.jpg",
-    available: true,
-  },
-];
+const initialMenu = MENU_ITEMS;
+const seedLines = seedOrderLines(initialMenu);
 const seedOrders = [
-  {
-    id: "KW-1048",
-    table: "03",
-    items: [
-      { ...initialMenu[0], qty: 2 },
-      { ...initialMenu[3], qty: 2 },
-    ],
-    total: 760,
-    payment: "GCash",
-    status: "new",
-    time: "2 min ago",
-    seed: true,
-  },
-  {
-    id: "KW-1047",
-    table: "08",
-    items: [
-      { ...initialMenu[1], qty: 1 },
-      { ...initialMenu[2], qty: 1 },
-    ],
-    total: 565,
-    payment: "Cash",
-    status: "preparing",
-    time: "6 min ago",
-    seed: true,
-  },
-  {
-    id: "KW-1046",
-    table: "01",
-    items: [{ ...initialMenu[2], qty: 2 }],
-    total: 640,
-    payment: "GCash",
-    status: "ready",
-    time: "12 min ago",
-    seed: true,
-  },
-];
+  { id: "KW-1048", table: "03", payment: "GCash", status: "new", time: "2 min ago" },
+  { id: "KW-1047", table: "08", payment: "Cash", status: "preparing", time: "6 min ago" },
+  { id: "KW-1046", table: "01", payment: "GCash", status: "ready", time: "12 min ago" },
+].map((o) => ({ ...o, items: seedLines[o.id], total: seedLines[o.id].reduce((n, i) => n + i.price * i.qty, 0), seed: true }));
+// Bumped when the seeded business changes; a browser holding an older seed starts fresh
+// instead of showing a mix of old and new records.
+const SEED = "matcha-mood-1";
 const fresh = () =>
   extend({
-    brand: {
-      name: "Salo",
-      accent: "#245642",
-      tagline: "Fresh, local, made with love.",
-    },
+    seed: SEED,
+    brand: { ...BRAND },
     menu: initialMenu,
     orders: seedOrders,
     offline: false,
@@ -188,7 +95,7 @@ const fresh = () =>
 function load() {
   try {
     const v = JSON.parse(localStorage.getItem("kawing-demo-v1"));
-    if (v?.brand && Array.isArray(v.menu) && Array.isArray(v.orders))
+    if (v?.seed === SEED && v.brand && Array.isArray(v.menu) && Array.isArray(v.orders))
       return extend(v);
   } catch {}
   return fresh();
@@ -488,17 +395,8 @@ function App({
     const items = order.items.map((i) => {
       const menuItem = data.menu.find((m) => m.id === i.id && m.available);
       if (!menuItem) throw new Error("An item is no longer available.");
-      return {
-        ...menuItem,
-        qty: Math.max(1, Math.min(20, i.qty)),
-        modifier:
-          i.modifier === "avocado" && allowsFoodAddon(menuItem)
-            ? "avocado"
-            : "",
-        price:
-          menuItem.price +
-          (i.modifier === "avocado" && allowsFoodAddon(menuItem) ? 35 : 0),
-      };
+      // Authoritative: the unit price is recomputed from the menu item and a cleaned selection.
+      return orderLine(menuItem, i.sel, Math.max(1, Math.min(20, i.qty)));
     });
     const created = {
       ...order,
@@ -583,7 +481,7 @@ function App({
     notify("Demo order report downloaded.");
   }
   const totalBase =
-    period === "Today" ? 12840 : period === "This week" ? 84260 : 346800;
+    period === "Today" ? 36480 : period === "This week" ? 251600 : 1019000; // illustrative: ~₱760 average order
   const multiplier = period === "Today" ? 1 : period === "This week" ? 7 : 28;
   const viewData = previewTier
     ? { ...data, storefront: projectTier(data.storefront, previewTier) }
@@ -897,8 +795,8 @@ function App({
                   <div className="banner-art">
                     <div className="art-ring" />
                     <img
-                      src="/images/bowl.jpg"
-                      alt="Fresh seasonal vegetable bowl"
+                      src="/images/matcha/ritual-sm.jpg"
+                      alt="A bowl of whisked matcha with a bamboo whisk"
                     />
                     <div className="floating-note">
                       <div className="check-circle">
@@ -1439,7 +1337,7 @@ function App({
                     <Leaf />
                     <h3>Local favorites, lasting connections.</h3>
                     <p>
-                      Harvest bowls lead the sample menu. A good starting point
+                      Matcha lattes lead the sample menu. A good starting point
                       for your next seasonal special.
                     </p>
                   </section>
@@ -1828,7 +1726,7 @@ function SalesChart({ period }) {
         {[30, 80, 130, 180].map((y, i) => (
           <g key={y}>
             <text x="0" y={y + 4} className="chart-label">
-              {["₱6k", "₱4k", "₱2k", "₱0"][i]}
+              {["₱18k", "₱12k", "₱6k", "₱0"][i]}
             </text>
             <line
               x1="52"

@@ -891,85 +891,11 @@
   border-radius: 8px;
   font-size: 13px !important;
 }
-.cx-payment {
-  grid-template-columns: 1fr 1fr !important;
-}
-.cx-payment button {
-  min-height: 44px;
-}
-.cx-shell .cx-primary {
-  background: var(--sf-primary);
-  color: var(--sf-on-primary);
-  font-size: 14px !important;
-  min-height: 46px;
-}
-.cx-shell .cx-add {
-  width: 44px;
-  height: 44px;
-}
-.cx-shell .cx-qty button {
-  width: 34px;
-  height: 36px;
-  min-height: 36px;
-}
-.cx-shell .cx-food p {
-  font-size: 12px;
-}
-.cx-shell .cx-food h3 {
-  font-size: 15px;
-}
-.cx-shell .cx-cart-title h2 {
-  font-size: 17px;
-}
-.cx-shell .cx-cart-row h4 {
-  font-size: 13px;
-}
-.cx-shell .cx-note,
-.cx-shell .cx-note textarea {
-  font-size: 12px;
-}
-.cx-shell .cx-food-visual {
-  aspect-ratio: 1.6;
-  height: auto;
-}
-.cx-shell .cx-food {
-  background: var(--sf-surface);
-}
-.cx-shell .cx-cart {
-  background: var(--sf-surface);
-  border-color: var(--sf-line);
-}
-.cx-shell .cx-hero {
-  display: none;
-}
+
 .sf-shell:has(.sf-module-page) .sf-context {
   margin-bottom: 12px;
 }
-.sf-shell .cx-shell {
-  color: var(--sf-ink);
-}
-.sf-shell .cx-food h3 {
-  color: var(--sf-ink);
-}
-.sf-shell .cx-food p,
-.sf-shell .cx-cart-sub,
-.sf-shell .cx-note,
-.sf-shell .cx-disclaimer {
-  color: var(--sf-muted);
-}
-.sf-shell .cx-search input {
-  color: var(--sf-ink);
-}
-.sf-shell .cx-success {
-  background: var(--sf-surface);
-  color: var(--sf-ink);
-}
-.sf-shell .cx-success > p {
-  color: var(--sf-muted);
-}
-.sf-shell .cx-success-ref {
-  background: var(--sf-bg);
-}
+
 .sf-shell:has(.sf-module-page) .sf-footnote {
   display: none;
 }
@@ -1448,12 +1374,7 @@
   justify-content: space-between;
   font-size: 12px;
 }
-.sf-shell:has(.cx-grid) .cx-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.sf-shell:has(.cx-grid) .cx-layout {
-  grid-template-columns: minmax(0, 1fr) 290px;
-}
+
 @keyframes sf-in {
   from {
     opacity: 0.3;
@@ -1485,13 +1406,8 @@
   .studio-preview-mobile {
     width: 100%;
   }
-  .sf-shell:has(.cx-grid) .cx-layout {
-    display: block;
-  }
-  .sf-shell .cx-cart {
-    position: static;
-    margin-top: 22px;
-  }
+  
+  
   .sf-brand-hero h1 {
     font-size: 43px;
   }
@@ -1802,11 +1718,7 @@
     min-width: 0;
     min-height: 50px;
   }
-  .sf-shell .cx-mobile-bag {
-    bottom: calc(85px + env(safe-area-inset-bottom));
-    left: 18px;
-    right: 18px;
-  }
+  
   .sf-current {
     padding: 13px;
     gap: 10px;
@@ -1837,90 +1749,30 @@
     font-size: 12px;
     padding: 14px;
   }
-  .sf-shell .cx-grid {
-    gap: 10px;
-  }
-  .sf-shell .cx-food-body {
-    padding: 13px 12px;
-  }
-  .sf-shell .cx-food h3 {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  .sf-shell .cx-food p {
-    font-size: 12px;
-    min-height: 76px;
-  }
-  .sf-shell .cx-food-visual {
-    aspect-ratio: 1.2;
-  }
-  .sf-shell .cx-food-foot {
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .sf-shell .cx-food-foot strong {
-    font-size: 14px;
-  }
-  .sf-shell .cx-add {
-    width: 40px;
-    height: 42px;
-  }
-  .sf-shell .cx-qty {
-    gap: 5px;
-  }
-  .sf-shell .cx-count {
-    font-size: 12px;
-    min-width: 10px;
-  }
-  .sf-shell .cx-food .cx-qty button {
-    width: 29px;
-    min-height: 34px;
-    height: 34px;
-  }
-  .sf-shell .cx-cart {
-    padding: 21px 18px;
-  }
-  .sf-shell .cx-cart-sub {
-    font-size: 12px;
-    margin-top: 9px;
-  }
-  .sf-shell .cx-note textarea {
-    font-size: 13px;
-    min-height: 75px;
-  }
-  .sf-shell .cx-category {
-    min-height: 40px;
-    font-size: 11px !important;
-  }
-  .sf-shell .cx-search input {
-    font-size: 14px;
-  }
-  .sf-shell .cx-cart-title span {
-    font-size: 11px;
-  }
-  .sf-shell .cx-success {
-    padding: 26px 18px;
-  }
-  .sf-shell .cx-success h1 {
-    font-size: 28px;
-  }
-  .sf-shell .cx-success-ref {
-    font-size: 12px;
-    line-height: 1.8;
-    overflow-wrap: anywhere;
-  }
-  .sf-shell .cx-progress {
-    gap: 3px;
-  }
-  .sf-shell .cx-step {
-    font-size: 10px;
-  }
-  .sf-shell .cx-success > p {
-    font-size: 13px;
-  }
-  .sf-shell .cx-disclaimer {
-    font-size: 11px;
-  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   .studio-heading {
     align-items: flex-start;
     flex-wrap: wrap;
@@ -2134,26 +1986,7 @@
 .sf-shell .sf-loyalty-ink {
   color: #eef4e8;
 }
-.sf-shell .cx-category.active,
-.sf-shell .cx-mobile-bag {
-  background: var(--sf-primary);
-  color: var(--sf-on-primary);
-}
-.sf-shell .cx-category:not(.active) {
-  color: var(--sf-muted);
-  border-color: var(--sf-line);
-}
-.sf-shell .cx-food-foot > strong {
-  color: var(--sf-ink);
-}
-.sf-shell .cx-payment button {
-  background: var(--sf-bg);
-  color: var(--sf-ink);
-  border-color: var(--sf-line);
-}
-.sf-shell .cx-payment .selected {
-  outline: 2px solid var(--sf-primary);
-}
+
 .studio-preview-desktop > .sf-shell.sf-visual .sf-brand-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2161,26 +1994,7 @@
 .studio-preview-desktop > .sf-shell .sf-services {
   grid-template-columns: 1fr 1fr;
 }
-.sf-shell:has(.cx-shell) .sf-primary {
-  margin-top: 12px;
-}
-.sf-shell.sf-menu-list .cx-grid {
-  grid-template-columns: 1fr;
-}
-.sf-menu-list .cx-food {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-}
-.sf-menu-list .cx-food-visual {
-  height: 100%;
-  aspect-ratio: auto;
-}
-.sf-menu-list .cx-food p {
-  min-height: 0;
-}
-.sf-menu-list .cx-food-body {
-  padding: 17px;
-}
+
 .sf-hero-split.sf-quick .sf-brand-copy {
   padding-left: 95px;
 }
@@ -2194,9 +2008,7 @@
   color: var(--sf-on-secondary);
 }
 @media (max-width: 700px) {
-  .sf-shell:has(.cx-mobile-bag) .sf-bottom-nav {
-    position: static;
-  }
+  
   .studio-preview-desktop > .sf-shell.sf-visual .sf-brand-hero {
     display: block;
   }
@@ -2206,24 +2018,13 @@
   .sf-hero-split.sf-quick .sf-logo {
     position: static;
   }
-  .sf-menu-list .cx-food {
-    grid-template-columns: 95px 1fr;
-  }
-  .sf-menu-list .cx-food-body {
-    padding: 15px;
-  }
+  
+  
   .sf-services > button:active .sf-service-icon {
     transform: scale(0.93);
   }
-  .sf-shell .cx-food .cx-qty button {
-    width: 36px;
-    height: 44px;
-    min-height: 44px;
-  }
-  .sf-shell .cx-add {
-    width: 44px;
-    height: 44px;
-  }
+  
+  
 }
 .guest-surface {
   max-width: 1000px;

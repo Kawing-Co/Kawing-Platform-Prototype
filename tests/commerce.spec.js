@@ -33,7 +33,7 @@ const menu = async (p) => {
 async function order(p) {
   await menu(p);
   await p
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Add Matcha Latte", exact: true })
     .click();
   await p
     .getByRole("button", { name: "Review your order", exact: true })
@@ -316,15 +316,16 @@ test("cart and modifiers persist, table context is explicit, and presentation re
   await page.goto("/?workspace=merchant&entry=table&table=03#Customer");
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Customize Matcha Latte", exact: true })
     .click();
-  await page
-    .getByLabel("Harvest bowl add-on", { exact: true })
-    .selectOption("avocado");
-  await expect(page.locator(".cx-total")).toContainText("320");
+  await page.getByRole("radio", { name: /^Large/ }).click();
+  await page.getByRole("radio", { name: /^Oat/ }).click();
+  await page.getByRole("button", { name: /Add to order/ }).click();
+  await expect(page.locator(".cx-total")).toContainText("840");
   await page.reload();
   await page.getByRole("button", { name: "Order now", exact: true }).click();
-  await expect(page.locator(".cx-total")).toContainText("320");
+  await expect(page.locator(".cx-total")).toContainText("840");
+  await expect(page.locator(".cx-cart-sum")).toContainText("Large · Oat");
   await expect(page.locator(".cx-cart-sub")).toContainText("Table 03");
   await page
     .getByRole("button", { name: "Customization", exact: true })
@@ -427,11 +428,11 @@ test("counter cash approval is separate from payment and context/cart survive se
     .selectOption("counter");
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Add Matcha Latte", exact: true })
     .click();
   await page.reload();
   await page.getByRole("button", { name: "Order now", exact: true }).click();
-  await expect(page.locator(".cx-total")).toContainText("285");
+  await expect(page.locator(".cx-total")).toContainText("680");
   await expect(page.getByLabel("Entry context")).toHaveValue("counter");
   await page
     .getByRole("button", { name: "Review your order", exact: true })
@@ -536,7 +537,7 @@ test("guest entry examples expose only customer presentation even with a staff h
   ).toHaveCount(0);
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Add Matcha Latte", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Review your order", exact: true })

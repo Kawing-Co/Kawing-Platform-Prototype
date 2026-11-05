@@ -753,18 +753,6 @@ body:has(.premium-landing) {
   overflow: hidden;
   position: relative;
 }
-.sf-shell .cx-food-visual .progressive-image img {
-  opacity: 0;
-  transition:
-    opacity 0.24s ease,
-    transform 0.3s var(--premium-ease);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.sf-shell .cx-food-visual .image-ready img {
-  opacity: 1;
-}
 .image-error > span {
   display: grid;
   place-items: center;
@@ -954,9 +942,7 @@ body:has(.premium-landing) {
 .sf-shell .sf-bottom-nav {
   padding-bottom: max(8px, env(safe-area-inset-bottom));
 }
-.cx-mobile-bag {
-  bottom: calc(18px + env(safe-area-inset-bottom));
-}
+
 .premium-landing .spaces-footer {
   padding-bottom: max(24px, env(safe-area-inset-bottom));
 }
@@ -1311,14 +1297,8 @@ body:has(.premium-landing) {
   .frame-skeleton {
     inset: 15px 25px;
   }
-  .sf-shell .cx-add {
-    width: 40px;
-    height: 40px;
-  }
-  .sf-shell .cx-qty > button {
-    min-height: 34px;
-    min-width: 30px;
-  }
+  
+  
 }
 @media (pointer: coarse) {
   .icon-button,
@@ -1328,10 +1308,7 @@ body:has(.premium-landing) {
     min-height: 44px;
     min-width: 44px;
   }
-  .cx-add {
-    min-height: 44px;
-    min-width: 44px;
-  }
+  
 }
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1385,74 +1362,5 @@ body:has(.premium-landing) {
 }
 
 .story-visual:has(.spatial-fallback) > .spatial-controls {
-  display: none;
-}
-
-/* Third scenario: the Matcha Mood merchant profile (links to /matcha-mood/) */
-.premium-landing .scenario-cards .matcha-scenario {
-  grid-column: 1 / -1;
-  grid-template-columns: 0.9fr 1.6fr;
-  text-decoration: none;
-  color: inherit;
-  background: #14231a;
-  border-color: #14231a;
-}
-.premium-landing .matcha-scenario:hover {
-  border-color: #6f9a4a;
-  box-shadow: 0 18px 48px #14231a33;
-}
-.premium-landing .matcha-art {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  background: #14231a;
-  border-right: 0;
-}
-.premium-landing .matcha-art img {
-  width: 100%;
-  height: 100%;
-  min-height: 245px;
-  object-fit: cover;
-  transition: transform 0.9s var(--premium-ease);
-}
-.premium-landing .matcha-scenario:hover .matcha-art img {
-  transform: scale(1.06);
-}
-.premium-landing .matcha-art .art-label {
-  background: #14231acc;
-  color: #cfe79a;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-.premium-landing .matcha-scenario .scenario-card-copy > span {
-  color: #9db98a;
-}
-.premium-landing .matcha-scenario h2 {
-  color: #eef3e0;
-  font-family: Georgia, serif;
-  font-weight: 400;
-}
-.premium-landing .matcha-scenario p {
-  color: #b9c9a8;
-}
-.premium-landing .matcha-scenario strong {
-  color: #cfe79a;
-}
-@media (max-width: 1000px) {
-  .premium-landing .scenario-cards .matcha-scenario {
-    grid-column: 1 / -1;
-    display: block;
-  }
-  .premium-landing .matcha-art {
-    height: 200px;
-    min-height: 200px;
-  }
-  .premium-landing .matcha-art img {
-    min-height: 200px;
-  }
-}
-.premium-landing .matcha-art::before,
-.premium-landing .matcha-art::after {
   display: none;
 }

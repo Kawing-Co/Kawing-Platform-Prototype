@@ -6,11 +6,13 @@ const kitchen = page => page.getByRole('button', { name: 'Staff kitchen', exact:
 
 async function placeOrder(page, { offline = false } = {}) {
   await customer(page);
-  await page.getByRole('button', { name: 'Add Harvest bowl', exact: true }).click();
-  await page.getByRole('button', { name: 'Increase Harvest bowl in order' }).click();
-  await expect(page.locator('.cx-total')).toContainText('570');
-  await page.getByRole('button', { name: 'Remove Harvest bowl from order' }).click();
-  await expect(page.locator('.cx-total')).toContainText('285');
+  await page.getByRole('button', { name: 'Add Matcha Latte', exact: true }).click();
+  const bag = page.locator('.cx-mobile-bag');   // on phones the order opens as a bottom sheet
+  if (await bag.isVisible()) await bag.click();
+  await page.getByRole('button', { name: 'Increase Matcha Latte in order' }).click();
+  await expect(page.locator('.cx-total')).toContainText('1,360');
+  await page.getByRole('button', { name: 'Remove Matcha Latte from order' }).click();
+  await expect(page.locator('.cx-total')).toContainText('680');
   await page.getByRole('button', { name: 'Review your order' }).click();
   await expect(page.getByText('No payment details or real charges.', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: offline ? 'Save order offline' : 'Place demo order', exact: true }).click();
@@ -25,12 +27,12 @@ test('one customer order connects receipt, kitchen, owner totals, and reload', a
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   const order = await placeOrder(page);
-  expect(order.total).toBe(285);
+  expect(order.total).toBe(680);
   expect(order.items[0].qty).toBe(1);
   await expect(page.locator('.cx-success')).toContainText('no money was charged');
   await kitchen(page);
   const card = page.locator('.kitchen-card').filter({ hasText: order.id });
-  await expect(card).toContainText('Harvest bowl');
+  await expect(card).toContainText('Matcha Latte');
   await expect(card.getByRole('button',{name:'Start preparing'})).toBeDisabled();
   await card.getByRole('button',{name:'Review payment',exact:true}).click();
   await card.getByRole('button',{name:'Confirm payment',exact:true}).click();
@@ -42,7 +44,7 @@ test('one customer order connects receipt, kitchen, owner totals, and reload', a
   await customer(page);
   await expect(page.locator('.cx-success')).toContainText('Your order has been served');
   await page.getByRole('button', { name: 'Owner workspace', exact: true }).click();
-  await expect(page.locator('.stat-card').first()).toContainText('13,125');
+  await expect(page.locator('.stat-card').first()).toContainText('37,160');
   await page.reload();
   expect((await state(page)).orders.filter(o => o.id === order.id)).toHaveLength(1);
   expect(errors).toEqual([]);
@@ -70,10 +72,10 @@ test('owner branding and menu availability update customer experience and persis
   await page.getByRole('button', { name: 'Use brand color #8b4f36' }).click();
   await page.getByRole('button',{name:'Save design',exact:true}).first().click();
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
-  await page.getByRole('button', { name: 'Toggle availability for Harvest bowl' }).click();
+  await page.getByRole('button', { name: 'Toggle availability for Matcha Latte' }).click();
   await customer(page);
   expect((await state(page)).brand.name).toBe('Luntian');
-  await expect(page.getByRole('button', { name: 'Add Harvest bowl', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Add Matcha Latte', exact: true })).toBeDisabled();
   await page.reload();
   const saved = await state(page);
   expect(saved.brand.name).toBe('Luntian');
@@ -84,11 +86,11 @@ test('owner branding and menu availability update customer experience and persis
 test('analytics period, search, and confirmed reset behave coherently', async ({ page }) => {
   await page.getByRole('button', { name: 'Analytics', exact: true }).click();
   await page.getByLabel('Analytics period').selectOption('This week');
-  await expect(page.locator('.analytics-stats').first()).toContainText('84,260');
+  await expect(page.locator('.analytics-stats').first()).toContainText('251,600');
   await expect(page.getByRole('img', { name: 'Illustrative sales chart for This week' })).toBeVisible();
   await customer(page);
-  await page.getByRole('textbox', { name: 'Search dishes' }).fill('no-such-dish');
-  await expect(page.getByText('No dishes found. Try another craving.')).toBeVisible();
+  await page.getByRole('textbox', { name: 'Search the menu' }).fill('no-such-dish');
+  await expect(page.getByText('Nothing found. Try another mood.')).toBeVisible();
   await page.getByRole('button', { name: 'Owner workspace', exact: true }).click();
   await page.getByRole('button', { name: 'Reset demo', exact: true }).click();
   await expect(page.getByRole('dialog', { name: 'Reset demo' })).toBeVisible();
@@ -136,11 +138,11 @@ test('tour supports keyboard, export contains orders, and customer images load l
   for await (const chunk of stream) chunks.push(chunk);
   const csv = Buffer.concat(chunks).toString('utf8');
   expect(csv).toContain('Order,Table,Total PHP,Payment,Status');
-  expect(csv).toContain('KW-1048,03,760,GCash,new');
+  expect(csv).toContain('KW-1048,03,2400,GCash,new');
   expect(csv.trim().split('\n')).toHaveLength(4);
   await customer(page);
   const images = page.locator('.cx-food img');
-  await expect(images).toHaveCount(6);
+  await expect(images).toHaveCount(9);
   for (const image of await images.all()) {
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);

@@ -45,9 +45,9 @@ export const seedMarket = () => ({
   profiles: [
     {
       id: "salo",
-      name: "Salo Kitchen",
+      name: "Matcha Mood",
       category: "Food & drinks",
-      bio: "Fresh, local, made with love. An existing merchant joining the neighborhood market.",
+      bio: "One sip, and the mood unwinds. An existing merchant joining the neighborhood market.",
       temporary: false,
     },
     {
@@ -658,9 +658,9 @@ export default function Market({ role }) {
                           {(
                             commerce?.menu || [
                               {
-                                name: "Harvest bowl",
-                                price: 285,
-                                image: "/images/bowl.jpg",
+                                name: "Matcha Latte",
+                                price: 680,
+                                image: "/images/matcha/latte-iced-sm.jpg",
                               },
                             ]
                           )

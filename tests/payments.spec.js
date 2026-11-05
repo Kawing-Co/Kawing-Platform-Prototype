@@ -8,7 +8,9 @@ const newest = async (p) => (await state(p)).orders.find((o) => !o.seed);
 async function order(page, method) {
   await page.goto("/?surface=guest&entry=table&table=03#Customer");
   await page.getByRole("button", { name: "Order now", exact: true }).click();
-  await page.getByRole("button", { name: "Add Harvest bowl", exact: true }).click();
+  await page.getByRole("button", { name: "Add Matcha Latte", exact: true }).click();
+  const bag = page.locator(".cx-mobile-bag"); // on phones the order opens as a bottom sheet
+  if (await bag.isVisible()) await bag.click();
   await page.getByRole("button", { name: "Review your order", exact: true }).click();
   await page.getByRole("button", { name: method, exact: true }).click();
   await page.getByRole("button", { name: "Place demo order", exact: true }).click();

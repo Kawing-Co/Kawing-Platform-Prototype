@@ -49,10 +49,10 @@ const VIEW_COPY = {
   standard: {
     merchant: [
       "Opens Kawing Studio.",
-      "Shape Salo's business profile, menu and modules, then run orders and payment checks.",
+      "Shape Matcha Mood's business profile, menu and modules, then run orders and payment checks.",
     ],
     customer: [
-      "Opens Salo's finished page.",
+      "Opens Matcha Mood's finished page.",
       "Browse the menu, order and track a visit the way a guest would.",
     ],
     admin: [
@@ -241,7 +241,7 @@ export default function Spaces({ Workspace }) {
               ? "ONE PLATFORM. DIFFERENT POSSIBILITIES."
               : scenario === "market"
                 ? "POP-UP MARKET · THE SUNDAY COMMONS"
-                : "STANDARD MERCHANT · SALO KITCHEN"}
+                : "STANDARD MERCHANT · MATCHA MOOD"}
           </span>
           <h1>
             {step === "scenario" ? (
@@ -274,8 +274,8 @@ export default function Spaces({ Workspace }) {
               <div className="scenario-art" aria-hidden="true">
                 <div className="mini-shop">
                   <Leaf size={40} />
-                  <span>YOUR DAILY LOCAL</span>
-                  <b>Salo Kitchen</b>
+                  <span>YOUR DAILY MATCHA</span>
+                  <b>Matcha Mood</b>
                   <i />
                   <div>
                     <span />
@@ -335,50 +335,6 @@ export default function Spaces({ Workspace }) {
                 </strong>
               </div>
             </button>
-            <a
-              href="/matcha-mood/"
-              className="scenario-card matcha-scenario"
-              data-magnetic
-            >
-              <div className="scenario-art matcha-art" aria-hidden="true">
-                <img
-                  src="/matcha-mood/media/photo/latte-iced-sm.webp"
-                  alt=""
-                  width="480"
-                  height="600"
-                  loading="lazy"
-                />
-                <img
-                  src="/matcha-mood/media/photo/softserve-cone-sm.webp"
-                  alt=""
-                  width="480"
-                  height="600"
-                  loading="lazy"
-                />
-                <img
-                  src="/matcha-mood/media/photo/berrycake-sm.webp"
-                  alt=""
-                  width="480"
-                  height="600"
-                  loading="lazy"
-                />
-                <span className="art-label">
-                  <Check size={13} /> A mobile ordering site
-                </span>
-              </div>
-              <div className="scenario-card-copy">
-                <span>03 / MERCHANT PROFILE</span>
-                <h2>Matcha Mood</h2>
-                <p>
-                  A matcha café's mobile ordering experience. Swipe the menu,
-                  customize size and toppings, watch the photograph and price
-                  follow, then order. Demo payment only.
-                </p>
-                <strong>
-                  Open the ordering site <ArrowRight size={18} />
-                </strong>
-              </div>
-            </a>
           </div>
         ) : (
           <>
@@ -587,8 +543,8 @@ export function SessionHeader({
           <h2 id="session-reset-title">Reset {SCENARIOS[scenario].label}?</h2>
           <p>
             {scenario === "market"
-              ? "Restores The Sunday Commons map, booths, assignments, event-only merchants, their orders and the event lifecycle. Any unpublished layout draft is discarded. Salo's business records are kept."
-              : "Restores Salo's seeded menu, orders, loyalty, engagement, saved design and package, and clears this browser's carts and last receipt. Pop-up Market records are kept."}
+              ? "Restores The Sunday Commons map, booths, assignments, event-only merchants, their orders and the event lifecycle. Any unpublished layout draft is discarded. Matcha Mood's business records are kept."
+              : "Restores Matcha Mood's seeded menu, orders, loyalty, engagement, saved design and package, and clears this browser's carts and last receipt. Pop-up Market records are kept."}
           </p>
           {draftExists && (
             <label className="session-check">

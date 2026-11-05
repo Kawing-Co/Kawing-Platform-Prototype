@@ -1,25 +1,30 @@
 import { receiptKey } from "./experience";
 import ProgressiveImage from "./ProgressiveImage";
-import React, { useEffect, useMemo, useState, useRef } from "react";
-import { paymentLabel, contextLabel, uid, allowsFoodAddon } from "./commerce";
+import React, { useEffect, useLayoutEffect, useMemo, useState, useRef } from "react";
+import { paymentLabel, contextLabel, uid } from "./commerce";
 import { PROVIDERS, provider, resolvePaymentRoute } from "./payments";
 import "./payments.css";
+import "./ds/customer.css";
 import {
   ArrowLeft,
   ArrowUpRight,
   Check,
   CheckCircle2,
   Clock3,
-  Leaf,
   MapPin,
   Minus,
   Plus,
   Search,
   ShoppingBag,
+  SlidersHorizontal,
   UtensilsCrossed,
   WifiOff,
   X,
 } from "lucide-react";
+import ItemSheet from "./CustomerSheet.jsx";
+import Odometer from "./ds/Odometer.jsx";
+import { flyTo, burst } from "./ds/fx.js";
+import { cleanSel, defaultSel, hasOptions, orderLine, sigOf, summarize } from "./merchant";
 
 const peso = (n) =>
   new Intl.NumberFormat("en-PH", {
@@ -27,16 +32,10 @@ const peso = (n) =>
     currency: "PHP",
     maximumFractionDigits: 0,
   }).format(n);
-const cxStyle = `
-.cx-shell{--cx-accent:var(--accent,#204b3b);max-width:1240px;margin:0 auto;color:#263c33}.cx-shell button,.cx-shell input,.cx-shell textarea{font:inherit}.cx-shell button{cursor:pointer}.cx-hero{position:relative;overflow:hidden;border-radius:20px;background:#e7e8dd;min-height:245px;display:flex;align-items:center;padding:36px 42px;margin-bottom:28px}.cx-hero:after{content:'';position:absolute;width:360px;height:360px;right:-70px;top:-85px;border:1px solid #c7cebc;border-radius:50%;box-shadow:0 0 0 34px #ffffff25,0 0 0 35px #c7cebc,0 0 0 70px #ffffff25,0 0 0 71px #c7cebc}.cx-hero-copy{position:relative;z-index:1;max-width:560px}.cx-eyebrow{text-transform:uppercase;font-size:10px;letter-spacing:1.8px;font-weight:700;display:flex;gap:8px;align-items:center}.cx-hero h1{font-family:Georgia,serif;font-size:44px;font-weight:400;letter-spacing:-1.6px;line-height:1.1;margin:17px 0 12px}.cx-hero p{font-size:13px;color:#637168;line-height:1.6;margin:0}.cx-hero-meta{display:flex;gap:18px;margin-top:20px;font-size:11px;align-items:center}.cx-hero-meta span{display:flex;align-items:center;gap:5px}.cx-table{position:absolute;right:30px;bottom:25px;background:#ffffffbd;border:1px solid #fff;border-radius:12px;padding:12px 18px;z-index:2;display:grid;gap:3px;font-size:11px}.cx-table strong{font-size:24px;font-weight:500}.cx-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:28px;align-items:start}.cx-filter{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:24px;flex-wrap:wrap}.cx-categories{display:flex;gap:7px;flex-wrap:wrap}.cx-category{border:1px solid #e0e3d9;border-radius:30px;padding:9px 14px;background:transparent;color:#69766c;font-size:11px!important}.cx-category.active{background:var(--cx-accent);color:#fff;border-color:var(--cx-accent)}.cx-search{display:flex;align-items:center;gap:8px;border-bottom:1px solid #d9ded3;padding:8px 0;color:#879186;max-width:190px}.cx-search input{border:0;background:transparent;outline:none;width:100%;min-width:0;color:#263c33;font-size:12px}.cx-section-head{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 16px}.cx-section-head h2{font-size:20px;font-weight:500;margin:0;letter-spacing:-.5px}.cx-section-head span{font-size:11px;color:#8a938a}.cx-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.cx-food{background:#fff;border:1px solid #e6e8df;border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s}.cx-food:hover{transform:translateY(-3px);box-shadow:0 10px 25px #243b3209}.cx-food-visual{height:155px;background:#e7e9dd;position:relative;overflow:hidden}.cx-food-visual img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.cx-food:hover img{transform:scale(1.04)}.cx-food-fallback{height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e8e7d7,#cbd5c1);color:#637654}.cx-food-label{position:absolute;top:12px;left:12px;background:#fffcf3ed;padding:5px 9px;border-radius:20px;font-size:9px;font-weight:600;letter-spacing:.3px}.cx-food-body{padding:17px}.cx-food h3{font-size:15px;font-weight:600;margin:0 0 7px}.cx-food p{font-size:11px;line-height:1.6;color:#879085;margin:0 0 16px;min-height:35px}.cx-food-foot{display:flex;align-items:center;justify-content:space-between;font-size:14px}.cx-add{height:30px;width:30px;border:1px solid #dce2d7;background:#f6f7f1;color:var(--cx-accent);border-radius:50%;display:grid;place-items:center}.cx-add:hover{background:var(--cx-accent);color:white}.cx-food.unavailable{opacity:.6}.cx-cart{position:sticky;top:20px;background:#fff;border:1px solid #e3e6dc;border-radius:16px;padding:23px}.cx-cart-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.cx-cart-title h2{font-size:17px;font-weight:500;margin:0}.cx-cart-title span{font-size:10px;background:#edf1e7;border-radius:20px;padding:5px 8px}.cx-cart-sub{color:#8b958a;font-size:11px;margin:0 0 22px}.cx-empty{text-align:center;padding:30px 10px;color:#98a18f}.cx-empty svg{margin-bottom:13px}.cx-empty h3{font-weight:500;font-size:14px;color:#5b6e5e}.cx-empty p{font-size:11px;line-height:1.6}.cx-cart-row{padding:15px 0;border-bottom:1px solid #eef0e8;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.cx-cart-row h4{font-size:12px;font-weight:500;margin:0 0 7px}.cx-cart-row small{font-size:11px;color:#829078}.cx-qty{display:flex;align-items:center;gap:9px;font-size:11px;flex-shrink:0}.cx-qty button{display:grid;place-items:center;background:#f5f6ef;border:1px solid #e8ebdf;color:#3e583f;border-radius:5px;padding:4px}.cx-note{display:block;font-size:11px;color:#7e8b7b;margin:18px 0}.cx-note textarea{display:block;resize:vertical;min-height:54px;width:100%;box-sizing:border-box;border:1px solid #e2e6da;border-radius:8px;padding:10px;margin-top:7px;font-size:11px;background:#fcfcf8}.cx-total{border-top:1px dashed #dfe4d6;display:flex;justify-content:space-between;padding:18px 0;font-size:14px}.cx-total strong{font-size:20px}.cx-primary{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--cx-accent);color:white;border:0;border-radius:9px;padding:13px 18px;width:100%;font-size:12px!important;font-weight:500}.cx-primary:disabled{opacity:.4;cursor:not-allowed}.cx-disclaimer{font-size:9px;color:#8b9488;line-height:1.6;text-align:center;margin:12px 0 0}.cx-payment-label{font-size:11px;color:#6f7f6a;margin-bottom:8px}.cx-payment{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.cx-payment button{border:1px solid #dfe5d7;background:#fafbf6;border-radius:8px;padding:10px;font-size:11px;color:#6c7c66}.cx-payment button.selected{border-color:var(--cx-accent);background:#edf3e9;color:var(--cx-accent)}.cx-offline{display:flex;align-items:center;gap:8px;background:#f7eedc;color:#916a33;border:1px solid #ecdcbd;border-radius:9px;padding:12px;font-size:11px;margin-bottom:20px}.cx-success{max-width:600px;background:#fff;border:1px solid #e2e6dc;border-radius:20px;padding:42px;margin:30px auto;text-align:center}.cx-success-icon{display:inline-grid;place-items:center;width:62px;height:62px;border-radius:50%;background:#e8f0e2;color:var(--cx-accent)}.cx-success h1{font-family:Georgia,serif;font-weight:400;font-size:34px;margin:20px 0 12px}.cx-success>p{font-size:13px;line-height:1.7;color:#7c8876}.cx-success-ref{padding:15px;background:#f7f8f1;border-radius:10px;font-size:12px;margin:22px 0}.cx-progress{display:flex;justify-content:space-between;margin:30px 0}.cx-step{flex:1;position:relative;color:#b1baa9;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:8px}.cx-step:before{content:'';position:absolute;top:12px;right:50%;width:100%;border-top:1px solid #e2e6da}.cx-step:first-child:before{display:none}.cx-step i{position:relative;display:grid;place-items:center;height:25px;width:25px;border-radius:50%;background:#f0f3e9;font-style:normal}.cx-step.done{color:var(--cx-accent)}.cx-step.done i{background:var(--cx-accent);color:white}.cx-back{background:none;border:0;color:var(--cx-accent);display:flex;align-items:center;justify-content:center;gap:7px;margin:22px auto 0;font-size:12px!important}.cx-inline-notice{font-size:11px;background:#edf2e7;padding:10px 13px;border-radius:8px;margin:0 0 17px}.cx-mobile-bag{display:none}.cx-no-results{padding:50px 15px;text-align:center;color:#7a8972;font-size:13px}.cx-shell :focus-visible{outline:2px solid var(--cx-accent);outline-offset:3px}.cx-count{font-size:12px;min-width:15px;text-align:center}.cx-payment-heading{margin:0 0 15px;font-size:16px;font-weight:500}.cx-checkout-back{border:0;background:transparent;color:#75816b;padding:0;margin:0 0 16px;display:flex;align-items:center;gap:5px;font-size:10px!important}
-@media(max-width:1000px){.cx-layout{grid-template-columns:minmax(0,1fr) 280px;gap:18px}.cx-hero{padding:30px}.cx-cart{padding:19px}.cx-grid{gap:13px}.cx-food-visual{height:135px}}
-@media(max-width:700px){.cx-hero{padding:27px 23px;min-height:230px;border-radius:15px}.cx-hero h1{font-size:36px;max-width:280px}.cx-hero p{max-width:230px;font-size:12px}.cx-hero-meta{font-size:10px;gap:12px}.cx-table{right:17px;bottom:22px;padding:9px 12px}.cx-table strong{font-size:20px}.cx-hero:after{right:-220px}.cx-layout{display:block}.cx-cart{position:static;margin-top:25px}.cx-grid{gap:12px}.cx-food-body{padding:13px}.cx-food h3{font-size:13px}.cx-food p{font-size:10px;min-height:48px}.cx-food-visual{height:130px}.cx-food-foot{font-size:13px}.cx-filter{gap:16px}.cx-search{max-width:none;width:100%}.cx-categories{gap:6px}.cx-category{font-size:10px!important;padding:8px 12px}.cx-success{padding:28px 18px;margin-top:10px}.cx-success h1{font-size:29px}.cx-mobile-bag{display:flex;position:fixed;bottom:18px;left:22px;right:22px;z-index:25;background:var(--cx-accent);color:white;border:0;border-radius:12px;justify-content:space-between;align-items:center;padding:15px 20px;box-shadow:0 8px 24px #18352330}.cx-shell{padding-bottom:65px}.cx-mobile-bag span{display:flex;align-items:center;gap:10px;font-size:12px}}
-@media(prefers-reduced-motion:reduce){.cx-food,.cx-food img{transition:none}.cx-food:hover{transform:none}}
-`;
 
 export default function Customer({
   menu = [],
-  brand = { name: "Salo" },
+  brand = { name: "Matcha Mood" },
   onSubmit,
   orders = [],
   offline = false,
@@ -59,28 +58,39 @@ export default function Customer({
     context.kind +
     ":" +
     (context.table || "");
+  // Lines are { id, sel, qty } keyed by item + selection. Anything stored that no longer
+  // matches the menu (older carts, edited menus) is dropped or cleaned, never trusted.
   const readCart = () => {
     try {
-      return JSON.parse(localStorage.getItem(cartKey)) || {};
+      const v = JSON.parse(localStorage.getItem(cartKey)) || {};
+      const lines = {};
+      for (const l of Object.values(v.cart || {})) {
+        const item = menu.find((m) => m.id === l?.id);
+        if (!item) continue;
+        const sel = cleanSel(item, l.sel);
+        lines[sigOf(item.id, sel)] = { id: item.id, sel, qty: Math.max(1, Math.min(20, Number(l.qty) || 1)) };
+      }
+      return { cart: lines, note: typeof v.note === "string" ? v.note : "" };
     } catch {
-      return {};
+      return { cart: {}, note: "" };
     }
   };
-  const [cart, setCart] = useState(() => readCart().cart || {});
-  const [modifiers, setModifiers] = useState(() => readCart().modifiers || {});
+  const [cart, setCart] = useState(() => readCart().cart);
   const submission = useRef(uid());
   const inFlight = useRef(false);
   const [submitError, setSubmitError] = useState("");
-  const [note, setNote] = useState(() => readCart().note || "");
+  const [note, setNote] = useState(() => readCart().note);
   useEffect(() => {
     try {
-      localStorage.setItem(cartKey, JSON.stringify({ cart, note, modifiers }));
+      localStorage.setItem(cartKey, JSON.stringify({ cart, note }));
     } catch {}
-  }, [cart, note, modifiers, cartKey]);
+  }, [cart, note, cartKey]);
   const [checkout, setCheckout] = useState(false);
   const [payment, setPayment] = useState("GCash");
   // Opened only by an explicit "Continue with …" tap; never changes payment status.
   const [payGuide, setPayGuide] = useState(null);
+  const [sheet, setSheet] = useState(null);       // item being customized
+  const [bagOpen, setBagOpen] = useState(false);  // phone: the order sheet
   const [placed, setPlaced] = useState(() => {
     try {
       const id = localStorage.getItem(receiptKey(merchantId));
@@ -107,7 +117,6 @@ export default function Customer({
   function clearReceipt() {
     setPlaced(null);
     submission.current = uid();
-    setModifiers({});
     try {
       localStorage.removeItem(receiptKey(merchantId));
     } catch {
@@ -126,25 +135,50 @@ export default function Customer({
         .toLowerCase()
         .includes(search.toLowerCase()),
   );
-  const items = menu
-    .filter((item) => cart[item.id] && item.available !== false)
-    .map((item) => ({
-      ...item,
-      modifier: allowsFoodAddon(item) ? modifiers[item.id] || "" : "",
-      price:
-        item.price +
-        (modifiers[item.id] === "avocado" && allowsFoodAddon(item) ? 35 : 0),
-      qty: cart[item.id],
-    }));
+  const items = useMemo(
+    () =>
+      Object.entries(cart)
+        .map(([lineKey, l]) => {
+          const item = menu.find((m) => m.id === l.id);
+          return item && item.available !== false ? { ...orderLine(item, l.sel, l.qty), lineKey } : null;
+        })
+        .filter(Boolean),
+    [cart, menu],
+  );
   const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
   const quantity = items.reduce((sum, item) => sum + item.qty, 0);
-  const change = (id, delta) => {
-    if (!quantity && delta > 0) onCartStart?.();
-    setCart((current) => ({
-      ...current,
-      [id]: Math.max(0, Math.min(20, (current[id] || 0) + delta)),
-    }));
+  const addLine = (id, sel, qty = 1) => {
+    if (!quantity) onCartStart?.();
+    const key = sigOf(id, sel);
+    setCart((c) => ({ ...c, [key]: { id, sel, qty: Math.min(20, (c[key]?.qty || 0) + qty) } }));
   };
+  const changeLine = (key, d) =>
+    setCart((c) => {
+      const l = c[key];
+      if (!l) return c;
+      const qty = Math.max(0, Math.min(20, l.qty + d));
+      const next = { ...c };
+      if (qty) next[key] = { ...l, qty };
+      else delete next[key];
+      return next;
+    });
+  // The default (as-listed) line of an item, for the card's quick stepper.
+  const defaultLine = (item) => cart[sigOf(item.id, defaultSel(item))];
+  // Where the photograph lands: the phone's bag pill, or the order panel on a wide screen.
+  const bagPoint = () => {
+    const el = [...document.querySelectorAll(".cx-mobile-bag, #customer-cart")].find((e) => e.offsetParent) || document.body;
+    const r = el.getBoundingClientRect();
+    return { x: r.left + Math.min(60, r.width / 2), y: r.top + Math.min(26, r.height / 2) };
+  };
+  function flyAdd(rect, src, size = 76) {
+    if (!rect) return;
+    flyTo({ from: { x: rect.left + rect.width / 2, y: rect.top + rect.height * 0.5 }, src, target: bagPoint(), size }).then(() => {
+      const t = bagPoint();
+      burst(t.x, t.y, ["#cfe79a", "#7da24a", "#eef3dc"], 12, { spread: 64, gravity: 28 });
+      const pill = document.querySelector(".cx-mobile-bag");
+      pill?.classList.remove("k-squish"); void pill?.offsetWidth; pill?.classList.add("k-squish");
+    });
+  }
   const liveOrder = useMemo(
     () =>
       orders.find((order) => String(order.id) === String(placed?.id)) || placed,
@@ -195,6 +229,7 @@ export default function Customer({
       }
       setCart({});
       setCheckout(false);
+      setBagOpen(false);
       setNote("");
     } catch (error) {
       setSubmitError(error.message);
@@ -203,20 +238,33 @@ export default function Customer({
       inFlight.current = false;
     }
   }
+  // sliding category indicator
+  const rail = useRef(null);
+  const [ind, setInd] = useState({ x: 0, w: 0 });
+  useLayoutEffect(() => {
+    const el = rail.current?.querySelector(".cx-category.active");
+    if (el) setInd({ x: el.offsetLeft, w: el.offsetWidth });
+  }, [category, categories.length]);
+  const blocked = context.table
+    ? tables[context.table] === false
+    : !["counter", "takeaway"].includes(context.kind);
+  const heroPhoto = craft ? "/images/market-stall.jpg" : "/images/matcha/latte-iced.jpg";
   return (
     <div
       className="cx-shell"
-      style={{ "--cx-accent": brand.accent || "#204b3b" }}
+      style={{ "--cx-brand": brand.accent || "#1f4d3a" }}
     >
-      <style>{cxStyle}</style>
       {placed ? (
         <section className="cx-success" aria-live="polite">
-          <div className="cx-success-icon">
-            {status === "queued" ? (
-              <WifiOff size={27} />
-            ) : (
-              <CheckCircle2 size={29} />
-            )}
+          <div className="cx-stamp-wrap" aria-hidden="true">
+            <i /><i /><i />
+            <div className="cx-success-icon">
+              {status === "queued" ? (
+                <WifiOff size={27} />
+              ) : (
+                <CheckCircle2 size={29} />
+              )}
+            </div>
           </div>
           <h1>
             {status === "refunded"
@@ -224,12 +272,12 @@ export default function Customer({
               : status === "queued"
                 ? "Saved. We’ll send it soon."
                 : statusIndex === 3
-                  ? "Salamat. See you again!"
+                  ? "Thank you. See you again!"
                   : statusIndex === 2
                     ? "Something good is ready."
                     : craft
                       ? "Your market order is received."
-                      : "Good food is on its way."}
+                      : "Your order is on its way."}
           </h1>
           <p>
             {status === "refunded"
@@ -239,10 +287,10 @@ export default function Customer({
                 : statusIndex === 3
                   ? craft
                     ? "Your order has been collected. Thank you for supporting a local maker."
-                    : "Your order has been served. Thank you for supporting a local table."
+                    : "Your order has been served. Thank you for supporting a local café."
                   : craft
                     ? "The merchant can verify payment and get your items ready for collection."
-                    : "Stay a little, make yourself at home. Your table is connected to our kitchen."}
+                    : "Stay a little, make yourself at home. Your order is connected to our kitchen."}
           </p>
           <div className="cx-success-ref">
             Order <strong>#{liveOrder?.id}</strong> ·{" "}
@@ -257,6 +305,16 @@ export default function Customer({
                 : "Pay at the counter · demo order only"}
             </small>
           </div>
+          {Array.isArray(liveOrder?.items) && liveOrder.items.length > 0 && (
+            <ul className="cx-receipt-items" aria-label="Items in this order">
+              {liveOrder.items.map((i, n) => (
+                <li key={n}>
+                  <span>{i.qty} × {i.name}{i.summary?.length ? <small>{i.summary.join(" · ")}</small> : null}</span>
+                  <strong>{peso(i.price * i.qty)}</strong>
+                </li>
+              ))}
+            </ul>
+          )}
           <p className="cx-payment-state" role="status">
             {paymentLabel(liveOrder || {})}
           </p>
@@ -297,7 +355,7 @@ export default function Customer({
           <p>
             {craft
               ? "Your order is shared with this merchant. Updates appear here as they prepare your pickup."
-              : "Your order is shared with the restaurant team. Follow it in the kitchen, then come back to see its progress."}
+              : "Your order is shared with the café team. Follow it in the kitchen, then come back to see its progress."}
           </p>
           {onNavigate && (
             <button className="cx-primary" onClick={() => onNavigate("Orders")}>
@@ -311,9 +369,12 @@ export default function Customer({
       ) : (
         <>
           <header className="cx-hero">
+            <div className="cx-hero-media" aria-hidden="true">
+              <ProgressiveImage src={heroPhoto} alt="" width="1024" height="1280" />
+            </div>
             <div className="cx-hero-copy">
               <div className="cx-eyebrow">
-                <Leaf size={13} /> Made local. Shared together.
+                {craft ? "Made local. Shared together." : "Matcha specialty café"}
               </div>
               <h1>
                 {craft ? (
@@ -326,22 +387,21 @@ export default function Customer({
                   <>
                     A seat at
                     <br />
-                    the {brand.name || "Salo"} table.
+                    the {brand.name || "Matcha Mood"} table.
                   </>
                 )}
               </h1>
               <p>
                 {brand.tagline || "Good food, thoughtfully made."}
-                <br />A little familiar. A little extraordinary.
               </p>
               <div className="cx-hero-meta">
                 <span>
-                  <MapPin size={12} />{" "}
+                  <MapPin size={13} />{" "}
                   {craft ? "Market pickup · fictional" : "Poblacion, Makati"}
                 </span>
                 <span>
-                  <Clock3 size={12} />{" "}
-                  {craft ? "Arrange at the booth" : "15–25 min"}
+                  <Clock3 size={13} />{" "}
+                  {craft ? "Arrange at the booth" : "10–15 min"}
                 </span>
               </div>
             </div>
@@ -358,10 +418,11 @@ export default function Customer({
           )}
           <div className="cx-layout">
             <section
-              aria-label={craft ? "Merchant catalog" : "Restaurant menu"}
+              aria-label={craft ? "Merchant catalog" : "Café menu"}
             >
               <div className="cx-filter">
-                <div className="cx-categories">
+                <div className="cx-categories" ref={rail}>
+                  <i className="cx-rail-ind" aria-hidden="true" style={{ transform: `translateX(${ind.x}px)`, width: ind.w }} />
                   {categories.map((cat) => (
                     <button
                       className={`cx-category ${category === cat ? "active" : ""}`}
@@ -376,9 +437,9 @@ export default function Customer({
                 <label className="cx-search">
                   <Search size={15} />
                   <input
-                    aria-label={craft ? "Search products" : "Search dishes"}
+                    aria-label={craft ? "Search products" : "Search the menu"}
                     placeholder={
-                      craft ? "Find something lovely" : "Find your craving"
+                      craft ? "Find something lovely" : "Find your mood"
                     }
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
@@ -390,87 +451,118 @@ export default function Customer({
                   {category === "All" ? "A little of everything" : category}
                 </h2>
                 <span>
-                  {filtered.length} {craft ? "items" : "dishes"} to discover
+                  {filtered.length} {craft ? "items" : "items"} to discover
                 </span>
               </div>
               <div className="cx-grid">
-                {filtered.map((item, index) => (
-                  <article
-                    className={`cx-food ${item.available === false ? "unavailable" : ""}`}
-                    key={item.id}
-                  >
-                    <div className="cx-food-visual">
-                      {item.image ? (
-                        <ProgressiveImage
-                          src={item.image}
-                          alt={item.name}
-                          loading="lazy"
-                          width="640"
-                          height="420"
-                        />
-                      ) : (
-                        <div className="cx-food-fallback">
-                          <UtensilsCrossed size={35} />
-                        </div>
-                      )}
-                      {item.available === false ? (
-                        <span className="cx-food-label">Back soon</span>
-                      ) : (
-                        index === 0 && (
-                          <span className="cx-food-label">House favorite</span>
-                        )
-                      )}
-                    </div>
-                    <div className="cx-food-body">
-                      <h3>{item.name}</h3>
-                      <p>{item.description}</p>
-                      <div className="cx-food-foot">
-                        <strong>{peso(item.price)}</strong>
-                        {cart[item.id] && item.available !== false ? (
-                          <div className="cx-qty">
-                            <button
-                              aria-label={`Remove one ${item.name}`}
-                              onClick={() => change(item.id, -1)}
-                            >
-                              <Minus size={12} />
-                            </button>
-                            <span className="cx-count">{cart[item.id]}</span>
-                            <button
-                              aria-label={`Add one ${item.name}`}
-                              onClick={() => change(item.id, 1)}
-                            >
-                              <Plus size={12} />
-                            </button>
-                          </div>
+                {filtered.map((item, index) => {
+                  const dl = defaultLine(item);
+                  const custom = hasOptions(item);
+                  return (
+                    <article
+                      className={`cx-food ${item.available === false ? "unavailable" : ""}`}
+                      key={item.id}
+                    >
+                      <button
+                        type="button"
+                        className="cx-food-visual"
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        disabled={item.available === false || !custom}
+                        onClick={() => setSheet(item)}
+                      >
+                        {item.image ? (
+                          <ProgressiveImage
+                            src={item.image}
+                            alt={item.name}
+                            loading="lazy"
+                            width="1024"
+                            height="1280"
+                          />
                         ) : (
-                          <button
-                            className="cx-add"
-                            aria-label={`Add ${item.name}`}
-                            disabled={item.available === false}
-                            onClick={() => change(item.id, 1)}
-                          >
-                            <Plus size={16} />
-                          </button>
+                          <div className="cx-food-fallback">
+                            <UtensilsCrossed size={35} />
+                          </div>
                         )}
+                        {item.available === false ? (
+                          <span className="cx-food-label">Back soon</span>
+                        ) : (
+                          index === 0 && category === "All" && (
+                            <span className="cx-food-label">House favorite</span>
+                          )
+                        )}
+                      </button>
+                      <div className="cx-food-body">
+                        <h3>{item.name}</h3>
+                        <p>{item.description}</p>
+                        <div className="cx-food-foot">
+                          <strong className="tnum">{peso(item.price)}</strong>
+                          <div className="cx-food-actions">
+                            {custom && item.available !== false && (
+                              <button
+                                type="button"
+                                className="cx-customize"
+                                aria-label={`Customize ${item.name}`}
+                                onClick={() => setSheet(item)}
+                              >
+                                <SlidersHorizontal size={14} /> Customize
+                              </button>
+                            )}
+                            {dl && item.available !== false ? (
+                              <div className="cx-qty">
+                                <button
+                                  aria-label={`Remove one ${item.name}`}
+                                  onClick={() => changeLine(sigOf(item.id, defaultSel(item)), -1)}
+                                >
+                                  <Minus size={12} />
+                                </button>
+                                <span className="cx-count">{dl.qty}</span>
+                                <button
+                                  aria-label={`Add one ${item.name}`}
+                                  onClick={() => changeLine(sigOf(item.id, defaultSel(item)), 1)}
+                                >
+                                  <Plus size={12} />
+                                </button>
+                              </div>
+                            ) : (
+                              <button
+                                className="cx-add"
+                                aria-label={`Add ${item.name}`}
+                                disabled={item.available === false}
+                                onClick={(e) => {
+                                  const r = e.currentTarget.closest(".cx-food")?.querySelector(".cx-food-visual")?.getBoundingClientRect();
+                                  addLine(item.id, defaultSel(item), 1);
+                                  navigator.vibrate?.(10);
+                                  flyAdd(r, (item.image || "").replace(/\.jpg$/, "-sm.jpg"));
+                                }}
+                              >
+                                <Plus size={16} />
+                              </button>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  );
+                })}
               </div>
               {!filtered.length && (
                 <p className="cx-no-results">
-                  No dishes found. Try another craving.
+                  Nothing found. Try another mood.
                 </p>
               )}
             </section>
+            <div className="cx-scrim" hidden={!bagOpen} onClick={() => setBagOpen(false)} />
             <aside
-              className="cx-cart"
+              className={"cx-cart" + (bagOpen || checkout ? " is-open" : "")}
               id="customer-cart"
               aria-label="Your order"
             >
+              <div className="cx-cart-grab" aria-hidden="true"><i /></div>
               <div className="cx-cart-title">
-                <h2>Your table, your order</h2>
-                <span>{quantity} items</span>
+                <h2>Your order</h2>
+                <span>{quantity} {quantity === 1 ? "item" : "items"}</span>
+                <button type="button" className="cx-cart-close" aria-label="Close order" onClick={() => { setBagOpen(false); setCheckout(false); }}><X size={16} /></button>
               </div>
               <p className="cx-cart-sub">{contextLabel(context)}</p>
               {!quantity ? (
@@ -478,7 +570,7 @@ export default function Customer({
                   <ShoppingBag size={32} strokeWidth={1} />
                   <h3>Good things start here.</h3>
                   <p>
-                    Add something delicious.
+                    Add something you’ll love.
                     <br />
                     We’ll take care of the rest.
                   </p>
@@ -502,22 +594,24 @@ export default function Customer({
                     </>
                   )}
                   {items.map((item) => (
-                    <div className="cx-cart-row" key={item.id}>
+                    <div className="cx-cart-row" key={item.lineKey}>
+                      <ProgressiveImage className="cx-cart-thumb" src={item.image} alt="" width="1024" height="1280" />
                       <div>
                         <h4>{item.name}</h4>
-                        <small>{peso(item.price * item.qty)}</small>
+                        {item.summary.length > 0 && <small className="cx-cart-sum">{item.summary.join(" · ")}</small>}
+                        <small className="tnum">{peso(item.price * item.qty)}</small>
                       </div>
                       <div className="cx-qty">
                         <button
                           aria-label={`Remove ${item.name} from order`}
-                          onClick={() => change(item.id, -1)}
+                          onClick={() => changeLine(item.lineKey, -1)}
                         >
                           <Minus size={11} />
                         </button>
                         <span>{item.qty}</span>
                         <button
                           aria-label={`Increase ${item.name} in order`}
-                          onClick={() => change(item.id, 1)}
+                          onClick={() => changeLine(item.lineKey, 1)}
                         >
                           <Plus size={11} />
                         </button>
@@ -534,36 +628,12 @@ export default function Customer({
                         placeholder={
                           craft
                             ? "Optional pickup request (demo)"
-                            : "Less spicy, no onions…"
+                            : "Extra ice, no straw…"
                         }
                       />
                     </label>
                   )}
-                  {items
-                    .filter((item) => allowsFoodAddon(item))
-                    .map((item) => (
-                      <label className="cx-modifier" key={"modifier" + item.id}>
-                        {item.name} add-on
-                        <select
-                          aria-label={item.name + " add-on"}
-                          value={modifiers[item.id] || ""}
-                          onChange={(e) =>
-                            setModifiers((m) => ({
-                              ...m,
-                              [item.id]: e.target.value,
-                            }))
-                          }
-                        >
-                          <option value="">As prepared</option>
-                          <option value="avocado">
-                            Extra avocado +₱35 each
-                          </option>
-                        </select>
-                      </label>
-                    ))}
-                  {(context.table
-                    ? tables[context.table] === false
-                    : !["counter", "takeaway"].includes(context.kind)) && (
+                  {blocked && (
                     <p className="cx-inline-notice">
                       {context.table
                         ? "This example table is temporarily disabled."
@@ -575,7 +645,7 @@ export default function Customer({
                     <span>
                       Total <small>(VAT included)</small>
                     </span>
-                    <strong>{peso(total)}</strong>
+                    <strong><Odometer value={total} /></strong>
                   </div>
                   {checkout && (
                     <>
@@ -600,12 +670,7 @@ export default function Customer({
                   )}
                   <button
                     className="cx-primary"
-                    disabled={
-                      busy ||
-                      (context.table
-                        ? tables[context.table] === false
-                        : !["counter", "takeaway"].includes(context.kind))
-                    }
+                    disabled={busy || blocked}
                     onClick={checkout ? placeOrder : () => setCheckout(true)}
                   >
                     {busy
@@ -629,23 +694,26 @@ export default function Customer({
           {quantity > 0 && !checkout && (
             <button
               className="cx-mobile-bag"
-              onClick={() =>
-                document.getElementById("customer-cart")?.scrollIntoView({
-                  behavior: window.matchMedia(
-                    "(prefers-reduced-motion: reduce)",
-                  ).matches
-                    ? "instant"
-                    : "smooth",
-                  block: "center",
-                })
-              }
+              aria-expanded={bagOpen}
+              onClick={() => setBagOpen(true)}
             >
               <span>
                 <ShoppingBag size={16} />
-                {quantity} items · View order
+                {quantity} {quantity === 1 ? "item" : "items"} · View order
               </span>
               <strong>{peso(total)}</strong>
             </button>
+          )}
+          {sheet && (
+            <ItemSheet
+              item={sheet}
+              onClose={() => setSheet(null)}
+              onAdd={(line, rect, src) => {
+                addLine(line.id, line.sel, line.qty);
+                navigator.vibrate?.(14);
+                flyAdd(rect, src, 96);
+              }}
+            />
           )}
         </>
       )}

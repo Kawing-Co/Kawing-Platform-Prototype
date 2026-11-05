@@ -133,7 +133,7 @@ test("Scenario → View entry is two addressable steps with exactly three views"
   await expect(
     page
       .frameLocator('iframe[title^="Customer "]')
-      .getByRole("heading", { name: "Salo", exact: true }),
+      .getByRole("heading", { name: "Matcha Mood", exact: true }),
   ).toBeVisible();
   await expect(page.getByRole("heading", { name: "Kawing Studio" })).toHaveCount(0);
 });
@@ -237,7 +237,7 @@ test("Reset is scenario-scoped, confirmed, and keeps the Studio draft unless ask
   await dialog.getByLabel("Also discard the unsaved Kawing Studio draft").check();
   await dialog.getByRole("button", { name: "Reset Standard" }).click();
   await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue(
-    "Salo",
+    "Matcha Mood",
   );
 
   await page.getByRole("button", { name: "Change Scenario", exact: true }).click();

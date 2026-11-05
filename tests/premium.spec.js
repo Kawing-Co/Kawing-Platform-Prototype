@@ -63,7 +63,7 @@ test("undo restores only catalog availability and can be consumed only once", as
   );
   await page.getByRole("tab", { name: "Menu", exact: true }).click();
   const available = page.getByRole("checkbox", {
-    name: "Studio availability Harvest bowl",
+    name: "Studio availability Matcha Latte",
     exact: true,
   });
   await available.uncheck();
@@ -276,7 +276,7 @@ test("BlurHash placeholder keeps menu images stable until the real photograph lo
 }) => {
   let release;
   const gate = new Promise((r) => (release = r));
-  await page.route("**/images/bowl.jpg", async (r) => {
+  await page.route("**/images/matcha/latte-iced.jpg", async (r) => {
     await gate;
     await r.continue();
   });
@@ -313,13 +313,14 @@ test("reduced motion, immediate ordering feedback, and recovery autofill remain 
     .click();
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Add Matcha Latte", exact: true })
     .click();
   await expect(
     page
-      .getByRole("button", { name: "Add one Harvest bowl", exact: true })
+      .getByRole("button", { name: "Add one Matcha Latte", exact: true })
       .first(),
   ).toBeVisible();
+  await page.locator(".cx-mobile-bag").click(); // phones: the order is a bottom sheet
   await page
     .getByRole("button", { name: "Review your order", exact: true })
     .click();

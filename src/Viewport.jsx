@@ -155,7 +155,7 @@ export function StudioReceiver() {
 export function CustomerPreview({
   merchantId = "salo",
   boothId,
-  merchantName = "Salo",
+  merchantName = "Matcha Mood",
   onBack,
 }) {
   // Customer View opens the finished experience at once, using the merchant's saved

@@ -71,7 +71,7 @@ export function readTier(storage = globalThis.localStorage) {
   }
 }
 
-// Keys owned by each scenario. Salo's business record is the Standard Merchant record;
+// Keys owned by each scenario. Matcha Mood (internal id "salo") holds the Standard Merchant record;
 // Pop-up Market keeps its event and event-only merchants under separate keys.
 export function resetKeys(scenario, keys, { discardStudioDraft = false } = {}) {
   const standard = (k) =>

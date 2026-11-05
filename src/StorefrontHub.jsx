@@ -24,6 +24,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import Customer from "./Customer";
+import { ASSETS } from "./merchant";
 import {
   labels,
   themeTokens,
@@ -327,13 +328,7 @@ export default function StorefrontHub({
                 </button>
               )}
               {c.galleryAssets
-                .filter((src) =>
-                  [
-                    "/images/bowl.jpg",
-                    "/images/salad.jpg",
-                    "/images/drink.jpg",
-                  ].includes(src),
-                )
+                .filter((src) => ASSETS.covers.includes(src))
                 .map((src, i) => (
                   <img key={i} src={src} alt={"Business gallery " + (i + 1)} />
                 ))}
@@ -446,7 +441,7 @@ export default function StorefrontHub({
           <button className="sf-back" onClick={() => setPane("home")}>
             <ArrowLeft size={16} /> Back to Business Profile
           </button>
-          <h2 tabIndex={-1} ref={focus} className="sf-module-title">
+          <h2 tabIndex={-1} ref={focus} className={"sf-module-title" + (pane === "order" ? " is-order" : "")}>
             {pane === "order"
               ? "Something good starts here."
               : c.modules.find((m) => m.type === pane)?.title || labels[pane]}

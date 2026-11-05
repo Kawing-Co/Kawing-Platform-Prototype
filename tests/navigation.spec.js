@@ -8,7 +8,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await page.getByRole('button',{name:'Start guided demo',exact:false}).click();
  await expect(rail(page)).toContainText('STEP 1 OF 8');
  await expect(rail(page).getByRole('button',{name:'Continue',exact:true})).toBeDisabled();
- await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
+ await page.getByRole('button',{name:'Add Matcha Latte',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Place demo order',exact:true}).click();
  await page.getByRole('button',{name:'I’ve sent the demo payment'}).click();
@@ -22,12 +22,12 @@ test('partner completes the eight-step story with one shared order and an offlin
  await card.getByRole('button',{name:'Mark ready'}).click();
  await card.getByRole('button',{name:'Mark served'}).click();
  await next(page);
- await expect(page.locator('.stat-card').first()).toContainText('13,125');
+ await expect(page.locator('.stat-card').first()).toContainText('37,160');
  await next(page);
  await page.getByLabel('Restaurant name',{exact:true}).fill('Salo & Friends');
  await page.getByRole('button',{name:'Save design',exact:true}).first().click();
  await next(page);
- await page.getByRole('button',{name:'Toggle availability for Salo garden salad'}).click();
+ await page.getByRole('button',{name:'Toggle availability for Matcha Roll Cake'}).click();
  await next(page);
  await page.getByLabel('Analytics period').selectOption('This week');
  await next(page);
@@ -35,7 +35,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await page.getByRole('button',{name:'Enable offline simulation',exact:true}).click();
  await page.getByRole('button',{name:'Create an offline demo order'}).click();
  await page.getByRole('button',{name:'Order now',exact:true}).click();
- await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
+ await page.getByRole('button',{name:'Add Matcha Latte',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Save order offline',exact:true}).click();
  await expect(rail(page).getByRole('button',{name:'Continue',exact:true})).toBeDisabled();
@@ -81,7 +81,8 @@ test('mobile guide pauses, resumes, skips, and preserves progress across refresh
 test('mobile completed action offers a reachable next step',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/?workspace=merchant#Start%20here');
  await page.getByRole('button',{name:'Start guided demo',exact:false}).click();
- await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
+ await page.getByRole('button',{name:'Add Matcha Latte',exact:true}).click();
+ await page.locator('.cx-mobile-bag').click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
  await page.getByRole('button',{name:'Place demo order',exact:true}).click();
  await page.getByRole('button',{name:'I’ve sent the demo payment'}).click();

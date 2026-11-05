@@ -1,4 +1,9 @@
 // Browser-local demo contracts. Config never contains executable routes or content.
+import { ASSETS } from "./merchant";
+// Other fictional merchants (event-only sellers) still use these earlier photographs.
+const LEGACY = ["/images/bowl.jpg", "/images/salad.jpg", "/images/plate.jpg", "/images/drink.jpg"];
+// Internal id of the Standard Merchant record. It keys browser storage and operations, so it stays
+// stable even though the visible business is Matcha Mood.
 export const MERCHANT = "salo";
 export const moduleTypes = [
   "order",
@@ -26,7 +31,7 @@ export const defaults = () => ({
   featured: "order",
   theme: {
     mode: "light",
-    primary: "#245642",
+    primary: "#1f4d3a",
     secondary: "#e7eee2",
     accent: "#b4743e",
     background: "#f7f7f0",
@@ -39,8 +44,8 @@ export const defaults = () => ({
     menu: "grid",
     modules: "rows",
   },
-  logo: "/images/bowl.jpg",
-  cover: "/images/bowl.jpg",
+  logo: ASSETS.logos[0],
+  cover: ASSETS.covers[0],
   modules: moduleTypes.map((type, order) => ({
     id: type,
     type,
@@ -57,40 +62,40 @@ export const defaults = () => ({
     {
       id: "instagram",
       platform: "Instagram",
-      label: "Our daily moments",
+      label: "Matcha moments",
       url: "",
       enabled: true,
     },
     {
       id: "facebook",
       platform: "Facebook",
-      label: "Around our table",
+      label: "Around the counter",
       url: "",
       enabled: true,
     },
   ],
   wifi: {
-    name: "Salo-Guest-DEMO",
-    password: "fictional-salo-2026",
+    name: "MatchaMood-Guest-DEMO",
+    password: "fictional-matcha-2026",
     instructions:
       "Open your phone’s Wi-Fi settings, choose the guest network, then enter the demo password. This fictional network will not connect.",
   },
   loyalty: {
     enabled: true,
     threshold: 9,
-    reward: "A bowl on the house",
-    eligible: [1, 2, 3, 6],
+    reward: "A matcha latte on the house",
+    eligible: [1, 3, 4, 9],
     card: "sage",
   },
   promotion: {
     active: true,
     kind: "Featured product",
-    title: "A little lunch, a little sunshine.",
-    description: "Make time for a fresh harvest bowl and a calamansi cooler.",
-    image: "/images/bowl.jpg",
+    title: "One sip, and the mood unwinds.",
+    description: "Pair a Matcha Latte with a slice of Berry Cake — a quiet little break.",
+    image: ASSETS.promos[0],
     cta: "Explore the menu",
-    code: "SALODEMO",
-    price: "₱380 sample bundle",
+    code: "MATCHADEMO",
+    price: "₱1,350 sample pairing",
     start: "2026-01-01",
     end: "2027-12-31",
     placement: "hub",
@@ -156,22 +161,12 @@ export function config(raw = {}) {
     featured: pick(raw.featured, moduleTypes, "order"),
     logo: pick(
       raw.logo,
-      [
-        "/images/bowl.jpg",
-        "/images/salad.jpg",
-        "/images/plate.jpg",
-        "/images/market-mark.svg",
-      ],
+      [...ASSETS.logos, ...LEGACY],
       d.logo,
     ),
     cover: pick(
       raw.cover,
-      [
-        "/images/bowl.jpg",
-        "/images/salad.jpg",
-        "/images/plate.jpg",
-        "/images/drink.jpg",
-      ],
+      [...ASSETS.covers, ...LEGACY],
       d.cover,
     ),
     theme: {
@@ -249,7 +244,7 @@ export function config(raw = {}) {
       ...d.wifi,
       ...raw.wifi,
       name: text(raw.wifi?.name, d.wifi.name, 50),
-      password: "fictional-salo-2026",
+      password: "fictional-matcha-2026",
       instructions: text(raw.wifi?.instructions, d.wifi.instructions, 300),
     },
     loyalty: {
@@ -288,7 +283,7 @@ export function config(raw = {}) {
       active: raw.promotion?.active !== false,
       image: pick(
         raw.promotion?.image,
-        ["/images/bowl.jpg", "/images/drink.jpg", "/images/plate.jpg"],
+        [...ASSETS.promos, ...LEGACY],
         d.promotion.image,
       ),
       kind: pick(
@@ -318,9 +313,9 @@ export function extend(base, merchant = base.merchantId || MERCHANT) {
     ...base,
     brand: {
       ...base.brand,
-      name: text(base.brand?.name, "Salo", 28),
-      tagline: text(base.brand?.tagline, "Fresh, local, made with love.", 90),
-      accent: hex(base.brand?.accent, "#245642"),
+      name: text(base.brand?.name, "Matcha Mood", 28),
+      tagline: text(base.brand?.tagline, "One sip, and the mood unwinds.", 90),
+      accent: hex(base.brand?.accent, "#1f4d3a"),
     },
     schemaVersion: 2,
     merchantId: merchant,
@@ -384,8 +379,6 @@ export function extend(base, merchant = base.merchantId || MERCHANT) {
       })),
   };
 }
-export const allowsFoodAddon = (item) =>
-  ["Bowls", "Small plates"].includes(item.category);
 export const uid = () => crypto.randomUUID();
 export function event(d, type, detail = "") {
   const merchant = d.merchantId || MERCHANT;

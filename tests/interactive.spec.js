@@ -17,9 +17,11 @@ async function openShop(p, booth) {
     .click();
   return frame(p);
 }
-async function checkout(f, item = "Harvest bowl", payment = "GCash") {
+async function checkout(f, item = "Matcha Latte", payment = "GCash") {
   await f.getByRole("button", { name: "Order now", exact: true }).click();
   await f.getByRole("button", { name: "Add " + item, exact: true }).click();
+  const bag = f.locator(".cx-mobile-bag"); // phone-width canvas: the order is a bottom sheet
+  if (await bag.isVisible()) await bag.click();
   if (item.includes("ceramic")) {
     await expect(f.getByLabel(item + " add-on", { exact: true })).toHaveCount(
       0,
@@ -69,10 +71,10 @@ test("Studio frame uses actual device width and selects the exact editor from th
   await f.getByRole("button", { name: "Order now", exact: true }).click();
   await expect(page.locator(".inspector-context")).toContainText("Order now");
   await expect(
-    page.getByRole("checkbox", { name: "Studio availability Harvest bowl" }),
+    page.getByRole("checkbox", { name: "Studio availability Matcha Latte" }),
   ).toBeVisible();
   await page
-    .getByRole("checkbox", { name: "Studio availability Harvest bowl" })
+    .getByRole("checkbox", { name: "Studio availability Matcha Latte" })
     .uncheck();
   expect(
     await page.evaluate(
@@ -98,7 +100,7 @@ test("customer device and tier selection affect only the preview; keyboard and 3
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?workspace=customer&scenario=standard");
   // Customer View opens the finished experience at once; preview controls are optional.
-  await expect(page.getByRole("heading", { name: "Salo", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Matcha Mood", exact: true })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Preview options", exact: true }),
   ).toBeVisible();
@@ -352,7 +354,7 @@ test("a craft booth uses its own catalog, cart and receipt instead of another me
     .click();
   await expect(frame(page).locator(".cx-success")).toHaveCount(0);
   await expect(
-    frame(page).getByRole("button", { name: "Add Harvest bowl", exact: true }),
+    frame(page).getByRole("button", { name: "Add Matcha Latte", exact: true }),
   ).toBeVisible();
 });
 test("checkout rejects an event closed or booth reassigned while a customer was browsing", async ({
@@ -362,8 +364,9 @@ test("checkout rejects an event closed or booth reassigned while a customer was 
   const f = await openShop(page, "B02");
   await f.getByRole("button", { name: "Order now", exact: true }).click();
   await f
-    .getByRole("button", { name: "Add Harvest bowl", exact: true })
+    .getByRole("button", { name: "Add Matcha Latte", exact: true })
     .click();
+  await f.locator(".cx-mobile-bag").click();
   await f
     .getByRole("button", { name: "Review your order", exact: true })
     .click();
