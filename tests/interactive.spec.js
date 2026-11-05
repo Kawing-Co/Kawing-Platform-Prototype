@@ -252,6 +252,7 @@ test("merchant requests are not fulfillment and reported blockers reach the orga
   page,
 }) => {
   await page.goto("/?workspace=merchant&scenario=market");
+  await page.getByRole("button", { name: "My participation", exact: true }).click();
   await page.getByRole("button", { name: "Logistics", exact: true }).click();
   await page
     .getByRole("checkbox", { name: "Request Cold storage", exact: true })

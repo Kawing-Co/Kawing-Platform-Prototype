@@ -36,10 +36,11 @@ in the selected viewport.
 
 ## Pop-up Market
 
-Merchant View opens My participation. Select a fictional business and review its
-assigned booth, event package, needs and issues. A merchant can request support,
-set load-in information and report a problem. Requests do not verify fulfillment.
-Map and Merchants retain assignment and temporary-profile creation workflows.
+Merchant View opens the shared booth map. Choose an open booth there, then use
+My participation to select a fictional business and review its assigned booth,
+event package, needs and issues. A merchant can request support, set load-in
+information and report a problem. Requests do not verify fulfillment. Merchants
+retains temporary-profile creation.
 
 Admin View opens Vendor desk. Select/search a business (a compact selector on mobile); its dossier contains:
 

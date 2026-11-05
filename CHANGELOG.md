@@ -23,6 +23,8 @@
   9 surfaces at 5 widths found no overflow or console errors. Verification record and
   acceptance checklist: docs/DEMO_UX_002_VERIFICATION.md. UX-03/UX-04 are verified
   against the existing map, booth, editor and lifecycle tests, with no code change.
+- Pop-up Merchant View now opens on the shared booth map, with My participation one tab
+  away. This supersedes the participation-first landing at Earl's direction.
 - Playwright honours `CHROMIUM_PATH` and only uses `/usr/bin/chromium` when present.
 - Reconciled PR #1 with main, preserving the original four commits and historical branches.
   Studio refuses blank names without discarding the draft or saved configuration.
