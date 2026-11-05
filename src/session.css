@@ -208,3 +208,47 @@
     animation: none;
   }
 }
+
+/* Kawing Studio · Review & publish checklist (UX-02). */
+.studio-check-summary {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--sp-ink);
+  font-weight: 600;
+}
+.studio-review-list.studio-checklist {
+  list-style: none;
+  padding: 0;
+  line-height: 1.5;
+  display: grid;
+  gap: 10px;
+}
+.studio-checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: #4f6a40;
+}
+.studio-checklist li > svg {
+  margin-top: 3px;
+  color: var(--sp-green);
+}
+.studio-checklist li[data-ok="false"] {
+  color: #7a5426;
+}
+.studio-checklist small {
+  display: block;
+  font-size: 11px;
+  color: #8a6a3e;
+}
+.studio-check-flag {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f7eedc;
+  color: #7a5426;
+  font-size: 11px;
+  font-weight: 800;
+}

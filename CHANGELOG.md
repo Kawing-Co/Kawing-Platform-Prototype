@@ -9,6 +9,11 @@
   tier/setup panel), Change Scenario and a confirmed, scenario-scoped Reset that keeps the
   Kawing Studio draft unless the visitor opts in. Compact header on small screens.
   Customer View opens the finished experience at once with the saved package.
+- UX-02: Kawing Studio tabs follow the brief's order and end with **Review & publish**,
+  which now shows a live validation checklist (name, modules, review/social link safety,
+  promotion dates, package gallery quota). User-facing "Storefront" wording is replaced
+  by Business Profile / Kawing Studio (page title, guide, engagement labels, back link,
+  "Visual Showcase" template); internal IDs, hashes and event keys are unchanged.
 - UX-05: Checkout offers GCash, Maya (formerly PayMaya), GoTyme Bank, MariBank and Cash.
   `Continue with <provider>` releases only an approved, order-specific https checkout on
   a verified provider host; none exists in the demo, so each opens truthful QR Ph

@@ -47,10 +47,10 @@ export const steps = [
   },
   {
     page: "Storefront",
-    title: "Make the storefront yours",
+    title: "Make the Business Profile yours",
     role: "Owner",
     action:
-      "Choose a hub template and theme, or change the name. Preview your draft, then Save storefront to update customer mode.",
+      "Choose a hub template and theme, or change the name. Preview your draft, then Save design to update Customer View.",
     why: "Each establishment keeps its own identity. Changes also appear in the customer menu.",
     icon: Palette,
   },
@@ -368,7 +368,7 @@ export const contexts = {
     "Make the sample restaurant your own.",
     "Edit the name, welcome message, or color. Your customer menu follows these settings.",
     "Customer",
-    "Preview your storefront",
+    "Preview your Business Profile",
   ],
   Menu: [
     "OWNER · MENU MANAGEMENT",
@@ -529,7 +529,7 @@ export function WalkthroughComplete({ navigate, restart }) {
           to served.
         </p>
         <p>
-          <strong>For the owner</strong>Control the storefront and see business
+          <strong>For the owner</strong>Shape the Business Profile and see business
           activity in one place.
         </p>
       </div>

@@ -305,7 +305,8 @@ function App({
   }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = `Kawing · ${page}`;
+    // "Storefront" is the legacy internal page id; the public name is Kawing Studio.
+    document.title = `Kawing · ${page === "Storefront" ? "Kawing Studio" : page}`;
   }, [page]);
   useEffect(() => {
     try {
@@ -1657,7 +1658,7 @@ function App({
                       "Meet Kawing: a proposed commerce workspace bringing guests, teams, and local business owners together. Everything here is an interactive simulation.",
                       "Explore the customer menu, build a basket, and place a simulated order. No accounts or real payments are needed.",
                       "Open Staff kitchen to move the same order from received to preparing, ready, and served. Toggle offline to try a local queue.",
-                      "Change your storefront name and colors, manage menu availability, and explore illustrative analytics that include your demo orders.",
+                      "Change your Business Profile name and colors, manage menu availability, and explore illustrative analytics that include your demo orders.",
                       "Start with 3–5 pilot establishments, learn with operators, and explore a connected neighborhood. The ecosystem page shares the proposed path.",
                     ][tour]
                   }

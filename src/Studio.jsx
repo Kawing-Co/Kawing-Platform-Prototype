@@ -17,6 +17,8 @@ import {
   Image,
 } from "lucide-react";
 import { defaults, config, safeUrl, labels } from "./commerce";
+import { studioChecks } from "./studio-review";
+import { tierOf } from "./session";
 export default function Studio({ data, update, navigate, customizeTick = 0 }) {
   const retained = () => {
     try {
@@ -226,11 +228,11 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
             "Layout",
             "Modules",
             "Content",
+            "Menu",
             "Loyalty",
             "Operations",
             "Media & tier",
-            "Review",
-            "Menu",
+            "Review & publish",
           ].map((t) => (
             <button
               role="tab"
@@ -445,22 +447,17 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
               </button>
             </>
           )}
-          {tab === "Review" && (
+          {tab === "Review & publish" && (
             <>
               <h2>A considered final look.</h2>
               <p>
                 Preview the customer experience beside your draft. Saving
                 updates this browser only—it does not publish a real business.
               </p>
-              <ul className="studio-review-list">
-                <li>Business name: {brand.name || "Add a name"}</li>
-                <li>Template: {draft.layout}</li>
-                <li>
-                  {draft.modules.filter((m) => m.enabled).length} approved
-                  modules enabled
-                </li>
-                <li>Payments and external destinations remain simulations</li>
-              </ul>
+              <StudioChecklist
+                checks={studioChecks(draft, brand, tierOf(data))}
+                template={draft.layout}
+              />
               <button className="button primary" onClick={save}>
                 Save demo design
               </button>
@@ -629,7 +626,7 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
                   ],
                   [
                     "visual",
-                    "Visual Storefront",
+                    "Visual Showcase",
                     "Image-led hero, featured food, and a richer discovery grid.",
                   ],
                   [
@@ -1248,3 +1245,40 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
   );
 }
 const uidForLink = () => crypto.randomUUID();
+
+function StudioChecklist({ checks, template }) {
+  const open = checks.filter((c) => !c.ok).length;
+  return (
+    <>
+      <p className="studio-check-summary" aria-live="polite">
+        {open
+          ? open + (open === 1 ? " item needs" : " items need") + " attention before saving."
+          : "All checks pass. Saving updates this browser only."}
+      </p>
+      <ul className="studio-review-list studio-checklist">
+        {checks.map((c) => (
+          <li key={c.id} data-ok={c.ok}>
+            {c.ok ? (
+              <Check size={14} aria-label="Ready" />
+            ) : (
+              <span className="studio-check-flag" aria-label="Needs attention">
+                !
+              </span>
+            )}
+            <span>
+              {c.label}
+              {!c.ok && <small>{c.hint}</small>}
+            </span>
+          </li>
+        ))}
+        <li data-ok="true">
+          <Check size={14} aria-label="Ready" />
+          <span>
+            Template: {{ quick: "Quick Actions", visual: "Visual Showcase", minimal: "Minimal Utility" }[template] || template}.
+            Payments and external links stay simulated.
+          </span>
+        </li>
+      </ul>
+    </>
+  );
+}
