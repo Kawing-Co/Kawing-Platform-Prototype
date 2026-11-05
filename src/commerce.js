@@ -90,8 +90,8 @@ export const defaults = () => ({
   promotion: {
     active: true,
     kind: "Featured product",
-    title: "One sip, and the mood unwinds.",
-    description: "Pair a Matcha Latte with a slice of Berry Cake — a quiet little break.",
+    title: "A quiet little break.",
+    description: "Pair a Matcha Latte with a slice of Berry Cake.",
     image: ASSETS.promos[0],
     cta: "Explore the menu",
     code: "MATCHADEMO",
@@ -565,7 +565,7 @@ export function themeTokens(c) {
     "--sf-gap": c.theme.spacing === "compact" ? "12px" : "22px",
     "--sf-font":
       c.theme.typography === "editorial"
-        ? "Georgia,serif"
+        ? '"Cormorant Garamond",Georgia,serif'
         : c.theme.typography === "friendly"
           ? "Manrope,sans-serif"
           : "DM Sans,sans-serif",

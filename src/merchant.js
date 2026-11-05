@@ -960,7 +960,7 @@ const img = (n) => `/images/matcha/${n}.jpg`;
 export const ASSETS = {
   logos: ["latte-iced", "mochi", "strawberry", "cookie"].map(img).concat("/images/market-mark.svg"),
   covers: ["ritual", "latte-iced", "softserve-topped", "strawberry-topped", "berrycake-candle", "crepe-topped"].map(img),
-  promos: ["ritual", "strawberry-topped", "berrycake-candle", "mochi-four", "softserve-topped"].map(img),
+  promos: ["berrycake-candle", "strawberry-topped", "ritual", "mochi-four", "softserve-topped"].map(img),
 };
 const NAMES = {
   "latte-iced": "Iced matcha latte", mochi: "Mochi", strawberry: "Strawberry matcha", cookie: "Cookie",

@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import Customer from "./Customer";
 import { ASSETS } from "./merchant";
+import ProgressiveImage from "./ProgressiveImage";
+import "./ds/hub.css";
 import {
   labels,
   themeTokens,
@@ -237,12 +239,16 @@ export default function StorefrontHub({
                 Edit identity
               </button>
             )}
-            {c.layout === "visual" && (
-              <img
-                className="sf-cover"
-                src={c.cover}
-                alt="Fresh seasonal food"
-              />
+            {c.layout !== "minimal" && (
+              <div className="sf-hero-media" aria-hidden="true">
+                <ProgressiveImage
+                  className="sf-cover"
+                  src={c.cover}
+                  alt=""
+                  width="1024"
+                  height="1280"
+                />
+              </div>
             )}
             <div className="sf-brand-copy">
               <img
@@ -404,7 +410,11 @@ export default function StorefrontHub({
                 <button
                   key={m.id}
                   data-edit-id={m.type}
-                  className={selectedEdit === m.type ? "edit-selected" : ""}
+                  data-k-reveal=""
+                  className={
+                    (selectedEdit === m.type ? "edit-selected " : "") +
+                    (m.type === "loyalty" ? "is-loyalty" : "")
+                  }
                   onClick={() => open(m.type)}
                   aria-label={m.cta || m.title}
                 >
@@ -425,6 +435,13 @@ export default function StorefrontHub({
                           game: "A small pause for play.",
                         }[m.type]}
                     </small>
+                    {m.type === "loyalty" && (
+                      <span className="sf-stamps" aria-hidden="true">
+                        {Array.from({ length: c.loyalty.threshold }, (_, i) => (
+                          <i key={i} className={i < points ? "on" : ""} />
+                        ))}
+                      </span>
+                    )}
                   </span>
                   <ArrowRight size={17} />
                 </button>

@@ -1,0 +1,143 @@
+/* Customer View hub (the merchant's business profile). Studio's three compositions, theme colours,
+   module order and module style all keep working; this layer only changes how they look:
+   a photographic hero, a bento of modules, a quieter presenter strip, a floating tab bar. */
+
+html body .sf-shell {
+  --hub-r: 28px;
+  background: var(--sf-bg);
+  border-radius: 0;
+  padding: clamp(14px, 3vw, 28px);
+  padding-bottom: calc(clamp(14px, 3vw, 28px) + var(--k-sab));
+  max-width: 1120px;
+  margin-inline: auto;
+}
+@supports (corner-shape: squircle) { html body .sf-shell { --hub-r: 40px; } }
+@media (min-width: 761px) { @supports (corner-shape: squircle) { html body .sf-shell { --hub-r: 56px; } } }
+@media (max-width: 760px) { html body .sf-shell { --hub-r: 26px; } }
+html body .sf-shell h1, html body .sf-shell h2, html body .sf-shell h3 { font-family: var(--k-head); }
+
+/* ── presenter strip: it is demo furniture, so it recedes ── */
+html body .sf-demo-context { padding: 8px 12px; margin-bottom: 8px; background: transparent; border: 1px dashed color-mix(in srgb, var(--sf-ink) 20%, transparent); border-radius: 14px; }
+html body .sf-demo-context > span { font-size: 11px; letter-spacing: 0.08em; max-width: none; }
+html body .sf-demo-context label { font-size: 12px; gap: 8px; }
+html body .sf-demo-context select { padding: 8px 10px; min-height: 40px; border-radius: 10px; font-size: 12.5px; }
+html body .sf-context { font-size: 12px; margin-bottom: 14px; }
+html body .sf-context > span:last-child { font-size: 12px; }
+@media (max-width: 700px) {
+  html body .sf-demo-context { flex-wrap: wrap; gap: 6px 10px; }
+  html body .sf-demo-context > span { flex-basis: 100%; }
+  html body .sf-demo-context label { width: 100%; justify-content: space-between; }
+  html body .sf-demo-context select { flex: 1; max-width: none; }
+  html body .sf-context > span:last-child { display: none; }
+}
+
+/* ── hero ── */
+html body .sf-brand-hero { corner-shape: squircle; position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: clamp(380px, 62vw, 480px); padding: clamp(22px, 5vw, 52px); border: 0; border-radius: var(--hub-r); overflow: hidden; background: var(--k-night); color: #f4f8e8; margin-bottom: var(--sf-gap); }
+html body .sf-quick .sf-brand-hero { min-height: clamp(300px, 46vw, 380px); }
+html body .sf-visual .sf-brand-hero { display: flex; grid-template-columns: none; padding: clamp(22px, 5vw, 52px); }
+html body .sf-hero-media { position: absolute; inset: 0; z-index: -2; }
+html body .sf-hero-media .progressive-image { position: absolute; inset: 0; }
+html body .sf-hero-media img, html body .sf-cover { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; max-height: none; object-fit: cover; object-position: 66% 28%; opacity: 0; transform: scale(1.08); transition: opacity 0.7s ease; animation: hub-drift 24s ease-in-out infinite alternate; }
+html body .sf-hero-media .image-ready img { opacity: 1; }
+@keyframes hub-drift { to { transform: scale(1.16) translate3d(-1.5%, -1%, 0); } }
+html body .sf-brand-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(12, 24, 17, 0.95) 10%, rgba(12, 24, 17, 0.72) 46%, rgba(12, 24, 17, 0.18) 100%); }
+html body .sf-brand-hero::after { display: none; }
+html body .sf-brand-copy { position: relative; max-width: 560px; }
+html body .sf-logo { width: 52px; height: 52px; border: 2px solid rgba(238, 246, 218, 0.7); margin-bottom: 20px; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6); }
+html body .sf-kicker { font-size: 11.5px; letter-spacing: 0.2em; color: rgba(214, 232, 176, 0.9); }
+html body .sf-brand-hero h1 { font-family: var(--sf-font); font-weight: 500; font-size: clamp(46px, 9vw, 84px); line-height: 0.98; letter-spacing: -0.02em; margin: 14px 0 14px; color: #f4f8e8; text-wrap: balance; }
+html body .sf-brand-hero p { font-family: var(--k-serif); font-style: italic; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.3; color: rgba(236, 244, 214, 0.92); max-width: 24ch; margin: 0; }
+html body .sf-welcome { font-size: 13px; color: rgba(228, 240, 200, 0.78); margin: 16px 0 24px; }
+html body .sf-brand-hero .sf-primary { width: auto; min-width: 200px; min-height: 54px; padding: 0 26px; border-radius: var(--sf-button); }
+@media (max-width: 700px) { html body .sf-brand-hero .sf-primary { width: 100%; } }
+@media (min-width: 761px) {
+  /* the photograph sits right and melts into the panel */
+  html body .sf-hero-media { left: 34%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%); mask-image: linear-gradient(90deg, transparent 0, #000 40%); }
+  html body .sf-brand-hero::before { background: linear-gradient(90deg, rgba(12, 24, 17, 0.5) 0%, rgba(12, 24, 17, 0) 55%), linear-gradient(0deg, rgba(12, 24, 17, 0.6), transparent 50%); }
+}
+/* the minimal composition stays a quiet, paper-coloured header */
+html body .sf-minimal .sf-brand-hero { min-height: 0; padding: 20px 0; background: none; color: var(--sf-ink); display: block; border-radius: 0; }
+html body .sf-minimal .sf-brand-hero::before { display: none; }
+html body .sf-minimal .sf-brand-hero h1 { color: var(--sf-ink); font-size: clamp(30px, 5vw, 40px); }
+html body .sf-minimal .sf-brand-hero p, html body .sf-minimal .sf-welcome, html body .sf-minimal .sf-kicker { color: var(--sf-muted); }
+html body .sf-minimal .sf-logo { border-color: var(--sf-secondary); }
+
+/* ── "your current order" and the featured module: dark, calm pills ── */
+html body .sf-current { border: 0; border-radius: 20px; background: var(--k-night); color: #eef3e0; padding: 14px 18px; box-shadow: var(--k-shadow-1); }
+html body .sf-current strong { font-size: 13.5px; } html body .sf-current small { font-size: 12px; color: rgba(228, 240, 200, 0.75); }
+html body .sf-featured-module { border-radius: 24px; padding: 22px 24px; }
+html body .sf-featured-module small { font-size: 11.5px; }
+
+/* ── offer: photograph first ── */
+html body .sf-promo-teaser { position: relative; isolation: isolate; display: block; min-height: 200px; padding: 0; border: 0; border-radius: 28px; background: var(--k-night); color: #f4f8e8; overflow: hidden; transition: transform 0.45s var(--k-spring); }
+html body .sf-promo-teaser:hover { transform: translateY(-3px); }
+html body .sf-promo-teaser:active { transform: scale(0.985); }
+html body .sf-promo-teaser > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; transition: transform 1.2s var(--k-ease); }
+html body .sf-promo-teaser:hover > img { transform: scale(1.05); }
+html body .sf-promo-teaser::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12, 24, 17, 0.85) 0%, rgba(12, 24, 17, 0.4) 60%, rgba(12, 24, 17, 0.05) 100%); }
+html body .sf-promo-teaser > span { display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; padding: 26px; max-width: 520px; }
+html body .sf-promo-teaser small { font-size: 11.5px; letter-spacing: 0.14em; color: rgba(214, 232, 176, 0.9); }
+html body .sf-promo-teaser strong { font: 500 clamp(26px, 4vw, 34px)/1.05 var(--sf-font); color: #f4f8e8; margin: 10px 0 14px; text-wrap: balance; }
+html body .sf-promo-teaser > span > span { font-size: 13px; color: #e8f3cf; font-weight: 600; }
+
+/* ── modules: a bento ── */
+html body .sf-services-heading { margin: 34px 0 16px; }
+html body .sf-services-heading h2 { font: 500 clamp(28px, 4vw, 38px)/1.05 var(--k-serif); letter-spacing: -0.01em; }
+html body .sf-services-heading > span { font-size: 12.5px; }
+html body .sf-services { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 12px; }
+html body .sf-services > button { position: relative; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 18px; min-height: 148px; padding: 20px; border-radius: 26px; background: var(--sf-surface); border: 1px solid var(--sf-line); box-shadow: var(--k-shadow-1); transition: transform 0.45s var(--k-spring), box-shadow 0.3s; }
+@supports (corner-shape: squircle) { html body .sf-services > button { corner-shape: squircle; border-radius: 46px; } }
+html body .sf-services > button:hover { transform: translateY(-4px); box-shadow: var(--k-shadow-2); }
+html body .sf-services > button:active { transform: scale(0.97); }
+html body .sf-services > button > svg:last-child { position: absolute; top: 18px; right: 18px; width: 18px; height: 18px; transition: transform 0.4s var(--k-spring); }
+html body .sf-services > button:hover > svg:last-child { transform: translate(3px, -3px); }
+html body .sf-service-icon { width: 46px; height: 46px; border-radius: 16px; }
+html body .sf-services strong { font: 650 15.5px/1.25 var(--k-head); margin: 0; }
+html body .sf-services small { font-size: 12.5px; line-height: 1.5; margin-top: 4px; }
+/* the loyalty tile leads */
+html body .sf-services > button.is-loyalty { grid-column: 1 / -1; min-height: 190px; background: var(--sf-primary); color: var(--sf-on-primary); border-color: transparent; }
+html body .sf-services > button.is-loyalty .sf-service-icon { background: color-mix(in srgb, var(--sf-on-primary) 16%, transparent); color: var(--sf-on-primary); }
+html body .sf-services > button.is-loyalty strong { font: 500 clamp(26px, 4vw, 34px)/1.05 var(--k-serif); color: var(--sf-on-primary); }
+html body .sf-services > button.is-loyalty small, html body .sf-services > button.is-loyalty > svg:last-child { color: color-mix(in srgb, var(--sf-on-primary) 82%, transparent); }
+.sf-stamps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.sf-stamps i { width: 24px; height: 24px; border-radius: 50%; border: 1.5px dashed color-mix(in srgb, var(--sf-on-primary) 55%, transparent); display: block; transition: background 0.4s, transform 0.5s var(--k-spring); }
+.sf-stamps i.on { background: var(--sf-on-primary); border-style: solid; transform: scale(1.06); }
+@media (min-width: 761px) {
+  html body .sf-services { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  html body .sf-services > button.is-loyalty { flex-direction: row; align-items: center; justify-content: flex-start; gap: 28px; min-height: 0; padding: 30px 36px; }
+  html body .sf-services > button.is-loyalty > span:not(.sf-service-icon) { flex: 1; }
+  html body .sf-services > button.is-loyalty .sf-service-icon { width: 64px; height: 64px; border-radius: 22px; }
+  html body .sf-services > button.is-loyalty .sf-stamps { margin-top: 16px; }
+}
+/* Studio's "cards" module style: an even grid, no leading tile */
+html body .sf-modules-cards:not(.sf-minimal) .sf-services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+html body .sf-modules-cards:not(.sf-minimal) .sf-services > button.is-loyalty { grid-column: auto; grid-row: auto; min-height: 148px; background: var(--sf-surface); color: var(--sf-ink); }
+html body .sf-modules-cards:not(.sf-minimal) .sf-services > button.is-loyalty strong { font: 650 15.5px/1.25 var(--k-head); color: var(--sf-ink); }
+html body .sf-modules-cards:not(.sf-minimal) .sf-services > button.is-loyalty .sf-service-icon { background: var(--sf-secondary); color: var(--sf-primary); }
+html body .sf-modules-cards:not(.sf-minimal) .sf-services > button.is-loyalty small { color: var(--sf-muted); }
+html body .sf-modules-cards:not(.sf-minimal) .sf-stamps { display: none; }
+@media (min-width: 761px) { html body .sf-modules-cards:not(.sf-minimal) .sf-services > button.is-loyalty { flex-direction: column; align-items: flex-start; padding: 20px; gap: 18px; } }
+/* minimal: plain rows */
+html body .sf-minimal .sf-services { display: block; }
+html body .sf-minimal .sf-services > button { flex-direction: row; align-items: center; min-height: 0; padding: 15px 0; border-radius: 0; box-shadow: none; transform: none; }
+html body .sf-minimal .sf-services > button > svg:last-child { position: static; margin-left: auto; }
+html body .sf-minimal .sf-stamps { display: none; }
+html body .sf-preview .sf-services { grid-template-columns: 1fr; }
+html body .sf-footnote { font-size: 12px !important; }
+
+/* ── tab bar ── */
+@media (max-width: 750px) {
+  html body .sf-bottom-nav { margin: 24px -14px -14px; padding: 8px 10px calc(8px + var(--k-sab)); background: color-mix(in srgb, var(--sf-surface) 86%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border-top: 1px solid var(--sf-line); }
+}
+html body .sf-bottom-nav button { font-size: 12px; border-radius: 16px; transition: background 0.3s, color 0.3s, transform 0.35s var(--k-spring); }
+html body .sf-bottom-nav button:active { transform: scale(0.94); }
+html body .sf-bottom-nav button[aria-current="page"] { background: color-mix(in srgb, var(--sf-primary) 12%, transparent); }
+
+/* module pages */
+html body .sf-back { font-size: 13px; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; color: var(--sf-primary); background: none; border: 0; margin-bottom: 6px; padding: 0; }
+html body .sf-module-title:not(.is-order) { font: 500 clamp(30px, 5vw, 42px)/1.05 var(--k-serif); letter-spacing: -0.01em; margin: 6px 0 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html body .sf-hero-media img, html body .sf-cover { animation: none; transform: none; }
+  html body .sf-promo-teaser, html body .sf-promo-teaser > img, html body .sf-services > button { transition: none; }
+}
