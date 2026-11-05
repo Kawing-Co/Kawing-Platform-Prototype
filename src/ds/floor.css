@@ -1,0 +1,31 @@
+/* Legibility floor: found by auditing every surface at 360px and 1280px for visible text under
+   11px. Labels, captions and chips never go below 11.5px; nothing here makes text smaller. */
+html body :is(
+  .text-button, .legend, .growth, .avatar-stack > span, .feedback-record > span, .vision-note p,
+  .banner-number, .banner-label, .welcome-banner .banner-copy button, .welcome-banner .banner-copy p,
+  .venue-title span, .customer-lab-toolbar span, .stat-top span, .stat-foot span, .inspector-context span,
+  .studio-draft-label, .studio-help, .studio-save-bar button, .studio-save-bar > span, .studio-heading .button,
+  .queue-foot, .section-line h3 span, .connection-explainer span, .demo-boundary, .simulation-note,
+  .market-pager span, .popular-row strong, .sales-panel .panel-heading p, .engagement-grid .panel > span,
+  .story-spatial-toggle, .intro-actions > span, .floating-note strong, .order-copy strong,
+  .market-command-summary button, .canvas-selection, .canvas-selection button, .studio-preview-toolbar label,
+  .studio .eyebrow, .connection-card p, .vendor-directory label
+) { font-size: 11.5px; }
+html body .banner-number { font-size: 11px; }
+
+/* Touch: every control gets a 44px target without changing how it looks. Small inline controls
+   grow an invisible hit slop instead of shifting the layout. */
+@media (pointer: coarse), (max-width: 750px) {
+  html body :is(.mobile-toggle, .text-button, .help-link, .demo-home-link, .tour-link, .connection, .toggle-label, .space-wordmark, .spaces-brand > a, main.content > footer button) { position: relative; }
+  html body :is(.mobile-toggle, .text-button, .help-link, .demo-home-link, .tour-link, .connection, .toggle-label, .space-wordmark, .spaces-brand > a, main.content > footer button)::after {
+    content: ""; position: absolute; inset: 50% auto auto 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%);
+  }
+  html body :is(.studio-colors button, .brand-swatches button, button[aria-label^="Use brand color"]) { min-width: 44px; min-height: 44px; }
+  html body :is(.button.primary, .button.secondary, button.chip, .studio-presets button, .feedback-record button, .studio-mobile-switch button, .market-pager button) { min-height: 44px; }
+}
+/* Studio and the offline explainer carry more specific legacy rules, so they need a matching prefix. */
+html body .studio.studio-interactive :is(.studio-draft-label, .studio-help, .studio-save-bar button, .studio-save-bar > span, .studio-heading .button, .eyebrow, .inspector-context span),
+html body .offline-experience .payment-explainer .simulation-note,
+html body main.content > div.studio.studio-interactive > div.studio-heading > button.button { font-size: 11.5px; }
+html body .studio-heading h1 .studio-draft-label { font-size: 11.5px; }
+html body .studio-help, html body .simulation-note { font-size: 11.5px !important; }

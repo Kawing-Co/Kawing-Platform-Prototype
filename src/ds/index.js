@@ -4,6 +4,8 @@ import "./base.css";
 import "./type.css";
 import "./shell.css";
 import "./entry.css";
+import "./merchant.css";
+import "./floor.css";
 import { initTactile } from "./tactile.js";
 import { initReveal } from "./reveal.js";
 

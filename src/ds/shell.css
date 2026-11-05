@@ -67,8 +67,8 @@ html body .sidebar nav button.active::before {
 }
 html body .sidebar nav button .soon, html body .sidebar nav button .new { border-radius: 99px; }
 
-/* ── page chrome (desktop): breadcrumb and role tabs share one row ── */
-@media (min-width: 1000px) {
+/* ── page chrome (wide desktop): breadcrumb and role tabs share one row ── */
+@media (min-width: 1360px) {
   html body .main {
     display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "top demo" "ctx ctx" "content content";
     align-content: start;
@@ -126,3 +126,7 @@ html body .page-heading .eyebrow { color: var(--k-moss); }
   html body .view-context h2 { margin: 0; white-space: nowrap; }
   html body .view-context p { flex: 1 1 100%; margin: 0; }
 }
+
+html body .prototype-tag { font-size: 11px; }
+@media (max-width: 1500px) { html body .prototype-tag { display: none; } }
+@media (min-width: 1000px) { html body .top-actions .connection { white-space: nowrap; } }

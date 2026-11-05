@@ -18,9 +18,16 @@ License notices are in public/fonts. Lucide icons are provided by lucide-react
 under its ISC license. No runtime external image or font requests are needed.
 
 
+Matcha Mood photography (`public/images/matcha/*.jpg`, `public/images/market-*.jpg`,
+`salo-table.jpg`) is original, AI-generated imagery created for this prototype (no real
+products, people or brands); each photograph has a full-size and a `-sm` variant, and BlurHash
+placeholders. Selecting menu options shows the closest photographed variant. Display type is
+Cormorant Garamond (SIL OFL, `public/fonts`). The peso sign renders in DM Sans/Manrope, not
+Cormorant, which has no ₱ glyph.
+
 Premium experience assets: `public/motion/kawing-story.mp4`, its captions, and
 `story-poster.jpg` / `story-scene.jpg` are generated from the original HTML/GSAP
-composition in `motion/` and the existing bundled Salo photograph. Regenerate with
+composition in `motion/` and the Matcha Mood photography. Regenerate with
 `scripts/render-story.sh`. `motion/gsap.min.js` is GSAP 3.14.2 (copyright and license
 URL retained in its header), used only to author the film. The native WebGL scene
 is original procedural geometry. BlurHash 2.0.5 is a small MIT-licensed runtime

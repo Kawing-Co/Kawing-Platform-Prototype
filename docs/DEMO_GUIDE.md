@@ -2,7 +2,7 @@
 
 Kawing connects the customer, restaurant team, and owner through one shared order.
 This is a browser-local concept prototype for a business proposal, using fictional
-restaurant Salo and illustrative operating data. No real payments are processed.
+café Matcha Mood (internal id `salo`) and illustrative operating data. No real payments are processed.
 
 ## Run locally
 

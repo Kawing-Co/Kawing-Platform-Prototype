@@ -528,7 +528,7 @@ function App({
             <Leaf size={19} />
           </div>
           <div>
-            <strong>{data.brand.name} Kitchen</strong>
+            <strong>{data.brand.name}</strong>
             <small>Merchant workspace</small>
           </div>
           <ChevronDown size={14} />
@@ -757,8 +757,7 @@ function App({
                       <span className="sun">☀</span>
                     </h1>
                     <p>
-                      Here’s what’s happening at {data.brand.name} Kitchen
-                      today.
+                      Here’s what’s happening at {data.brand.name} today.
                     </p>
                   </div>
                   <button
@@ -1086,11 +1085,13 @@ function App({
                                 )}
                               </small>
                               <ul>
-                                {o.items.map((i) => (
-                                  <li key={i.id}>
+                                {o.items.map((i, n) => (
+                                  <li key={i.id + ":" + n}>
                                     <b>{i.qty}×</b> {i.name}
-                                    {i.modifier === "avocado" && (
-                                      <small> · Extra avocado</small>
+                                    {i.summary?.length > 0 && (
+                                      <small className="kitchen-opts">
+                                        {i.summary.join(" · ")}
+                                      </small>
                                     )}
                                   </li>
                                 ))}
@@ -1229,6 +1230,11 @@ function App({
                           <span className="eyebrow">{i.category}</span>
                           <h3>{i.name}</h3>
                           <p>{i.description}</p>
+                          {i.options?.length > 0 && (
+                            <p className="menu-opts">
+                              {i.options.map((o) => o.label).join(" · ")}
+                            </p>
+                          )}
                           <div className="menu-card-footer">
                             <strong>{money(i.price)}</strong>
                             <button
@@ -1636,10 +1642,15 @@ function App({
                     ? "Collect at counter"
                     : "Simulated payment"}
                 </p>
-                {modal.items.map((i) => (
-                  <div className="modal-order-row" key={i.id}>
+                {modal.items.map((i, n) => (
+                  <div className="modal-order-row" key={i.id + ":" + n}>
                     <span>
                       {i.qty} × {i.name}
+                      {i.summary?.length > 0 && (
+                        <small className="kitchen-opts">
+                          {i.summary.join(" · ")}
+                        </small>
+                      )}
                     </span>
                     <strong>{money(i.price * i.qty)}</strong>
                   </div>

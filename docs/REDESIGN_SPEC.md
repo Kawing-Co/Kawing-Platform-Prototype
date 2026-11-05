@@ -5,6 +5,14 @@ deployed. Follows [DESIGN_NOTES.md](DESIGN_NOTES.md), the architecture documents
 earlier [premium amendment](PREMIUM_EXPERIENCE_SPEC.md). There is no `DESIGN.md` or
 `ARCHITECTURE.md` in this repository; those documents are the equivalents.
 
+## The Standard Merchant is Matcha Mood
+Matcha Mood replaces Salo as the business behind Standard Merchant, Customer View, the kitchen,
+analytics and Studio. Its design language (dark photography, display serif, spring motion, a
+customizer with live photo and price) is the Customer View. The internal merchant id stays
+`"salo"` so storage keys (`kawing-demo-v1`, `kawing-cart-v2:salo:*`, `kawing-last-order`), loyalty
+ledger keys and operations are untouched; older docs that say "Salo" describe the same record.
+A seed marker (`seed: "matcha-mood-1"`) discards a browser's old Salo demo record once.
+
 ## Goal
 A product-wide visual and interaction redesign that feels premium, calm and modern on a
 phone first, without changing what the product does: Customer, Merchant and Admin views, and
@@ -43,8 +51,9 @@ headlines) rather than replace it.
 ## Scope by area
 - Shell: calmer session header, labelled sidebar, consistent page headers, mobile bottom nav.
 - Entry: cinematic hero with real photography; photo-led scenario and view cards.
-- Customer: photo-led hub, sticky category rail, item sheet with live price, animated cart,
-  smooth order → completion, loyalty and payments restyled. Mobile-first; desktop preview.
+- Customer: photo-led hub, category rail with a sliding indicator, item sheet with live photo
+  and rolling price (size, milk, strength, sweetness, toppings), fly-to-bag cart, bottom-sheet
+  order on phones, order → receipt tracker, loyalty and payments restyled. Mobile-first.
 - Merchant: overview hierarchy, kitchen board, menu manager, analytics, Studio chrome.
 - Admin: overview, packages, setup review, support.
 - Events: map and booths, vendor desk, readiness, orders.
@@ -54,6 +63,12 @@ Browser-local state (`kawing-demo-v1`, event keys), simulated payments and fulfi
 backend, tracking, payment SDK or real identity. Order, loyalty, offline-queue and idempotency
 logic are not modified. No magnetic motion on touch. No autoplay film or 3D during checkout.
 Existing routes, query parameters, hashes and the six spaces keep working.
+
+## Order model (unchanged trust boundary)
+A line is `{ id, sel, qty }`. The unit price is recomputed from the menu at submission
+(`orderLine` in `src/merchant.js`); a tampered cart cannot change a price. The photograph shown
+for a selection is the closest photographed variant (`images.rules`), not a render of every
+combination. Payments and fulfilment remain explicitly simulated.
 
 ## Acceptance
 - `npm run build` passes; the full Playwright suite (72) passes unchanged.

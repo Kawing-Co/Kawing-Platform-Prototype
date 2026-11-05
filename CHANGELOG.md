@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-11-05 — Premium redesign: Matcha Mood is the Standard Merchant
+
+- Matcha Mood replaces Salo as the Standard Merchant everywhere (brand, nine-item menu with
+  options, generated photography, seeded orders, loyalty, Studio). Internal id `salo` unchanged.
+- New design layer `src/ds/`: tokens, type floor, tactile buttons (magnet + cursor light + press
+  give on fine pointers, fingertip bloom on touch), scroll reveal, rolling digits, fx.
+- Entry: photographic opening, photo-led scenario cards, re-rendered Matcha Mood product film.
+- Customer: photographic hub with bento modules; ordering with sliding category rail, customizer
+  sheet (live photo + price), fly-to-bag, bottom-sheet order on phones, receipt tracker.
+- Merchant/Admin/Events: option summaries on kitchen cards, menu option hints, photographic
+  Events header, calmer chrome, legibility floor and 44 px touch targets.
+- Docs: REDESIGN_SPEC.md, REDESIGN_VERIFICATION.md. Not merged, pushed or deployed.
+
 ## 2026-11-05 — Premium experience and spatial product story
 
 - Refined the shared interface with warm paper/ink tones, editorial entry typography,
