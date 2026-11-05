@@ -234,6 +234,50 @@ export default function StorefrontHub({
               )}
             </div>
           </header>
+          {(b.bio || b.hours || b.address || b.contact) && (
+            <section className="sf-business-details">
+              <span>{b.category || "LOCAL BUSINESS"}</span>
+              {b.bio && <p>{b.bio}</p>}
+              <div>
+                {b.hours && (
+                  <p>
+                    <strong>Hours</strong>
+                    {b.hours}
+                  </p>
+                )}
+                {b.address && (
+                  <p>
+                    <strong>Find us</strong>
+                    {b.address}
+                  </p>
+                )}
+                {b.contact && (
+                  <p>
+                    <strong>Contact</strong>
+                    {b.contact}
+                  </p>
+                )}
+              </div>
+            </section>
+          )}
+          {Array.isArray(c.galleryAssets) && c.galleryAssets.length > 0 && (
+            <section
+              className="sf-business-gallery"
+              aria-label="Business gallery"
+            >
+              {c.galleryAssets
+                .filter((src) =>
+                  [
+                    "/images/bowl.jpg",
+                    "/images/salad.jpg",
+                    "/images/drink.jpg",
+                  ].includes(src),
+                )
+                .map((src, i) => (
+                  <img key={i} src={src} alt={"Business gallery " + (i + 1)} />
+                ))}
+            </section>
+          )}
           {c.layout === "visual" && (
             <div className="sf-featured-products">
               {data.menu

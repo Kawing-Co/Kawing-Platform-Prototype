@@ -19,7 +19,7 @@ async function placeOrder(page, { offline = false } = {}) {
   return (await state(page)).orders.find(o => !o.seed);
 }
 
-test.beforeEach(async ({ page }) => { await page.goto('/'); });
+test.beforeEach(async ({ page }) => { await page.goto('/?workspace=merchant#Start%20here'); });
 
 test('one customer order connects receipt, kitchen, owner totals, and reload', async ({ page }) => {
   const errors = [];
@@ -65,10 +65,10 @@ test('offline queue survives reload and reconnects exactly once', async ({ page 
 });
 
 test('owner branding and menu availability update customer experience and persist', async ({ page }) => {
-  await page.getByRole('button', { name: 'Storefront', exact: true }).click();
+  await page.getByRole('button', { name: 'Customization', exact: true }).click();
   await page.getByLabel('Restaurant name', { exact: true }).fill('Luntian');
   await page.getByRole('button', { name: 'Use brand color #8b4f36' }).click();
-  await page.getByRole('button',{name:'Save storefront',exact:true}).first().click();
+  await page.getByRole('button',{name:'Save design',exact:true}).first().click();
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
   await page.getByRole('button', { name: 'Toggle availability for Harvest bowl' }).click();
   await customer(page);
@@ -107,7 +107,7 @@ test('mobile ordering and navigation fit the viewport', async ({ page }) => {
   await kitchen(page);
   expect(await fits()).toBe(true);
   await page.getByRole('button', { name: 'Toggle navigation' }).click();
-  await page.getByRole('button', { name: 'Storefront', exact: true }).click();
+  await page.getByRole('button', { name: 'Customization', exact: true }).click();
   await expect(page.getByLabel('Restaurant name', { exact: true })).toBeVisible();
   expect(await fits()).toBe(true);
 });

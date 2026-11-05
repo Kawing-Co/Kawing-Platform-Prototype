@@ -14,7 +14,7 @@ const state = (p) =>
   p.evaluate(() => JSON.parse(localStorage.getItem("kawing-demo-v1")));
 const save = (p) =>
   p
-    .getByRole("button", { name: "Save storefront", exact: true })
+    .getByRole("button", { name: "Save design", exact: true })
     .first()
     .click();
 const customer = async (p) => {
@@ -117,7 +117,7 @@ test("schema migration retains valid records and blocks unsafe URLs and cross-me
 test("three compositions, saved theme, module ordering and preview isolation", async ({
   page,
 }) => {
-  await page.goto("/#Storefront");
+  await page.goto("/?workspace=merchant#Storefront");
   const initial = (await state(page)).events.length;
   await page.getByRole("tab", { name: "Layout", exact: true }).click();
   for (const [title, cls] of [
@@ -132,7 +132,7 @@ test("three compositions, saved theme, module ordering and preview isolation", a
     await save(page);
     await customer(page);
     await expect(page.locator(".sf-shell")).toHaveClass(new RegExp(cls));
-    await page.getByRole("button", { name: "Storefront", exact: true }).click();
+    await page.getByRole("button", { name: "Customization", exact: true }).click();
     await page.getByRole("tab", { name: "Layout", exact: true }).click();
   }
   await page.getByRole("tab", { name: "Brand", exact: true }).click();
@@ -162,7 +162,7 @@ test("three compositions, saved theme, module ordering and preview isolation", a
 test("studio rejects unsafe social destinations, negative private feedback never gates reviews", async ({
   page,
 }) => {
-  await page.goto("/#Storefront");
+  await page.goto("/?workspace=merchant#Storefront");
   await page.getByRole("tab", { name: "Content", exact: true }).click();
   await page.getByText("Social links", { exact: true }).click();
   await page
@@ -221,7 +221,7 @@ test("studio rejects unsafe social destinations, negative private feedback never
 test("verified completed purchases credit loyalty once; redemption and refund preserve ledger integrity", async ({
   page,
 }) => {
-  await page.goto("/#Customer");
+  await page.goto("/?workspace=merchant#Customer");
   await page.getByRole("button", { name: "My rewards", exact: true }).click();
   await page
     .getByRole("button", { name: "Try Alex’s demo loyalty account" })
@@ -261,7 +261,7 @@ test("verified completed purchases credit loyalty once; redemption and refund pr
 test("recovery requires simulated proof; Wi-Fi is honest and the complete puzzle works", async ({
   page,
 }) => {
-  await page.goto("/#Customer");
+  await page.goto("/?workspace=merchant#Customer");
   await page.getByRole("button", { name: "My rewards", exact: true }).click();
   await page
     .getByText("Recover a demo loyalty account", { exact: true })
@@ -312,7 +312,7 @@ test("recovery requires simulated proof; Wi-Fi is honest and the complete puzzle
 test("cart and modifiers persist, table context is explicit, and presentation restore preserves disabled tables", async ({
   page,
 }) => {
-  await page.goto("/?entry=table&table=03#Customer");
+  await page.goto("/?workspace=merchant&entry=table&table=03#Customer");
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page
     .getByRole("button", { name: "Add Harvest bowl", exact: true })
@@ -325,7 +325,7 @@ test("cart and modifiers persist, table context is explicit, and presentation re
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await expect(page.locator(".cx-total")).toContainText("320");
   await expect(page.locator(".cx-cart-sub")).toContainText("Table 03");
-  await page.getByRole("button", { name: "Storefront", exact: true }).click();
+  await page.getByRole("button", { name: "Customization", exact: true }).click();
   await save(page);
   await page.getByRole("tab", { name: "Operations", exact: true }).click();
   await page
@@ -346,7 +346,7 @@ test("360px hub templates and modules support keyboard and reduced motion withou
   page.on("pageerror", (e) => errors.push(e.message));
   await page.setViewportSize({ width: 360, height: 800 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/#Customer");
+  await page.goto("/?workspace=merchant#Customer");
   const fits = () =>
     page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1);
   expect(await fits()).toBe(true);
@@ -359,7 +359,7 @@ test("360px hub templates and modules support keyboard and reduced motion withou
   await page
     .getByRole("button", { name: "Toggle navigation", exact: true })
     .click();
-  await page.getByRole("button", { name: "Storefront", exact: true }).click();
+  await page.getByRole("button", { name: "Customization", exact: true }).click();
   expect(await fits()).toBe(true);
   await page.getByRole("tab", { name: "Layout", exact: true }).click();
   for (const title of ["Visual Storefront", "Minimal Utility"]) {
@@ -370,7 +370,7 @@ test("360px hub templates and modules support keyboard and reduced motion withou
     await page
       .getByRole("button", { name: "Toggle navigation", exact: true })
       .click();
-    await page.getByRole("button", { name: "Storefront", exact: true }).click();
+    await page.getByRole("button", { name: "Customization", exact: true }).click();
     await page.getByRole("tab", { name: "Layout", exact: true }).click();
   }
   expect(errors).toEqual([]);
@@ -379,7 +379,7 @@ test("360px hub templates and modules support keyboard and reduced motion withou
 test("promotion scheduling and visibility work, disabled games have no stale route", async ({
   page,
 }) => {
-  await page.goto("/#Storefront");
+  await page.goto("/?workspace=merchant#Storefront");
   await page.getByRole("tab", { name: "Content", exact: true }).click();
   await page.getByText("Merchant-owned promotion", { exact: true }).click();
   await page.getByLabel("Promotion end", { exact: true }).fill("2020-01-01");
@@ -392,13 +392,13 @@ test("promotion scheduling and visibility work, disabled games have no stale rou
   await expect(
     page.getByRole("heading", { name: "Good things are on their way." }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Storefront", exact: true }).click();
+  await page.getByRole("button", { name: "Customization", exact: true }).click();
   await page.getByRole("tab", { name: "Modules", exact: true }).click();
   await page
     .getByRole("checkbox", { name: "Enable Play while you wait", exact: true })
     .uncheck();
   await save(page);
-  await page.goto("/#game");
+  await page.goto("/?workspace=merchant#game");
   await customer(page);
   await expect(
     page.getByRole("button", { name: "Play while you wait", exact: true }),
@@ -407,7 +407,7 @@ test("promotion scheduling and visibility work, disabled games have no stale rou
 test("counter cash approval is separate from payment and context/cart survive selection reload", async ({
   page,
 }) => {
-  await page.goto("/#Storefront");
+  await page.goto("/?workspace=merchant#Storefront");
   await page.getByRole("tab", { name: "Operations", exact: true }).click();
   await page
     .getByRole("combobox", { name: "Preparation policy", exact: true })
@@ -450,7 +450,7 @@ test("counter cash approval is separate from payment and context/cart survive se
 test("current order status reopens receipt after browsing; full reset clears engagement and cart", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?workspace=merchant#Start%20here");
   const o = await order(page);
   await page
     .getByRole("button", { name: "Explore the menu", exact: true })
@@ -481,7 +481,7 @@ test("current order status reopens receipt after browsing; full reset clears eng
 test("review CTR measures clicked views, and studio tabs support arrow keys", async ({
   page,
 }) => {
-  await page.goto("/#Customer");
+  await page.goto("/?workspace=merchant#Customer");
   await page
     .getByRole("button", { name: "Review us on Google", exact: true })
     .click();
@@ -502,7 +502,7 @@ test("review CTR measures clicked views, and studio tabs support arrow keys", as
       .locator(".engagement-grid .panel")
       .filter({ hasText: "Review-link CTR" }),
   ).toContainText("100%");
-  await page.getByRole("button", { name: "Storefront", exact: true }).click();
+  await page.getByRole("button", { name: "Customization", exact: true }).click();
   await page.getByRole("tab", { name: "Brand", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
   await expect(
@@ -521,7 +521,7 @@ test("guest entry examples expose only customer presentation even with a staff h
     page.getByRole("button", { name: "Staff kitchen", exact: true }),
   ).toHaveCount(0);
   await expect(
-    page.getByRole("button", { name: "Storefront", exact: true }),
+    page.getByRole("button", { name: "Customization", exact: true }),
   ).toHaveCount(0);
   await page.getByRole("button", { name: "Order now", exact: true }).click();
   await page

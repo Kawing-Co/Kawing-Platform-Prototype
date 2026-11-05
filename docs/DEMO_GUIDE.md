@@ -92,3 +92,11 @@ The owner now authorizes publishing the existing public Site to match GitHub `ma
 after changes are completed and merged. This supersedes the previous source-only
 restriction. See `AGENTS.md` for the standing workflow. A verified Sites deployment
 is required before calling a main-branch update live; no unattended CI sync is claimed.
+
+## Current navigation — 2026-11-05
+
+The landing page now starts with Merchant Setup or Booth Setup, followed by Merchant,
+Admin or Customer View. Creator navigation is **Customization**, opening **Kawing
+Studio**. See [SPACES_STUDIO_GUIDE.md](SPACES_STUDIO_GUIDE.md) for both walkthroughs,
+state boundaries and the payment-provider matrix, and
+[SPACES_STUDIO_VERIFICATION.md](SPACES_STUDIO_VERIFICATION.md) for tests/screenshots.

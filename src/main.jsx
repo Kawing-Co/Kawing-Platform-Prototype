@@ -1,3 +1,5 @@
+import Spaces from "./Spaces";
+import AdminSpace from "./AdminSpace";
 import React, { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
@@ -48,6 +50,7 @@ import {
   paymentLabel,
 } from "./commerce";
 import "./styles.css";
+import "./spaces.css";
 import {
   DemoHome,
   GuideRail,
@@ -187,7 +190,7 @@ const nav = [
   ["Orders", ReceiptText],
   ["Menu", UtensilsCrossed],
   ["Analytics", ChartNoAxesCombined],
-  ["Storefront", Palette],
+  ["Customization", Palette],
   ["Ecosystem", Network],
   ["Payments & offline", WifiOff],
   ["Engagement", Heart],
@@ -210,7 +213,13 @@ function readPage() {
     return "Customer";
   try {
     const p = decodeURIComponent(location.hash.slice(1));
-    return pages.includes(p) ? p : "Start here";
+    return p === "Customization"
+      ? "Storefront"
+      : pages.includes(p)
+        ? p
+        : new URLSearchParams(location.search).get("workspace") === "merchant"
+          ? "Storefront"
+          : "Start here";
   } catch {
     return "Start here";
   }
@@ -229,7 +238,7 @@ function readGuide() {
     return null;
   }
 }
-function App() {
+function App({ space = "merchant" }) {
   const [data, setData] = useState(load),
     [page, setPage] = useState(readPage),
     [guide, setGuide] = useState(readGuide),
@@ -313,6 +322,15 @@ function App() {
   const added = data.orders.filter((o) => !o.seed && o.status === "served");
   const addedTotal = added.reduce((s, o) => s + o.total, 0);
   function navigate(p) {
+    if (p === "Customization") p = "Storefront";
+    if (
+      window.kawingStudioDirty &&
+      p !== "Storefront" &&
+      !confirm(
+        "Leave the unsaved Studio draft? Your draft is retained for later.",
+      )
+    )
+      return;
     if (!pages.includes(p)) return;
     if (p === "Customer") setCustomerVisit((v) => v + 1);
     setPage(p);
@@ -503,8 +521,12 @@ function App() {
   const totalBase =
     period === "Today" ? 12840 : period === "This week" ? 84260 : 346800;
   const multiplier = period === "Today" ? 1 : period === "This week" ? 7 : 28;
+  if (space === "admin") return <AdminSpace data={data} update={setData} />;
   // Guest links expose a customer-only presentation; this is not production authentication.
-  if (new URLSearchParams(location.search).get("surface") === "guest")
+  if (
+    space === "customer" ||
+    new URLSearchParams(location.search).get("surface") === "guest"
+  )
     return (
       <main className="guest-surface">
         <p className="guest-demo-note">
@@ -552,7 +574,12 @@ function App() {
             <button
               key={name}
               onClick={() => navigate(name)}
-              className={page === name ? "active" : ""}
+              className={
+                page === name ||
+                (page === "Storefront" && name === "Customization")
+                  ? "active"
+                  : ""
+              }
             >
               <Icon size={19} />
               {name}
@@ -611,7 +638,11 @@ function App() {
             <span>Workspace</span>
             <ChevronRight size={13} />
             <strong>
-              {page === "Customer" ? "Customer experience" : page}
+              {page === "Customer"
+                ? "Business Profile preview"
+                : page === "Storefront"
+                  ? "Customization"
+                  : page}
             </strong>
           </div>
           <div className="top-actions">
@@ -1512,9 +1543,11 @@ function App() {
                     className="button primary"
                     onClick={() => {
                       setData(fresh());
+                      window.kawingStudioDirty = false;
                       setGuide(null);
                       try {
                         localStorage.removeItem("kawing-last-order");
+                        localStorage.removeItem("kawing-studio-draft");
                         Object.keys(localStorage)
                           .filter((k) => k.startsWith("kawing-cart-"))
                           .forEach((k) => localStorage.removeItem(k));
@@ -1772,4 +1805,4 @@ function SalesChart({ period }) {
     </div>
   );
 }
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(<Spaces Workspace={App} />);

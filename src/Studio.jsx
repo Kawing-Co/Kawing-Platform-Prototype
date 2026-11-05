@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { TierPanel } from "./AdminSpace";
+import React, { useState, useEffect } from "react";
 import {
   ArrowUp,
   ArrowDown,
@@ -18,11 +19,47 @@ import {
 import StorefrontHub from "./StorefrontHub";
 import { defaults, config, safeUrl, labels } from "./commerce";
 export default function Studio({ data, update, navigate }) {
-  const [draft, setDraft] = useState(() => structuredClone(data.storefront)),
-    [brand, setBrand] = useState({ ...data.brand }),
+  const retained = () => {
+    try {
+      return JSON.parse(localStorage.getItem("kawing-studio-draft"));
+    } catch {
+      return null;
+    }
+  };
+  const [draft, setDraft] = useState(
+      () => retained()?.draft || structuredClone(data.storefront),
+    ),
+    [brand, setBrand] = useState(() => retained()?.brand || { ...data.brand }),
     [tab, setTab] = useState("Brand"),
     [size, setSize] = useState("mobile"),
     [message, setMessage] = useState("");
+  const dirty =
+    JSON.stringify(draft) !== JSON.stringify(data.storefront) ||
+    JSON.stringify(brand) !== JSON.stringify(data.brand);
+  useEffect(() => {
+    window.kawingStudioDirty = dirty;
+    try {
+      if (dirty)
+        localStorage.setItem(
+          "kawing-studio-draft",
+          JSON.stringify({ draft, brand }),
+        );
+      else localStorage.removeItem("kawing-studio-draft");
+    } catch {}
+    return () => {
+      window.kawingStudioDirty = false;
+    };
+  }, [dirty, draft, brand]);
+  useEffect(() => {
+    const h = (e) => {
+      if (dirty) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", h);
+    return () => window.removeEventListener("beforeunload", h);
+  }, [dirty]);
   const change = (k, v) => setDraft((d) => ({ ...d, [k]: v }));
   const theme = (k, v) =>
     setDraft((d) => ({ ...d, theme: { ...d.theme, [k]: v } }));
@@ -70,8 +107,9 @@ export default function Studio({ data, update, navigate }) {
       brand: { ...brand, accent: clean.theme.primary },
     }));
     setDraft(clean);
+    setBrand({ ...brand, accent: clean.theme.primary });
     setMessage(
-      "Storefront saved. Customer mode now uses this design. Orders and payment records are unchanged.",
+      "Business Profile design saved. Customer mode now uses this design. Orders and payment records are unchanged.",
     );
   }
   function restore() {
@@ -86,7 +124,7 @@ export default function Studio({ data, update, navigate }) {
     setDraft({ ...saved.storefront, tables: { ...data.storefront.tables } });
     setBrand(saved.brand);
     setMessage(
-      "Previous saved storefront restored. Operational records are unchanged.",
+      "Previous saved design restored. Operational records are unchanged.",
     );
   }
   const select = (label, value, options, fn) => (
@@ -108,12 +146,17 @@ export default function Studio({ data, update, navigate }) {
     <div className="studio">
       <div className="studio-heading">
         <div>
-          <span className="eyebrow">OWNER STUDIO</span>
-          <h1>A little more you.</h1>
+          <span className="eyebrow">CUSTOMIZATION</span>
+          <h1>
+            Kawing Studio
+            <span className="studio-draft-label">
+              {dirty ? "Unsaved draft" : "Saved design"}
+            </span>
+          </h1>
           <p>Shape the welcome. Keep the whole business connected.</p>
         </div>
         <button className="button primary" onClick={save}>
-          <Save size={16} /> Save storefront
+          <Save size={16} /> Save design
         </button>
       </div>
       <div className="studio-toolbar">
@@ -136,12 +179,15 @@ export default function Studio({ data, update, navigate }) {
           }}
         >
           {[
+            "Business details",
             "Brand",
             "Layout",
             "Modules",
             "Content",
             "Loyalty",
             "Operations",
+            "Media & tier",
+            "Review",
           ].map((t) => (
             <button
               role="tab"
@@ -166,6 +212,177 @@ export default function Studio({ data, update, navigate }) {
           aria-label={tab + " settings"}
           key={tab}
         >
+          {tab === "Business details" && (
+            <>
+              <h2>Your business, at a glance.</h2>
+              <p>
+                Business Profile only. No event booth or map is needed for
+                Merchant Setup.
+              </p>
+              {[
+                ["name", "Business name"],
+                ["category", "Business category"],
+                ["bio", "Short business description"],
+                ["address", "Business address"],
+                ["hours", "Opening hours"],
+                ["contact", "Contact information"],
+              ].map(([key, label]) => (
+                <label key={key}>
+                  {label}
+                  <input
+                    maxLength={key === "bio" ? 220 : 100}
+                    value={brand[key] || ""}
+                    onChange={(e) =>
+                      setBrand({ ...brand, [key]: e.target.value })
+                    }
+                  />
+                </label>
+              ))}
+            </>
+          )}
+          {tab === "Media & tier" && (
+            <>
+              <TierPanel data={data} update={update} />
+              <h3>Approved media library</h3>
+              <div className="studio-gallery-editor">
+                <p>
+                  {(draft.galleryAssets || []).length} of{" "}
+                  {data.presentationTier === "basic"
+                    ? 2
+                    : data.presentationTier === "bespoke"
+                      ? 12
+                      : 6}{" "}
+                  gallery slots used
+                </p>
+                <div className="studio-images">
+                  {(draft.galleryAssets || []).map((src, i) => (
+                    <button
+                      key={i}
+                      aria-label={"Remove gallery image " + (i + 1)}
+                      onClick={() =>
+                        change(
+                          "galleryAssets",
+                          draft.galleryAssets.filter((_, j) => j !== i),
+                        )
+                      }
+                    >
+                      <img src={src} alt="Demo gallery" />
+                    </button>
+                  ))}
+                </div>
+                <button
+                  className="button secondary"
+                  disabled={
+                    (draft.galleryAssets || []).length >=
+                    (data.presentationTier === "basic"
+                      ? 2
+                      : data.presentationTier === "bespoke"
+                        ? 12
+                        : 6)
+                  }
+                  onClick={() =>
+                    change("galleryAssets", [
+                      ...(draft.galleryAssets || []),
+                      [
+                        "/images/bowl.jpg",
+                        "/images/salad.jpg",
+                        "/images/drink.jpg",
+                      ][(draft.galleryAssets || []).length % 3],
+                    ])
+                  }
+                >
+                  Add approved gallery image
+                </button>
+                <p className="studio-help">
+                  Downgrading keeps existing images; adding more is disabled
+                  until below the new quota. Click an image to remove it.
+                </p>
+              </div>
+              <p>
+                {data.presentationTier === "basic"
+                  ? "2"
+                  : data.presentationTier === "bespoke"
+                    ? "12"
+                    : "6"}{" "}
+                media slots in this demonstration. No arbitrary executable
+                content is accepted.
+              </p>
+              <p>
+                Use the logo and cover selectors under Brand. File uploads and
+                server storage are future integrations.
+              </p>
+              <button
+                className="button secondary"
+                disabled={data.presentationTier === "basic"}
+                onClick={() => {
+                  setDraft((d) => ({
+                    ...d,
+                    theme: {
+                      ...d.theme,
+                      primary: "#854a36",
+                      secondary: "#f0e3d8",
+                      typography: "editorial",
+                    },
+                  }));
+                  setMessage(
+                    "Mock style suggestion applied to draft. No AI API was called.",
+                  );
+                }}
+              >
+                Try a mock style suggestion
+              </button>
+            </>
+          )}
+          {tab === "Review" && (
+            <>
+              <h2>A considered final look.</h2>
+              <p>
+                Preview the customer experience beside your draft. Saving
+                updates this browser only—it does not publish a real business.
+              </p>
+              <ul className="studio-review-list">
+                <li>Business name: {brand.name || "Add a name"}</li>
+                <li>Template: {draft.layout}</li>
+                <li>
+                  {draft.modules.filter((m) => m.enabled).length} approved
+                  modules enabled
+                </li>
+                <li>Payments and external destinations remain simulations</li>
+              </ul>
+              <button className="button primary" onClick={save}>
+                Save demo design
+              </button>
+              <button
+                className="button secondary"
+                onClick={() => {
+                  try {
+                    const v = JSON.parse(
+                      localStorage.getItem("kawing-studio-draft"),
+                    );
+                    if (v) {
+                      setDraft(v.draft);
+                      setBrand(v.brand);
+                      setMessage("Retained draft restored.");
+                    }
+                  } catch {
+                    setMessage("No retained draft available.");
+                  }
+                }}
+              >
+                Restore retained draft
+              </button>
+              <button
+                className="button secondary"
+                onClick={() => {
+                  setDraft(structuredClone(data.storefront));
+                  setBrand({ ...data.brand });
+                  setMessage("Draft reverted to the saved design.");
+                }}
+              >
+                Revert unsaved changes
+              </button>
+            </>
+          )}
           {tab === "Brand" && (
             <>
               <h2>Start with a feeling.</h2>
@@ -891,7 +1108,7 @@ export default function Studio({ data, update, navigate }) {
           </button>
           <button className="button primary" onClick={save}>
             <Save size={15} />
-            Save storefront
+            Save design
           </button>
         </div>
       </div>

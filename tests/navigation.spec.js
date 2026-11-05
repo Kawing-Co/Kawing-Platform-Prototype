@@ -3,7 +3,7 @@ const rail=page=>page.getByRole('region',{name:'Interactive walkthrough'});
 const next=page=>rail(page).getByRole('button',{name:'Continue',exact:true}).click();
 const fits=page=>page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1);
 test('partner completes the eight-step story with one shared order and an offline replay',async({page})=>{
- await page.goto('/');
+ await page.goto('/?workspace=merchant#Start%20here');
  await expect(page.getByRole('heading',{name:'One order. A whole business, connected.'})).toBeVisible();
  await page.getByRole('button',{name:'Start guided demo',exact:false}).click();
  await expect(rail(page)).toContainText('STEP 1 OF 8');
@@ -25,7 +25,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await expect(page.locator('.stat-card').first()).toContainText('13,125');
  await next(page);
  await page.getByLabel('Restaurant name',{exact:true}).fill('Salo & Friends');
- await page.getByRole('button',{name:'Save storefront',exact:true}).first().click();
+ await page.getByRole('button',{name:'Save design',exact:true}).first().click();
  await next(page);
  await page.getByRole('button',{name:'Toggle availability for Salo garden salad'}).click();
  await next(page);
@@ -51,7 +51,7 @@ test('partner completes the eight-step story with one shared order and an offlin
 });
 test('mobile guide pauses, resumes, skips, and preserves progress across refresh and browser history',async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto('/');
+ await page.goto('/?workspace=merchant#Start%20here');
  expect(await fits(page)).toBe(true);
  await page.getByRole('button',{name:'Start guided demo',exact:false}).click();
  expect(await fits(page)).toBe(true);
@@ -79,7 +79,7 @@ test('mobile guide pauses, resumes, skips, and preserves progress across refresh
 });
 
 test('mobile completed action offers a reachable next step',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/');
+ await page.setViewportSize({width:390,height:844});await page.goto('/?workspace=merchant#Start%20here');
  await page.getByRole('button',{name:'Start guided demo',exact:false}).click();
  await page.getByRole('button',{name:'Add Harvest bowl',exact:true}).click();
  await page.getByRole('button',{name:'Review your order',exact:true}).click();
