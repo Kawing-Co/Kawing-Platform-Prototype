@@ -47,6 +47,7 @@
 }
 .space-session-header nav button {
   white-space: nowrap;
+  min-height: 40px;
 }
 .session-wide {
   display: contents;
@@ -168,6 +169,10 @@
   }
   .session-more {
     display: block;
+  }
+  /* Tablet widths are usually touch: full 44px targets. */
+  .space-session-header nav button {
+    min-height: 44px;
   }
 }
 @media (max-width: 750px) {

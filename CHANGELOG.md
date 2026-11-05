@@ -19,6 +19,10 @@
   a verified provider host; none exists in the demo, so each opens truthful QR Ph
   instructions. No custom scheme, QR or receiver number; opening, returning, repeating
   or claiming never confirms payment. Matrix and sources: docs/PAYMENT_PROVIDERS.md.
+- UX-06: Session header buttons are at least 40px (44px at ≤1000px). A responsive sweep of
+  9 surfaces at 5 widths found no overflow or console errors. Verification record and
+  acceptance checklist: docs/DEMO_UX_002_VERIFICATION.md. UX-03/UX-04 are verified
+  against the existing map, booth, editor and lifecycle tests, with no code change.
 - Playwright honours `CHROMIUM_PATH` and only uses `/usr/bin/chromium` when present.
 - See docs/DEMO_UX_002_AMENDMENT.md. Not merged or published.
 
