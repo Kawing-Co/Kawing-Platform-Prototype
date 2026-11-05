@@ -1,4 +1,5 @@
 import { receiptKey } from "./experience";
+import ProgressiveImage from "./ProgressiveImage";
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { paymentLabel, contextLabel, uid, allowsFoodAddon } from "./commerce";
 import { PROVIDERS, provider, resolvePaymentRoute } from "./payments";
@@ -400,13 +401,12 @@ export default function Customer({
                   >
                     <div className="cx-food-visual">
                       {item.image ? (
-                        <img
+                        <ProgressiveImage
                           src={item.image}
                           alt={item.name}
                           loading="lazy"
-                          onError={(event) => {
-                            event.currentTarget.style.display = "none";
-                          }}
+                          width="640"
+                          height="420"
                         />
                       ) : (
                         <div className="cx-food-fallback">
@@ -584,16 +584,16 @@ export default function Customer({
                       </div>
                       <div className="cx-payment">
                         {PROVIDERS.map(({ id: method, label }) => (
-                            <button
-                              className={payment === method ? "selected" : ""}
-                              aria-pressed={payment === method}
-                              key={method}
-                              onClick={() => setPayment(method)}
-                            >
-                              {method === "Cash"
-                                ? "Cash at counter"
-                                : label + " · simulated"}
-                            </button>
+                          <button
+                            className={payment === method ? "selected" : ""}
+                            aria-pressed={payment === method}
+                            key={method}
+                            onClick={() => setPayment(method)}
+                          >
+                            {method === "Cash"
+                              ? "Cash at counter"
+                              : label + " · simulated"}
+                          </button>
                         ))}
                       </div>
                     </>

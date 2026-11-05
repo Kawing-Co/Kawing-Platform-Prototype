@@ -54,3 +54,11 @@ Local browser checks: `npm test` uses `/usr/bin/chromium` when present; elsewher
 `CHROMIUM_PATH` to a Chromium executable or install Playwright's managed browser.
 
 [Open the public Kawing demo](https://kawing-connected-kitchen.adrianoearl04.chatgpt.site).
+
+### Premium interaction pass
+
+A restrained visual system, command search (Ctrl/Cmd K), reversible Studio/catalog
+actions, stable loading placeholders and optional spatial/product-film demonstrations
+are included. See the [experience guide and pattern map](docs/PREMIUM_EXPERIENCE_GUIDE.md).
+The 12-second film is rendered with Hyperframes and optimized with FFmpeg; it is loaded
+only in the optional player. Ordering and financial states remain explicit simulations.

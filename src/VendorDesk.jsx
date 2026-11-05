@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Check,
   AlertTriangle,
@@ -19,6 +19,7 @@ import {
   resolveIssue,
 } from "./operations";
 import { businessKey } from "./experience";
+import { useLocalSnapshot } from "./premium";
 import { orderAction, paymentLabel } from "./commerce";
 export function VendorDesk({
   data,
@@ -570,30 +571,8 @@ export function VendorDesk({
   );
 }
 export function MarketOrders({ merchantId, merchantName }) {
-  const [data, setData] = useState(() => {
-      try {
-        return JSON.parse(localStorage.getItem(businessKey(merchantId)));
-      } catch {
-        return null;
-      }
-    }),
-    [notice, setNotice] = useState("");
-  useEffect(() => {
-    try {
-      setData(JSON.parse(localStorage.getItem(businessKey(merchantId))));
-    } catch {}
-  }, [merchantId]);
-  useEffect(() => {
-    const sync = (e) => {
-      if (e.key === businessKey(merchantId) && e.newValue) {
-        try {
-          setData(JSON.parse(e.newValue));
-        } catch {}
-      }
-    };
-    window.addEventListener("storage", sync);
-    return () => window.removeEventListener("storage", sync);
-  }, [merchantId]);
+  const data = useLocalSnapshot(businessKey(merchantId));
+  const [notice, setNotice] = useState("");
   function act(id, action) {
     const raw = JSON.parse(localStorage.getItem(businessKey(merchantId)));
     if (!raw) {
@@ -608,7 +587,7 @@ export function MarketOrders({ merchantId, merchantName }) {
       return;
     }
     localStorage.setItem(businessKey(merchantId), JSON.stringify(next));
-    setData(next);
+    window.dispatchEvent(new Event("kawing:local-change"));
     setNotice(
       "Demo operation updated. Customer receipt uses the same order record.",
     );

@@ -16,3 +16,15 @@ before any public commercial launch.
 DM Sans and Manrope fonts are bundled locally from Google Fonts; SIL Open Font
 License notices are in public/fonts. Lucide icons are provided by lucide-react
 under its ISC license. No runtime external image or font requests are needed.
+
+
+Premium experience assets: `public/motion/kawing-story.mp4`, its captions, and
+`story-poster.jpg` / `story-scene.jpg` are generated from the original HTML/GSAP
+composition in `motion/` and the existing bundled Salo photograph. Regenerate with
+`scripts/render-story.sh`. `motion/gsap.min.js` is GSAP 3.14.2 (copyright and license
+URL retained in its header), used only to author the film. The native WebGL scene
+is original procedural geometry. BlurHash 2.0.5 is a small MIT-licensed runtime
+dependency; hashes are regenerated with `node scripts/create-image-hashes.mjs`.
+
+3D reference provenance and rights boundaries: [3D_REFERENCE_REVIEW.md](3D_REFERENCE_REVIEW.md).
+No assets or source from the supplied interactive portfolio are redistributed.

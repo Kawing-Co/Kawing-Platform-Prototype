@@ -19,6 +19,7 @@ import {
 import { defaults, config, safeUrl, labels } from "./commerce";
 import { studioChecks } from "./studio-review";
 import { tierOf } from "./session";
+import { offerUndo } from "./premium";
 export default function Studio({ data, update, navigate, customizeTick = 0 }) {
   const retained = () => {
     try {
@@ -118,6 +119,16 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
     );
   }
   function moduleChange(type, k, v) {
+    const previous = draft.modules.find((m) => m.type === type)?.[k];
+    if (k === "enabled" && previous !== v)
+      offerUndo((labels[type] || type) + (v ? " shown" : " hidden"), () =>
+        setDraft((d) => ({
+          ...d,
+          modules: d.modules.map((m) =>
+            m.type === type && m[k] === v ? { ...m, [k]: previous } : m,
+          ),
+        })),
+      );
     change(
       "modules",
       draft.modules.map((m) => (m.type === type ? { ...m, [k]: v } : m)),
@@ -313,16 +324,30 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
                       type="checkbox"
                       aria-label={"Studio availability " + item.name}
                       checked={item.available}
-                      onChange={(e) =>
+                      onChange={(e) => {
+                        const next = e.target.checked,
+                          previous = item.available;
+                        offerUndo(
+                          item.name + (next ? " is available" : " is sold out"),
+                          () =>
+                            update((d) => ({
+                              ...d,
+                              menu: d.menu.map((m) =>
+                                m.id === item.id && m.available === next
+                                  ? { ...m, available: previous }
+                                  : m,
+                              ),
+                            })),
+                        );
                         update((d) => ({
                           ...d,
                           menu: d.menu.map((m) =>
                             m.id === item.id
-                              ? { ...m, available: e.target.checked }
+                              ? { ...m, available: next }
                               : m,
                           ),
-                        }))
-                      }
+                        }));
+                      }}
                     />
                     Available
                   </label>
@@ -1256,7 +1281,9 @@ function StudioChecklist({ checks, template }) {
     <>
       <p className="studio-check-summary" aria-live="polite">
         {open
-          ? open + (open === 1 ? " item needs" : " items need") + " attention before saving."
+          ? open +
+            (open === 1 ? " item needs" : " items need") +
+            " attention before saving."
           : "All checks pass. Saving updates this browser only."}
       </p>
       <ul className="studio-review-list studio-checklist">
@@ -1278,8 +1305,13 @@ function StudioChecklist({ checks, template }) {
         <li data-ok="true">
           <Check size={14} aria-label="Ready" />
           <span>
-            Template: {{ quick: "Quick Actions", visual: "Visual Showcase", minimal: "Minimal Utility" }[template] || template}.
-            Payments and external links stay simulated.
+            Template:{" "}
+            {{
+              quick: "Quick Actions",
+              visual: "Visual Showcase",
+              minimal: "Minimal Utility",
+            }[template] || template}
+            . Payments and external links stay simulated.
           </span>
         </li>
       </ul>

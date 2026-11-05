@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-11-05 — Premium experience and spatial product story
+
+- Refined the shared interface with warm paper/ink tones, editorial entry typography,
+  responsive hierarchy, stronger operational labels and restrained microinteractions.
+- Added scenario-aware Quick actions (Ctrl/Cmd K), native modal focus, keyboard search,
+  pointer intent, mobile swipe dismissal, destination previews and interruptible view
+  transitions. Existing Studio draft-cancellation guards remain in place.
+- Added single-use, field-scoped undo for module visibility and catalog availability;
+  loading skeletons, genuine BlurHash image placeholders, local snapshot revalidation,
+  safe insets/touch targets, code autofill and reduced-motion fallbacks.
+- Added an optional original WebGL café story: Guest / Team / Owner stages, rotation,
+  zoom, keyboard controls, on-demand rendering and honest unavailable/lost-GPU fallback.
+  Reviewed Earl's three reference repos; retained no restricted portfolio code/assets.
+- Rendered an original, captioned 12-second product film using Hyperframes CLI and
+  FFmpeg. Video and WebGL are user-requested; orders never wait for either.
+- Preserved the six spaces, map-first market merchant entry, live Studio drafts,
+  browser-local ordering, verified payment distinction, loyalty ledger and offline demo.
+- Added focused regression coverage and updated screenshot, reference and demo guides.
+  See docs/PREMIUM_EXPERIENCE_VERIFICATION.md for checks and known limits.
+
 ## 2026-11-05 — KAWING-DEMO-UX-002 reconciliation
 
 - UX-01: Scenario → View entry uses the public names Standard Merchant and Pop-up Market;

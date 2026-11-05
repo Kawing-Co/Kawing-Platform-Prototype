@@ -658,10 +658,7 @@ export default function StorefrontHub({
         <div role="status" className="sf-notice">
           <Check size={16} />
           {notice}
-          <button
-            aria-label="Dismiss notice"
-            onClick={() => setNotice("")}
-          >
+          <button aria-label="Dismiss notice" onClick={() => setNotice("")}>
             ×
           </button>
         </div>
@@ -915,6 +912,9 @@ function Loyalty({ data, c, update, preview, notify }) {
             Recovery code
             <input
               inputMode="numeric"
+              autoComplete="one-time-code"
+              maxLength={6}
+              pattern="[0-9]{6}"
               value={code}
               onChange={(e) => setCode(e.target.value)}
               required

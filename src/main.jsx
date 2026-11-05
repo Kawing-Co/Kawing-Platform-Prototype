@@ -1922,3 +1922,5 @@ createRoot(document.getElementById("root")).render(
 );
 
 import "./interactive.css";
+
+import "./premium.css";

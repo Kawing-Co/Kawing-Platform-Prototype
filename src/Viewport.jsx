@@ -11,6 +11,7 @@ import StorefrontHub from "./StorefrontHub";
 import { config, moduleTypes } from "./commerce";
 import { devices, tiers, businessKey } from "./experience";
 import { tierOf, TIER_LABELS } from "./session";
+import { Skeleton } from "./PremiumExperience";
 export function DeviceFrame({
   device = "phone",
   src,
@@ -66,6 +67,11 @@ export function DeviceFrame({
   }, [loaded, payload, selected]);
   return (
     <div ref={box} className="device-canvas" data-device={d.id}>
+      {!loaded && (
+        <div className="frame-skeleton">
+          <Skeleton label="Loading customer preview" />
+        </div>
+      )}
       <div
         className="device-frame"
         style={{ width: d.w * scale, height: d.h * scale }}
@@ -116,8 +122,7 @@ export function StudioReceiver() {
     window.addEventListener("message", receive);
     return () => window.removeEventListener("message", receive);
   }, []);
-  if (!value)
-    return <div className="frame-loading">Preparing your design…</div>;
+  if (!value) return <Skeleton label="Preparing your design" />;
   const data = {
     brand: value.brand,
     storefront: value.config,
