@@ -164,6 +164,8 @@
 .k-odo-d { position: relative; display: inline-block; height: 1.18em; overflow: hidden; -webkit-text-fill-color: transparent; }
 .k-odo-d::before { content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9"; white-space: pre; position: absolute; left: 0; top: 0; -webkit-text-fill-color: currentColor; transform: translateY(calc(var(--d) * -1.18em)); transition: transform 0.7s var(--k-spring); }
 .k-odo-s { display: inline-block; height: 1.18em; }
+/* The strip pitch (1.18em) and the line height must be the same number, whatever class the host sets. */
+.k-odo .k-odo-d, .k-odo .k-odo-d::before, .k-odo .k-odo-s { line-height: 1.18; }
 
 /* ── fx layer ── */
 .k-fx-layer { position: fixed; inset: 0; z-index: 2147483000; pointer-events: none; overflow: hidden; }

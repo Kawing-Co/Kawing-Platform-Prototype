@@ -54,6 +54,25 @@ test.describe("Matcha Mood ordering", () => {
     await expect(page.locator(".cx-receipt-items")).toContainText("Hot · Large · Oat");
   });
 
+  test("the rolling price lines up: digit strip pitch equals line height, even in the sheet tag", async ({ page }) => {
+    await page.getByRole("button", { name: "Customize Matcha Cookie", exact: true }).click();
+    const sheet = page.locator("dialog.k-sheet");
+    await sheet.getByRole("radio", { name: /^Trio/ }).click();
+    await sheet.getByRole("radio", { name: /^Jumbo/ }).click();
+    await expect(sheet.locator(".k-sheet-price")).toContainText("1,280");
+    await page.waitForTimeout(1000);
+    const m = await sheet.locator(".k-sheet-price").evaluate((e) => {
+      const d = e.querySelector(".k-odo-d");
+      const fs = parseFloat(getComputedStyle(e).fontSize);
+      return {
+        line: parseFloat(getComputedStyle(d, "::before").lineHeight) / fs,
+        step: -new DOMMatrix(getComputedStyle(d, "::before").transform).m42 / (Number(d.style.getPropertyValue("--d")) * fs),
+      };
+    });
+    expect(m.line).toBeCloseTo(1.18, 2);
+    expect(m.step).toBeCloseTo(m.line, 2);
+  });
+
   test("a forged saved cart is cleaned, never trusted", async ({ page }) => {
     await page.evaluate(() =>
       localStorage.setItem(
