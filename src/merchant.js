@@ -881,7 +881,8 @@ export const MENU_ITEMS = [
   }
 ];
 
-export const photoPath = (name, sm = false) => `/images/matcha/${name}${sm ? "-sm" : ""}.jpg`;
+// Photograph variants live next to their business: /images/<dir>/<name>[-sm].jpg (dir defaults to matcha).
+export const photoPath = (item, name, sm = false) => `/images/${item?.dir || "matcha"}/${name}${sm ? "-sm" : ""}.jpg`;
 export const itemOptions = (item) => item.options || [];
 export const hasOptions = (item) => itemOptions(item).length > 0;
 
@@ -954,7 +955,7 @@ export function seedOrderLines(menu) {
   };
 }
 
-// Approved photography for the Studio pickers and for storefront config validation.
+// Approved photography per business for the Studio pickers and for storefront config validation.
 // Config only ever stores one of these paths; anything else falls back to the default.
 const img = (n) => `/images/matcha/${n}.jpg`;
 export const ASSETS = {
@@ -967,6 +968,14 @@ const NAMES = {
   ritual: "Matcha ritual", "softserve-topped": "Soft serve", "strawberry-topped": "Strawberry matcha, topped",
   "berrycake-candle": "Berry cake", "crepe-topped": "Mille crêpe", "mochi-four": "Mochi, four ways",
   "market-mark": "Kawing mark",
+  // the usual.
+  interior: "The café", logo: "The café, square", "the-usual": "The usual", "dirty-horchata": "Dirty horchata",
+  "americano-cloud": "Americano cloud", "spanish-latte": "Spanish latte", americano: "Americano",
+  "seasalt-latte": "Seasalt latte", "mocha-latte": "Mocha latte", "biscoff-latte": "Biscoff latte",
+  horchata: "Horchata", "dark-cocoa": "Dark cocoa and cream", "strawberries-cream": "Strawberries and cream",
+  blush: "Blush", "golden-hour": "Golden hour", blossom: "Blossom", amber: "Amber",
+  "classic-matcha": "Classic matcha", "ube-matcha": "Ube matcha", "dango-matcha": "Dango matcha",
+  "cookie-butter-matcha": "Salted cookie butter matcha", hojicha: "Hojicha", "hojicha-cocoa": "Hojicha cocoa",
 };
 /** Plain-language name for an approved image path (used for labels and alt text). */
 export const assetName = (path) => NAMES[String(path).replace(/^.*\//, "").replace(/(-sm)?\.(jpg|svg)$/, "")] || "Photo";

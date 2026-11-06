@@ -23,6 +23,7 @@ import {
 } from "./PremiumExperience";
 import { transitionView } from "./premium";
 import ProgressiveImage from "./ProgressiveImage";
+import { BUSINESSES, BUSINESS_IDS } from "./businesses";
 import {
   SCENARIOS,
   VIEWS,
@@ -48,10 +49,10 @@ const VIEW_COPY = {
   standard: {
     merchant: [
       "Opens Kawing Studio.",
-      "Shape Matcha Mood's business profile, menu and modules, then run orders and payment checks.",
+      "Shape {business}'s business profile, menu and modules, then run orders and payment checks.",
     ],
     customer: [
-      "Opens Matcha Mood's finished page.",
+      "Opens {business}'s finished page.",
       "Browse the menu, order and track a visit the way a guest would.",
     ],
     admin: [
@@ -93,6 +94,7 @@ export default function Spaces({ Workspace }) {
     [scenario, setScenario] = useState(initial.scenario),
     [view, setView] = useState(initial.view),
     [step, setStep] = useState(initial.step),
+    [business, setBusiness] = useState(initial.business),
     [resets, setResets] = useState(0),
     [status, setStatus] = useState("");
   useEffect(() => {
@@ -101,6 +103,7 @@ export default function Spaces({ Workspace }) {
       setScenario(s.scenario);
       setView(s.view);
       setStep(s.step);
+      setBusiness(s.business);
     };
     window.addEventListener("popstate", change);
     return () => window.removeEventListener("popstate", change);
@@ -117,11 +120,13 @@ export default function Spaces({ Workspace }) {
   function go(next) {
     window.dispatchEvent(new Event("kawing:clear-undo"));
     transitionView(() => {
-      const destination = new URL(sessionHref(location.href, next));
+      const open = next.business ?? business;
+      const destination = new URL(sessionHref(location.href, { ...next, business: open }));
       if (next.page) destination.hash = next.page;
       history.pushState(null, "", destination);
       setScenario(next.scenario || scenario);
       setView(next.view || null);
+      setBusiness(open);
       setStep(next.view ? "inside" : next.scenario ? "view" : "scenario");
       setStatus("");
       if (next.page) window.dispatchEvent(new HashChangeEvent("hashchange"));
@@ -131,6 +136,11 @@ export default function Spaces({ Workspace }) {
   function enter(v, customize = false) {
     if (v !== view && step === "inside" && !confirmLeave("Switch view")) return;
     go({ scenario, view: v, customize });
+  }
+  function chooseBusiness(id) {
+    if (id === business) return;
+    if (step === "inside" && !confirmLeave("Switch business")) return;
+    go({ scenario, view: step === "inside" ? view : null, business: id });
   }
   function chooseScenario() {
     if (step === "inside" && !confirmLeave("Change scenario")) return;
@@ -184,6 +194,8 @@ export default function Spaces({ Workspace }) {
           <SessionHeader
             scenario={scenario}
             view={view}
+            business={business}
+            onBusiness={chooseBusiness}
             onView={(v) => enter(v)}
             onCustomize={customize}
             onScenario={chooseScenario}
@@ -194,11 +206,15 @@ export default function Spaces({ Workspace }) {
           </p>
           <React.Fragment key={resets}>
             {scenario === "standard" && view === "customer" ? (
-              <CustomerPreview />
+              <CustomerPreview
+                key={business}
+                merchantId={business}
+                merchantName={BUSINESSES[business].name}
+              />
             ) : scenario === "market" ? (
               <Market key={view} role={view} />
             ) : (
-              <Workspace key={view} space={view} />
+              <Workspace key={view + business} space={view} />
             )}
           </React.Fragment>
         </div>
@@ -222,18 +238,20 @@ export default function Spaces({ Workspace }) {
           <CommandTrigger />
         </header>
         <div className={"spaces-intro" + (step === "view" ? " is-compact" : "")}>
-          <div className="spaces-hero-media" aria-hidden="true">
-            <ProgressiveImage
-              key={step === "view" && scenario === "market" ? "m" : "s"}
-              src={
-                step === "view" && scenario === "market"
-                  ? "/images/market-hero.jpg"
-                  : "/images/matcha/ritual.jpg"
-              }
-              alt=""
-              width="1536"
-              height="1024"
-            />
+          <div className="spaces-collage" aria-hidden="true">
+            {[
+              ["c1", "/images/matcha/latte-iced.jpg", "Matcha Mood", "Matcha café"],
+              ["c2", "/images/usual/interior.jpg", "the usual.", "Neighbourhood coffee bar"],
+              ["c3", "/images/market-stall.jpg", "The Sunday Commons", "Pop-up market"],
+            ].map(([cls, src, name, kind]) => (
+              <figure className={cls} key={cls}>
+                <ProgressiveImage src={src} alt="" loading="lazy" width="1024" height="1280" />
+                <figcaption>
+                  <b>{name}</b>
+                  <small>{kind}</small>
+                </figcaption>
+              </figure>
+            ))}
           </div>
           <ol className="spaces-step" aria-label="Demo entry steps">
             <li aria-current={step === "scenario" ? "step" : undefined}>
@@ -253,7 +271,7 @@ export default function Spaces({ Workspace }) {
               ? "ONE PLATFORM. DIFFERENT POSSIBILITIES."
               : scenario === "market"
                 ? "POP-UP MARKET · THE SUNDAY COMMONS"
-                : "STANDARD MERCHANT · MATCHA MOOD"}
+                : "STANDARD MERCHANT · " + BUSINESSES[business].name.toUpperCase()}
           </span>
           <h1>
             {step === "scenario" ? (
@@ -284,15 +302,12 @@ export default function Spaces({ Workspace }) {
               data-magnetic
             >
               <div className="scenario-art" aria-hidden="true">
-                <ProgressiveImage
-                  src="/images/matcha/latte-iced.jpg"
-                  alt=""
-                  loading="lazy"
-                  width="1024"
-                  height="1280"
-                />
+                <div className="art-split">
+                  <ProgressiveImage src="/images/matcha/latte-iced.jpg" alt="" loading="lazy" width="1024" height="1280" />
+                  <ProgressiveImage src="/images/usual/interior.jpg" alt="" loading="lazy" width="1170" height="1414" />
+                </div>
                 <span className="art-label">
-                  <Check size={13} /> A beautiful business profile
+                  <Check size={13} /> Two businesses, two looks
                 </span>
               </div>
               <div className="scenario-card-copy">
@@ -340,10 +355,35 @@ export default function Spaces({ Workspace }) {
         ) : (
           <>
             <BackPreview onClick={() => go({})}>Back to scenarios</BackPreview>
+            {scenario === "standard" && (
+              <div className="business-picker" role="radiogroup" aria-label="Business">
+                <span className="business-picker-label">Business</span>
+                {BUSINESS_IDS.map((id) => {
+                  const b = BUSINESSES[id];
+                  return (
+                    <button
+                      key={id}
+                      role="radio"
+                      aria-checked={business === id}
+                      onClick={() => chooseBusiness(id)}
+                    >
+                      <ProgressiveImage src={b.previewPhoto.replace(/\.jpg$/, "-sm.jpg")} alt="" width="400" height="500" />
+                      <span>
+                        <b>{b.name}</b>
+                        <small>{b.kind}</small>
+                      </span>
+                      {business === id && <Check size={16} aria-hidden="true" />}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             <div className="space-role-cards">
               {VIEWS.map(([id, title]) => {
                 const Icon = VIEW_ICONS[id];
-                const [subtitle, desc] = VIEW_COPY[scenario][id];
+                const [subtitle, desc] = VIEW_COPY[scenario][id].map((t) =>
+                  t.replace("{business}", BUSINESSES[business].name),
+                );
                 return (
                   <button key={id} onClick={() => enter(id)}>
                     <span className="space-role-icon" aria-hidden="true">
@@ -424,24 +464,27 @@ function Disclosure({ label, icon, className = "", children }) {
 export function SessionHeader({
   scenario,
   view,
+  business = "salo",
+  onBusiness = () => {},
   onView,
   onCustomize,
   onScenario,
   onReset,
 }) {
-  const [tier, setTier] = useState(readTier),
+  const [tier, setTier] = useState(() => readTier(undefined, business)),
     dialog = useRef(null),
     [discardDraft, setDiscardDraft] = useState(false),
     [draftExists, setDraftExists] = useState(false);
   useEffect(() => {
-    const refresh = () => setTier(readTier());
+    const refresh = () => setTier(readTier(undefined, business));
+    refresh();
     window.addEventListener("storage", refresh);
     window.addEventListener("kawing:local-change", refresh);
     return () => {
       window.removeEventListener("storage", refresh);
       window.removeEventListener("kawing:local-change", refresh);
     };
-  }, []);
+  }, [business]);
   const target = customizeTarget(scenario, view);
   function openReset(close) {
     close?.();
@@ -481,6 +524,12 @@ export function SessionHeader({
       </a>
       <p className="session-context" aria-label="Demo session">
         <span>{SCENARIOS[scenario].label}</span>
+        {scenario === "standard" && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span className="session-business">{BUSINESSES[business].name}</span>
+          </>
+        )}
         <span aria-hidden="true">·</span>
         <span className="session-tier">{TIER_LABELS[tier]} tier</span>
         <span aria-hidden="true">·</span>
@@ -493,25 +542,46 @@ export function SessionHeader({
           label="Switch View"
           icon={<Users size={15} aria-hidden="true" />}
         >
-          {(close) =>
-            VIEWS.map(([id, title]) => {
-              const Icon = VIEW_ICONS[id];
-              return (
-                <button
-                  key={id}
-                  aria-current={id === view ? "true" : undefined}
-                  onClick={() => {
-                    close();
-                    if (id !== view) onView(id);
-                  }}
-                >
-                  <Icon size={15} aria-hidden="true" />
-                  {title}
-                  {id === view && <Check size={14} aria-label="current" />}
-                </button>
-              );
-            })
-          }
+          {(close) => (
+            <>
+              {VIEWS.map(([id, title]) => {
+                const Icon = VIEW_ICONS[id];
+                return (
+                  <button
+                    key={id}
+                    aria-current={id === view ? "true" : undefined}
+                    onClick={() => {
+                      close();
+                      if (id !== view) onView(id);
+                    }}
+                  >
+                    <Icon size={15} aria-hidden="true" />
+                    {title}
+                    {id === view && <Check size={14} aria-label="current" />}
+                  </button>
+                );
+              })}
+              {scenario === "standard" && (
+                <>
+                  <span className="session-menu-label">Business</span>
+                  {BUSINESS_IDS.map((id) => (
+                    <button
+                      key={id}
+                      aria-current={id === business ? "true" : undefined}
+                      onClick={() => {
+                        close();
+                        onBusiness(id);
+                      }}
+                    >
+                      <Store size={15} aria-hidden="true" />
+                      {BUSINESSES[id].name}
+                      {id === business && <Check size={14} aria-label="current" />}
+                    </button>
+                  ))}
+                </>
+              )}
+            </>
+          )}
         </Disclosure>
         <button onClick={onCustomize} title={"Open " + target.label}>
           <SlidersHorizontal size={15} aria-hidden="true" />
@@ -544,8 +614,8 @@ export function SessionHeader({
           <h2 id="session-reset-title">Reset {SCENARIOS[scenario].label}?</h2>
           <p>
             {scenario === "market"
-              ? "Restores The Sunday Commons map, booths, assignments, event-only merchants, their orders and the event lifecycle. Any unpublished layout draft is discarded. Matcha Mood's business records are kept."
-              : "Restores Matcha Mood's seeded menu, orders, loyalty, engagement, saved design and package, and clears this browser's carts and last receipt. Pop-up Market records are kept."}
+              ? "Restores The Sunday Commons map, booths, assignments, event-only merchants, their orders and the event lifecycle. Any unpublished layout draft is discarded. The Standard Merchant businesses' records are kept."
+              : "Restores Matcha Mood's and the usual.'s seeded menus, orders, loyalty, engagement, saved designs and packages, and clears this browser's carts and last receipts. Pop-up Market records are kept."}
           </p>
           {draftExists && (
             <label className="session-check">

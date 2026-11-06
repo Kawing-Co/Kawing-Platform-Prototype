@@ -13,8 +13,9 @@ npm install
 npm run dev
 ```
 
-The Standard Merchant is **Matcha Mood** (internal id `salo`, so existing storage keys keep
-working). The premium redesign is described in [docs/REDESIGN_SPEC.md](docs/REDESIGN_SPEC.md) and
+The Standard Merchant scenario has two demonstration businesses, **Matcha Mood** (internal id `salo`, so
+existing storage keys keep working) and **the usual.** (`?business=usual`); each has its own merchant
+theme, while the platform itself keeps Kawing's identity. The premium redesign is described in [docs/REDESIGN_SPEC.md](docs/REDESIGN_SPEC.md) and
 checked in [docs/REDESIGN_VERIFICATION.md](docs/REDESIGN_VERIFICATION.md).
 
 Open http://localhost:5173. Build with `npm run build`; run browser checks with

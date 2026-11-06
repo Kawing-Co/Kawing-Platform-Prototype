@@ -25,6 +25,12 @@ placeholders. Selecting menu options shows the closest photographed variant. Dis
 Cormorant Garamond (SIL OFL, `public/fonts`). The peso sign renders in DM Sans/Manrope, not
 Cormorant, which has no ₱ glyph.
 
+the usual. photography (`public/images/usual`): `interior.jpg`, `interior-sm.jpg` and `logo.jpg` are
+the owner's own photograph, supplied for this prototype; every drink image is original, AI-generated
+editorial imagery in a light concrete-grey style (no real products, people or brands). Where two
+drinks look alike (biscoff, seasalt hojicha, matcha crunch) they share one photograph. Display and
+body type for this merchant is Jost (SIL OFL, `public/fonts/Jost-OFL.txt`).
+
 Premium experience assets: `public/motion/kawing-story.mp4`, its captions, and
 `story-poster.jpg` / `story-scene.jpg` are generated from the original HTML/GSAP
 composition in `motion/` and the Matcha Mood photography. Regenerate with

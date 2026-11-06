@@ -10,6 +10,8 @@ const images = [
   "/images/market-hero.jpg", "/images/market-stall.jpg", "/images/salo-table.jpg",
   // Matcha Mood photography, every full-size and -sm variant
   ...readdirSync("public/images/matcha").filter((f) => f.endsWith(".jpg")).sort().map((f) => `/images/matcha/${f}`),
+  // the usual.
+  ...readdirSync("public/images/usual").filter((f) => f.endsWith(".jpg")).sort().map((f) => `/images/usual/${f}`),
 ];
 const hashes = {};
 for (const src of images) {

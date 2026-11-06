@@ -17,11 +17,13 @@ import {
   Image,
 } from "lucide-react";
 import { defaults, config, safeUrl, labels } from "./commerce";
-import { ASSETS, assetName } from "./merchant";
+import { assetName } from "./merchant";
+import { businessOf } from "./businesses";
 import { studioChecks } from "./studio-review";
 import { tierOf } from "./session";
 import { offerUndo } from "./premium";
 export default function Studio({ data, update, navigate, customizeTick = 0 }) {
+  const ASSETS = businessOf(data.merchantId).assets; // this business's approved photography
   const retained = () => {
     try {
       return JSON.parse(localStorage.getItem("kawing-studio-draft"));
@@ -605,7 +607,7 @@ export default function Studio({ data, update, navigate, customizeTick = 0 }) {
               {select(
                 "Typography preset",
                 draft.theme.typography,
-                ["editorial", "modern", "friendly"],
+                ["editorial", "modern", "friendly", "geometric"],
                 (v) => theme("typography", v),
               )}
               <label>

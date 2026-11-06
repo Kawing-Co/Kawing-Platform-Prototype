@@ -101,7 +101,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
       <div className="k-sheet-stage" data-grab ref={stage}>
         <div className="k-sheet-photo" style={{ "--sc": scaleOf(item, sel), filter: toneOf(item, sel) || undefined }}>
           {layers.map((l) => (
-            <img key={l.k} className={"k-layer" + (l.first ? "" : " k-iris")} src={photoPath(l.name)} alt={l.first ? item.name : ""} width="1024" height="1280" draggable="false" />
+            <img key={l.k} className={"k-layer" + (l.first ? "" : " k-iris")} src={photoPath(item, l.name)} alt={l.first ? item.name : ""} width="1024" height="1280" draggable="false" />
           ))}
         </div>
         <div className="k-sheet-glow" /><div className={"k-sheet-candle" + (celebrate ? " on" : "")} />
@@ -154,7 +154,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
           <button type="button" aria-label="More" disabled={qty >= 20} onClick={() => setQty((q) => Math.min(20, q + 1))}><Plus size={16} /></button>
         </div>
         <button type="button" className="primary k-sheet-add" data-tactile
-          onClick={() => { const r = stage.current?.getBoundingClientRect(); onAdd({ id: item.id, sel, qty }, r, photoPath(name, true)); dialog.current.close(); }}>
+          onClick={() => { const r = stage.current?.getBoundingClientRect(); onAdd({ id: item.id, sel, qty }, r, photoPath(item, name, true)); dialog.current.close(); }}>
           Add to order · <Odometer value={price * qty} />
         </button>
       </div>

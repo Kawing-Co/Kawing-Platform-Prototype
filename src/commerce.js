@@ -1,5 +1,6 @@
 // Browser-local demo contracts. Config never contains executable routes or content.
 import { ASSETS } from "./merchant";
+import { allAssets } from "./businesses";
 // Other fictional merchants (event-only sellers) still use these earlier photographs.
 const LEGACY = ["/images/bowl.jpg", "/images/salad.jpg", "/images/plate.jpg", "/images/drink.jpg"];
 // Internal id of the Standard Merchant record. It keys browser storage and operations, so it stays
@@ -43,6 +44,8 @@ export const defaults = () => ({
     hero: "cover",
     menu: "grid",
     modules: "rows",
+    stage: "dark",
+    tint: "#0c1811",
   },
   logo: ASSETS.logos[0],
   cover: ASSETS.covers[0],
@@ -161,12 +164,12 @@ export function config(raw = {}) {
     featured: pick(raw.featured, moduleTypes, "order"),
     logo: pick(
       raw.logo,
-      [...ASSETS.logos, ...LEGACY],
+      [...allAssets().logos, ...LEGACY],
       d.logo,
     ),
     cover: pick(
       raw.cover,
-      [...ASSETS.covers, ...LEGACY],
+      [...allAssets().covers, ...LEGACY],
       d.cover,
     ),
     theme: {
@@ -178,7 +181,7 @@ export function config(raw = {}) {
       background: hex(t.background, d.theme.background),
       typography: pick(
         t.typography,
-        ["editorial", "modern", "friendly"],
+        ["editorial", "modern", "friendly", "geometric"],
         "editorial",
       ),
       button: pick(t.button, ["soft", "pill", "square"], "soft"),
@@ -188,6 +191,9 @@ export function config(raw = {}) {
       hero: pick(t.hero, ["cover", "split"], "cover"),
       menu: pick(t.menu, ["grid", "list"], "grid"),
       modules: pick(t.modules, ["rows", "cards"], "rows"),
+      // photography tone (dark backdrops or light ones) and the hero's overlay colour
+      stage: pick(t.stage, ["dark", "light"], d.theme.stage || "dark"),
+      tint: hex(t.tint, d.theme.tint || "#0c1811"),
     },
     modules: moduleTypes
       .map((type) => {
@@ -244,7 +250,7 @@ export function config(raw = {}) {
       ...d.wifi,
       ...raw.wifi,
       name: text(raw.wifi?.name, d.wifi.name, 50),
-      password: "fictional-matcha-2026",
+      password: pick(raw.wifi?.password, ["fictional-matcha-2026", "fictional-usual-2026"], d.wifi.password),
       instructions: text(raw.wifi?.instructions, d.wifi.instructions, 300),
     },
     loyalty: {
@@ -283,7 +289,7 @@ export function config(raw = {}) {
       active: raw.promotion?.active !== false,
       image: pick(
         raw.promotion?.image,
-        [...ASSETS.promos, ...LEGACY],
+        [...allAssets().promos, ...LEGACY],
         d.promotion.image,
       ),
       kind: pick(
@@ -544,37 +550,65 @@ export const contextLabel = (c) =>
       : c.kind === "counter"
         ? "Counter pickup"
         : "Choose table or pickup";
+const lum = (h) => {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const rgbTriple = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)).join(",");
 export function themeTokens(c) {
   const dark = c.theme.mode === "dark";
+  const ink = dark ? "#ffffff" : onColor(c.theme.background);
+  const bg = dark ? "#17251f" : c.theme.background;
+  const typo = c.theme.typography;
+  const lightStage = c.theme.stage === "light";
   return {
     "--sf-primary": c.theme.primary,
     "--sf-on-primary": onColor(c.theme.primary),
     "--sf-secondary": c.theme.secondary,
     "--sf-on-secondary": onColor(c.theme.secondary),
     "--sf-accent": c.theme.accent,
-    "--sf-bg": dark ? "#17251f" : c.theme.background,
-    "--sf-ink": dark ? "#fff" : onColor(c.theme.background),
-    "--sf-muted": dark ? "#dee9d8" : onColor(c.theme.background),
+    "--sf-bg": bg,
+    "--sf-ink": ink,
+    "--sf-muted": dark ? "#dee9d8" : `color-mix(in srgb, ${ink} 78%, ${bg})`,
     "--sf-surface": dark
       ? "#22372c"
       : onColor(c.theme.background) === "#fff"
         ? "#22372c"
         : "#fffefa",
-    "--sf-line": dark ? "#49604e" : "#dce5d5",
+    "--sf-line": dark ? "#49604e" : `color-mix(in srgb, ${ink} 14%, ${bg})`,
     "--sf-radius": c.theme.radius === "crisp" ? "5px" : "19px",
     "--sf-gap": c.theme.spacing === "compact" ? "12px" : "22px",
     "--sf-font":
-      c.theme.typography === "editorial"
+      typo === "editorial"
         ? '"Cormorant Garamond",Georgia,serif'
-        : c.theme.typography === "friendly"
-          ? "Manrope,sans-serif"
-          : "DM Sans,sans-serif",
+        : typo === "geometric"
+          ? 'Jost,"DM Sans",sans-serif'
+          : typo === "friendly"
+            ? "Manrope,sans-serif"
+            : "DM Sans,sans-serif",
     "--sf-button":
       c.theme.button === "pill"
         ? "40px"
         : c.theme.button === "square"
           ? "3px"
           : "12px",
+    // display type used by headlines in the hub, ordering and the customizer
+    "--sf-display":
+      typo === "geometric" ? 'Jost,"DM Sans",sans-serif' : typo === "editorial" ? '"Cormorant Garamond",Georgia,serif' : typo === "friendly" ? "Manrope,sans-serif" : '"DM Sans",sans-serif',
+    "--sf-display-weight": typo === "geometric" ? "600" : typo === "editorial" ? "500" : "650",
+    "--sf-display-track": typo === "geometric" ? "-0.045em" : "-0.02em",
+    "--sf-case": typo === "geometric" ? "lowercase" : "none",
+    "--sf-lede-style": typo === "editorial" ? "italic" : "normal",
+    "--sf-lede-font": typo === "editorial" ? '"Cormorant Garamond",Georgia,serif' : typo === "geometric" ? 'Jost,"DM Sans",sans-serif' : '"DM Sans",sans-serif',
+    // a near-black brand colour would vanish on the photographic hero, so its CTA flips to paper
+    "--sf-hero-cta": lum(c.theme.primary) < 0.03 ? bg : c.theme.primary,
+    "--sf-hero-cta-ink": lum(c.theme.primary) < 0.03 ? ink : onColor(c.theme.primary),
+    ...(typo === "geometric" ? { "--sf-body": 'Jost,"DM Sans",sans-serif', "--sf-head": 'Jost,"DM Sans",sans-serif' } : {}),
+    "--sf-tint-rgb": rgbTriple(c.theme.tint || "#0c1811"),
+    "--sf-stage-rgb": lightStage ? rgbTriple(c.theme.background) : rgbTriple(c.theme.tint || "#0c1811"),
+    "--sf-stage-ink": lightStage ? "#141412" : "#f1f6e4",
+    "--sf-zoom": lightStage ? "1.5" : "1.3",
+    "--sf-stage-chip": lightStage ? "rgba(255,255,255,0.7)" : "rgba(8,16,11,0.5)",
   };
 }
 export function onColor(hex) {

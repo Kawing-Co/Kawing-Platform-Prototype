@@ -130,3 +130,8 @@ html body .page-heading .eyebrow { color: var(--k-moss); }
 html body .prototype-tag { font-size: 11px; }
 @media (max-width: 1500px) { html body .prototype-tag { display: none; } }
 @media (min-width: 1000px) { html body .top-actions .connection { white-space: nowrap; } }
+
+/* the session line carries scenario · business · tier · view: keep it on one line */
+html body .space-session-header .session-context { flex-wrap: nowrap; white-space: nowrap; }
+@media (max-width: 1500px) { html body .space-session-header .session-context .session-tier, html body .space-session-header .session-context .session-tier + span { display: none; } }
+@media (max-width: 1500px) { html body .space-session-header .command-trigger kbd { display: none; } }

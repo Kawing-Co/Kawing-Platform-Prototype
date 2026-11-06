@@ -8,31 +8,47 @@ html body .premium-landing .spaces-brand { height: 72px; border-bottom: 0; }
 html body .premium-landing .spaces-brand > a { font-size: 27px; color: var(--k-forest); letter-spacing: -1.4px; }
 html body .premium-landing .spaces-brand > span { font-size: 11.5px; letter-spacing: 0.18em; color: var(--k-ink-2); }
 
-/* ── opening: photograph, headline, steps ── */
-html body .premium-landing .spaces-intro { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; align-items: flex-start; max-width: none; min-height: clamp(460px, 62vw, 600px); margin: 8px 0 22px; padding: clamp(24px, 5vw, 64px); border-radius: var(--entry-r); background: var(--k-night); color: #eef3e0; }
-html body .premium-landing .spaces-intro.is-compact { min-height: clamp(300px, 36vw, 380px); }
-.spaces-hero-media { position: absolute; inset: 0; z-index: -2; }
-.spaces-hero-media .progressive-image { position: absolute; inset: 0; }
-.spaces-hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; opacity: 0; transform: scale(1.08); transition: opacity 0.8s ease; animation: entry-drift 28s ease-in-out infinite alternate; }
-.spaces-hero-media .image-ready img { opacity: 1; }
-@keyframes entry-drift { to { transform: scale(1.18) translate3d(-2%, -1.5%, 0); } }
-html body .premium-landing .spaces-intro::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(12, 24, 17, 0.9) 0%, rgba(12, 24, 17, 0.55) 45%, rgba(12, 24, 17, 0.05) 85%), linear-gradient(0deg, rgba(12, 24, 17, 0.55), transparent 40%); }
-html body .premium-landing .spaces-intro > :not(.spaces-hero-media):not(.spaces-step) { max-width: 620px; }
-html body .premium-landing .spaces-step > li { color: rgba(224, 238, 196, 0.6); }
-html body .premium-landing .spaces-step > li[aria-current="step"] { color: #f4f8e8; font-weight: 600; }
-html body .premium-landing .spaces-step { position: static; margin: 0 0 auto; padding-bottom: 28px; max-width: none; color: rgba(224, 238, 196, 0.85); font-size: 12px; }
-html body .premium-landing .spaces-step > li > span { height: 24px; width: 24px; font-size: 11px; background: rgba(224, 238, 196, 0.16); color: #eef3e0; }
-html body .premium-landing .spaces-step > li > span.current, html body .premium-landing .spaces-step > li > span.done { background: #d6e8b0; color: #14231a; }
-html body .premium-landing .spaces-step > i { background: rgba(224, 238, 196, 0.3); }
-html body .premium-landing .spaces-eyebrow { font-size: 11.5px; letter-spacing: 0.2em; color: rgba(214, 232, 176, 0.9); }
-html body .premium-landing .spaces-intro h1 { font-family: var(--k-serif); font-weight: 500; font-size: clamp(52px, 9.5vw, 104px); line-height: 0.96; letter-spacing: -0.025em; margin: 16px 0 20px; color: #f4f8e8; text-wrap: balance; }
-html body .premium-landing .spaces-intro h1 em { color: #cfe79a; font-weight: 400; }
-html body .premium-landing .spaces-intro > p { font-size: 16px; line-height: 1.7; color: rgba(236, 244, 214, 0.86); max-width: 480px; margin: 0; }
-@media (max-width: 750px) {
-  html body .premium-landing .spaces-intro h1 { font-size: clamp(46px, 14vw, 62px); letter-spacing: -0.02em; }
+/* ── opening: Kawing's own headline on paper, beside a collage of different merchants ── */
+html body .premium-landing .spaces-intro { position: relative; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); grid-template-areas: "step collage" "eyebrow collage" "title collage" "lede collage"; grid-template-rows: auto auto auto 1fr; align-content: center; column-gap: clamp(24px, 4vw, 64px); text-align: left; align-items: start; max-width: none; margin: 8px 0 28px; padding: clamp(8px, 2vw, 24px) 0; min-height: clamp(460px, 46vw, 560px); color: var(--k-ink); }
+html body .premium-landing .spaces-intro.is-compact { min-height: 0; }
+html body .premium-landing .spaces-intro > .spaces-step { grid-area: step; justify-self: start; justify-content: flex-start; width: auto; position: static; margin: 0 0 clamp(28px, 5vw, 56px); max-width: none; color: var(--k-ink-2); font-size: 12px; }
+html body .premium-landing .spaces-intro > .spaces-eyebrow { grid-area: eyebrow; font-size: 11.5px; letter-spacing: 0.2em; color: var(--k-moss); font-weight: 600; }
+html body .premium-landing .spaces-intro > h1 { grid-area: title; font-family: var(--k-serif); font-weight: 500; font-size: clamp(52px, 7.4vw, 96px); line-height: 0.96; letter-spacing: -0.025em; margin: 16px 0 20px; color: var(--k-ink); text-wrap: balance; }
+html body .premium-landing .spaces-intro > h1 em { color: var(--k-forest-2); font-weight: 400; }
+html body .premium-landing .spaces-intro > p { grid-area: lede; font-size: 16px; line-height: 1.7; color: var(--k-ink-2); max-width: 460px; margin: 0; }
+html body .premium-landing .spaces-step > li { color: var(--k-ink-2); }
+html body .premium-landing .spaces-step > li[aria-current="step"] { color: var(--k-ink); font-weight: 600; }
+html body .premium-landing .spaces-step > li > span { height: 24px; width: 24px; font-size: 11px; }
+html body .premium-landing .spaces-step > li > span.current, html body .premium-landing .spaces-step > li > span.done { background: var(--k-forest); color: #fff; }
+
+/* the collage: three real businesses, drifting gently; a swipeable strip on phones */
+.spaces-collage { grid-area: collage; position: relative; min-height: clamp(380px, 42vw, 520px); }
+.spaces-collage figure { position: absolute; margin: 0; border-radius: 28px; overflow: hidden; background: var(--k-night); box-shadow: var(--k-shadow-2); animation: collage-drift 9s ease-in-out infinite alternate; }
+@supports (corner-shape: squircle) { .spaces-collage figure { corner-shape: squircle; border-radius: 48px; } }
+.spaces-collage figure .progressive-image { position: absolute; inset: 0; }
+.spaces-collage figure img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.7s ease; }
+.spaces-collage figure .image-ready img { opacity: 1; }
+.spaces-collage figcaption { position: absolute; left: 12px; bottom: 12px; display: grid; gap: 2px; padding: 8px 13px; border-radius: 16px; background: rgba(18, 28, 22, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #f1f6e4; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
+.spaces-collage figcaption b { font: 650 13px/1.1 var(--k-head); letter-spacing: -0.01em; }
+.spaces-collage figcaption small { font-size: 11px; color: rgba(236, 244, 214, 0.8); }
+.spaces-collage .c2 figcaption { top: 12px; bottom: auto; }
+.spaces-collage .c1 { left: 0; bottom: 4%; width: 46%; aspect-ratio: 4 / 5; transform: rotate(-2.2deg); animation-delay: -2s; }
+.spaces-collage .c2 { right: 2%; top: 0; width: 54%; aspect-ratio: 4 / 5; transform: rotate(1.6deg); animation-duration: 11s; }
+.spaces-collage .c3 { right: 14%; bottom: 0; width: 34%; aspect-ratio: 1; transform: rotate(-1deg); animation-duration: 8s; animation-delay: -4s; z-index: 2; }
+@keyframes collage-drift { to { translate: 0 -10px; } }
+@media (max-width: 760px) {
+  html body .premium-landing .spaces-intro { display: flex; flex-direction: column; min-height: 0; padding: 4px 0 0; }
+  html body .premium-landing .spaces-intro > .spaces-step { order: 1; } html body .premium-landing .spaces-intro > .spaces-eyebrow { order: 2; } html body .premium-landing .spaces-intro > h1 { order: 3; } html body .premium-landing .spaces-intro > p { order: 4; } .spaces-collage { order: 5; }
+  html body .premium-landing .spaces-intro > .spaces-step { margin-bottom: 26px; }
+  html body .premium-landing .spaces-intro > h1 { font-size: clamp(46px, 14vw, 62px); }
   html body .premium-landing .spaces-intro > p { font-size: 14.5px; }
-  html body .premium-landing .spaces-step { font-size: 11.5px; }
+  .spaces-collage { display: flex; gap: 12px; min-height: 0; margin: 28px -14px 0; padding: 4px 14px 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .spaces-collage::-webkit-scrollbar { display: none; }
+  .spaces-collage figure, .spaces-collage .c1, .spaces-collage .c2, .spaces-collage .c3 { position: relative; inset: auto; flex: 0 0 72%; width: auto; aspect-ratio: 4 / 5; transform: none; scroll-snap-align: center; animation: none; }
+  html body .premium-landing .spaces-intro.is-compact .spaces-collage { display: none; }
 }
+html body .premium-landing .spaces-intro.is-compact { grid-template-areas: "step collage" "eyebrow collage" "title collage" "lede collage"; }
+html body .premium-landing .spaces-intro.is-compact .spaces-collage { min-height: 300px; }
 
 /* ── scenario cards: photograph on top, words below ── */
 html body .premium-landing .scenario-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -67,15 +83,32 @@ html body .premium-landing .space-role-cards .space-role-tag { font-size: 11.5px
 html body .premium-landing .space-enter { font-size: 13.5px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .spaces-hero-media img { animation: none; transform: none; }
-  html body .premium-landing .scenario-card, html body .premium-landing .scenario-art img, html body .premium-landing .space-role-cards > button { transition: none; }
+    html body .premium-landing .scenario-card, html body .premium-landing .scenario-art img, html body .premium-landing .space-role-cards > button { transition: none; }
 }
 
 /* product story: the film still is a dark panel now */
-html body .story-visual { background: #101d16; }
+html body .story-visual { background: #e4e8d9; }
 html body .story-visual > img, html body .spatial-fallback img { object-fit: contain; }
 html body .story-visual-label { font-size: 11px; letter-spacing: 0.1em; }
 @media (max-width: 750px) {
   html body .premium-landing .space-role-cards > button { padding: 24px; min-height: 0; border-radius: 28px; }
   html body .premium-landing .space-role-icon { position: static; width: 52px; height: 52px; margin-bottom: 18px; }
 }
+
+/* Standard Merchant card: two businesses side by side */
+html body .premium-landing .scenario-art .art-split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--k-surface); }
+html body .premium-landing .scenario-art .art-split > .progressive-image { position: relative; inset: auto; overflow: hidden; }
+
+/* Standard Merchant: choose which business to open */
+.business-picker { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 6px 0 22px; }
+.business-picker-label { font: 600 11.5px/1 var(--k-sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--k-ink-2); margin-right: 4px; }
+.business-picker button { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 6px 18px 6px 6px; border: 1.5px solid var(--k-line-strong); border-radius: 99px; background: var(--k-surface); color: var(--k-ink); text-align: left; transition: border-color 0.25s, box-shadow 0.25s, transform 0.4s var(--k-spring); }
+.business-picker button:active { transform: scale(0.97); }
+.business-picker button[aria-checked="true"] { border-color: var(--k-forest); box-shadow: 0 0 0 3px color-mix(in srgb, var(--k-forest) 16%, transparent); }
+.business-picker .progressive-image { width: 44px; height: 44px; flex: none; border-radius: 50%; overflow: hidden; }
+.business-picker .progressive-image img { width: 100%; height: 100%; object-fit: cover; }
+.business-picker button span:not(.progressive-image) { display: grid; gap: 2px; }
+.business-picker b { font: 650 14px/1.1 var(--k-head); }
+.business-picker small { font-size: 11.5px; color: var(--k-ink-2); }
+.business-picker svg { color: var(--k-forest); flex: none; }
+html body .session-menu-label { display: block; padding: 10px 14px 4px; font: 600 11px/1 var(--k-sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--k-ink-2); }

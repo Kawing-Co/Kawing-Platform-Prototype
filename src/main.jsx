@@ -1,6 +1,7 @@
 import { StudioReceiver } from "./Viewport";
 import {
   businessKey,
+  receiptKey,
   newBusiness,
   projectTier,
   eventOrderError,
@@ -67,38 +68,46 @@ import {
   WalkthroughComplete,
   steps,
 } from "./DemoExperience";
-import { BRAND, MENU_ITEMS, orderLine, seedOrderLines } from "./merchant";
+import { orderLine } from "./merchant";
+import { businessFromSearch, businessOf, isStandard } from "./businesses";
 const money = (n) =>
   "₱" +
   n.toLocaleString("en-PH", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
-const initialMenu = MENU_ITEMS;
-const seedLines = seedOrderLines(initialMenu);
-const seedOrders = [
-  { id: "KW-1048", table: "03", payment: "GCash", status: "new", time: "2 min ago" },
-  { id: "KW-1047", table: "08", payment: "Cash", status: "preparing", time: "6 min ago" },
-  { id: "KW-1046", table: "01", payment: "GCash", status: "ready", time: "12 min ago" },
-].map((o) => ({ ...o, items: seedLines[o.id], total: seedLines[o.id].reduce((n, i) => n + i.price * i.qty, 0), seed: true }));
-// Bumped when the seeded business changes; a browser holding an older seed starts fresh
-// instead of showing a mix of old and new records.
-const SEED = "matcha-mood-1";
-const fresh = () =>
-  extend({
-    seed: SEED,
-    brand: { ...BRAND },
-    menu: initialMenu,
-    orders: seedOrders,
-    offline: false,
-  });
-function load() {
+// Each demonstration business seeds its own record; the browser keeps it under businessKey(id).
+// The seed marker means a browser holding an older seed starts fresh instead of showing a mix.
+const seedOrdersFor = (b) => {
+  const lines = b.seedOrderLines(b.menu);
+  return [
+    { id: "KW-1048", table: "03", payment: "GCash", status: "new", time: "2 min ago" },
+    { id: "KW-1047", table: "08", payment: "Cash", status: "preparing", time: "6 min ago" },
+    { id: "KW-1046", table: "01", payment: "GCash", status: "ready", time: "12 min ago" },
+  ].map((o) => ({ ...o, items: lines[o.id], total: lines[o.id].reduce((n, i) => n + i.price * i.qty, 0), seed: true }));
+};
+const freshBusiness = (id) => {
+  const b = businessOf(id);
+  return extend(
+    {
+      seed: b.seed,
+      brand: { ...b.brand },
+      menu: b.menu,
+      orders: seedOrdersFor(b),
+      offline: false,
+      ...(b.storefront ? { storefront: b.storefront } : {}),
+    },
+    id,
+  );
+};
+function loadBusiness(id) {
+  const b = businessOf(id);
   try {
-    const v = JSON.parse(localStorage.getItem("kawing-demo-v1"));
-    if (v?.seed === SEED && v.brand && Array.isArray(v.menu) && Array.isArray(v.orders))
-      return extend(v);
+    const v = JSON.parse(localStorage.getItem(businessKey(id)));
+    if (v?.seed === b.seed && v.brand && Array.isArray(v.menu) && Array.isArray(v.orders))
+      return extend(v, id);
   } catch {}
-  return fresh();
+  return freshBusiness(id);
 }
 const nav = [
   ["Start here", CircleHelp],
@@ -162,7 +171,7 @@ function App({
   previewTier = null,
 }) {
   const [data, setData] = useState(() => {
-      if (merchantId === "salo") return load();
+      if (isStandard(merchantId)) return loadBusiness(merchantId);
       try {
         const v = JSON.parse(localStorage.getItem(businessKey(merchantId)));
         if (v)
@@ -196,7 +205,7 @@ function App({
     [customizeTick, setCustomizeTick] = useState(0);
   // Session header "Customize": Merchant View opens Kawing Studio at Media & tier.
   useCustomize(() => {
-    if (space !== "merchant" || merchantId !== "salo") return;
+    if (space !== "merchant" || !isStandard(merchantId)) return;
     navigate("Customization");
     setCustomizeTick((t) => t + 1);
   });
@@ -310,7 +319,7 @@ function App({
   }
   function startGuide() {
     try {
-      localStorage.removeItem("kawing-last-order");
+      localStorage.removeItem(receiptKey(merchantId));
     } catch {}
     setGuide({
       step: 0,
@@ -343,7 +352,7 @@ function App({
   function prepareOfflineOrder() {
     if (!data.offline) toggleConnection();
     try {
-      localStorage.removeItem("kawing-last-order");
+      localStorage.removeItem(receiptKey(merchantId));
     } catch {}
     setEntryContext({ kind: "table", table: "05" });
     navigate("Customer");
@@ -794,8 +803,8 @@ function App({
                   <div className="banner-art">
                     <div className="art-ring" />
                     <img
-                      src="/images/matcha/ritual-sm.jpg"
-                      alt="A bowl of whisked matcha with a bamboo whisk"
+                      src={(data.brand.bannerPhoto || data.brand.heroPhoto || "/images/matcha/ritual.jpg").replace(/\.jpg$/, "-sm.jpg")}
+                      alt={data.brand.name}
                     />
                     <div className="floating-note">
                       <div className="check-circle">
@@ -1343,8 +1352,8 @@ function App({
                     <Leaf />
                     <h3>Local favorites, lasting connections.</h3>
                     <p>
-                      Matcha lattes lead the sample menu. A good starting point
-                      for your next seasonal special.
+                      {data.brand.insight ||
+                        "Your best sellers are a good starting point for your next seasonal special."}
                     </p>
                   </section>
                 </div>
@@ -1518,14 +1527,18 @@ function App({
                   <button
                     className="button primary"
                     onClick={() => {
-                      setData(fresh());
+                      setData(freshBusiness(merchantId));
                       window.kawingStudioDirty = false;
                       setGuide(null);
                       try {
-                        localStorage.removeItem("kawing-last-order");
+                        localStorage.removeItem(receiptKey(merchantId));
                         localStorage.removeItem("kawing-studio-draft");
                         Object.keys(localStorage)
-                          .filter((k) => k.startsWith("kawing-cart-"))
+                          .filter(
+                            (k) =>
+                              k.startsWith("kawing-cart-v2:" + merchantId + ":") ||
+                              (k.startsWith("kawing-cart-") && !k.startsWith("kawing-cart-v2:")),
+                          )
                           .forEach((k) => localStorage.removeItem(k));
                       } catch {}
                       setModal(null);
@@ -1788,12 +1801,12 @@ function SalesChart({ period }) {
 }
 function RoutedWorkspace(props) {
   const q = new URLSearchParams(location.search),
-    id = props.merchantId || q.get("merchant") || "salo";
+    id = props.merchantId || q.get("merchant") || businessFromSearch(location.search);
   let profile = props.merchantProfile;
   let ctx = props.marketContext;
   try {
     const m = JSON.parse(localStorage.getItem("kawing-market-v1"));
-    if (id !== "salo" && !profile)
+    if (!isStandard(id) && !profile)
       profile = m?.profiles.find((p) => p.id === id);
     if (q.get("marketBooth"))
       ctx = {
@@ -1802,7 +1815,7 @@ function RoutedWorkspace(props) {
         eventId: "commons",
       };
   } catch {}
-  if (id !== "salo" && !profile)
+  if (!isStandard(id) && !profile)
     return (
       <main className="market-panel">
         <h1>Business unavailable</h1>

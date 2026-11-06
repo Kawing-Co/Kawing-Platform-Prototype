@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-06 — Kawing identity restored; second merchant "the usual."
+
+- The platform is Kawing again: the entry page is paper, ink and forest with a swipeable collage of
+  several businesses, and the product film shows two merchants inside a Kawing frame. Matcha Mood's
+  look stays inside merchant profiles.
+- New merchant "the usual." (coffee bar): theme from its printed menu (warm grey, black, olive, Jost
+  lowercase), 25-drink menu with the printed prices and add-ons as options, generated drink photography,
+  the owner's interior photo as hero, seeded kitchen orders. Standard Merchant has a business picker.
+- Merchant profiles now follow a per-merchant theme (display/body type, case, hero tint, light or dark
+  photography, CTA contrast). Registry in `src/businesses.js`; reset and storage are per business.
+- Fix: the customizer's rolling price was misaligned in the photo tag (line-height).
+
 ## 2026-11-05 — Premium redesign: Matcha Mood is the Standard Merchant
 
 - Matcha Mood replaces Salo as the Standard Merchant everywhere (brand, nine-item menu with

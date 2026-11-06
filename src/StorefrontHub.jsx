@@ -24,7 +24,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import Customer from "./Customer";
-import { ASSETS } from "./merchant";
+import { allAssets } from "./businesses";
 import ProgressiveImage from "./ProgressiveImage";
 import "./ds/hub.css";
 import {
@@ -257,16 +257,17 @@ export default function StorefrontHub({
                 alt={`${b.name} logo demo`}
               />
               <div className="sf-kicker">
-                {b.category === "Crafts"
-                  ? "MADE BY YOUR NEIGHBORS"
-                  : "YOUR NEIGHBORHOOD TABLE"}
+                {b.kicker ||
+                  (b.category === "Crafts"
+                    ? "MADE BY YOUR NEIGHBORS"
+                    : "YOUR NEIGHBORHOOD TABLE")}
               </div>
               <h1>{b.name || "Your restaurant"}</h1>
               <p>{b.tagline}</p>
               <div className="sf-welcome">
                 {guest
                   ? `Welcome back, ${guest.name}. ${Math.max(0, c.loyalty.threshold - points)} stamps to your next reward.`
-                  : "A little familiar. A little extraordinary."}
+                  : b.welcome || "A little familiar. A little extraordinary."}
               </div>
               <button
                 className="sf-primary"
@@ -334,7 +335,7 @@ export default function StorefrontHub({
                 </button>
               )}
               {c.galleryAssets
-                .filter((src) => ASSETS.covers.includes(src))
+                .filter((src) => allAssets().covers.includes(src))
                 .map((src, i) => (
                   <img key={i} src={src} alt={"Business gallery " + (i + 1)} />
                 ))}

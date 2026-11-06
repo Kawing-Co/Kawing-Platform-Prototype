@@ -5,6 +5,24 @@ deployed. Follows [DESIGN_NOTES.md](DESIGN_NOTES.md), the architecture documents
 earlier [premium amendment](PREMIUM_EXPERIENCE_SPEC.md). There is no `DESIGN.md` or
 `ARCHITECTURE.md` in this repository; those documents are the equivalents.
 
+## Two layers: Kawing (the platform) and the merchant profile
+The platform keeps Kawing's own identity everywhere: entry, session shell, Merchant, Admin and
+Events chrome, Studio. Warm paper, ink, forest green, the display serif, and photography that shows
+*several* businesses (a collage of Matcha Mood, the usual. and the market), never one merchant's look.
+A merchant's own design direction lives only inside merchant profiles (Customer hub, ordering,
+customizer, receipt) and in the Studio preview of them, and follows that merchant's theme:
+`theme.typography` (editorial / modern / friendly / geometric), colours, `stage` (dark or light
+photography) and hero `tint`, turned into `--sf-*` tokens by `themeTokens()`. Future merchants get the
+same direction by supplying a theme, a menu and photography (see `src/businesses.js`).
+
+## Businesses
+- **Matcha Mood** (`salo`, record `kawing-demo-v1`): deep green, Cormorant, dark photography.
+- **the usual.** (`usual`, record `kawing-merchant-v2:usual`): warm grey `#e8e9e4`, black type and pills,
+  olive `#84794c`, Jost in lowercase, light photography, the owner's own interior photograph as hero.
+  Menu and add-on prices are the printed menu (25 drinks in six groups; add-ons are options).
+Standard Merchant offers both (`?business=usual`); each has its own storage, receipts, carts and reset keys.
+Pop-up Market still features Matcha Mood and Luna Made only; adding the usual. as a booth is a follow-up.
+
 ## The Standard Merchant is Matcha Mood
 Matcha Mood replaces Salo as the business behind Standard Merchant, Customer View, the kitchen,
 analytics and Studio. Its design language (dark photography, display serif, spring motion, a

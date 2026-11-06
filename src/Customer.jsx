@@ -248,7 +248,7 @@ export default function Customer({
   const blocked = context.table
     ? tables[context.table] === false
     : !["counter", "takeaway"].includes(context.kind);
-  const heroPhoto = craft ? "/images/market-stall.jpg" : "/images/matcha/latte-iced.jpg";
+  const heroPhoto = craft ? "/images/market-stall.jpg" : brand.heroPhoto || "/images/matcha/latte-iced.jpg";
   return (
     <div
       className="cx-shell"
@@ -374,7 +374,7 @@ export default function Customer({
             </div>
             <div className="cx-hero-copy">
               <div className="cx-eyebrow">
-                {craft ? "Made local. Shared together." : "Matcha specialty café"}
+                {craft ? "Made local. Shared together." : brand.eyebrow || "Neighborhood café"}
               </div>
               <h1>
                 {craft ? (
@@ -385,9 +385,9 @@ export default function Customer({
                   </>
                 ) : (
                   <>
-                    A seat at
+                    {(brand.heroLines || ["A seat at", `the ${brand.name} table.`])[0]}
                     <br />
-                    the {brand.name || "Matcha Mood"} table.
+                    {(brand.heroLines || ["A seat at", `the ${brand.name} table.`])[1]}
                   </>
                 )}
               </h1>
@@ -439,7 +439,7 @@ export default function Customer({
                   <input
                     aria-label={craft ? "Search products" : "Search the menu"}
                     placeholder={
-                      craft ? "Find something lovely" : "Find your mood"
+                      craft ? "Find something lovely" : brand.searchHint || "Find your mood"
                     }
                     value={search}
                     onChange={(event) => setSearch(event.target.value)}
