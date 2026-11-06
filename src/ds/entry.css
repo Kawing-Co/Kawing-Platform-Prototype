@@ -37,7 +37,7 @@ html body .premium-landing .spaces-step > li > span.current, html body .premium-
 .spaces-collage .c3 { right: 14%; bottom: 0; width: 34%; aspect-ratio: 1; transform: rotate(-1deg); animation-duration: 8s; animation-delay: -4s; z-index: 2; }
 @keyframes collage-drift { to { translate: 0 -10px; } }
 @media (max-width: 760px) {
-  html body .premium-landing .spaces-intro { display: flex; flex-direction: column; min-height: 0; padding: 4px 0 0; }
+  html body .premium-landing .spaces-intro { display: flex; flex-direction: column; align-items: stretch; min-height: 0; padding: 4px 0 0; }
   html body .premium-landing .spaces-intro > .spaces-step { order: 1; } html body .premium-landing .spaces-intro > .spaces-eyebrow { order: 2; } html body .premium-landing .spaces-intro > h1 { order: 3; } html body .premium-landing .spaces-intro > p { order: 4; } .spaces-collage { order: 5; }
   html body .premium-landing .spaces-intro > .spaces-step { margin-bottom: 26px; }
   html body .premium-landing .spaces-intro > h1 { font-size: clamp(46px, 14vw, 62px); }
