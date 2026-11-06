@@ -98,7 +98,7 @@ export const defaults = () => ({
     image: ASSETS.promos[0],
     cta: "Explore the menu",
     code: "MATCHADEMO",
-    price: "₱1,350 sample pairing",
+    price: "₱450 sample pairing",
     start: "2026-01-01",
     end: "2027-12-31",
     placement: "hub",
@@ -608,6 +608,7 @@ export function themeTokens(c) {
     "--sf-stage-rgb": lightStage ? rgbTriple(c.theme.background) : rgbTriple(c.theme.tint || "#0c1811"),
     "--sf-stage-ink": lightStage ? "#141412" : "#f1f6e4",
     "--sf-zoom": lightStage ? "1.5" : "1.3",
+    "--sf-promo-y": lightStage ? "26%" : "45%",
     "--sf-stage-chip": lightStage ? "rgba(255,255,255,0.7)" : "rgba(8,16,11,0.5)",
   };
 }

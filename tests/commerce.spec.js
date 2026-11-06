@@ -321,10 +321,10 @@ test("cart and modifiers persist, table context is explicit, and presentation re
   await page.getByRole("radio", { name: /^Large/ }).click();
   await page.getByRole("radio", { name: /^Oat/ }).click();
   await page.getByRole("button", { name: /Add to order/ }).click();
-  await expect(page.locator(".cx-total")).toContainText("840");
+  await expect(page.locator(".cx-total")).toContainText("320");
   await page.reload();
   await page.getByRole("button", { name: "Order now", exact: true }).click();
-  await expect(page.locator(".cx-total")).toContainText("840");
+  await expect(page.locator(".cx-total")).toContainText("320");
   await expect(page.locator(".cx-cart-sum")).toContainText("Large · Oat");
   await expect(page.locator(".cx-cart-sub")).toContainText("Table 03");
   await page
@@ -432,7 +432,7 @@ test("counter cash approval is separate from payment and context/cart survive se
     .click();
   await page.reload();
   await page.getByRole("button", { name: "Order now", exact: true }).click();
-  await expect(page.locator(".cx-total")).toContainText("680");
+  await expect(page.locator(".cx-total")).toContainText("230");
   await expect(page.getByLabel("Entry context")).toHaveValue("counter");
   await page
     .getByRole("button", { name: "Review your order", exact: true })

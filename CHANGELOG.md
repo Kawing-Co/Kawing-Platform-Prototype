@@ -10,6 +10,10 @@
   the owner's interior photo as hero, seeded kitchen orders. Standard Merchant has a business picker.
 - Merchant profiles now follow a per-merchant theme (display/body type, case, hero tint, light or dark
   photography, CTA contrast). Registry in `src/businesses.js`; reset and storage are per business.
+- the usual. uses its supplied wordmark logo; its palette and copy were refined from its Instagram feed
+  (ivory-grey, olive green, matcha pop-ups, ceremonies and after-hours nights; "the matcha loop" offer).
+- Matcha Mood's prices and option deltas are reconciled to the usual.'s scale (matcha latte ₱230,
+  oat +₱50, more matcha +₱30); analytics baselines are per business.
 - Fix: the customizer's rolling price was misaligned in the photo tag (line-height).
 
 ## 2026-11-05 — Premium redesign: Matcha Mood is the Standard Merchant

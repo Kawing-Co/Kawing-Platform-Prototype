@@ -35,7 +35,7 @@ test.describe("the usual. menu and order model (pure)", () => {
   test("every drink has a photograph that exists on disk under /images/usual", async () => {
     const { existsSync } = await import("node:fs");
     for (const m of USUAL) expect(existsSync("public" + m.image), m.name).toBe(true);
-    expect(STOREFRONT.theme.background).toBe("#e8e9e4"); // the menu's warm grey
+    expect(STOREFRONT.theme.background).toBe("#eaebe0"); // the menu's warm grey, a touch greener like their feed
   });
 });
 
@@ -96,7 +96,7 @@ test.describe("the usual. as a merchant profile", () => {
       const cs = getComputedStyle(e), h = getComputedStyle(e.querySelector("h1"));
       return { bg: cs.getPropertyValue("--sf-bg").trim(), primary: cs.getPropertyValue("--sf-primary").trim(), display: cs.getPropertyValue("--sf-display").trim(), caseTok: cs.getPropertyValue("--sf-case").trim(), h1Font: h.fontFamily, h1Case: h.textTransform };
     });
-    expect(t.bg).toBe("#e8e9e4");
+    expect(t.bg).toBe("#eaebe0");
     expect(t.primary).toBe("#141412");
     expect(t.display).toContain("Jost");
     expect(t.caseTok).toBe("lowercase");

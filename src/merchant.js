@@ -26,7 +26,7 @@ export const MENU_ITEMS = [
     "slug": "latte",
     "name": "Matcha Latte",
     "description": "Stone-ground matcha over cold milk. The layers settle, then soften.",
-    "price": 680,
+    "price": 230,
     "category": "Drinks",
     "image": "/images/matcha/latte-iced.jpg",
     "available": true,
@@ -81,7 +81,7 @@ export const MENU_ITEMS = [
             "id": "s",
             "label": "Small",
             "note": "300 ml",
-            "delta": -60,
+            "delta": -30,
             "scale": 1
           },
           {
@@ -95,7 +95,7 @@ export const MENU_ITEMS = [
             "id": "l",
             "label": "Large",
             "note": "520 ml",
-            "delta": 100,
+            "delta": 40,
             "scale": 1.18
           }
         ]
@@ -114,7 +114,7 @@ export const MENU_ITEMS = [
           {
             "id": "oat",
             "label": "Oat",
-            "delta": 60
+            "delta": 50
           },
           {
             "id": "soy",
@@ -144,7 +144,7 @@ export const MENU_ITEMS = [
             "id": "deep",
             "label": "Deep",
             "note": "double",
-            "delta": 120,
+            "delta": 30,
             "tone": "saturate(1.22) brightness(.93) contrast(1.05)"
           }
         ]
@@ -170,7 +170,7 @@ export const MENU_ITEMS = [
           {
             "id": "azuki",
             "label": "Azuki red bean",
-            "delta": 80,
+            "delta": 40,
             "fx": [
               "#6a2d33",
               "#8a4a47"
@@ -179,7 +179,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Whipped cream",
-            "delta": 70,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -188,7 +188,7 @@ export const MENU_ITEMS = [
           {
             "id": "pearl",
             "label": "Mochi pearls",
-            "delta": 90,
+            "delta": 40,
             "fx": [
               "#e6edcf",
               "#c6d5a0"
@@ -203,7 +203,7 @@ export const MENU_ITEMS = [
     "slug": "strawberry",
     "name": "Strawberry Matcha Latte",
     "description": "Ripe strawberry beneath, matcha above. Stir once, or not at all.",
-    "price": 750,
+    "price": 260,
     "category": "Drinks",
     "image": "/images/matcha/strawberry.jpg",
     "available": true,
@@ -233,7 +233,7 @@ export const MENU_ITEMS = [
             "id": "s",
             "label": "Small",
             "note": "300 ml",
-            "delta": -60,
+            "delta": -30,
             "scale": 1
           },
           {
@@ -247,7 +247,7 @@ export const MENU_ITEMS = [
             "id": "l",
             "label": "Large",
             "note": "520 ml",
-            "delta": 100,
+            "delta": 40,
             "scale": 1.18
           }
         ]
@@ -294,7 +294,7 @@ export const MENU_ITEMS = [
           {
             "id": "extra",
             "label": "Extra",
-            "delta": 60,
+            "delta": 30,
             "tone": "saturate(1.15)"
           }
         ]
@@ -313,7 +313,7 @@ export const MENU_ITEMS = [
           {
             "id": "oat",
             "label": "Oat",
-            "delta": 60
+            "delta": 50
           },
           {
             "id": "soy",
@@ -330,7 +330,7 @@ export const MENU_ITEMS = [
           {
             "id": "bits",
             "label": "Freeze-dried berry",
-            "delta": 60,
+            "delta": 30,
             "fx": [
               "#f4a9b8",
               "#e0667f"
@@ -339,7 +339,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Whipped cream",
-            "delta": 70,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -354,7 +354,7 @@ export const MENU_ITEMS = [
     "slug": "softserve",
     "name": "Matcha Soft Serve",
     "description": "Slow-churned and barely sweet. One clean swirl of matcha.",
-    "price": 580,
+    "price": 160,
     "category": "Sweets",
     "image": "/images/matcha/softserve-cone.jpg",
     "available": true,
@@ -415,7 +415,7 @@ export const MENU_ITEMS = [
             "id": "large",
             "label": "Large",
             "note": "taller swirl",
-            "delta": 120,
+            "delta": 50,
             "scale": 1.2
           }
         ]
@@ -428,7 +428,7 @@ export const MENU_ITEMS = [
           {
             "id": "kinako",
             "label": "Kinako dust",
-            "delta": 50,
+            "delta": 30,
             "fx": [
               "#c8a063",
               "#e0c48e"
@@ -437,7 +437,7 @@ export const MENU_ITEMS = [
           {
             "id": "azuki",
             "label": "Azuki red bean",
-            "delta": 80,
+            "delta": 40,
             "fx": [
               "#6a2d33",
               "#8a4a47"
@@ -446,7 +446,7 @@ export const MENU_ITEMS = [
           {
             "id": "gold",
             "label": "Edible gold leaf",
-            "delta": 150,
+            "delta": 60,
             "fx": [
               "#f5d77a",
               "#d9a92c"
@@ -461,7 +461,7 @@ export const MENU_ITEMS = [
     "slug": "berrycake",
     "name": "Matcha Berry Cake",
     "description": "Soft matcha sponge, light cream and whole strawberries.",
-    "price": 720,
+    "price": 220,
     "category": "Sweets",
     "image": "/images/matcha/berrycake.jpg",
     "available": true,
@@ -489,7 +489,7 @@ export const MENU_ITEMS = [
             "id": "celebrate",
             "label": "Celebration set",
             "note": "extra strawberries + a candle",
-            "delta": 100,
+            "delta": 50,
             "fx": [
               "#e0485f",
               "#ffd978"
@@ -498,7 +498,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Cream rosettes",
-            "delta": 70,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -522,7 +522,7 @@ export const MENU_ITEMS = [
     "slug": "crepe",
     "name": "Matcha Mille Crêpe",
     "description": "Twenty thin crêpes, each brushed with green tea cream.",
-    "price": 780,
+    "price": 240,
     "category": "Sweets",
     "image": "/images/matcha/crepe.jpg",
     "available": true,
@@ -551,7 +551,7 @@ export const MENU_ITEMS = [
           {
             "id": "azuki",
             "label": "Azuki red bean",
-            "delta": 80,
+            "delta": 40,
             "fx": [
               "#6a2d33",
               "#8a4a47"
@@ -560,7 +560,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Cream dollop",
-            "delta": 70,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -569,7 +569,7 @@ export const MENU_ITEMS = [
           {
             "id": "brulee",
             "label": "Torched sugar top",
-            "delta": 60,
+            "delta": 30,
             "fx": [
               "#e8a447",
               "#b8651f"
@@ -584,7 +584,7 @@ export const MENU_ITEMS = [
     "slug": "roll",
     "name": "Matcha Roll Cake",
     "description": "Airy matcha sponge rolled around whipped cream.",
-    "price": 680,
+    "price": 190,
     "category": "Sweets",
     "image": "/images/matcha/roll.jpg",
     "available": true,
@@ -616,7 +616,7 @@ export const MENU_ITEMS = [
             "id": "two",
             "label": "To share",
             "note": "two slices, strawberry cream",
-            "delta": 560
+            "delta": 160
           }
         ]
       },
@@ -628,7 +628,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Cream dollop",
-            "delta": 60,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -637,7 +637,7 @@ export const MENU_ITEMS = [
           {
             "id": "berry",
             "label": "Fresh strawberry",
-            "delta": 90,
+            "delta": 40,
             "fx": [
               "#e0485f",
               "#f4a9b8"
@@ -652,7 +652,7 @@ export const MENU_ITEMS = [
     "slug": "cheesecake",
     "name": "Matcha Cheesecake",
     "description": "Dense, silky and quietly bitter, on a buttery biscuit base.",
-    "price": 720,
+    "price": 210,
     "category": "Sweets",
     "image": "/images/matcha/cheesecake.jpg",
     "available": true,
@@ -681,7 +681,7 @@ export const MENU_ITEMS = [
           {
             "id": "compote",
             "label": "Berry compote",
-            "delta": 80,
+            "delta": 40,
             "fx": [
               "#c4304c",
               "#e0667f"
@@ -690,7 +690,7 @@ export const MENU_ITEMS = [
           {
             "id": "azuki",
             "label": "Azuki red bean",
-            "delta": 80,
+            "delta": 40,
             "fx": [
               "#6a2d33",
               "#8a4a47"
@@ -699,7 +699,7 @@ export const MENU_ITEMS = [
           {
             "id": "cream",
             "label": "Whipped cream",
-            "delta": 70,
+            "delta": 30,
             "fx": [
               "#fffdf4",
               "#efe8d2"
@@ -714,7 +714,7 @@ export const MENU_ITEMS = [
     "slug": "cookie",
     "name": "Matcha Cookie",
     "description": "Crisp edge, tender centre, a crackle of powdered sugar.",
-    "price": 420,
+    "price": 110,
     "category": "Bites",
     "image": "/images/matcha/cookie.jpg",
     "available": true,
@@ -746,7 +746,7 @@ export const MENU_ITEMS = [
             "id": "trio",
             "label": "Trio",
             "note": "three cookies",
-            "delta": 760
+            "delta": 200
           }
         ]
       },
@@ -765,7 +765,7 @@ export const MENU_ITEMS = [
           {
             "id": "jumbo",
             "label": "Jumbo",
-            "delta": 100,
+            "delta": 40,
             "scale": 1.2
           }
         ]
@@ -778,7 +778,7 @@ export const MENU_ITEMS = [
           {
             "id": "choc",
             "label": "White chocolate chunks",
-            "delta": 40,
+            "delta": 20,
             "fx": [
               "#f6f0dd",
               "#e3d9b4"
@@ -802,7 +802,7 @@ export const MENU_ITEMS = [
     "slug": "mochi",
     "name": "Matcha Mochi",
     "description": "Soft rice dumplings dusted with matcha. A set of two.",
-    "price": 480,
+    "price": 140,
     "category": "Bites",
     "image": "/images/matcha/mochi.jpg",
     "available": true,
@@ -839,7 +839,7 @@ export const MENU_ITEMS = [
           {
             "id": "berry",
             "label": "Strawberry cream",
-            "delta": 40
+            "delta": 20
           }
         ]
       },
@@ -857,7 +857,7 @@ export const MENU_ITEMS = [
           {
             "id": "four",
             "label": "Four pieces",
-            "delta": 440
+            "delta": 120
           }
         ]
       },
@@ -869,7 +869,7 @@ export const MENU_ITEMS = [
           {
             "id": "kuromitsu",
             "label": "Kuromitsu syrup",
-            "delta": 50,
+            "delta": 20,
             "fx": [
               "#2a1511",
               "#5a2f3a"
@@ -969,7 +969,7 @@ const NAMES = {
   "berrycake-candle": "Berry cake", "crepe-topped": "Mille crêpe", "mochi-four": "Mochi, four ways",
   "market-mark": "Kawing mark",
   // the usual.
-  interior: "The café", logo: "The café, square", "the-usual": "The usual", "dirty-horchata": "Dirty horchata",
+  interior: "The café", "interior-square": "The café, square", logo: "the usual. logo", "the-usual": "The usual", "dirty-horchata": "Dirty horchata",
   "americano-cloud": "Americano cloud", "spanish-latte": "Spanish latte", americano: "Americano",
   "seasalt-latte": "Seasalt latte", "mocha-latte": "Mocha latte", "biscoff-latte": "Biscoff latte",
   horchata: "Horchata", "dark-cocoa": "Dark cocoa and cream", "strawberries-cream": "Strawberries and cream",

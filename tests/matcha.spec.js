@@ -6,13 +6,13 @@ const latte = MENU_ITEMS[0];
 
 test.describe("Matcha Mood order model (pure)", () => {
   test("price is recomputed from the menu; unknown choices fall back to defaults", () => {
-    expect(unitPrice(latte, defaultSel(latte))).toBe(680);
-    expect(unitPrice(latte, { ...defaultSel(latte), size: "l", milk: "oat" })).toBe(840);
+    expect(unitPrice(latte, defaultSel(latte))).toBe(230);
+    expect(unitPrice(latte, { ...defaultSel(latte), size: "l", milk: "oat" })).toBe(320);
     // a forged selection and a forged price cannot change the unit price
     const forged = orderLine({ ...latte, price: 1 }, { size: "xl", milk: "diamond", top: ["nope"] }, 1);
     expect(forged.sel).toEqual(defaultSel(latte));
     expect(forged.price).toBe(unitPrice({ ...latte, price: 1 }, defaultSel(latte)));
-    expect(unitPrice(latte, forged.sel)).toBe(680);
+    expect(unitPrice(latte, forged.sel)).toBe(230);
   });
   test("the photograph follows the selection to the closest photographed variant", () => {
     expect(pickImage(latte, defaultSel(latte))).toBe("latte-iced");
@@ -31,25 +31,25 @@ test.describe("Matcha Mood ordering", () => {
     await page.getByRole("button", { name: "Customize Matcha Latte", exact: true }).click();
     const sheet = page.locator("dialog.k-sheet");
     await expect(sheet).toBeVisible();
-    await expect(sheet.locator(".k-sheet-price")).toContainText("680");
+    await expect(sheet.locator(".k-sheet-price")).toContainText("230");
     await sheet.getByRole("radio", { name: /^Hot/ }).click();
     await expect(sheet.locator(".k-layer").last()).toHaveAttribute("src", /latte-hot/);
     await sheet.getByRole("radio", { name: /^Large/ }).click();
     await sheet.getByRole("radio", { name: /^Oat/ }).click();
-    await expect(sheet.locator(".k-sheet-price")).toContainText("840");
+    await expect(sheet.locator(".k-sheet-price")).toContainText("320");
     await expect(sheet.locator(".k-sheet-chips")).toContainText("Hot");
     await sheet.getByRole("button", { name: /Add to order/ }).click();
     await expect(sheet).toBeHidden();
     const bag = page.locator(".cx-mobile-bag");
     if (await bag.isVisible()) await bag.click();
-    await expect(page.locator(".cx-total")).toContainText("840");
+    await expect(page.locator(".cx-total")).toContainText("320");
     await expect(page.locator(".cx-cart-sum")).toContainText("Hot · Large · Oat");
     await page.getByRole("button", { name: "Review your order", exact: true }).click();
     await page.getByRole("button", { name: "Place demo order", exact: true }).click();
     await expect(page.locator(".cx-success")).toBeVisible();
     const order = (await state(page)).orders.find((o) => !o.seed);
-    expect(order.total).toBe(840);
-    expect(order.items[0]).toMatchObject({ id: 1, qty: 1, price: 840 });
+    expect(order.total).toBe(320);
+    expect(order.items[0]).toMatchObject({ id: 1, qty: 1, price: 320 });
     expect(order.items[0].sel).toMatchObject({ temp: "hot", size: "l", milk: "oat" });
     await expect(page.locator(".cx-receipt-items")).toContainText("Hot · Large · Oat");
   });
@@ -59,7 +59,7 @@ test.describe("Matcha Mood ordering", () => {
     const sheet = page.locator("dialog.k-sheet");
     await sheet.getByRole("radio", { name: /^Trio/ }).click();
     await sheet.getByRole("radio", { name: /^Jumbo/ }).click();
-    await expect(sheet.locator(".k-sheet-price")).toContainText("1,280");
+    await expect(sheet.locator(".k-sheet-price")).toContainText("350");
     await page.waitForTimeout(1000);
     const m = await sheet.locator(".k-sheet-price").evaluate((e) => {
       const d = e.querySelector(".k-odo-d");
@@ -84,7 +84,7 @@ test.describe("Matcha Mood ordering", () => {
     await page.getByRole("button", { name: "Order now", exact: true }).click();
     const bag = page.locator(".cx-mobile-bag");
     if (await bag.isVisible()) await bag.click();
-    await expect(page.locator(".cx-total")).toContainText("1,360"); // 2 × ₱680, the unknown item dropped
+    await expect(page.locator(".cx-total")).toContainText("460"); // 2 × ₱230, the unknown item dropped
   });
 
   test("the customizer closes with Escape and keeps the order unchanged", async ({ page }) => {
@@ -129,4 +129,19 @@ test("phone: the order is a bottom sheet that opens from the bag pill and closes
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole("button", { name: "Close order", exact: true }).click();
   await expect(cart).not.toHaveClass(/is-open/);
+});
+
+test("Matcha Mood and the usual. share one price scale", async () => {
+  const { MENU_ITEMS: matcha } = await import("../src/merchant.js");
+  const { MENU_ITEMS: usual } = await import("../src/usual.js");
+  const by = (list, n) => list.find((m) => m.name.toLowerCase() === n).price;
+  // the same drink costs the same at both
+  expect(by(matcha, "matcha latte")).toBe(by(usual, "classic matcha"));
+  // add-ons agree where they are the same thing: oat +50, more matcha +30, foam/cream +30
+  const delta = (item, opt, ch) => item.options.find((o) => o.id === opt).choices.find((c) => c.id === ch).delta;
+  expect(delta(matcha[0], "milk", "oat")).toBe(50);
+  expect(delta(matcha[0], "strength", "deep")).toBe(30);
+  expect(delta(matcha[0], "top", "cream")).toBe(30);
+  // nothing on either menu is out of scale
+  for (const m of [...matcha, ...usual]) expect(m.price, m.name).toBeLessThanOrEqual(280);
 });

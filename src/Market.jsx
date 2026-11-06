@@ -659,7 +659,7 @@ export default function Market({ role }) {
                             commerce?.menu || [
                               {
                                 name: "Matcha Latte",
-                                price: 680,
+                                price: 230,
                                 image: "/images/matcha/latte-iced-sm.jpg",
                               },
                             ]

@@ -19,6 +19,8 @@ export const BRAND = {
   searchHint: "find your usual",
   welcome: "everyone has an order. what's yours?",
   category: "Coffee & matcha",
+  bio: "a neighbourhood coffee bar. coffee by day, with matcha pop-ups, tea ceremonies and after-hours nights.",
+  contact: "@the.usualclub on instagram",
 };
 
 const MILK = {
@@ -87,20 +89,21 @@ export const MENU_ITEMS = [
 // Studio's approved photography for this business (logo, cover, offers and the tier galleries).
 const img = (x) => `/images/usual/${x}.jpg`;
 export const ASSETS = {
-  logos: [img("logo"), img("the-usual"), img("classic-matcha"), img("blush")],
+  logos: [img("logo"), img("interior-square"), img("the-usual"), img("classic-matcha")],
   covers: ["interior", "the-usual", "dirty-horchata", "americano-cloud", "seasalt-latte", "biscoff-latte", "classic-matcha", "ube-matcha", "dango-matcha", "blush", "golden-hour", "hojicha-cocoa"].map(img),
-  promos: ["the-usual", "dirty-horchata", "ube-matcha", "dango-matcha", "blush"].map(img),
+  promos: ["dango-matcha", "classic-matcha", "the-usual", "dirty-horchata", "ube-matcha", "dango-matcha", "blush"].map(img),
 };
 
-// Storefront theme taken from the printed menu: warm grey paper, black type, an olive flower, rounded pills.
+// Storefront theme taken from the printed menu and the café's Instagram: ivory-grey paper, black type,
+// olive green, a brown-black overlay, rounded pills.
 export const STOREFRONT = {
   layout: "visual",
   theme: {
     mode: "light",
     primary: "#141412",
-    secondary: "#dcdcd3",
-    accent: "#84794c",
-    background: "#e8e9e4",
+    secondary: "#dcdfc8",
+    accent: "#6a7338",
+    background: "#eaebe0",
     typography: "geometric",
     button: "pill",
     cards: "outlined",
@@ -116,7 +119,7 @@ export const STOREFRONT = {
   cover: img("interior"),
   galleryAssets: [img("interior"), img("the-usual"), img("blush")],
   socials: [
-    { id: "instagram", platform: "Instagram", label: "daily regulars", url: "", enabled: true },
+    { id: "instagram", platform: "Instagram", label: "@the.usualclub", url: "https://www.instagram.com/the.usualclub/", enabled: true },
     { id: "facebook", platform: "Facebook", label: "the usual crowd", url: "", enabled: true },
   ],
   wifi: {
@@ -128,13 +131,13 @@ export const STOREFRONT = {
   loyalty: { enabled: true, threshold: 9, reward: "a drink on the house", eligible: [1, 4, 6, 17], card: "sage" },
   promotion: {
     active: true,
-    kind: "Featured product",
-    title: "the usual, every day.",
-    description: "our house iced coffee, ₱190. no need to say it twice.",
-    image: img("the-usual"),
+    kind: "Upcoming event",
+    title: "the matcha loop.",
+    description: "our matcha pop-up, back for another loop: hand-whisked matcha, cheesecake cloud, red bean paste and honey crunch.",
+    image: img("dango-matcha"),
     cta: "Explore the menu",
-    code: "USUALDEMO",
-    price: "₱190 the usual",
+    code: "LOOPDEMO",
+    price: "pop-up pricing varies",
     start: "2026-01-01",
     end: "2027-12-31",
     placement: "hub",

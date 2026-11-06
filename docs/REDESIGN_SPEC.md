@@ -17,8 +17,8 @@ same direction by supplying a theme, a menu and photography (see `src/businesses
 
 ## Businesses
 - **Matcha Mood** (`salo`, record `kawing-demo-v1`): deep green, Cormorant, dark photography.
-- **the usual.** (`usual`, record `kawing-merchant-v2:usual`): warm grey `#e8e9e4`, black type and pills,
-  olive `#84794c`, Jost in lowercase, light photography, the owner's own interior photograph as hero.
+- **the usual.** (`usual`, record `kawing-merchant-v2:usual`): ivory-grey `#eaebe0` (the printed menu's grey, a touch greener like their Instagram feed), black type and
+  pills, olive `#6a7338`, a brown-black hero overlay, Jost in lowercase, light photography, the owner's own interior photograph as hero.
   Menu and add-on prices are the printed menu (25 drinks in six groups; add-ons are options).
 Standard Merchant offers both (`?business=usual`); each has its own storage, receipts, carts and reset keys.
 Pop-up Market still features Matcha Mood and Luna Made only; adding the usual. as a booth is a follow-up.

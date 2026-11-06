@@ -22,7 +22,7 @@ test('partner completes the eight-step story with one shared order and an offlin
  await card.getByRole('button',{name:'Mark ready'}).click();
  await card.getByRole('button',{name:'Mark served'}).click();
  await next(page);
- await expect(page.locator('.stat-card').first()).toContainText('37,160');
+ await expect(page.locator('.stat-card').first()).toContainText('16,070');
  await next(page);
  await page.getByLabel('Restaurant name',{exact:true}).fill('Salo & Friends');
  await page.getByRole('button',{name:'Save design',exact:true}).first().click();

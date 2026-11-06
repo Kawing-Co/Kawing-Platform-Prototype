@@ -489,9 +489,9 @@ function App({
     URL.revokeObjectURL(url);
     notify("Demo order report downloaded.");
   }
-  const totalBase =
-    period === "Today" ? 36480 : period === "This week" ? 251600 : 1019000; // illustrative: ~₱760 average order
   const multiplier = period === "Today" ? 1 : period === "This week" ? 7 : 28;
+  // illustrative: 48 orders a day at the business's own average basket
+  const totalBase = (data.brand.avgBasket || 330) * 48 * multiplier;
   const viewData = previewTier
     ? { ...data, storefront: projectTier(data.storefront, previewTier) }
     : data;
@@ -1750,7 +1750,7 @@ function SalesChart({ period }) {
         {[30, 80, 130, 180].map((y, i) => (
           <g key={y}>
             <text x="0" y={y + 4} className="chart-label">
-              {["₱18k", "₱12k", "₱6k", "₱0"][i]}
+              {["₱6k", "₱4k", "₱2k", "₱0"][i]}
             </text>
             <line
               x1="52"

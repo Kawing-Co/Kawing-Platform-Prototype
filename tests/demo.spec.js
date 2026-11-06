@@ -10,9 +10,9 @@ async function placeOrder(page, { offline = false } = {}) {
   const bag = page.locator('.cx-mobile-bag');   // on phones the order opens as a bottom sheet
   if (await bag.isVisible()) await bag.click();
   await page.getByRole('button', { name: 'Increase Matcha Latte in order' }).click();
-  await expect(page.locator('.cx-total')).toContainText('1,360');
+  await expect(page.locator('.cx-total')).toContainText('460');
   await page.getByRole('button', { name: 'Remove Matcha Latte from order' }).click();
-  await expect(page.locator('.cx-total')).toContainText('680');
+  await expect(page.locator('.cx-total')).toContainText('230');
   await page.getByRole('button', { name: 'Review your order' }).click();
   await expect(page.getByText('No payment details or real charges.', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: offline ? 'Save order offline' : 'Place demo order', exact: true }).click();
@@ -27,7 +27,7 @@ test('one customer order connects receipt, kitchen, owner totals, and reload', a
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   const order = await placeOrder(page);
-  expect(order.total).toBe(680);
+  expect(order.total).toBe(230);
   expect(order.items[0].qty).toBe(1);
   await expect(page.locator('.cx-success')).toContainText('no money was charged');
   await kitchen(page);
@@ -44,7 +44,7 @@ test('one customer order connects receipt, kitchen, owner totals, and reload', a
   await customer(page);
   await expect(page.locator('.cx-success')).toContainText('Your order has been served');
   await page.getByRole('button', { name: 'Owner workspace', exact: true }).click();
-  await expect(page.locator('.stat-card').first()).toContainText('37,160');
+  await expect(page.locator('.stat-card').first()).toContainText('16,070');
   await page.reload();
   expect((await state(page)).orders.filter(o => o.id === order.id)).toHaveLength(1);
   expect(errors).toEqual([]);
@@ -86,7 +86,7 @@ test('owner branding and menu availability update customer experience and persis
 test('analytics period, search, and confirmed reset behave coherently', async ({ page }) => {
   await page.getByRole('button', { name: 'Analytics', exact: true }).click();
   await page.getByLabel('Analytics period').selectOption('This week');
-  await expect(page.locator('.analytics-stats').first()).toContainText('251,600');
+  await expect(page.locator('.analytics-stats').first()).toContainText('110,880');
   await expect(page.getByRole('img', { name: 'Illustrative sales chart for This week' })).toBeVisible();
   await customer(page);
   await page.getByRole('textbox', { name: 'Search the menu' }).fill('no-such-dish');
@@ -138,7 +138,7 @@ test('tour supports keyboard, export contains orders, and customer images load l
   for await (const chunk of stream) chunks.push(chunk);
   const csv = Buffer.concat(chunks).toString('utf8');
   expect(csv).toContain('Order,Table,Total PHP,Payment,Status');
-  expect(csv).toContain('KW-1048,03,2400,GCash,new');
+  expect(csv).toContain('KW-1048,03,860,GCash,new');
   expect(csv.trim().split('\n')).toHaveLength(4);
   await customer(page);
   const images = page.locator('.cx-food img');
