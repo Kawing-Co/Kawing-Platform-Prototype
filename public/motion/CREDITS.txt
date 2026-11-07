@@ -1,0 +1,25 @@
+Motion, with thanks. — Kawing & Co.
+
+Locally hosted Lottie microinteractions adapted from the LottieFiles community:
+
+Infinity Loader — menee design
+https://lottiefiles.com/free-animation/infinity-loader-5S0tGTfa8x
+Used as a decorative connection motif, not as a loading indicator.
+
+Shopping Cart Animation — Pedro Aquino
+https://lottiefiles.com/free-animation/shopping-cart-animation-WMW61d1kbk
+Adapted for the customer journey illustration; decorative numbers removed.
+
+Scroll down nudge — Rama
+https://lottiefiles.com/free-animation/scroll-down-nudge-uS9qGp7rrR
+Adapted as a directional action cue.
+
+Colors, crop and playback adapted for Kawing. These animations and derivatives
+are distributed under the Lottie Simple License:
+https://lottiefiles.com/page/license
+Local copy: /motion/LICENSE.txt
+
+The animations are decorative. They never represent live orders or payment confirmation.
+Kawing's original logos remain unchanged.
+SVG player: lottie-web 5.13.0 (MIT), https://github.com/airbnb/lottie-web
+Local license: /motion/LOTTIE_WEB_LICENSE.txt

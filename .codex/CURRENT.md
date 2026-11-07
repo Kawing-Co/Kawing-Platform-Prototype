@@ -39,3 +39,13 @@ not rerun for this bounded presentation slice; previous baseline evidence retain
 Existing main-bundle advisory remains. Next: exact-source Site update, preserve public
 audience; record returned deployment/version in .git/kawing-brand-release.json. GitHub
 push remains deferred; no credentials were used for LottieFiles.
+
+External checkpoint: Site 14 published successfully from c2f3373; public motion,
+pause/resume and interactive entry passed at360/1440 with no errors/overflow. Exact
+JS/CSS/runtime and license bytes verified. The host returned an empty document for
+nested credits.html; replace the owned credits page with a plain-text credits artifact,
+which uses the verified static .txt delivery path. Publish this bounded link repair;
+do not repeat Site14 deployment. No animation or operational source behavior changes.
+Credits repair verified locally: targeted fallback/credits check 1 passed. Updated
+source retains the 29-test motion/integration evidence; build/package next exact commit
+and verify nonempty public text attribution after publication.

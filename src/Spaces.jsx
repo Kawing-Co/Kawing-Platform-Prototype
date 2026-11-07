@@ -381,7 +381,7 @@ export default function Spaces({ Workspace }) {
           <span>
             <span className="online-dot" /> Interactive demo · Fictional
             businesses · Browser-local data
-            <a className="motion-credits" href="/motion/credits.html" target="_blank" rel="noopener noreferrer">Animation credits</a>
+            <a className="motion-credits" href="/motion/CREDITS.txt" target="_blank" rel="noopener noreferrer">Animation credits</a>
           </span>
           <CompanyWordmark variant="reversed" />
         </footer>

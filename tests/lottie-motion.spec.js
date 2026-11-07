@@ -64,4 +64,5 @@ test('unavailable animation runtime keeps static content and navigation usable',
   await page.goto('/');await expect(page.locator('.demo-start .motion-fallback')).toBeVisible();
   await page.getByRole('button',{name:'Choose your experience',exact:true}).click();await expect(page.locator('.experience-selection')).toBeVisible();
   const r=await page.request.get('/motion/LICENSE.txt');expect(r.ok()).toBe(true);expect(await r.text()).toContain('Lottie Simple License');
+  const credits=await page.request.get('/motion/CREDITS.txt');expect(credits.ok()).toBe(true);expect(await credits.text()).toContain('Pedro Aquino');
 });

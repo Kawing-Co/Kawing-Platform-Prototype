@@ -44,7 +44,7 @@ analytics, iframe, account integration or hosted animation request is introduced
 Derived data lives in src/motion. Colors were adapted to navy/white; crops improve
 small-icon legibility; the nudge background circle and decorative cart text counters
 were removed. These derivatives retain the Lottie Simple License at
-public/motion/LICENSE.txt. Visible Animation credits links to public/motion/credits.html.
+public/motion/LICENSE.txt. Visible Animation credits links to public/motion/CREDITS.txt.
 The connection asset is a motif, not a loading-state claim.
 
 The only added dependency is lottie-web 5.13.0 (MIT); its light SVG player is lazy-loaded
@@ -70,3 +70,8 @@ The previous release's complete operational regression evidence is retained; the
 is configured. Physical iOS/Android testing and a formal accessibility audit are not
 claimed. Existing bundle-size advisory remains. Public release verification is recorded
 in the local release checkpoint and completion response after exact-source publication.
+
+Hosted-page correction: nested credits.html returned an empty response from Sites.
+The visible link now opens /motion/CREDITS.txt, using the same static delivery path
+as the verified license files. Targeted runtime-fallback/credits check passed again;
+this follow-up does not change playback or operational behavior.
