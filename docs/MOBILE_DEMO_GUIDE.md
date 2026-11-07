@@ -7,9 +7,9 @@ with 3–5 establishments. All transactions, accounts and operating figures are 
 
 ## Partner walkthrough
 
-1. Read the brief introduction; Choose your experience focuses the experience cards.
+1. Read the brief introduction; Choose your experience opens a separate experience-selection page.
 2. Choose Standard Merchant for one business, or Pop-up Market for event operations.
-3. The large landing introduction disappears. Standard Merchant lets you select
+3. The introduction and experience cards never share a page. Standard Merchant lets you select
    Matcha Mood or the usual.; then choose Merchant, Customer or Admin View.
 4. Customer View: browse, customize a drink, order and follow its progress.
 5. Switch View: use Merchant View for brand customization, cashier verification,

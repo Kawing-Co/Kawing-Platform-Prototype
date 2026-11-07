@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-07 — Separate entry pages and interactive booth map
+
+- Split introduction, experience selection and view selection into addressable pages,
+  retaining history, direct entry and Studio draft guards.
+- Rebuilt the market schematic in company navy/white with two facing booth rows,
+  entrances, walkways, clear booth states and connected merchant details.
+- Added bounded drag/pinch/keyboard zoom and pan, Fit/normal-scroll recovery, spatial
+  filtering, mobile detail sheets and cross-access validation.
+- Preserved assignment, lifecycle, ordering, shared local records and customer themes.
+  Guide and verification: docs/BOOTH_MAP_GUIDE.md. GitHub push remains deferred.
+
 ## 2026-11-07 — Company theme isolation
 
 - Corrected the incomplete green-to-navy platform migration. The workspace accent

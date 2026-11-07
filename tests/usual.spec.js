@@ -65,7 +65,7 @@ test.describe("the platform keeps Kawing's identity", () => {
     expect(c).not.toBe("rgb(244, 248, 232)"); // not the light-on-dark merchant hero
     await expect(page.locator(".demo-purpose-card")).toContainText("Everyone connected.");
     await expect(page.getByRole("button", {name: "Choose your experience"})).toBeVisible();
-    await expect(page.locator(".scenario-cards")).toContainText("Standard Merchant");
+    await expect(page.locator(".scenario-cards")).toHaveCount(0);
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     expect(bg).not.toBe("rgb(20, 35, 26)");
   });

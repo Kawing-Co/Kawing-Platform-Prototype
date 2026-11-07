@@ -259,7 +259,7 @@ test("reduced motion, immediate ordering feedback, and recovery autofill remain 
 test("rapid view transitions finish on the last requested scenario", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?screen=experiences");
   await page.evaluate(() => {
     const cards = document.querySelectorAll(".scenario-cards>button");
     cards[0].click();

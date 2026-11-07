@@ -7,6 +7,8 @@ test('phone introduction explains the demo and leads to a compact addressable vi
   await expect(page.locator('.demo-purpose-card')).toContainText('Everyone connected.');
   await expect(page.locator('.demo-introduction')).toContainText('No real payments');
   await page.getByRole('button',{name:'Choose your experience'}).click();
+  await expect(page).toHaveURL(/screen=experiences/);
+  await expect(page.locator('.demo-introduction')).toHaveCount(0);
   await expect(page.locator('#experience-choices')).toBeFocused();
   await page.getByRole('button',{name:/Explore a business/}).click();
   await expect(page.getByRole('heading',{name:'Choose your view.'})).toBeVisible();
@@ -20,7 +22,10 @@ test('phone introduction explains the demo and leads to a compact addressable vi
   await expect(page.getByRole('heading',{name:'Choose your view.'})).toBeVisible();
   await expect(page.getByRole('radio',{name:/the usual\./})).toHaveAttribute('aria-checked','true');
   await page.getByRole('button',{name:'Back to scenarios',exact:true}).click();
+  await expect(page.locator('.experience-selection')).toBeVisible();
+  await page.getByRole('button',{name:'Back to introduction',exact:true}).click();
   await expect(page.locator('.demo-introduction')).toBeVisible();
+  await expect(page.locator('.experience-selection')).toHaveCount(0);
 });
 
 test('command search and its keyboard shortcut are gone throughout the experience', async ({page}) => {

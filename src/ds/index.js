@@ -14,3 +14,5 @@ if (document.readyState === "loading") document.addEventListener("DOMContentLoad
 else start();
 
 import "./mobile-demo.css";
+
+import "./booth-map.css";

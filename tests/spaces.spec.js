@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 async function enter(page, scenario, role) {
-  await page.goto("/");
+  await page.goto("/?screen=experiences");
   await page.getByRole("button", { name: new RegExp(scenario) }).click();
   await page.getByRole("button", { name: new RegExp("Enter " + role) }).click();
   // Pop-up Merchant View opens on the booth map, with no extra click.
@@ -13,7 +13,7 @@ async function enter(page, scenario, role) {
 test("two simulations lead immediately to exactly three spaces", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?screen=experiences");
   await expect(
     page.getByRole("heading", { name: "Standard Merchant", exact: true }),
   ).toBeVisible();

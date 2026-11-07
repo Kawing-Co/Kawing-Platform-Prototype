@@ -1,37 +1,41 @@
-# Current work — mobile demo entry and navigation
+# Active slice — distinct entry pages and market map
 
-Authority: owner request 2026-11-07; repository AGENTS.md; previously read active
-Context Vault AGENTS.md TOKEN-OPT-001-A8. Single writer, main, clean start at
-62c556c22bda2031fa32ae5662a48c03d5fa1557. Site version 10 serves this commit.
-GitHub main remains 2910c87; owner explicitly deferred GitHub push and authorized
-Site publication from local commits. Do not retry GitHub writes during this slice.
+Authority: owner request 2026-11-07; repository AGENTS.md and previously read active
+Context Vault AGENTS.md TOKEN-OPT-001-A8. Clean local main at
+459f98dbcb33758225e429b0d31c97aac1fe65ed; live Site 12. GitHub push remains
+explicitly deferred; preserve that authorization and publish only to the existing Site.
 
-Approved scope: mobile-first branded introduction explaining the demo; concise
-experience → business/view choice; remove command search/shortcut completely;
-remove the large intro/collage after an experience is chosen. Preserve addressable
-selection, browser history, direct guest links, all six views, Studio draft guards,
-undo, ordering, verified payment, loyalty and event operations. No backend or identity changes.
+Approved scope: separate introduction (/) from experience selection
+(?screen=experiences), then existing scenario/view URLs. Preserve direct guest/legacy
+links, browser history, draft guards and company SVG branding. Map overhaul uses the
+owner's annotated Orchard image as a layout reference for an original fictional
+schematic: two facing booth rows, central walkway, entrances and cross access. Do not
+copy Google satellite imagery or claim an official venue plan/verified real layout.
 
-Acceptance: 360px+ layouts; readable type and >=44px primary controls; compact
-view picker; no search dialog or Ctrl/Cmd K handler; clear fictional demo disclosure;
-keyboard path and back navigation; no horizontal page overflow. Validate production
-build, relevant and full browser regression, compiled mobile/desktop screenshots,
-console, complete diff, existing public Site deployment and served assets.
+Map: clear booth states and selection, connected merchant details/order entry, bounded
+zoom/pan with touch/pointer/keyboard alternatives, fit/reset, useful search/filter,
+mobile detail sheet, readable accessible booth list, and layout validation protecting
+walkways. Preserve existing IDs, assignments, saved records and operational lifecycle.
+No backend, real booking, geolocation, payments, physical location or infrastructure.
 
-Latest owner steering: apply Kawing & Co. logo, colors and theme. Company landing and chrome use navy/white; merchant storefront themes remain independent. Owner supplied five original SVGs. Integrate stacked logo, symbol, flat/depth/reversed wordmarks directly; preserve originals. Additional accepted scope: reactive microinteractions for logo, buttons, cards and confirmations; honor reduced motion and preserve transactions.
-Verification: production build passed; 94 Playwright checks passed for the mobile overhaul (5.3m); after actual SVG and motion integration, 36 relevant logo/mobile/session/merchant/order checks passed (1.5m); compiled-preview 24-case sweep at 360/390/768/1440px had no console errors or page overflow. Six screenshots and docs/MOBILE_DEMO_VERIFICATION.md retained. Rollback: Site version 10 / starting commit above. Next: publish this local commit to the existing public Site; keep GitHub push pending. Reconcile actual release state in .git/kawing-brand-release.json and the Site before retrying publication.
+Acceptance: introduction and experience choices never co-render; links addressable;
+Back/Forward and mobile 360px+ work. Map selection agrees with list/detail and shared
+operations; unavailable booths cannot be reserved; filters don't erase spatial context;
+zoom/pan bounded; no accidental selection after drag; walkway violations rejected.
+Verify build, relevant and full browser regressions, compiled desktop/mobile visuals,
+console/overflow, complete diff and exact Site release. Rollback: saved Site 12.
 
+Completed source work: distinct introduction/experience/view pages; original navy
+schematic, bounded camera and pinch/drag/keyboard controls, spatial filters, phone
+sheet/focus return, connected business entry, crosswalk validation and inactive
+profile protection. Guide: docs/BOOTH_MAP_GUIDE.md; screenshots: docs/screenshots/booth-map/.
 
-Current correction: owner reports green/company-theme clash. Starting at a843fdb
-(Site 11), clean main. Root cause: merchant accent injected into platform --brand
-and hardcoded green colors in legacy company CSS. Tokenize company styles and bind
-platform accent to company ink. Exclude customer .sf/.cx/.mm/.us selectors and leave
-merchant theme/config values intact. Verify Studio/admin/market colors, genuine
-merchant storefront themes, browser regressions, mobile layout and exact Site release.
-GitHub push stays deferred. Rollback is Site version 11.
+Verification: production build passed; complete suite 101/105 initial, then all seven
+targeted reruns passed (including four failed cases: stale selectors, development
+reload interruption, fractional pixel assertion). No unresolved failure. Compiled
+12-case responsive review passed with zero overflow or console/page errors; actual
+desktop/phone screenshots inspected. Complete diff/whitespace review passed. No new
+dependency, backend or GitHub push. Existing large-bundle advisory remains.
 
-Correction verification: production build passed; 36/37 initial cases passed with
-one trace-artifact collision; affected craft case and two theme regressions passed
-on isolated rerun. Final five Studio/theme cases passed. Final compiled 24-case
-review had no console errors or overflow; screenshots updated. Next: commit and
-publish exact Site-source revision; preserve GitHub deferral.
+Release target: exact local main to the existing Sites source remote and public Site;
+record returned version and source in .git/kawing-brand-release.json after verification.

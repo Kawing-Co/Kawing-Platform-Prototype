@@ -30,7 +30,7 @@ export function parseSession(search) {
   return {
     scenario,
     view,
-    step: view ? "inside" : scenarioParam ? "view" : "scenario",
+    step: view ? "inside" : scenarioParam ? "view" : q.get("screen") === "experiences" ? "scenario" : "landing",
     guest: q.get("surface") === "guest",
     customize: q.get("customize") === "1",
     // Which Standard Merchant business is open (Matcha Mood by default).
@@ -39,11 +39,12 @@ export function parseSession(search) {
 }
 
 // Builds the URL for a session step. Only parameters owned by the session change.
-export function sessionHref(current, { scenario = null, view = null, customize = false, business }) {
+export function sessionHref(current, { scenario = null, view = null, customize = false, business, screen }) {
   const u = new URL(current);
   const open = business ?? businessFromSearch(u.search);
-  for (const k of ["scenario", "workspace", "customize", "business"]) u.searchParams.delete(k);
+  for (const k of ["scenario", "workspace", "customize", "business", "screen"]) u.searchParams.delete(k);
   if (scenario === "standard" && open !== "salo") u.searchParams.set("business", open);
+  if (!scenario && screen === "experiences") u.searchParams.set("screen", "experiences");
   if (scenario) u.searchParams.set("scenario", scenario);
   if (scenario && view) u.searchParams.set("workspace", view);
   if (scenario && view && customize) u.searchParams.set("customize", "1");

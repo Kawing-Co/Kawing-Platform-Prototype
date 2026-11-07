@@ -37,7 +37,7 @@ test('button press gives immediate feedback and keeps the experience action func
   await page.mouse.down();
   await expect(button).toHaveClass(/k-pressed/);
   await page.mouse.up();
-  await expect(button).not.toHaveClass(/k-pressed/);
+  await expect(button).toHaveCount(0);
   await expect(page.locator('#experience-choices')).toBeFocused();
   await page.getByRole('button',{name:/Explore a business/}).click();
   await expect(page.getByRole('heading',{name:'Choose your view.'})).toBeVisible();
@@ -50,7 +50,7 @@ test('reduced motion disables logo movement and confirmations while actions rema
   await logo.hover();
   expect(await logo.locator('.company-wordmark').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
   expect(await logo.locator('.brand-symbol').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
+  expect(await page.getByRole('button',{name:'Choose your experience',exact:true}).evaluate(e=>getComputedStyle(e).transform)).toBe('none');
   await page.getByRole('button',{name:'Choose your experience',exact:true}).click();
   await expect(page.locator('#experience-choices')).toBeFocused();
-  expect(await page.getByRole('button',{name:'Choose your experience',exact:true}).evaluate(e=>getComputedStyle(e).transform)).toBe('none');
 });

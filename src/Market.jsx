@@ -1,3 +1,6 @@
+import { seedMarket, validateLayout } from "./market-layout";
+export { seedMarket, validateLayout } from "./market-layout";
+import BoothMap from "./BoothMap";
 import { CustomerPreview } from "./Viewport";
 import { VendorDesk } from "./VendorDesk";
 import { normalizeMarket, vendorReadiness } from "./operations";
@@ -7,8 +10,6 @@ import {
   MapPin,
   Search,
   Plus,
-  Minus,
-  Maximize,
   ArrowLeft,
   ArrowRight,
   Check,
@@ -20,79 +21,6 @@ import {
   LayoutGrid,
   X,
 } from "lucide-react";
-export const seedMarket = () => ({
-  version: 1,
-  name: "The Sunday Commons",
-  venue: "Riverside Pavilion · Fictional event",
-  status: "active",
-  booths: Array.from({ length: 10 }, (_, i) => ({
-    id: "B" + String(i + 1).padStart(2, "0"),
-    x: 5 + (i % 5) * 19,
-    y: i < 5 ? 8 : 47,
-    w: 14,
-    h: 15,
-    category:
-      i === 1
-        ? "Food & drinks"
-        : i === 6
-          ? "Crafts"
-          : i % 2
-            ? "Crafts"
-            : "Food & drinks",
-    blocked: i === 8,
-    merchant: i === 1 ? "salo" : i === 6 ? "luna" : null,
-  })),
-  profiles: [
-    {
-      id: "salo",
-      name: "Matcha Mood",
-      category: "Food & drinks",
-      bio: "One sip, and the mood unwinds. An existing merchant joining the neighborhood market.",
-      temporary: false,
-    },
-    {
-      id: "luna",
-      name: "Luna Made",
-      category: "Crafts",
-      bio: "Small-batch ceramics for everyday rituals. Fictional event-only seller.",
-      temporary: true,
-    },
-  ],
-  audit: [],
-});
-export function validateLayout(booths) {
-  const ids = new Set();
-  for (const b of booths) {
-    if (ids.has(b.id)) return "Each booth needs a unique ID.";
-    ids.add(b.id);
-    if (
-      ![b.x, b.y, b.w, b.h].every(Number.isFinite) ||
-      b.w < 5 ||
-      b.h < 5 ||
-      b.x < 0 ||
-      b.y < 0 ||
-      b.x + b.w > 100 ||
-      b.y + b.h > 70
-    )
-      return (
-        b.id +
-        ": keep the booth inside the venue with a minimum 5 × 5 footprint."
-      );
-    if (b.y < 41 && b.y + b.h > 29)
-      return b.id + ": keep the central walkway clear.";
-    for (const a of booths) {
-      if (a.id === b.id) continue;
-      if (
-        b.x < a.x + a.w &&
-        b.x + b.w > a.x &&
-        b.y < a.y + a.h &&
-        b.y + b.h > a.y
-      )
-        return b.id + " overlaps " + a.id + ".";
-    }
-  }
-  return "";
-}
 function load() {
   try {
     const d = JSON.parse(localStorage.getItem("kawing-market-v1"));
@@ -116,8 +44,6 @@ export default function Market({ role }) {
     [query, setQuery] = useState(""),
     [filter, setFilter] = useState("All"),
     [page, setPage] = useState(1),
-    [zoom, setZoom] = useState(1),
-    [pan, setPan] = useState({ x: 0, y: 0 }),
     [notice, setNotice] = useState(""),
     [profile, setProfile] = useState("salo"),
     [temp, setTemp] = useState({
@@ -173,6 +99,7 @@ export default function Market({ role }) {
       : p,
   );
   const active = data.status === "active",
+    visibleProfiles = role === "customer" && !active ? displayProfiles.filter(p => !p.temporary) : displayProfiles,
     filtered = booths.filter(
       (b) =>
         (
@@ -180,7 +107,7 @@ export default function Market({ role }) {
           " " +
           b.category +
           " " +
-          (displayProfiles.find((p) => p.id === b.merchant)?.name || "")
+          (visibleProfiles.find((p) => p.id === b.merchant)?.name || "")
         )
           .toLowerCase()
           .includes(query.toLowerCase()) &&
@@ -191,6 +118,14 @@ export default function Market({ role }) {
               ? !!b.merchant
               : b.category === filter)),
     );
+  useEffect(() => {
+    if (selected && !filtered.some(v=>v.id===selected)) setSelected(null);
+  }, [query, filter, data.booths]);
+  useEffect(() => {
+    if (!selected || !matchMedia('(max-width: 750px)').matches) return;
+    const frame=requestAnimationFrame(()=>document.getElementById('booth-detail-panel')?.focus({preventScroll:true}));
+    return ()=>cancelAnimationFrame(frame);
+  }, [selected]);
   function edit(id, patch) {
     if (patch.merchant && data.status !== "active") {
       setNotice("Reactivate the demo event before assigning a new merchant.");
@@ -292,7 +227,7 @@ export default function Market({ role }) {
       />
     );
   return (
-    <main className="market-workspace">
+    <main className={"market-workspace" + (["Map", "Layout Editor"].includes(tab) ? " map-mode" : "")}>
       <div className="market-heading">
         <div>
           <span className="spaces-eyebrow">THE NEIGHBORHOOD, TOGETHER</span>
@@ -422,152 +357,10 @@ export default function Market({ role }) {
                 ),
               )}
             </select>
-            <div>
-              <button
-                aria-label="Zoom out"
-                onClick={() => setZoom((z) => Math.max(1, z - 0.25))}
-              >
-                <Minus size={17} />
-              </button>
-              <span>{Math.round(zoom * 100)}%</span>
-              <button
-                aria-label="Zoom in"
-                onClick={() => setZoom((z) => Math.min(2.5, z + 0.25))}
-              >
-                <Plus size={17} />
-              </button>
-              <button
-                aria-label="Fit map"
-                onClick={() => {
-                  setZoom(1);
-                  setPan({ x: 0, y: 0 });
-                }}
-              >
-                <Maximize size={17} />
-              </button>
-            </div>
           </div>
           <div className="market-map-grid">
-            <section className="venue-map" aria-label="Interactive market map">
-              <div className="venue-title">
-                <span>RIVERSIDE PAVILION</span>
-                <small>North entrance ↑</small>
-              </div>
-              <svg
-                viewBox={`${pan.x} ${pan.y} ${100 / zoom} ${70 / zoom}`}
-                role="group"
-                aria-label="Booth layout"
-              >
-                <rect width="100" height="70" rx="2" fill="#f1f2e9" />
-                <rect x="0" y="29" width="100" height="12" fill="#fffdf7" />
-                <path
-                  d="M0 35H100"
-                  stroke="#d4d9c8"
-                  strokeDasharray="1 1"
-                  strokeWidth=".25"
-                />
-                <text
-                  x="50"
-                  y="36"
-                  textAnchor="middle"
-                  fontSize="2"
-                  fill="#8b977d"
-                  letterSpacing=".6"
-                >
-                  THE COMMON WALKWAY
-                </text>
-                {booths
-                  .filter((v) => filtered.some((f) => f.id === v.id))
-                  .map((v) => (
-                    <g
-                      key={v.id}
-                      role="button"
-                      tabIndex="0"
-                      aria-label={`${v.id} ${v.blocked ? "Unavailable" : v.merchant ? "Occupied" : "Available"}`}
-                      onClick={() => setSelected(v.id)}
-                      onKeyDown={(e) => {
-                        if (["Enter", " "].includes(e.key)) {
-                          e.preventDefault();
-                          setSelected(v.id);
-                        }
-                      }}
-                      className={
-                        "map-booth " +
-                        (selected === v.id ? "selected " : "") +
-                        (v.blocked
-                          ? "blocked"
-                          : v.merchant
-                            ? "occupied"
-                            : "available")
-                      }
-                    >
-                      <rect x={v.x} y={v.y} width={v.w} height={v.h} rx="1.2" />
-                      <text
-                        x={v.x + v.w / 2}
-                        y={v.y + v.h / 2}
-                        textAnchor="middle"
-                        fontSize="3"
-                        fontWeight="600"
-                      >
-                        {v.id}
-                      </text>
-                      <text
-                        x={v.x + v.w / 2}
-                        y={v.y + v.h - 2}
-                        textAnchor="middle"
-                        fontSize="1.65"
-                      >
-                        {v.blocked
-                          ? "UNAVAILABLE"
-                          : v.merchant
-                            ? "OCCUPIED"
-                            : "AVAILABLE"}
-                      </text>
-                    </g>
-                  ))}
-              </svg>
-              <div className="map-pan">
-                <span>Pan map</span>
-                {[
-                  ["←", -10, 0],
-                  ["↑", 0, -7],
-                  ["↓", 0, 7],
-                  ["→", 10, 0],
-                ].map(([s, x, y]) => (
-                  <button
-                    key={s}
-                    aria-label={"Pan " + s}
-                    onClick={() =>
-                      setPan((p) => ({
-                        x: Math.min(100 - 100 / zoom, Math.max(0, p.x + x)),
-                        y: Math.min(70 - 70 / zoom, Math.max(0, p.y + y)),
-                      }))
-                    }
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-              <div className="map-legend">
-                <span>
-                  <i />
-                  Available
-                </span>
-                <span>
-                  <i />
-                  Occupied
-                </span>
-                <span>
-                  <i />
-                  Unavailable
-                </span>
-                <span>
-                  <i />
-                  Selected
-                </span>
-              </div>
-            </section>
-            <aside className="booth-detail">
+            <BoothMap booths={booths} profiles={visibleProfiles} visible={filtered} selected={selected} onSelect={setSelected} editing={tab === "Layout Editor"} onClear={() => {setQuery("");setFilter("All");setPage(1);}} />
+            <aside className="booth-detail" id="booth-detail-panel" aria-label="Booth details" data-selected={!!b} tabIndex={-1} onKeyDown={e=>{if(e.key==='Escape'){setSelected(null);document.getElementById('map-'+selected)?.focus();}}}>
               {!b ? (
                 <>
                   <span className="detail-icon">
@@ -611,7 +404,7 @@ export default function Market({ role }) {
                     </small>
                     <button
                       aria-label="Close booth detail"
-                      onClick={() => setSelected(null)}
+                      onClick={() => {setSelected(null);document.getElementById('map-'+selected)?.focus();}}
                     >
                       <X size={17} />
                     </button>
@@ -622,7 +415,7 @@ export default function Market({ role }) {
                       : publicProfile?.name || "Your place in the market"}
                   </h2>
                   <p>
-                    {b.category} · {b.w} × {b.h} layout units
+                    {b.category} · {role === "customer" ? `Booth ${b.id}` : `${b.w} × ${b.h} layout units`}
                   </p>
                   {publicProfile &&
                   (active ||

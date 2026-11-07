@@ -15,7 +15,8 @@ const switchTo = async (p, view) => {
 
 test.describe("session model (pure)", () => {
   test("URL maps to scenario picker, view picker and view", () => {
-    expect(parseSession("")).toMatchObject({ step: "scenario", view: null });
+    expect(parseSession("")).toMatchObject({ step: "landing", view: null });
+    expect(parseSession("?screen=experiences")).toMatchObject({step: "scenario", view: null});
     expect(parseSession("?scenario=market")).toMatchObject({
       scenario: "market",
       step: "view",
@@ -94,7 +95,7 @@ test.describe("session model (pure)", () => {
 test("Scenario → View entry is two addressable steps with exactly three views", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?screen=experiences");
   await expect(
     page.getByRole("heading", { name: "Standard Merchant", exact: true }),
   ).toBeVisible();

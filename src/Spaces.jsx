@@ -119,10 +119,12 @@ export default function Spaces({ Workspace }) {
       setScenario(next.scenario || scenario);
       setView(next.view || null);
       setBusiness(open);
-      setStep(next.view ? "inside" : next.scenario ? "view" : "scenario");
+      setStep(parseSession(destination.search).step);
       setStatus("");
       if (next.page) window.dispatchEvent(new HashChangeEvent("hashchange"));
       window.scrollTo(0, 0);
+      const nextStep = parseSession(destination.search).step;
+      requestAnimationFrame(() => document.getElementById(nextStep === "scenario" ? "experience-choices" : nextStep === "view" ? "view-picker-title" : "demo-title")?.focus({preventScroll:true}));
     });
   }
   function enter(v, customize = false) {
@@ -136,6 +138,10 @@ export default function Spaces({ Workspace }) {
   }
   function chooseScenario() {
     if (step === "inside" && !confirmLeave("Change scenario")) return;
+    go({ screen: "experiences" });
+  }
+  function goHome() {
+    if (step === "inside" && !confirmLeave("Return to introduction")) return;
     go({});
   }
   function customize() {
@@ -191,6 +197,7 @@ export default function Spaces({ Workspace }) {
             onView={(v) => enter(v)}
             onCustomize={customize}
             onScenario={chooseScenario}
+            onHome={goHome}
             onReset={reset}
           />
           <p className="session-status" aria-live="polite">
@@ -221,7 +228,7 @@ export default function Spaces({ Workspace }) {
             href="/"
             onClick={(e) => {
               e.preventDefault();
-              chooseScenario();
+              goHome();
             }}
           >
             <CompanyWordmark />
@@ -229,17 +236,13 @@ export default function Spaces({ Workspace }) {
           <span>THE INTERACTIVE PRODUCT EXPERIENCE</span>
 
         </header>
-        {step === "scenario" ? (
+        {step === "landing" ? (
           <section className="demo-introduction" aria-labelledby="demo-title">
             <div className="demo-introduction-copy">
               <span className="demo-eyebrow">THE KAWING &amp; CO. PRODUCT DEMO</span>
-              <h1 id="demo-title">Good business.<br /><em>Closer connections.</em></h1>
+              <h1 id="demo-title" tabIndex={-1}>Good business.<br /><em>Closer connections.</em></h1>
               <p>See how one customer visit connects a branded menu, an order, the team behind it, and a reason to return.</p>
-              <button className="demo-start" data-tactile onClick={() => {
-                const heading = document.getElementById("experience-choices");
-                heading?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
-                heading?.focus({ preventScroll: true });
-              }}>Choose your experience <ArrowRight size={19} /></button>
+              <button className="demo-start" data-tactile onClick={() => go({ screen: "experiences" })}>Choose your experience <ArrowRight size={19} /></button>
               <small>Interactive proposal · Fictional businesses · No real payments</small>
             </div>
             <div className="demo-purpose-card">
@@ -253,16 +256,17 @@ export default function Spaces({ Workspace }) {
               <p className="demo-purpose-note">Try different views to see the same local demo data connect. A proposed three-month pilot would start with 3–5 establishments.</p>
             </div>
           </section>
-        ) : (
+        ) : step === "view" ? (
           <section className="selected-experience" aria-labelledby="view-picker-title">
             <span className="demo-eyebrow">{scenario === "market" ? "POP-UP MARKET · THE SUNDAY COMMONS" : "STANDARD MERCHANT · " + BUSINESSES[business].name.toUpperCase()}</span>
-            <h1 id="view-picker-title">Choose your view.</h1>
+            <h1 id="view-picker-title" tabIndex={-1}>Choose your view.</h1>
             <p>{scenario === "standard" ? "Pick a business, then step into the experience." : "Explore a shared market as a merchant, customer, or admin."}</p>
           </section>
-        )}
+        ) : null}
         {step === "scenario" ? (
           <section className="experience-selection" aria-label="Demo experiences">
-          <h2 id="experience-choices" tabIndex={-1}>What would you like to explore?</h2>
+          <BackPreview onClick={goHome}>Back to introduction</BackPreview>
+          <h1 id="experience-choices" tabIndex={-1}>What would you like to explore?</h1>
           <p>Choose one experience. Then choose whose view to try.</p>
           <div className="scenario-cards" data-reveal>
             <button
@@ -322,9 +326,9 @@ export default function Spaces({ Workspace }) {
             </button>
           </div>
           </section>
-        ) : (
+        ) : step === "view" ? (
           <>
-            <BackPreview onClick={() => go({})}>Back to scenarios</BackPreview>
+            <BackPreview onClick={() => go({ screen: "experiences" })}>Back to scenarios</BackPreview>
             {scenario === "standard" && (
               <div className="business-picker" role="radiogroup" aria-label="Business">
                 <span className="business-picker-label">Business</span>
@@ -372,8 +376,8 @@ export default function Spaces({ Workspace }) {
               })}
             </div>
           </>
-        )}
-        {step === "scenario" && <ProductStory />}
+        ) : null}
+        {step === "landing" && <ProductStory />}
         <footer className="spaces-footer">
           <span>
             <span className="online-dot" /> Interactive demo · Fictional
@@ -439,6 +443,7 @@ export function SessionHeader({
   onView,
   onCustomize,
   onScenario,
+  onHome,
   onReset,
 }) {
   const [tier, setTier] = useState(() => readTier(undefined, business)),
@@ -485,10 +490,10 @@ export function SessionHeader({
         href="/"
         onClick={(e) => {
           e.preventDefault();
-          onScenario();
+          (onHome || onScenario)();
         }}
         className="space-wordmark"
-        aria-label="Kawing demo: choose a scenario"
+        aria-label="Kawing demo: introduction"
       >
         <CompanyWordmark />
       </a>
