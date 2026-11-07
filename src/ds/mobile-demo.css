@@ -1,0 +1,97 @@
+/* Mobile demo journey: introduction → experience → concise view choice. */
+html body .entry-mobile-first { max-width: 1220px; padding-inline: clamp(18px, 4vw, 40px); }
+html body .entry-mobile-first .spaces-brand { justify-content: space-between; border-bottom: 1px solid var(--k-line); height: 78px; }
+.demo-introduction { display: grid; grid-template-columns: 1.08fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; padding: 60px 0 56px; }
+.demo-eyebrow { color: var(--k-ink-2); font-size: 11px; font-weight: 650; letter-spacing: .14em; line-height: 1.6; display: block; }
+.demo-introduction h1 { font: 500 clamp(48px, 6vw, 80px)/1.02 var(--k-serif); letter-spacing: -.03em; color: var(--k-ink); margin: 20px 0; text-wrap: balance; }
+.demo-introduction h1 em { font-weight: 400; color: #365579; }
+.demo-introduction-copy > p { color: var(--k-ink-2); font-size: 17px; line-height: 1.7; max-width: 470px; }
+.demo-start { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; border-radius: 14px; padding: 14px 22px; background: #152641; color: white; font-weight: 600; font-size: 15px; margin: 16px 0; border: 1px solid #152641; }
+.demo-start:hover { background: #2f4868; }
+.demo-introduction-copy > small { display: block; font-size: 12px; line-height: 1.7; color: var(--k-ink-2); }
+.demo-purpose-card { padding: clamp(24px, 3vw, 40px); background: #152641; color: #fff; border-radius: 24px; }
+.demo-purpose-card .demo-eyebrow { color: #bdcce0; }
+.demo-purpose-card h2 { font: 500 42px/1.05 var(--k-serif); margin: 18px 0 28px; }
+.demo-purpose-card ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
+.demo-purpose-card li { display: flex; gap: 16px; align-items: baseline; }
+.demo-purpose-card li > span { font-size: 12px; color: #bdcce0; font-variant-numeric: tabular-nums; }
+.demo-purpose-card b { font-size: 15px; font-weight: 600; }
+.demo-purpose-card li p { margin: 6px 0 0; font-size: 14px; line-height: 1.65; color: #d0dbea; }
+.demo-purpose-note { border-top: 1px solid #ffffff30; margin: 26px 0 0; padding-top: 18px; font-size: 12px; line-height: 1.7; color: #bdcce0; }
+.experience-selection { padding-top: 10px; }
+.experience-selection > h2 { font: 500 34px/1.1 var(--k-serif); color: var(--k-ink); margin: 0 0 10px; scroll-margin-top: 20px; }
+.experience-selection > p { margin: 0 0 24px; color: var(--k-ink-2); font-size: 15px; line-height: 1.6; }
+.selected-experience { padding: 32px 0 24px; max-width: 680px; }
+.selected-experience h1 { font: 500 clamp(34px, 4vw, 48px)/1.1 var(--k-serif); margin: 12px 0; color: var(--k-ink); }
+.selected-experience > p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--k-ink-2); }
+html body .view-picker .space-role-cards { gap: 16px; margin-top: 24px; }
+html body .view-picker .space-role-cards > button { min-height: 260px; padding: 26px; }
+html body .view-picker .space-role-cards > button .space-role-icon { margin-bottom: 18px; }
+html body .view-picker .space-role-cards h2 { font-size: 30px; }
+html body .view-picker .business-picker { margin: 18px 0 0; }
+html body .view-picker .back-preview { display: inline-flex; }
+@media (max-width: 750px) {
+  html body .entry-mobile-first .spaces-brand { height: 68px; }
+  html body .entry-mobile-first .spaces-brand > span { display: none; }
+  .demo-introduction { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 32px 0 36px; }
+  .demo-introduction h1 { font-size: clamp(44px, 12vw, 66px); margin: 14px 0 18px; }
+  .demo-introduction-copy > p { font-size: 16px; line-height: 1.65; margin: 0; }
+  .demo-start { width: 100%; min-height: 52px; margin: 22px 0 12px; }
+  .demo-introduction-copy > small { font-size: 11px; }
+  .demo-purpose-card { padding: 24px; border-radius: 20px; }
+  .demo-purpose-card h2 { font-size: 34px; margin-bottom: 22px; }
+  .demo-purpose-card ol { gap: 18px; }
+  .experience-selection > h2 { font-size: 30px; max-width: 300px; }
+  html body .entry-mobile-first .scenario-cards { margin-top: 0; }
+  html body .entry-mobile-first .scenario-art { height: 150px; }
+  html body .entry-mobile-first .scenario-card-copy { padding: 22px; }
+  html body .entry-mobile-first .scenario-card h2 { font-size: 32px; margin-top: 10px; }
+  html body .entry-mobile-first .scenario-card p { font-size: 14px; margin-bottom: 10px; }
+  .selected-experience { padding: 24px 0 18px; }
+  .selected-experience .demo-eyebrow { font-size: 10px; letter-spacing: .1em; }
+  .selected-experience h1 { font-size: 36px; margin: 10px 0; }
+  .selected-experience > p { font-size: 14px; }
+  html body .view-picker .business-picker { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+  .view-picker .business-picker-label { grid-column: 1 / -1; }
+  html body .view-picker .business-picker button { border-radius: 14px; padding: 10px 8px; gap: 8px; min-width: 0; }
+  .view-picker .business-picker b { font-size: 12px; }
+  .view-picker .business-picker small { font-size: 11px; }
+  .view-picker .business-picker .progressive-image { width: 32px; height: 40px; border-radius: 8px; }
+  .view-picker .business-picker svg { width: 14px; }
+  html body .view-picker .space-role-cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 18px; }
+  html body .view-picker .space-role-cards > button { display: grid; grid-template-columns: 42px minmax(0,1fr); grid-template-rows: auto auto auto; column-gap: 14px; min-height: 0; padding: 20px; border-radius: 18px; }
+  html body .view-picker .space-role-icon { grid-column: 1; grid-row: 1 / 4; width: 42px; height: 42px; margin: 0 !important; }
+  html body .view-picker .space-role-tag { display: none; }
+  html body .view-picker .space-role-cards h2 { grid-column: 2; font: 650 18px/1.3 var(--k-head); margin: 0 0 6px; }
+  html body .view-picker .space-role-cards > button > strong { display: none; }
+  html body .view-picker .space-role-cards p { grid-column: 2; font-size: 13px; line-height: 1.6; margin: 0 0 12px; }
+  html body .view-picker .space-enter { grid-column: 2; margin: 0; font-size: 12px; }
+  html body .space-session-header { position: relative; top: auto; }
+  html body .space-session-header nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; }
+  html body .space-session-header nav > button,
+  html body .space-session-header nav > .session-disclosure > button { width: 100%; min-height: 44px; padding-inline: 4px; font-size: 11px; justify-content: center; }
+  .session-status:empty { display: none; }
+  html body .space-session .view-context { margin: 0 0 12px; }
+  html body .premium-toast { bottom: calc(18px + env(safe-area-inset-bottom)); left: 12px; right: 12px; max-width: none; width: auto; font-size: 13px; }
+  html body .premium-toast button { min-height: 44px; min-width: 44px; }
+}
+@media (prefers-reduced-motion: reduce) { .demo-start { transition: none; } }
+/* Tablet chrome also needs two rows; a full context string cannot fit beside actions. */
+@media (max-width: 1000px) {
+  html body .space-session-header { display: flex; flex-wrap: wrap; height: auto; min-height: 0; padding-block: 10px 8px; gap: 8px; }
+  html body .space-session-header .session-context { margin-left: auto; flex: 0 1 auto; min-width: 0; justify-content: flex-end; }
+  html body .space-session-header .session-context > span { display: none; }
+  html body .space-session-header nav { flex-basis: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 6px; }
+  html body .space-session-header nav > .session-wide { display: none; }
+  html body .space-session-header nav > button,
+  html body .space-session-header nav > .session-disclosure > button { width: 100%; min-height: 44px; justify-content: center; }
+}
+html body .view-picker .space-role-icon { color: #152641; background: #edf1f7; }
+html body .view-picker .space-enter { color: #152641; }
+.demo-purpose-card > .company-wordmark { display: block; color: white; font: 700 38px/1.2 var(--k-serif); letter-spacing: -1px; margin-bottom: 18px; }
+/* Kawing & Co. company surfaces; merchant storefront themes stay in their own scope. */
+html body .entry-mobile-first { background: #fff; }
+body:has(.entry-mobile-first) { background: #fff; }
+html body .sidebar nav button.active::before { background: #152641; }
+html body .studio-heading .button.primary,
+html body .studio-save-bar .button.primary { background: #152641; border-color: #152641; color: #fff; }

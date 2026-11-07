@@ -65,9 +65,3 @@ export function useLocalSnapshot(key) {
   } catch {}
   return data;
 }
-export function inTriangle(p, a, b, c) {
-  const sign = (p1, p2, p3) =>
-    (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-  const v = [sign(p, a, b), sign(p, b, c), sign(p, c, a)];
-  return !(v.some((x) => x < 0) && v.some((x) => x > 0));
-}

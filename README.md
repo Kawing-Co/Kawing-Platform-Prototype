@@ -62,8 +62,8 @@ Local browser checks: `npm test` uses `/usr/bin/chromium` when present; elsewher
 
 ### Premium interaction pass
 
-A restrained visual system, command search (Ctrl/Cmd K), reversible Studio/catalog
+A branded mobile introduction, concise experience/view selection, reversible Studio/catalog
 actions, stable loading placeholders and optional spatial/product-film demonstrations
-are included. See the [experience guide and pattern map](docs/PREMIUM_EXPERIENCE_GUIDE.md).
+are included. See the [current mobile demo guide](docs/MOBILE_DEMO_GUIDE.md).
 The 12-second film is rendered with Hyperframes and optimized with FFmpeg; it is loaded
 only in the optional player. Ordering and financial states remain explicit simulations.

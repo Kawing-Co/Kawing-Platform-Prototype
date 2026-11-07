@@ -1,59 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { inTriangle } from "../src/premium.js";
 const studio = "/?scenario=standard&workspace=merchant#Customization";
-test("pointer intent keeps a diagonal path inside the submenu safety region", () => {
-  expect(
-    inTriangle(
-      { x: 60, y: 25 },
-      { x: 0, y: 50 },
-      { x: 100, y: 0 },
-      { x: 100, y: 100 },
-    ),
-  ).toBe(true);
-  expect(
-    inTriangle(
-      { x: 20, y: 5 },
-      { x: 0, y: 50 },
-      { x: 100, y: 0 },
-      { x: 100, y: 100 },
-    ),
-  ).toBe(false);
-});
-test("command search navigates with the keyboard and honors unsaved draft cancellation", async ({
-  page,
-}) => {
-  await page.goto(studio);
-  await page.keyboard.press("Control+k");
-  const dialog = page.getByRole("dialog", {
-    name: "Quick actions",
-    exact: true,
-  });
-  await expect(dialog).toBeVisible();
-  await page
-    .getByRole("combobox", { name: "Search actions" })
-    .fill("Staff orders");
-  await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/#Orders$/);
-  await expect(dialog).toBeHidden();
-  await page.goto(studio);
-  await page
-    .getByLabel("Restaurant name", { exact: true })
-    .fill("Retained premium draft");
-  await page.getByRole("button", { name: "Open quick actions" }).click();
-  await page
-    .getByRole("combobox", { name: "Search actions" })
-    .fill("Customer View");
-  page.once("dialog", (d) => d.dismiss());
-  await page.keyboard.press("Enter");
-  await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue(
-    "Retained premium draft",
-  );
-  expect(
-    await page.evaluate(
-      () => JSON.parse(localStorage.getItem("kawing-studio-draft")).brand.name,
-    ),
-  ).toBe("Retained premium draft");
-});
 test("undo restores only catalog availability and can be consumed only once", async ({
   page,
 }) => {
@@ -96,43 +42,10 @@ test("module visibility undo restores the live draft and navigation clears stale
   await page.getByRole("button", { name: "Undo", exact: true }).click();
   await expect(toggle).toBeChecked();
   await toggle.uncheck();
-  await page.getByRole("button", { name: "Open quick actions" }).click();
-  await page
-    .getByRole("combobox", { name: "Search actions" })
-    .fill("Business analytics");
   page.once("dialog", (d) => d.accept());
-  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "Analytics", exact: true }).click();
   await expect(page).toHaveURL(/#Analytics$/);
   await expect(page.locator(".premium-toast")).toHaveCount(0);
-});
-test("mobile command sheet supports swipe dismissal, Escape and focus return", async ({
-  page,
-}) => {
-  await page.setViewportSize({ width: 360, height: 800 });
-  await page.goto(studio);
-  const trigger = page.getByRole("button", { name: "Open quick actions" });
-  await trigger.click();
-  await expect(
-    page.getByRole("dialog", { name: "Quick actions", exact: true }),
-  ).toBeVisible();
-  const handle = page.locator(".command-sheet-handle");
-  const box = await handle.boundingBox();
-  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(box.x + box.width / 2, box.y + 135, { steps: 10 });
-  await page.mouse.up();
-  await expect(
-    page.getByRole("dialog", { name: "Quick actions", exact: true }),
-  ).toBeHidden();
-  await expect(trigger).toBeFocused();
-  await trigger.click();
-  await page.keyboard.press("Escape");
-  await expect(trigger).toBeFocused();
-  expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
-    ),
-  ).toBe(true);
 });
 test("optional spatial preview has honest fallback and film never starts automatically", async ({
   page,

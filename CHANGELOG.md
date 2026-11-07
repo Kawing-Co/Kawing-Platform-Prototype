@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-07 — Mobile demo journey
+
+- Added a branded proposal introduction explaining customer, merchant and admin
+  perspectives, the connected visit and the proposed 3–5-establishment pilot.
+- Choose your experience focuses the experience choices; selecting an experience
+  replaces the introduction with a concise business/view picker. Removed the repeated
+  hero/collage and old presentation stepper from the view-selection screen.
+- Removed command search, its trigger, catalog, keyboard listener and pointer-intent
+  helper. Kept undo as an independent host; normal navigation and draft guards remain.
+- Added compact phone role cards, business choices, touch controls and phone/tablet
+  session rows. Corrected tablet action overflow and retained merchant theme identity.
+- Updated browser coverage and demo guide. Screenshots: docs/screenshots/mobile-entry/.
+  GitHub push remains explicitly deferred; the existing public Site is the release target.
+
 ## 2026-11-07 — Company palette and signature-drink poster
 
 - Applied navy/white company tokens and a Kawing & Co. text-name fallback in the

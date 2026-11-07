@@ -57,15 +57,15 @@ test.describe("session: which business is open", () => {
 });
 
 test.describe("the platform keeps Kawing's identity", () => {
-  test("the entry page is Kawing's own: paper, forest, several merchants, no Matcha headline", async ({ page }) => {
+  test("the introduction explains Kawing before merchant selection", async ({ page }) => {
     await page.goto("/");
-    const h1 = page.locator(".spaces-intro h1");
+    const h1 = page.locator(".demo-introduction h1");
     await expect(h1).toContainText("Good business.");
     const c = await h1.evaluate((e) => getComputedStyle(e).color);
     expect(c).not.toBe("rgb(244, 248, 232)"); // not the light-on-dark merchant hero
-    await expect(page.locator(".spaces-collage figure")).toHaveCount(3);
-    await expect(page.locator(".spaces-collage")).toContainText("the usual.");
-    await expect(page.locator(".spaces-collage")).toContainText("Matcha Mood");
+    await expect(page.locator(".demo-purpose-card")).toContainText("Everyone connected.");
+    await expect(page.getByRole("button", {name: "Choose your experience"})).toBeVisible();
+    await expect(page.locator(".scenario-cards")).toContainText("Standard Merchant");
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     expect(bg).not.toBe("rgb(20, 35, 26)");
   });
@@ -74,7 +74,7 @@ test.describe("the platform keeps Kawing's identity", () => {
     const group = page.getByRole("radiogroup", { name: "Business" });
     await expect(group.getByRole("radio", { name: /Matcha Mood/ })).toHaveAttribute("aria-checked", "true");
     await group.getByRole("radio", { name: /the usual\./ }).click();
-    await expect(page.locator(".spaces-eyebrow")).toContainText("THE USUAL.");
+    await expect(page.locator(".selected-experience .demo-eyebrow")).toContainText("THE USUAL.");
     await page.getByRole("button", { name: /Enter Merchant View/ }).click();
     await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue("the usual.");
     expect(new URL(page.url()).searchParams.get("business")).toBe("usual");

@@ -1,5 +1,7 @@
 # Premium Kawing experience
 
+Historical interaction record: command search and its shortcut were removed at the owner’s request on 2026-11-07. The current entry and demonstration sequence is in [MOBILE_DEMO_GUIDE.md](MOBILE_DEMO_GUIDE.md).
+
 Start at the root. Choose Standard Merchant or Pop-up Market, then one of the three
 views. Existing ordering, cashier confirmation, kitchen, loyalty, event logistics and
 map-first Merchant View remain the interactive core.

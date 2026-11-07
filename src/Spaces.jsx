@@ -16,8 +16,7 @@ import {
 import { CustomerPreview } from "./Viewport";
 import Market from "./Market";
 import {
-  PremiumShell,
-  CommandTrigger,
+  UndoHost,
   ProductStory,
   BackPreview,
   useEditorialMotion,
@@ -110,14 +109,6 @@ export default function Spaces({ Workspace }) {
     return () => window.removeEventListener("popstate", change);
   }, []);
   useEditorialMotion();
-  function commandNavigate(a) {
-    if (step === "inside" && !confirmLeave("Open " + a.name)) return;
-    go({
-      scenario: a.page ? "standard" : a.scenario || scenario,
-      view: a.scenario ? null : a.view,
-      page: a.page,
-    });
-  }
   function go(next) {
     window.dispatchEvent(new Event("kawing:clear-undo"));
     transitionView(() => {
@@ -174,14 +165,14 @@ export default function Spaces({ Workspace }) {
   if (legacy)
     return (
       <>
-        <PremiumShell navigate={commandNavigate} />
+        <UndoHost />
         <Workspace />
       </>
     );
   if (step === "inside" && view)
     return (
       <>
-        <PremiumShell navigate={commandNavigate} />
+        <UndoHost />
         <div
           className={
             "space-session space-" +
@@ -223,8 +214,8 @@ export default function Spaces({ Workspace }) {
     );
   return (
     <>
-      <PremiumShell navigate={commandNavigate} />
-      <main className="spaces-landing premium-landing">
+      <UndoHost />
+      <main className={"spaces-landing premium-landing entry-mobile-first" + (step === "view" ? " view-picker" : "")}>
         <header className="spaces-brand">
           <a
             href="/"
@@ -236,66 +227,43 @@ export default function Spaces({ Workspace }) {
             <CompanyWordmark />
           </a>
           <span>THE INTERACTIVE PRODUCT EXPERIENCE</span>
-          <CommandTrigger />
+
         </header>
-        <div className={"spaces-intro" + (step === "view" ? " is-compact" : "")}>
-          <div className="spaces-collage" aria-hidden="true">
-            {[
-              ["c1", "/images/matcha/latte-iced.jpg", "Matcha Mood", "Matcha café"],
-              ["c2", "/images/usual/the-usual.jpg", "the usual.", "Neighbourhood coffee bar"],
-              ["c3", "/images/market-stall.jpg", "The Sunday Commons", "Pop-up market"],
-            ].map(([cls, src, name, kind]) => (
-              <figure className={cls} key={cls}>
-                <ProgressiveImage src={src} alt="" loading="lazy" width="1024" height="1280" />
-                <figcaption>
-                  <b>{name}</b>
-                  <small>{kind}</small>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <ol className="spaces-step" aria-label="Demo entry steps">
-            <li aria-current={step === "scenario" ? "step" : undefined}>
-              <span className={step === "scenario" ? "current" : "done"}>
-                {step === "view" ? <Check size={13} /> : 1}
-              </span>
-              Choose scenario
-            </li>
-            <i aria-hidden="true" />
-            <li aria-current={step === "view" ? "step" : undefined}>
-              <span className={step === "view" ? "current" : ""}>2</span>Choose
-              your view
-            </li>
-          </ol>
-          <span className="spaces-eyebrow">
-            {step === "scenario"
-              ? "ONE PLATFORM. DIFFERENT POSSIBILITIES."
-              : scenario === "market"
-                ? "POP-UP MARKET · THE SUNDAY COMMONS"
-                : "STANDARD MERCHANT · " + BUSINESSES[business].name.toUpperCase()}
-          </span>
-          <h1>
-            {step === "scenario" ? (
-              <>
-                Good business.
-                <br />
-                <em>Closer connections.</em>
-              </>
-            ) : (
-              <>
-                One experience.
-                <br />
-                <em>Three perspectives.</em>
-              </>
-            )}
-          </h1>
-          <p>
-            {step === "scenario"
-              ? "A welcome for your guests. A clear rhythm for your team. One thoughtfully connected place to run it all."
-              : "Choose a view and jump straight in. Everything is seeded, fictional and simulated, with no account or lengthy setup. Packages and setup live inside each view."}
-          </p>
-        </div>
         {step === "scenario" ? (
+          <section className="demo-introduction" aria-labelledby="demo-title">
+            <div className="demo-introduction-copy">
+              <span className="demo-eyebrow">THE KAWING &amp; CO. PRODUCT DEMO</span>
+              <h1 id="demo-title">Good business.<br /><em>Closer connections.</em></h1>
+              <p>See how one customer visit connects a branded menu, an order, the team behind it, and a reason to return.</p>
+              <button className="demo-start" onClick={() => {
+                const heading = document.getElementById("experience-choices");
+                heading?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
+                heading?.focus({ preventScroll: true });
+              }}>Choose your experience <ArrowRight size={19} /></button>
+              <small>Interactive proposal · Fictional businesses · No real payments</small>
+            </div>
+            <div className="demo-purpose-card">
+              <CompanyWordmark /><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
+              <h2>One visit.<br />Everyone connected.</h2>
+              <ol>
+                <li><span>01</span><div><b>Arrive &amp; order</b><p>A guest explores the menu, places an order, and follows its progress.</p></div></li>
+                <li><span>02</span><div><b>Run the business</b><p>The merchant verifies payment, prepares the order, and manages their brand.</p></div></li>
+                <li><span>03</span><div><b>Bring it together</b><p>The admin supports merchants, packages, and shared market operations.</p></div></li>
+              </ol>
+              <p className="demo-purpose-note">Try different views to see the same local demo data connect. A proposed three-month pilot would start with 3–5 establishments.</p>
+            </div>
+          </section>
+        ) : (
+          <section className="selected-experience" aria-labelledby="view-picker-title">
+            <span className="demo-eyebrow">{scenario === "market" ? "POP-UP MARKET · THE SUNDAY COMMONS" : "STANDARD MERCHANT · " + BUSINESSES[business].name.toUpperCase()}</span>
+            <h1 id="view-picker-title">Choose your view.</h1>
+            <p>{scenario === "standard" ? "Pick a business, then step into the experience." : "Explore a shared market as a merchant, customer, or admin."}</p>
+          </section>
+        )}
+        {step === "scenario" ? (
+          <section className="experience-selection" aria-label="Demo experiences">
+          <h2 id="experience-choices" tabIndex={-1}>What would you like to explore?</h2>
+          <p>Choose one experience. Then choose whose view to try.</p>
           <div className="scenario-cards" data-reveal>
             <button
               onClick={() => go({ scenario: "standard" })}
@@ -353,6 +321,7 @@ export default function Spaces({ Workspace }) {
               </div>
             </button>
           </div>
+          </section>
         ) : (
           <>
             <BackPreview onClick={() => go({})}>Back to scenarios</BackPreview>
@@ -538,7 +507,7 @@ export function SessionHeader({
         <small>SIMULATION</small>
       </p>
       <nav aria-label="Demo session">
-        <CommandTrigger />
+
         <Disclosure
           label="Switch View"
           icon={<Users size={15} aria-hidden="true" />}

@@ -1,27 +1,17 @@
 import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import {
-  Search,
   X,
   ArrowRight,
   ArrowLeft,
-  Command,
   Undo2,
   Play,
   RotateCcw,
   ZoomIn,
   ZoomOut,
-  ChevronRight,
   Box,
   Check,
-  Store,
-  Map,
-  Users,
-  ShieldCheck,
-  Palette,
-  ReceiptText,
-  ChartNoAxesCombined,
 } from "lucide-react";
-import { reducedMotion, inTriangle } from "./premium";
+import { reducedMotion } from "./premium";
 const SpatialCanvas = lazy(() => import("./SpatialCanvas"));
 export function Skeleton({ label = "Loading preview" }) {
   return (
@@ -50,336 +40,25 @@ export function BackPreview({ children, onClick }) {
     </span>
   );
 }
-export function PremiumShell({ navigate }) {
-  const [open, setOpen] = useState(false),
-    [query, setQuery] = useState(""),
-    [group, setGroup] = useState("Spaces"),
-    [toast, setToast] = useState(null),
-    [active, setActive] = useState(0);
-  const dialog = useRef(null),
-    input = useRef(null),
-    returnFocus = useRef(null),
-    drag = useRef(null),
-    pending = useRef(null),
-    trail = useRef([]),
-    pane = useRef(null),
-    undoRef = useRef(null);
-  const actions = [
-    {
-      name: "Merchant View",
-      detail: "Kawing Studio and daily operations",
-      group: "Spaces",
-      icon: Store,
-      view: "merchant",
-    },
-    {
-      name: "Customer View",
-      detail: "Browse and order as a guest",
-      group: "Spaces",
-      icon: Users,
-      view: "customer",
-    },
-    {
-      name: "Admin View",
-      detail: "Setup, packages and support",
-      group: "Spaces",
-      icon: ShieldCheck,
-      view: "admin",
-    },
-    {
-      name: "Kawing Studio",
-      detail: "Edit the Business Profile",
-      group: "Create",
-      icon: Palette,
-      view: "merchant",
-      page: "Customization",
-    },
-    {
-      name: "Menu management",
-      detail: "Availability and the daily catalog",
-      group: "Create",
-      icon: ReceiptText,
-      view: "merchant",
-      page: "Menu",
-    },
-    {
-      name: "Staff orders",
-      detail: "Cashier verification and fulfillment",
-      group: "Operate",
-      icon: ReceiptText,
-      view: "merchant",
-      page: "Orders",
-    },
-    {
-      name: "Business analytics",
-      detail: "Illustrative sales and performance",
-      group: "Operate",
-      icon: ChartNoAxesCombined,
-      view: "merchant",
-      page: "Analytics",
-    },
-    {
-      name: "Customer engagement",
-      detail: "Feedback and local activity",
-      group: "Operate",
-      icon: Users,
-      view: "merchant",
-      page: "Engagement",
-    },
-    {
-      name: "Standard Merchant",
-      detail: "One business, three perspectives",
-      group: "Explore",
-      icon: Store,
-      scenario: "standard",
-    },
-    {
-      name: "Pop-up Market",
-      detail: "Booths and event operations",
-      group: "Explore",
-      icon: Map,
-      scenario: "market",
-    },
-  ];
-  const q = query.toLowerCase().trim(),
-    shown = actions.filter((a) =>
-      q
-        ? (a.name + " " + a.detail).toLowerCase().includes(q)
-        : a.group === group,
-    );
-  function close() {
-    dialog.current?.close();
-    setOpen(false);
-    requestAnimationFrame(() => returnFocus.current?.focus?.());
-  }
-  function launch() {
-    dialog.current?.style.removeProperty("--sheet-drag");
-    returnFocus.current = document.activeElement;
-    setQuery("");
-    setActive(0);
-    setOpen(true);
-  }
+export function UndoHost() {
+  const [toast, setToast] = useState(null);
+  const undoRef = useRef(null);
   useEffect(() => {
-    const key = (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-        e.preventDefault();
-        open ? close() : launch();
-      }
-    };
-    const trigger = () => launch();
-    const undo = (e) => {
-      undoRef.current = e.detail;
-      setToast(e.detail);
-    };
-    const clear = () => {
-      undoRef.current = null;
-      setToast(null);
-    };
-    document.addEventListener("keydown", key);
-    window.addEventListener("kawing:commands", trigger);
+    const undo = (e) => { undoRef.current = e.detail; setToast(e.detail); };
+    const clear = () => { undoRef.current = null; setToast(null); };
     window.addEventListener("kawing:undo", undo);
-    window.addEventListener("kawing:clear-undo", clear);
-    window.addEventListener("hashchange", clear);
-    window.addEventListener("popstate", clear);
+    for (const event of ["kawing:clear-undo", "hashchange", "popstate"]) window.addEventListener(event, clear);
     return () => {
-      document.removeEventListener("keydown", key);
-      window.removeEventListener("kawing:commands", trigger);
       window.removeEventListener("kawing:undo", undo);
-      window.removeEventListener("kawing:clear-undo", clear);
-      window.removeEventListener("hashchange", clear);
-      window.removeEventListener("popstate", clear);
-      clearTimeout(pending.current);
+      for (const event of ["kawing:clear-undo", "hashchange", "popstate"]) window.removeEventListener(event, clear);
     };
-  }, [open]);
-  useEffect(() => {
-    if (open) {
-      dialog.current?.showModal();
-      input.current?.focus();
-    }
-  }, [open]);
+  }, []);
   useEffect(() => {
     if (!toast) return;
-    const t = setTimeout(() => {
-      undoRef.current = null;
-      setToast(null);
-    }, 9000);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => { undoRef.current = null; setToast(null); }, 9000);
+    return () => clearTimeout(timer);
   }, [toast]);
-  useEffect(() => {
-    setActive(0);
-  }, [query, group]);
-  function run(a) {
-    close();
-    navigate(a);
-  }
-  function aim(next, e) {
-    clearTimeout(pending.current);
-    const rect = pane.current?.getBoundingClientRect(),
-      last = trail.current.at(-3);
-    const p = { x: e.clientX, y: e.clientY };
-    if (
-      rect &&
-      last &&
-      p.x > last.x &&
-      inTriangle(
-        p,
-        last,
-        { x: rect.left, y: rect.top - 12 },
-        { x: rect.left, y: rect.bottom + 12 },
-      )
-    ) {
-      pending.current = setTimeout(() => setGroup(next), 220);
-    } else setGroup(next);
-  }
-  function dismissDrag(e) {
-    if (!drag.current) return;
-    const distance = e.clientY - drag.current.y;
-    if (distance > 90) close();
-    else dialog.current?.style.removeProperty("--sheet-drag");
-    drag.current = null;
-  }
-  return (
-    <>
-      <dialog
-        ref={dialog}
-        className="command-dialog"
-        aria-label="Quick actions"
-        onCancel={(e) => {
-          e.preventDefault();
-          close();
-        }}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) close();
-        }}
-      >
-        <div
-          className="command-sheet-handle"
-          aria-hidden="true"
-          onPointerDown={(e) => {
-            drag.current = { y: e.clientY };
-            e.currentTarget.setPointerCapture(e.pointerId);
-          }}
-          onPointerMove={(e) => {
-            if (drag.current)
-              dialog.current.style.setProperty(
-                "--sheet-drag",
-                Math.max(0, e.clientY - drag.current.y) + "px",
-              );
-          }}
-          onPointerUp={dismissDrag}
-          onPointerCancel={() => {
-            drag.current = null;
-            dialog.current?.style.removeProperty("--sheet-drag");
-          }}
-        >
-          <i />
-        </div>
-        <header>
-          <Search size={20} />
-          <input
-            ref={input}
-            aria-label="Search actions"
-            placeholder="Where would you like to go?"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            role="combobox"
-            aria-expanded="true"
-            aria-controls="command-results"
-            aria-activedescendant={
-              shown[active] ? "command-" + active : undefined
-            }
-            onKeyDown={(e) => {
-              if (e.key === "ArrowDown") {
-                e.preventDefault();
-                setActive((i) => (i + 1) % Math.max(shown.length, 1));
-              }
-              if (e.key === "ArrowUp") {
-                e.preventDefault();
-                setActive(
-                  (i) =>
-                    (i - 1 + Math.max(shown.length, 1)) %
-                    Math.max(shown.length, 1),
-                );
-              }
-              if (e.key === "Enter" && shown[active]) {
-                e.preventDefault();
-                run(shown[active]);
-              }
-            }}
-          />
-          <button aria-label="Close quick actions" onClick={close}>
-            <X size={18} />
-          </button>
-        </header>
-        <div
-          className="command-body"
-          onPointerMove={(e) => {
-            trail.current.push({ x: e.clientX, y: e.clientY });
-            if (trail.current.length > 5) trail.current.shift();
-          }}
-        >
-          {!q && (
-            <nav aria-label="Action categories">
-              {["Spaces", "Create", "Operate", "Explore"].map((g) => (
-                <button
-                  key={g}
-                  aria-pressed={group === g}
-                  onPointerEnter={(e) => aim(g, e)}
-                  onFocus={() => {
-                    clearTimeout(pending.current);
-                    setGroup(g);
-                  }}
-                  onClick={() => setGroup(g)}
-                >
-                  {g}
-                  <ChevronRight size={13} />
-                </button>
-              ))}
-            </nav>
-          )}
-          <div
-            ref={pane}
-            id="command-results"
-            role="listbox"
-            aria-label="Matching actions"
-            onPointerEnter={() => clearTimeout(pending.current)}
-          >
-            {shown.map((a, i) => (
-              <button
-                key={a.name}
-                role="option"
-                id={"command-" + i}
-                aria-selected={active === i}
-                onPointerMove={() => setActive(i)}
-                onClick={() => run(a)}
-              >
-                <span>
-                  <a.icon size={19} />
-                </span>
-                <div>
-                  <strong>{a.name}</strong>
-                  <small>{a.detail}</small>
-                </div>
-                <ArrowRight size={16} />
-              </button>
-            ))}
-            {!shown.length && (
-              <p className="command-empty">
-                No matching action. Try “orders” or “customer”.
-              </p>
-            )}
-          </div>
-        </div>
-        <footer>
-          <span>
-            <kbd>↑</kbd>
-            <kbd>↓</kbd> to browse <kbd>↵</kbd> to open
-          </span>
-          <span>
-            <kbd>esc</kbd> to close
-          </span>
-        </footer>
-      </dialog>
+  return (<>
       {toast && (
         <div className="premium-toast" role="status">
           <Check size={17} />
@@ -409,22 +88,6 @@ export function PremiumShell({ navigate }) {
         </div>
       )}
     </>
-  );
-}
-export function CommandTrigger() {
-  const mac =
-    typeof navigator !== "undefined" &&
-    /Mac|iPhone|iPad/.test(navigator.platform);
-  return (
-    <button
-      className="command-trigger"
-      onClick={() => window.dispatchEvent(new Event("kawing:commands"))}
-      aria-label="Open quick actions"
-    >
-      <Search size={15} />
-      <span>Quick actions</span>
-      <kbd>{mac ? "⌘" : "Ctrl"} K</kbd>
-    </button>
   );
 }
 export function ProductStory() {

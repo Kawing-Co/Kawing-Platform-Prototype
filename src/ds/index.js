@@ -12,3 +12,5 @@ import { initReveal } from "./reveal.js";
 const start = () => { initTactile(); initReveal(); };
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
 else start();
+
+import "./mobile-demo.css";
