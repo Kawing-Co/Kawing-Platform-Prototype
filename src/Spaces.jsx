@@ -1,4 +1,5 @@
 import CompanyWordmark from "./CompanyWordmark";
+import {useDemoMotion, MotionControl, MotionGlyph, ConnectedVisit} from "./MotionExperience";
 import React, { useState, useEffect, useRef, useId } from "react";
 import {
   ArrowRight,
@@ -90,6 +91,7 @@ function confirmLeave(action) {
 }
 
 export default function Spaces({ Workspace }) {
+  const motion=useDemoMotion();
   const initial = parseSession(location.search),
     [scenario, setScenario] = useState(initial.scenario),
     [view, setView] = useState(initial.view),
@@ -222,7 +224,7 @@ export default function Spaces({ Workspace }) {
   return (
     <>
       <UndoHost />
-      <main className={"spaces-landing premium-landing entry-mobile-first" + (step === "view" ? " view-picker" : "")}>
+      <main data-page-hidden={!motion.pageVisible} data-motion={motion.enabled?"on":"off"} className={"spaces-landing premium-landing entry-mobile-first" + (step === "view" ? " view-picker" : "")}>
         <header className="spaces-brand">
           <a
             href="/"
@@ -233,26 +235,23 @@ export default function Spaces({ Workspace }) {
           >
             <CompanyWordmark />
           </a>
-          <span>THE INTERACTIVE PRODUCT EXPERIENCE</span>
+          <div className="entry-header-tools"><span>THE INTERACTIVE PRODUCT EXPERIENCE</span><MotionControl motion={motion}/></div>
 
         </header>
         {step === "landing" ? (
           <section className="demo-introduction" aria-labelledby="demo-title">
             <div className="demo-introduction-copy">
               <span className="demo-eyebrow">THE KAWING &amp; CO. PRODUCT DEMO</span>
+              <div className="connection-badge"><MotionGlyph enabled={motion.enabled} loop/><span>Small businesses. Lasting connections.</span></div>
               <h1 id="demo-title" tabIndex={-1}>Good business.<br /><em>Closer connections.</em></h1>
               <p>See how one customer visit connects a branded menu, an order, the team behind it, and a reason to return.</p>
-              <button className="demo-start" data-tactile onClick={() => go({ screen: "experiences" })}>Choose your experience <ArrowRight size={19} /></button>
+              <button className="demo-start" data-tactile onClick={() => go({ screen: "experiences" })}>Choose your experience <MotionGlyph name="nudge" enabled={motion.enabled} tone="light" className="motion-forward"/></button>
               <small>Interactive proposal · Fictional businesses · No real payments</small>
             </div>
             <div className="demo-purpose-card">
-              <CompanyWordmark variant="stacked" /><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
+              <div className="logo-stage"><span className="logo-orbit" aria-hidden="true"/><CompanyWordmark variant="stacked" /></div><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
               <h2>One visit.<br />Everyone connected.</h2>
-              <ol>
-                <li><span>01</span><div><b>Arrive &amp; order</b><p>A guest explores the menu, places an order, and follows its progress.</p></div></li>
-                <li><span>02</span><div><b>Run the business</b><p>The merchant verifies payment, prepares the order, and manages their brand.</p></div></li>
-                <li><span>03</span><div><b>Bring it together</b><p>The admin supports merchants, packages, and shared market operations.</p></div></li>
-              </ol>
+              <ConnectedVisit motion={motion}/>
               <p className="demo-purpose-note">Try different views to see the same local demo data connect. A proposed three-month pilot would start with 3–5 establishments.</p>
             </div>
           </section>
@@ -291,7 +290,7 @@ export default function Spaces({ Workspace }) {
                   operations. No booth map required.
                 </p>
                 <strong>
-                  Explore a business <ArrowRight size={18} />
+                  Explore a business <MotionGlyph name="nudge" enabled={motion.enabled} className="motion-forward"/>
                 </strong>
               </div>
             </button>
@@ -320,7 +319,7 @@ export default function Spaces({ Workspace }) {
                   spot, and shape a shared event layout.
                 </p>
                 <strong>
-                  Explore a market <ArrowRight size={18} />
+                  Explore a market <MotionGlyph name="nudge" enabled={motion.enabled} className="motion-forward"/>
                 </strong>
               </div>
             </button>
@@ -382,6 +381,7 @@ export default function Spaces({ Workspace }) {
           <span>
             <span className="online-dot" /> Interactive demo · Fictional
             businesses · Browser-local data
+            <a className="motion-credits" href="/motion/credits.html" target="_blank" rel="noopener noreferrer">Animation credits</a>
           </span>
           <CompanyWordmark variant="reversed" />
         </footer>

@@ -16,3 +16,5 @@ else start();
 import "./mobile-demo.css";
 
 import "./booth-map.css";
+
+import "./lottie-motion.css";

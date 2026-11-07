@@ -1,0 +1,71 @@
+/* Locally hosted Lottie vectors: loading is optional, navigation is immediate. */
+.entry-header-tools { display:flex; align-items:center; gap:20px; }
+.entry-header-tools > span { font-size:10px; letter-spacing:.17em; color:var(--k-ink-2); }
+.motion-control { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:44px; padding:9px 12px; border:1px solid var(--k-line); border-radius:30px; color:var(--k-ink); background:white; font-size:11px; white-space:nowrap; }
+.motion-control:hover { background:#edf1f7; }
+.motion-control:disabled { opacity:.7; cursor:default; }
+.motion-glyph { position:relative; display:inline-flex; width:32px; height:32px; flex:none; align-items:center; justify-content:center; vertical-align:middle; pointer-events:none; }
+.motion-vector { position:absolute; inset:0; opacity:0; }
+.motion-vector svg { display:block; width:100%; height:100%; }
+.motion-fallback { opacity:1; }
+.motion-glyph[data-lottie-ready=true] .motion-vector { opacity:1; }
+.motion-glyph[data-lottie-ready=true] .motion-fallback { opacity:0; }
+.motion-forward { transform:rotate(-90deg); }
+.connection-badge { display:flex; align-items:center; gap:8px; color:#365579; font-size:12px; margin:16px 0 0; }
+.connection-badge .motion-glyph { width:34px; height:34px; }
+.demo-start .motion-glyph { color:white; }
+.logo-stage { position:relative; display:flex; align-items:center; justify-content:flex-start; width:148px; height:148px; margin-bottom:18px; isolation:isolate; }
+html body .logo-stage .company-wordmark.company-mark-stacked { display:block; color:white; width:142px; height:140px; margin:0; position:relative; }
+.logo-orbit { position:absolute; width:148px; height:148px; border:1px solid #ffffff15; border-radius:50%; z-index:-1; }
+.logo-orbit:before { content:''; display:block; position:absolute; top:10px; left:29px; width:7px; height:7px; border-radius:50%; background:#b7cbe6; box-shadow:0 0 18px #c7d9f5a0; }
+html body .connected-visit ol { gap:7px; }
+html body .connected-visit li { display:block; }
+.visit-step { width:100%; display:grid; grid-template-columns:23px minmax(0,1fr) 18px; gap:9px; align-items:start; text-align:left; color:white; background:transparent; border:1px solid transparent; border-radius:12px; padding:12px 10px; transition:background .25s,border-color .25s,transform .2s; }
+.visit-step:hover { background:#ffffff0c; }
+.visit-step[aria-pressed=true] { background:#ffffff0e; border-color:#ffffff30; }
+.visit-step:active { transform:scale(.99); }
+.visit-step:focus-visible { outline:2px solid #c6d9f3; outline-offset:2px; }
+.visit-index { color:#bdcce0; font-size:11px; padding-top:2px; font-variant-numeric:tabular-nums; }
+.visit-description { display:block; font-size:13px; line-height:1.65; color:#d0dbea; margin-top:5px; }
+.visit-indicator { opacity:0; transform:scale(.7); transition:opacity .25s,transform .25s; color:#c6d9f3; }
+.visit-step[aria-pressed=true] .visit-indicator { opacity:1; transform:scale(1); }
+.visit-preview { display:flex; align-items:center; gap:13px; min-height:96px; padding:14px 12px; background:#0f1d37; border:1px solid #ffffff18; border-radius:13px; margin-top:18px; }
+.visit-preview .motion-glyph { width:46px; height:46px; color:white; }
+.visit-preview small { color:#a8bdd8; font-size:10px; letter-spacing:.03em; }
+.visit-preview p { color:#edf3fc; font-size:13px; line-height:1.6; margin:4px 0 0; }
+.visit-hint { display:block; margin:10px 0 0; font-size:10px; color:#bdcce0; }
+html body .demo-purpose-card h2 { margin-bottom:20px; }
+html body .demo-purpose-note { margin-top:20px; }
+.entry-mobile-first[data-motion=on] .spaces-brand .company-wordmark { animation:brand-arrive .85s cubic-bezier(.2,.8,.2,1) both; }
+.entry-mobile-first[data-motion=on] .demo-introduction-copy { animation:welcome-arrive .8s cubic-bezier(.2,.8,.2,1) both; }
+.entry-mobile-first[data-motion=on] .demo-purpose-card { animation:welcome-arrive 1s cubic-bezier(.2,.8,.2,1) both; }
+.entry-mobile-first[data-motion=on] .logo-stage .brand-stacked { animation:brand-settle 1.2s cubic-bezier(.2,.8,.2,1) both; }
+.entry-mobile-first[data-motion=on] .logo-orbit { animation:connection-orbit 14s linear infinite; }
+.entry-mobile-first[data-motion=on] .visit-preview { animation:visit-update .35s ease both; }
+.entry-mobile-first[data-motion=on] .scenario-card:hover .motion-forward { translate:4px 0; }
+@keyframes welcome-arrive { from { opacity:.35; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes brand-arrive { from { opacity:.25; translate:-10px 0; } to { opacity:1; translate:0 0; } }
+@keyframes brand-settle { from { opacity:.2; transform:scale(.92) rotate(-5deg); } to { opacity:1; transform:scale(1) rotate(0); } }
+@keyframes connection-orbit { to { transform:rotate(360deg); } }
+@keyframes visit-update { from { opacity:.4; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+.entry-mobile-first[data-motion=off] * { animation:none!important; transition:none!important; }
+.entry-mobile-first[data-motion=off] .company-wordmark { transform:none!important; }
+@media(max-width:750px) {
+ .entry-header-tools { gap:0; }
+ .entry-header-tools > span { display:none; }
+ .motion-control { font-size:10px; padding-inline:10px; }
+ .connection-badge { font-size:11px; margin-top:10px; gap:6px; }
+ .logo-stage { width:124px; height:124px; margin-bottom:16px; }
+ html body .logo-stage .company-wordmark.company-mark-stacked { width:118px; height:118px; }
+ .logo-orbit { width:124px; height:124px; }
+ .visit-step { padding:10px 8px; grid-template-columns:21px minmax(0,1fr) 14px; gap:7px; }
+ .visit-description { font-size:12px; }
+ .visit-preview { min-height:100px; }
+ .entry-mobile-first .spaces-brand > a > .company-wordmark.company-mark-compact { width:166px; gap:6px; }
+ .entry-mobile-first .spaces-brand .brand-wordmark { width:134px; }
+}
+@media(prefers-reduced-motion:reduce) { .entry-mobile-first *, .entry-mobile-first *:before { animation:none!important; transition:none!important; } }
+
+.entry-mobile-first[data-page-hidden=true] *, .demo-purpose-card[data-card-visible=false] .logo-orbit { animation-play-state:paused!important; }
+
+.motion-credits { color:inherit; display:inline-block; margin-left:12px; text-underline-offset:3px; font-size:10px; opacity:.85; }

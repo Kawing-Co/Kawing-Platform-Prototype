@@ -1,41 +1,41 @@
-# Active slice — distinct entry pages and market map
+# Active slice — LottieFiles microinteractions
 
-Authority: owner request 2026-11-07; repository AGENTS.md and previously read active
-Context Vault AGENTS.md TOKEN-OPT-001-A8. Clean local main at
-459f98dbcb33758225e429b0d31c97aac1fe65ed; live Site 12. GitHub push remains
-explicitly deferred; preserve that authorization and publish only to the existing Site.
+Authority: explicit owner request 2026-11-07; AGENTS.md; Context Vault
+TOKEN-OPT-001-A8 read live. Clean /workspace/qrmenu main at
+76001b320fb1267491a84b78dadf85750921ebd3; live public Site 13. One worktree,
+no unknown changes or concurrent writer. GitHub push remains explicitly deferred.
 
-Approved scope: separate introduction (/) from experience selection
-(?screen=experiences), then existing scenario/view URLs. Preserve direct guest/legacy
-links, browser history, draft guards and company SVG branding. Map overhaul uses the
-owner's annotated Orchard image as a layout reference for an original fictional
-schematic: two facing booth rows, central walkway, entrances and cross access. Do not
-copy Google satellite imagery or claim an official venue plan/verified real layout.
+Approved scope: use the supplied LottieFiles microinteraction collection for actual
+locally hosted animations; immediate landing entrance/brand motion, responsive CTA
+and experience-card feedback, interactive connected-visit story. Keep original SVG
+identity and navy/white palette. Public animation files require no account access;
+no credentials or sign-in needed. Preserve licenses and creator/source provenance.
 
-Map: clear booth states and selection, connected merchant details/order entry, bounded
-zoom/pan with touch/pointer/keyboard alternatives, fit/reset, useful search/filter,
-mobile detail sheet, readable accessible booth list, and layout validation protecting
-walkways. Preserve existing IDs, assignments, saved records and operational lifecycle.
-No backend, real booking, geolocation, payments, physical location or infrastructure.
+Constraints: no operational/data/checkout changes, no backend, no redesign of merchant
+themes, no merge or GitHub push. Preserve separate entry pages and map/workspace flows.
+Use a small lazy SVG player; offscreen/hidden-page pause, reduced-motion static fallback,
+visible persistent pause/play control, cleanup on unmount; no motion-blocked actions.
+Rollback is Site 13 and parent commit. New dependency limited to Lottie SVG runtime.
 
-Acceptance: introduction and experience choices never co-render; links addressable;
-Back/Forward and mobile 360px+ work. Map selection agrees with list/detail and shared
-operations; unavailable booths cannot be reserved; filters don't erase spatial context;
-zoom/pan bounded; no accidental selection after drag; walkway violations rejected.
-Verify build, relevant and full browser regressions, compiled desktop/mobile visuals,
-console/overflow, complete diff and exact Site release. Rollback: saved Site 12.
+Acceptance: landing visibly animates on load; clickable narrative changes detail;
+Lottie renders from local data with no third-party runtime requests; hover/focus replay;
+pause/reduced motion stop autoplay including hidden/offscreen; fallback leaves usable
+content and navigation; phone360+, keyboard and existing entry/branding/map checks pass.
+Verify relevant Playwright coverage, production build, actual mobile/desktop screenshots,
+console/overflow and diff; commit local main and publish exact source to existing Site.
 
-Completed source work: distinct introduction/experience/view pages; original navy
-schematic, bounded camera and pinch/drag/keyboard controls, spatial filters, phone
-sheet/focus return, connected business entry, crosswalk validation and inactive
-profile protection. Guide: docs/BOOTH_MAP_GUIDE.md; screenshots: docs/screenshots/booth-map/.
+Completed: actual local Lottie vectors on landing/entry actions, immediate CSS entrance
+and original-logo orbit, interactive/auto-advancing story, persistent pause and reduced
+motion, offscreen/hidden-page handling, static failure fallback, visible credits/licenses.
+Implementation: MotionExperience.jsx, motion JSON data and scoped lottie-motion.css;
+Spaces only changes the introduction and decorative action icons. Added light SVG
+lottie-web dependency. Source/provenance/design notes: docs/LOTTIE_MOTION.md.
 
-Verification: production build passed; complete suite 101/105 initial, then all seven
-targeted reruns passed (including four failed cases: stale selectors, development
-reload interruption, fractional pixel assertion). No unresolved failure. Compiled
-12-case responsive review passed with zero overflow or console/page errors; actual
-desktop/phone screenshots inspected. Complete diff/whitespace review passed. No new
-dependency, backend or GitHub push. Existing large-bundle advisory remains.
-
-Release target: exact local main to the existing Sites source remote and public Site;
-record returned version and source in .git/kawing-brand-release.json after verification.
+Verification: 29 targeted Playwright checks passed (new motion + existing branding,
+mobile entry, map and session). Build passed. Compiled nine-case responsive sweep at
+360/768/1440 passed with zero overflow/console/page errors. Desktop/phone screenshots
+inspected and retained. Complete diff/whitespace check passed. Full operational suite
+not rerun for this bounded presentation slice; previous baseline evidence retained.
+Existing main-bundle advisory remains. Next: exact-source Site update, preserve public
+audience; record returned deployment/version in .git/kawing-brand-release.json. GitHub
+push remains deferred; no credentials were used for LottieFiles.

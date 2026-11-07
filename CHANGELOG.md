@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-07 — LottieFiles motion and interactive landing story
+
+- Added local, navy/white LottieFiles connection, cart and directional microinteractions;
+  immediate landing entrance and subtle orbit preserve the supplied original logo.
+- Made the three-step visit story interactive, with illustrative perspective previews.
+- Added persistent pause, reduced-motion/static fallbacks, focus replay and offscreen/
+  hidden-page suspension. Player is lazy-loaded; no animation account or credentials needed.
+- Added visible animation credits/licenses, source provenance, 29 passing targeted checks
+  and compiled responsive screenshot evidence. GitHub push remains deferred.
+
 ## 2026-11-07 — Separate entry pages and interactive booth map
 
 - Split introduction, experience selection and view selection into addressable pages,
