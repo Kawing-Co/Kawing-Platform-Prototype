@@ -8,7 +8,7 @@ test('landing animates real local vectors immediately and has an interactive vis
   await expect(loop).toHaveAttribute('data-lottie-state','playing');
   const vector=loop.locator('.motion-vector svg');const before=await vector.innerHTML();
   await expect.poll(()=>vector.innerHTML()).not.toBe(before);
-  await expect(page.locator('.logo-orbit')).toHaveCSS('animation-name','connection-orbit');
+  await expect(page.locator('.logo-orbit')).toHaveCount(0);
   await page.getByRole('button',{name:/03 Bring it together/}).click();
   await expect(page.locator('.visit-preview')).toContainText('Admin perspective');
   await expect(page.locator('.connected-visit')).toHaveAttribute('data-active-step','2');
@@ -30,7 +30,7 @@ test('pause is persistent and replay remains available through keyboard focus',a
   await expect(page.locator('.entry-mobile-first')).toHaveAttribute('data-motion','off');
   await expect(page.locator('.motion-vector svg')).toHaveCount(0);
   await page.reload();await expect(page.getByRole('button',{name:'Play motion',exact:true})).toBeVisible();
-  await expect(page.locator('.logo-orbit')).toHaveCSS('animation-name','none');
+  await expect(page.locator('.logo-orbit')).toHaveCount(0);
   await page.getByRole('button',{name:'Play motion',exact:true}).click();
   await expect(page.locator('.connection-badge .motion-glyph')).toHaveAttribute('data-lottie-state','playing');
 });
@@ -42,7 +42,7 @@ test('offscreen and hidden-page playback pauses; visible page can resume',async(
   await page.evaluate(()=>window.scrollTo(0,0));await expect(loop).toHaveAttribute('data-lottie-state','playing');
   await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:true});document.dispatchEvent(new Event('visibilitychange'));});
   await expect(loop).toHaveAttribute('data-lottie-state','paused');
-  await expect(page.locator('.logo-orbit')).toHaveCSS('animation-play-state','paused');
+  await expect(page.locator('.entry-mobile-first')).toHaveAttribute('data-page-hidden','true');
   await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,value:false});document.dispatchEvent(new Event('visibilitychange'));});
   await expect(loop).toHaveAttribute('data-lottie-state','playing');
 });
@@ -52,7 +52,7 @@ test('reduced motion at 360px loads no player and keeps controls and entry usabl
   const runtime=[];page.on('request',r=>{if(/lottie_light/.test(r.url()))runtime.push(r.url());});
   await page.goto('/');await expect(page.getByRole('button',{name:'Reduced motion enabled'})).toBeDisabled();
   await expect(page.locator('.motion-vector svg')).toHaveCount(0);
-  await expect(page.locator('.logo-orbit')).toHaveCSS('animation-name','none');
+  await expect(page.locator('.logo-orbit')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.getByRole('button',{name:/02 Run the business/}).click();await expect(page.locator('.visit-preview')).toContainText('Merchant perspective');
   await page.getByRole('button',{name:'Choose your experience',exact:true}).click();await expect(page).toHaveURL(/screen=experiences/);

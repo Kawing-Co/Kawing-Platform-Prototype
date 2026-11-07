@@ -8,7 +8,7 @@ GitHub push remains deferred. Rollback: saved Site 13.
 ## Experience
 
 The introduction animates immediately with a short typography/card arrival, an original
-logo reveal and slow connection orbit. The supplied company SVGs are untouched.
+logo reveal. The decorative orbit was removed at the owner’s request on 2026-11-08. The supplied company SVGs are untouched.
 A decorative Lottie connection motif accompanies the headline. Directional Lottie
 arrows play on arrival and replay on hover/focus for the CTA and experience cards.
 The three journey steps are now real buttons with an illustrative perspective preview.
@@ -18,7 +18,7 @@ This illustration does not create orders or claim payment was verified.
 Pause motion persists locally between entry pages/reloads. System reduced motion
 always wins and presents static icons; no player chunk is requested. Intersection
 observers pause vector playback offscreen; visibility events pause hidden-page players,
-CSS orbit and story rotation. Pointer/focus replay stays decorative. Unmount destroys
+CSS entrance motion and story rotation. Pointer/focus replay stays decorative. Unmount destroys
 players and observers. Navigation never waits for runtime availability.
 
 ## Source and licensing

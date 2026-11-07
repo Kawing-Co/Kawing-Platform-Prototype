@@ -249,7 +249,7 @@ export default function Spaces({ Workspace }) {
               <small>Interactive proposal · Fictional businesses · No real payments</small>
             </div>
             <div className="demo-purpose-card">
-              <div className="logo-stage"><span className="logo-orbit" aria-hidden="true"/><CompanyWordmark variant="stacked" /></div><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
+              <div className="logo-stage"><CompanyWordmark variant="stacked" /></div><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
               <h2>One visit.<br />Everyone connected.</h2>
               <ConnectedVisit motion={motion}/>
               <p className="demo-purpose-note">Try different views to see the same local demo data connect. A proposed three-month pilot would start with 3–5 establishments.</p>

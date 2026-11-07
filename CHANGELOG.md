@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-08 — Remove logo orbit
+
+- Removed the rotating ring and dot surrounding the stacked Kawing & Co. logo.
+- Preserved original SVG artwork, entrance motion and other Lottie interactions.
+
 ## 2026-11-07 — LottieFiles motion and interactive landing story
 
 - Added local, navy/white LottieFiles connection, cart and directional microinteractions;

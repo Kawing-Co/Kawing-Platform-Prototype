@@ -49,3 +49,15 @@ do not repeat Site14 deployment. No animation or operational source behavior cha
 Credits repair verified locally: targeted fallback/credits check 1 passed. Updated
 source retains the 29-test motion/integration evidence; build/package next exact commit
 and verify nonempty public text attribution after publication.
+
+## Active amendment — remove decorative logo orbit (2026-11-08)
+Owner explicitly requests removal of the rotating circle around Kawing & Co.
+Clean main baseline e634dd0; public Site15. Remove orbit markup, ring/dot styles and
+unused keyframes; preserve original SVG, logo entrance and other Lottie interactions.
+Update existing motion assertions; run motion/branding regressions and build, review
+diff, then commit local main and publish exact source to existing public Site. GitHub
+push remains deferred. Rollback: Site15. No operational or data changes.
+Verification: all nine motion/branding tests passed; production build and complete diff
+review passed. No operational source changed. Existing bundle-size advisory remains.
+Publish exact local main to the existing Sites source remote; record actual deployment
+and public verification in .git/kawing-brand-release.json. GitHub push remains deferred.

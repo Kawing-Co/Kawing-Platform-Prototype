@@ -16,8 +16,6 @@
 .demo-start .motion-glyph { color:white; }
 .logo-stage { position:relative; display:flex; align-items:center; justify-content:flex-start; width:148px; height:148px; margin-bottom:18px; isolation:isolate; }
 html body .logo-stage .company-wordmark.company-mark-stacked { display:block; color:white; width:142px; height:140px; margin:0; position:relative; }
-.logo-orbit { position:absolute; width:148px; height:148px; border:1px solid #ffffff15; border-radius:50%; z-index:-1; }
-.logo-orbit:before { content:''; display:block; position:absolute; top:10px; left:29px; width:7px; height:7px; border-radius:50%; background:#b7cbe6; box-shadow:0 0 18px #c7d9f5a0; }
 html body .connected-visit ol { gap:7px; }
 html body .connected-visit li { display:block; }
 .visit-step { width:100%; display:grid; grid-template-columns:23px minmax(0,1fr) 18px; gap:9px; align-items:start; text-align:left; color:white; background:transparent; border:1px solid transparent; border-radius:12px; padding:12px 10px; transition:background .25s,border-color .25s,transform .2s; }
@@ -40,13 +38,11 @@ html body .demo-purpose-note { margin-top:20px; }
 .entry-mobile-first[data-motion=on] .demo-introduction-copy { animation:welcome-arrive .8s cubic-bezier(.2,.8,.2,1) both; }
 .entry-mobile-first[data-motion=on] .demo-purpose-card { animation:welcome-arrive 1s cubic-bezier(.2,.8,.2,1) both; }
 .entry-mobile-first[data-motion=on] .logo-stage .brand-stacked { animation:brand-settle 1.2s cubic-bezier(.2,.8,.2,1) both; }
-.entry-mobile-first[data-motion=on] .logo-orbit { animation:connection-orbit 14s linear infinite; }
 .entry-mobile-first[data-motion=on] .visit-preview { animation:visit-update .35s ease both; }
 .entry-mobile-first[data-motion=on] .scenario-card:hover .motion-forward { translate:4px 0; }
 @keyframes welcome-arrive { from { opacity:.35; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
 @keyframes brand-arrive { from { opacity:.25; translate:-10px 0; } to { opacity:1; translate:0 0; } }
 @keyframes brand-settle { from { opacity:.2; transform:scale(.92) rotate(-5deg); } to { opacity:1; transform:scale(1) rotate(0); } }
-@keyframes connection-orbit { to { transform:rotate(360deg); } }
 @keyframes visit-update { from { opacity:.4; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
 .entry-mobile-first[data-motion=off] * { animation:none!important; transition:none!important; }
 .entry-mobile-first[data-motion=off] .company-wordmark { transform:none!important; }
@@ -57,7 +53,6 @@ html body .demo-purpose-note { margin-top:20px; }
  .connection-badge { font-size:11px; margin-top:10px; gap:6px; }
  .logo-stage { width:124px; height:124px; margin-bottom:16px; }
  html body .logo-stage .company-wordmark.company-mark-stacked { width:118px; height:118px; }
- .logo-orbit { width:124px; height:124px; }
  .visit-step { padding:10px 8px; grid-template-columns:21px minmax(0,1fr) 14px; gap:7px; }
  .visit-description { font-size:12px; }
  .visit-preview { min-height:100px; }
@@ -66,6 +61,7 @@ html body .demo-purpose-note { margin-top:20px; }
 }
 @media(prefers-reduced-motion:reduce) { .entry-mobile-first *, .entry-mobile-first *:before { animation:none!important; transition:none!important; } }
 
-.entry-mobile-first[data-page-hidden=true] *, .demo-purpose-card[data-card-visible=false] .logo-orbit { animation-play-state:paused!important; }
 
 .motion-credits { color:inherit; display:inline-block; margin-left:12px; text-underline-offset:3px; font-size:10px; opacity:.85; }
+
+.entry-mobile-first[data-page-hidden=true] * { animation-play-state:paused!important; }
