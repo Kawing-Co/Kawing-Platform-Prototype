@@ -518,7 +518,7 @@ function App({
       </main>
     );
   return (
-    <div className="app" style={{ "--brand": data.brand.accent }}>
+    <div className="app" style={{ "--brand": "var(--k-ink)" }}>
       <aside className={"sidebar " + (mobile ? "open" : "")}>
         <a
           className="logo"

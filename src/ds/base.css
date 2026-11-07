@@ -4,11 +4,11 @@
 /* ── tactile primary actions (behaviour in tactile.js) ── */
 html body .k-tactile {
   will-change: transform;
-  background-image: radial-gradient(150px circle at var(--lx, 50%) var(--ly, 50%), rgba(222, 240, 170, calc(0.42 * var(--lg, 0))), transparent 65%);
-  box-shadow: 0 14px 28px -16px color-mix(in srgb, currentColor 0%, rgba(20, 50, 34, 0.7)), inset 0 0 0 1px rgba(255, 255, 255, calc(0.08 + 0.25 * var(--lg, 0)));
+  background-image: radial-gradient(150px circle at var(--lx, 50%) var(--ly, 50%), rgba(220, 228, 239, calc(0.42 * var(--lg, 0))), transparent 65%);
+  box-shadow: 0 14px 28px -16px color-mix(in srgb, currentColor 0%, rgba(15, 29, 55, 0.7)), inset 0 0 0 1px rgba(255, 255, 255, calc(0.08 + 0.25 * var(--lg, 0)));
   transition: box-shadow 0.3s var(--k-ease), background-color 0.25s;
 }
-html body .k-tactile.k-pressed { box-shadow: 0 6px 12px -10px rgba(20, 50, 34, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
+html body .k-tactile.k-pressed { box-shadow: 0 6px 12px -10px rgba(15, 29, 55, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.18); }
 html body .k-tactile:disabled { background-image: none; box-shadow: none; }
 
 /* shared primary / secondary shape (colour stays with the context) */

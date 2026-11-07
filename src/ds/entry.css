@@ -28,9 +28,9 @@ html body .premium-landing .spaces-step > li > span.current, html body .premium-
 .spaces-collage figure .progressive-image { position: absolute; inset: 0; }
 .spaces-collage figure img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.7s ease; }
 .spaces-collage figure .image-ready img { opacity: 1; }
-.spaces-collage figcaption { position: absolute; left: 12px; bottom: 12px; display: grid; gap: 2px; padding: 8px 13px; border-radius: 16px; background: rgba(18, 28, 22, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #f1f6e4; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
+.spaces-collage figcaption { position: absolute; left: 12px; bottom: 12px; display: grid; gap: 2px; padding: 8px 13px; border-radius: 16px; background: rgba(15, 29, 55, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--k-sage); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
 .spaces-collage figcaption b { font: 650 13px/1.1 var(--k-head); letter-spacing: -0.01em; }
-.spaces-collage figcaption small { font-size: 11px; color: rgba(236, 244, 214, 0.8); }
+.spaces-collage figcaption small { font-size: 11px; color: rgba(237, 241, 247, 0.8); }
 .spaces-collage .c2 figcaption { top: 12px; bottom: auto; }
 .spaces-collage .c1 { left: 0; bottom: 4%; width: 46%; aspect-ratio: 4 / 5; transform: rotate(-2.2deg); animation-delay: -2s; }
 .spaces-collage .c2 { right: 2%; top: 0; width: 54%; aspect-ratio: 4 / 5; transform: rotate(1.6deg); animation-duration: 11s; }
@@ -59,7 +59,7 @@ html body .premium-landing .scenario-art .progressive-image { position: absolute
 html body .premium-landing .scenario-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; transform: scale(1.04); transition: transform 1.2s var(--k-ease), opacity 0.6s; opacity: 0; }
 html body .premium-landing .scenario-art .image-ready img { opacity: 1; }
 html body .premium-landing .scenario-card:hover .scenario-art img { transform: scale(1.12); }
-html body .premium-landing .scenario-art .art-label { position: absolute; left: 16px; right: auto; top: auto; bottom: 16px; width: max-content; max-width: calc(100% - 32px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 99px; background: rgba(12, 24, 17, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #eef3e0; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; box-shadow: inset 0 0 0 1px rgba(224, 238, 196, 0.2); }
+html body .premium-landing .scenario-art .art-label { position: absolute; left: 16px; right: auto; top: auto; bottom: 16px; width: max-content; max-width: calc(100% - 32px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 99px; background: rgba(15, 29, 55, 0.58); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--k-sage); font-size: 12px; font-weight: 600; letter-spacing: 0.02em; box-shadow: inset 0 0 0 1px rgba(237, 241, 247, 0.2); }
 html body .premium-landing .scenario-card-copy { padding: clamp(22px, 3vw, 32px); align-self: stretch; }
 html body .premium-landing .scenario-card-copy > span { font-size: 11.5px; letter-spacing: 0.16em; color: var(--k-moss); font-weight: 600; }
 html body .premium-landing .scenario-card h2 { font: 500 clamp(30px, 3.4vw, 40px)/1.02 var(--k-serif); letter-spacing: -0.01em; margin: 12px 0 10px; color: var(--k-ink); }
@@ -87,7 +87,7 @@ html body .premium-landing .space-enter { font-size: 13.5px; }
 }
 
 /* product story: the film still is a dark panel now */
-html body .story-visual { background: #e4e8d9; }
+html body .story-visual { background: var(--k-sage); }
 html body .story-visual > img, html body .spatial-fallback img { object-fit: contain; }
 html body .story-visual-label { font-size: 11px; letter-spacing: 0.1em; }
 @media (max-width: 750px) {

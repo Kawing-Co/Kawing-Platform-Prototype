@@ -20,3 +20,18 @@ console, complete diff, existing public Site deployment and served assets.
 
 Latest owner steering: apply Kawing & Co. logo, colors and theme. Company landing and chrome use navy/white; merchant storefront themes remain independent. Owner supplied five original SVGs. Integrate stacked logo, symbol, flat/depth/reversed wordmarks directly; preserve originals. Additional accepted scope: reactive microinteractions for logo, buttons, cards and confirmations; honor reduced motion and preserve transactions.
 Verification: production build passed; 94 Playwright checks passed for the mobile overhaul (5.3m); after actual SVG and motion integration, 36 relevant logo/mobile/session/merchant/order checks passed (1.5m); compiled-preview 24-case sweep at 360/390/768/1440px had no console errors or page overflow. Six screenshots and docs/MOBILE_DEMO_VERIFICATION.md retained. Rollback: Site version 10 / starting commit above. Next: publish this local commit to the existing public Site; keep GitHub push pending. Reconcile actual release state in .git/kawing-brand-release.json and the Site before retrying publication.
+
+
+Current correction: owner reports green/company-theme clash. Starting at a843fdb
+(Site 11), clean main. Root cause: merchant accent injected into platform --brand
+and hardcoded green colors in legacy company CSS. Tokenize company styles and bind
+platform accent to company ink. Exclude customer .sf/.cx/.mm/.us selectors and leave
+merchant theme/config values intact. Verify Studio/admin/market colors, genuine
+merchant storefront themes, browser regressions, mobile layout and exact Site release.
+GitHub push stays deferred. Rollback is Site version 11.
+
+Correction verification: production build passed; 36/37 initial cases passed with
+one trace-artifact collision; affected craft case and two theme regressions passed
+on isolated rerun. Final five Studio/theme cases passed. Final compiled 24-case
+review had no console errors or overflow; screenshots updated. Next: commit and
+publish exact Site-source revision; preserve GitHub deferral.

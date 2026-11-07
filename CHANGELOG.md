@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-07 — Company theme isolation
+
+- Corrected the incomplete green-to-navy platform migration. The workspace accent
+  now follows Kawing ink instead of the selected merchant's brand color.
+- Migrated legacy company and Studio/engagement color literals to navy/white tokens,
+  including form chrome, navigation, canvas frames, dashboard and market surfaces.
+- Preserved merchant theme records and customer storefront styles; added regression
+  checks for company/merchant color isolation. Evidence: docs/COMPANY_THEME_CORRECTION.md.
+
 ## 2026-11-07 — Supplied vector identity and reactive motion
 
 - Replaced the company-name fallback with the supplied SVG symbol, stacked mark and

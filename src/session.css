@@ -12,7 +12,7 @@
 .spaces-step > li > span {
   display: grid;
   place-items: center;
-  border: 1px solid #dce4d4;
+  border: 1px solid var(--k-sage);
   width: 23px;
   height: 23px;
   border-radius: 50%;
@@ -35,12 +35,12 @@
   flex-wrap: wrap;
   gap: 4px 9px;
   margin: 0 auto 0 0;
-  color: #7f8f74;
+  color: var(--k-ink-2);
   font-size: 11px;
   line-height: 1.3;
 }
 .space-session-header .session-tier {
-  color: #5d7352;
+  color: var(--k-ink);
 }
 .space-session-header nav {
   align-items: center;
@@ -59,8 +59,8 @@
   position: relative;
 }
 .space-session-header nav button[aria-expanded="true"] {
-  background: #e3ebdb;
-  color: #2f563e;
+  background: var(--k-sage);
+  color: var(--k-ink);
 }
 .space-session-header .session-menu {
   position: absolute;
@@ -71,9 +71,9 @@
   gap: 2px;
   padding: 6px;
   background: #fffefa;
-  border: 1px solid #dce5d5;
+  border: 1px solid var(--k-sage);
   border-radius: 10px;
-  box-shadow: 0 14px 40px #1d302a1f;
+  box-shadow: 0 14px 40px rgba(15, 29, 55, 0.122);
   z-index: 70;
   transform-origin: top right;
   animation: session-menu-in 0.16s ease-out;
@@ -84,14 +84,14 @@
   min-height: 44px;
   padding: 10px 12px;
   background: transparent;
-  color: #2f563e;
+  color: var(--k-ink);
   font-size: 12px;
 }
 .space-session-header .session-menu button:hover {
-  background: #f2f5eb;
+  background: var(--k-surface);
 }
 .space-session-header .session-menu button[aria-current] {
-  background: #eaf0e5;
+  background: var(--k-sage);
   font-weight: 700;
 }
 .space-session-header .session-menu button > svg:last-child:not(:first-child) {
@@ -107,8 +107,8 @@
 .session-status {
   margin: 0;
   padding: 10px 28px;
-  background: #eaf0e5;
-  color: #2f563e;
+  background: var(--k-sage);
+  color: var(--k-ink);
   font-size: 12px;
 }
 .session-status:empty {
@@ -127,7 +127,7 @@
   box-shadow: 0 25px 100px #192a3020;
 }
 .session-dialog::backdrop {
-  background: #1d302a65;
+  background: rgba(15, 29, 55, 0.396);
   backdrop-filter: blur(5px);
 }
 .session-dialog h2 {
@@ -137,7 +137,7 @@
   margin: 14px 0 12px;
 }
 .session-dialog p {
-  color: #6f7f66;
+  color: var(--k-ink);
   font-size: 13px;
   line-height: 1.7;
 }
@@ -152,7 +152,7 @@
   min-height: 44px;
   margin-top: 14px;
   font-size: 13px;
-  color: #3d5134;
+  color: var(--k-ink);
 }
 .session-check input {
   width: 18px;
@@ -232,7 +232,7 @@
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  color: #4f6a40;
+  color: var(--k-ink);
 }
 .studio-checklist li > svg {
   margin-top: 3px;
