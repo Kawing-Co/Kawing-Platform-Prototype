@@ -136,7 +136,7 @@ html body .space-session-header .session-context { flex-wrap: nowrap; white-spac
 @media (max-width: 1500px) { html body .space-session-header .session-context .session-tier, html body .space-session-header .session-context .session-tier + span { display: none; } }
 @media (max-width: 1500px) { html body .space-session-header .command-trigger kbd { display: none; } }
 
-/* Company-name fallback; replace with the supplied artwork once originals arrive. */
+/* Company mark frame; the SVG renderer in mobile-demo.css supplies final sizing. */
 html body .spaces-brand > a > .company-wordmark,
 html body .space-wordmark > .company-wordmark,
 html body .sidebar .logo > .company-wordmark {

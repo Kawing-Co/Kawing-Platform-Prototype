@@ -235,7 +235,7 @@ export default function Spaces({ Workspace }) {
               <span className="demo-eyebrow">THE KAWING &amp; CO. PRODUCT DEMO</span>
               <h1 id="demo-title">Good business.<br /><em>Closer connections.</em></h1>
               <p>See how one customer visit connects a branded menu, an order, the team behind it, and a reason to return.</p>
-              <button className="demo-start" onClick={() => {
+              <button className="demo-start" data-tactile onClick={() => {
                 const heading = document.getElementById("experience-choices");
                 heading?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" });
                 heading?.focus({ preventScroll: true });
@@ -243,7 +243,7 @@ export default function Spaces({ Workspace }) {
               <small>Interactive proposal · Fictional businesses · No real payments</small>
             </div>
             <div className="demo-purpose-card">
-              <CompanyWordmark /><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
+              <CompanyWordmark variant="stacked" /><span className="demo-eyebrow">MORE THAN A DIGITAL MENU</span>
               <h2>One visit.<br />Everyone connected.</h2>
               <ol>
                 <li><span>01</span><div><b>Arrive &amp; order</b><p>A guest explores the menu, places an order, and follows its progress.</p></div></li>
@@ -379,7 +379,7 @@ export default function Spaces({ Workspace }) {
             <span className="online-dot" /> Interactive demo · Fictional
             businesses · Browser-local data
           </span>
-          <span>Good business, connected.</span>
+          <CompanyWordmark variant="reversed" />
         </footer>
       </main>
     </>

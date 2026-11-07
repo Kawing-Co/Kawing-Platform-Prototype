@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-07 — Supplied vector identity and reactive motion
+
+- Replaced the company-name fallback with the supplied SVG symbol, stacked mark and
+  flat/depth/reversed wordmarks. All five originals are retained byte-for-byte.
+  Native SVG rendering/CSS cropping preserve the artwork; no replacement font or tracing.
+- Added bounded logo response, depth artwork on hover/focus, tactile entry action,
+  press feedback on cards/controls, and short confirmation transitions. No idle loop;
+  reduced motion removes movement. Company navy/white and merchant themes stay separate.
+- Added four asset/motion checks. Final focused set: 36 passed; full mobile overhaul
+  baseline: 94 passed. Compiled preview 24-case sweep passed; screenshots updated.
+
 ## 2026-11-07 — Mobile demo journey
 
 - Added a branded proposal introduction explaining customer, merchant and admin

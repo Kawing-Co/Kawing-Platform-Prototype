@@ -6,10 +6,10 @@ html body .entry-mobile-first .spaces-brand { justify-content: space-between; bo
 .demo-introduction h1 { font: 500 clamp(48px, 6vw, 80px)/1.02 var(--k-serif); letter-spacing: -.03em; color: var(--k-ink); margin: 20px 0; text-wrap: balance; }
 .demo-introduction h1 em { font-weight: 400; color: #365579; }
 .demo-introduction-copy > p { color: var(--k-ink-2); font-size: 17px; line-height: 1.7; max-width: 470px; }
-.demo-start { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; border-radius: 14px; padding: 14px 22px; background: #152641; color: white; font-weight: 600; font-size: 15px; margin: 16px 0; border: 1px solid #152641; }
+.demo-start { min-height: 52px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; border-radius: 14px; padding: 14px 22px; background: #14284b; color: white; font-weight: 600; font-size: 15px; margin: 16px 0; border: 1px solid #14284b; }
 .demo-start:hover { background: #2f4868; }
 .demo-introduction-copy > small { display: block; font-size: 12px; line-height: 1.7; color: var(--k-ink-2); }
-.demo-purpose-card { padding: clamp(24px, 3vw, 40px); background: #152641; color: #fff; border-radius: 24px; }
+.demo-purpose-card { padding: clamp(24px, 3vw, 40px); background: #14284b; color: #fff; border-radius: 24px; }
 .demo-purpose-card .demo-eyebrow { color: #bdcce0; }
 .demo-purpose-card h2 { font: 500 42px/1.05 var(--k-serif); margin: 18px 0 28px; }
 .demo-purpose-card ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
@@ -86,12 +86,67 @@ html body .view-picker .back-preview { display: inline-flex; }
   html body .space-session-header nav > button,
   html body .space-session-header nav > .session-disclosure > button { width: 100%; min-height: 44px; justify-content: center; }
 }
-html body .view-picker .space-role-icon { color: #152641; background: #edf1f7; }
-html body .view-picker .space-enter { color: #152641; }
+html body .view-picker .space-role-icon { color: #14284b; background: #edf1f7; }
+html body .view-picker .space-enter { color: #14284b; }
 .demo-purpose-card > .company-wordmark { display: block; color: white; font: 700 38px/1.2 var(--k-serif); letter-spacing: -1px; margin-bottom: 18px; }
 /* Kawing & Co. company surfaces; merchant storefront themes stay in their own scope. */
 html body .entry-mobile-first { background: #fff; }
 body:has(.entry-mobile-first) { background: #fff; }
-html body .sidebar nav button.active::before { background: #152641; }
+html body .sidebar nav button.active::before { background: #14284b; }
 html body .studio-heading .button.primary,
-html body .studio-save-bar .button.primary { background: #152641; border-color: #152641; color: #fff; }
+html body .studio-save-bar .button.primary { background: #14284b; border-color: #14284b; color: #fff; }
+
+/* Supplied vector identity: one untouched source for the wordmark and stacked mark. */
+html body .spaces-brand > a > .company-wordmark.company-mark-compact,
+html body .space-wordmark > .company-wordmark.company-mark-compact,
+html body .sidebar .logo > .company-wordmark.company-mark-compact {
+  display: inline-flex; align-items: center; gap: 8px; width: 176px; height: 36px;
+  color: #14284b; padding: 0; line-height: 1; vertical-align: middle;
+}
+.company-wordmark .brand-name { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.company-wordmark .brand-symbol { display: block; width: 26px; height: 31px; flex: none; background: currentColor; -webkit-mask: url('/branding/kawing-symbol.svg') center / contain no-repeat; mask: url('/branding/kawing-symbol.svg') center / contain no-repeat; }
+.company-wordmark .brand-wordmark { display: block; width: 142px; height: 31px; flex: none; background: currentColor; -webkit-mask: url('/branding/kawing-stacked.svg') center bottom / 100% auto no-repeat; mask: url('/branding/kawing-stacked.svg') center bottom / 100% auto no-repeat; }
+html body .demo-purpose-card > .company-wordmark.company-mark-stacked { display: block; width: 176px; height: 174px; color: white; margin: 0 0 24px; }
+.company-wordmark .brand-stacked { display: block; width: 100%; height: 100%; background: currentColor; -webkit-mask: url('/branding/kawing-stacked.svg') center / contain no-repeat; mask: url('/branding/kawing-stacked.svg') center / contain no-repeat; }
+@media (max-width: 380px) {
+  html body .space-wordmark > .company-wordmark.company-mark-compact { width: 155px; gap: 6px; }
+  .space-wordmark .brand-wordmark { width: 123px; height: 27px; }
+}
+/* Native SVG wordmark variants, clipped only in layout; original files are untouched. */
+.company-wordmark .brand-wordmark { position: relative; overflow: hidden; background: transparent; -webkit-mask: none; mask: none; }
+.company-wordmark .wordmark-art { display: block; position: absolute; top: 50%; max-width: none; height: auto; pointer-events: none; user-select: none; }
+.company-wordmark .art-depth { opacity: 0; transition: opacity 220ms ease; }
+a:is(:hover, :focus-visible) .company-wordmark .art-depth { opacity: 1; }
+.company-mark-compact .brand-wordmark { mix-blend-mode: multiply; }
+html body .company-wordmark.company-mark-reversed { display: inline-block; width: 158px; height: 33px; margin: 0; vertical-align: middle; }
+.company-mark-reversed .brand-reversed { width: 100%; height: 100%; }
+html body .entry-mobile-first .spaces-footer { background: #0f1d37; color: #d0dbea; padding: 20px 24px; border: 0; border-radius: 18px; gap: 20px; align-items: center; }
+html body .entry-mobile-first .spaces-footer > .company-wordmark { display: inline-block; }
+/* Motion is reactive: one hover/focus/press response, no idle logo loop. */
+.company-wordmark { transform: translate3d(var(--logo-x, 0px), var(--logo-y, 0px), 0); transition: transform 260ms cubic-bezier(.22,.8,.25,1); }
+.company-wordmark .brand-symbol { transform-origin: 50% 70%; transition: transform 260ms cubic-bezier(.22,.8,.25,1); }
+a:is(:hover, :focus-visible) .brand-symbol { transform: rotate(-4deg) translateY(-1px); }
+a:active .company-wordmark { transform: scale(.97); }
+html body .entry-mobile-first .k-tactile { background-image: radial-gradient(150px circle at var(--lx, 50%) var(--ly, 50%), rgba(255,255,255,calc(.32 * var(--lg,0))), transparent 65%); }
+.demo-start > svg { transition: transform 220ms ease; }
+.demo-start:is(:hover, :focus-visible) > svg { transform: translateX(4px); }
+:where(button, a.button) { touch-action: manipulation; }
+html body .entry-mobile-first .space-role-cards > button,
+html body .entry-mobile-first .business-picker button,
+html body .space-session-header nav button { transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms cubic-bezier(.22,.8,.25,1), box-shadow 180ms ease; }
+html body .entry-mobile-first .space-role-cards > button:active,
+html body .entry-mobile-first .business-picker button:active,
+html body .space-session-header nav button:active { transform: scale(.98); }
+html body .entry-mobile-first .space-role-cards > button:is(:hover, :focus-visible) .space-enter > svg { transform: translateX(4px); }
+.space-enter > svg { transition: transform 200ms ease; }
+:where(button[role="tab"], button[role="radio"]) { transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease; }
+.cx-success, .sf-notice { animation: demo-confirm 240ms cubic-bezier(.22,.8,.25,1) both; }
+@keyframes demo-confirm { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 750px) { html body .entry-mobile-first .spaces-footer > .company-wordmark { margin-top: 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  .company-wordmark, .company-wordmark .brand-symbol, a:active .company-wordmark,
+  .demo-start:is(:hover, :focus-visible) > svg,
+  html body .entry-mobile-first .space-role-cards > button:is(:hover, :focus-visible) .space-enter > svg { transform: none !important; transition: none !important; }
+  .company-wordmark .art-depth { transition: none; }
+  .cx-success, .sf-notice { animation: none; }
+}

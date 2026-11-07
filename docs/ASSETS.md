@@ -41,3 +41,19 @@ dependency; hashes are regenerated with `node scripts/create-image-hashes.mjs`.
 
 3D reference provenance and rights boundaries: [3D_REFERENCE_REVIEW.md](3D_REFERENCE_REVIEW.md).
 No assets or source from the supplied interactive portfolio are redistributed.
+
+
+Company identity (owner supplied, 2026-11-07): the five SVGs in public/branding/
+are preserved byte-for-byte, including their source comments. Stacked mark and
+symbol are alpha-masked in CSS for navy/white display. Flat, depth and reversed
+wordmarks retain their original artboards; CSS clips the display to measured glyph
+bounds. No font substitution, traced replacement, external asset request or generated
+logo is used. The symbol is also the favicon. Source filenames were the supplied
+stacked-logo, symbol-concept-b, blended-wordmark-depth, Flat-single-color-wordmark
+and White-wordmark-on-dark artifacts. SHA-256:
+
+- kawing-stacked.svg: `f2a5cf66023fe9fcb47325234e28d45281f438e55ef4095e02d3cac3ea23582a`
+- kawing-symbol.svg: `036c8883ee5b95ae0764eab6570c897228e1ab8be80e331790a67aa8473eee91`
+- kawing-wordmark-depth.svg: `ee2f4bc6a919cf5fcdf32ade5fb0d272d5ee780dcfdc86f25ed13ebe8bdaef91`
+- kawing-wordmark-flat.svg: `8d3f878a778c93d9d5f1453aa7e8f514de9afd2017f9416f2e768aa852e3393d`
+- kawing-wordmark-reversed.svg: `f652d1fb09c6a0140a1d05be27d9e3111afcca1d3637d9a2f045755a356b0cbf`

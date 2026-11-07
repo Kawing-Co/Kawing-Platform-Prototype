@@ -33,8 +33,9 @@ deep links, guest ordering and Studio previews remain available.
 - Merchant identities are independent of the navy/white company presentation.
 - Reduced motion keeps the same content and navigation without animated transitions.
 
-Company branding currently uses the supplied palette and a text-name fallback. Exact
-logo/monogram files remain pending; the fallback is not the supplied logo artwork.
+Company branding uses the original supplied SVG stacked logo, symbol and wordmark
+variants. Logo links react to hover/focus/press; primary buttons retain tactile
+feedback, with no ambient logo loop. Reduced motion removes movement.
 
 ## Verification
 
