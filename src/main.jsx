@@ -1,3 +1,4 @@
+import CompanyWordmark from "./CompanyWordmark";
 import { StudioReceiver } from "./Viewport";
 import {
   businessKey,
@@ -527,10 +528,7 @@ function App({
             navigate("Start here");
           }}
         >
-          <span className="logo-mark">
-            k<span>✳</span>
-          </span>
-          kawing<span className="logo-dot">.</span>
+          <CompanyWordmark />
         </a>
         <div className="workspace">
           <div className="store-avatar">

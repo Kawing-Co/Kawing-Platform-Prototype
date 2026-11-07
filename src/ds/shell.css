@@ -135,3 +135,16 @@ html body .prototype-tag { font-size: 11px; }
 html body .space-session-header .session-context { flex-wrap: nowrap; white-space: nowrap; }
 @media (max-width: 1500px) { html body .space-session-header .session-context .session-tier, html body .space-session-header .session-context .session-tier + span { display: none; } }
 @media (max-width: 1500px) { html body .space-session-header .command-trigger kbd { display: none; } }
+
+/* Company-name fallback; replace with the supplied artwork once originals arrive. */
+html body .spaces-brand > a > .company-wordmark,
+html body .space-wordmark > .company-wordmark,
+html body .sidebar .logo > .company-wordmark {
+  display: inline-block; width: auto; height: auto; background: none; padding: 0;
+  font-family: var(--k-serif); font-size: 29px; font-weight: 700; line-height: 1.1;
+  letter-spacing: -1.3px; color: #152641; white-space: nowrap;
+}
+html body .company-wordmark > span { color: inherit; font: inherit; }
+@media (max-width: 600px) {
+  html body .space-wordmark > .company-wordmark { font-size: 22px; }
+}

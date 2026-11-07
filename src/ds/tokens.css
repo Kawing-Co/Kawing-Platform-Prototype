@@ -1,4 +1,4 @@
-/* Kawing design system — tokens. Evolves the existing paper / ink / forest identity. */
+/* Kawing design system — tokens. Navy / white company identity; merchant themes remain independent. */
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-300-normal.woff2) format("woff2"); font-weight: 300; font-display: swap; }
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); font-weight: 500 700; font-display: swap; }
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-400-italic.woff2) format("woff2"); font-weight: 400 600; font-style: italic; font-display: swap; }
@@ -7,23 +7,23 @@
 
 :root {
   /* colour */
-  --k-paper: #f7f6f0;
-  --k-surface: #fffdf8;
-  --k-ink: #1f2e26;
-  --k-ink-2: #4b5d52;          /* muted text: 5.9:1 on paper */
-  --k-forest: #1f4d3a;
-  --k-forest-2: #2f6b50;
-  --k-sage: #e4ecdf;
-  --k-sage-2: #d3e0cd;
-  --k-moss: #6b8a5e;
-  --k-night: #14231a;          /* photographic dark, shared with the Matcha Mood site */
+  --k-paper: #ffffff;
+  --k-surface: #ffffff;
+  --k-ink: #152641;
+  --k-ink-2: #526077;          /* muted text on the company surface */
+  --k-forest: #152641;
+  --k-forest-2: #304d72;
+  --k-sage: #edf1f7;
+  --k-sage-2: #dce4ef;
+  --k-moss: #526b8b;
+  --k-night: #101c33;          /* photographic dark, shared with the Matcha Mood site */
   --k-amber: #b9741f;          /* pending / offline only */
-  --k-line: rgba(31, 46, 38, 0.12);
-  --k-line-strong: rgba(31, 46, 38, 0.22);
+  --k-line: rgba(21, 38, 65, 0.12);
+  --k-line-strong: rgba(21, 38, 65, 0.22);
   /* shape */
   --k-r-s: 12px; --k-r: 18px; --k-r-l: 28px;
-  --k-shadow-1: 0 1px 2px rgba(31, 46, 38, 0.05), 0 10px 28px -14px rgba(31, 46, 38, 0.14);
-  --k-shadow-2: 0 2px 4px rgba(31, 46, 38, 0.06), 0 30px 60px -28px rgba(31, 46, 38, 0.28);
+  --k-shadow-1: 0 1px 2px rgba(21, 38, 65, 0.05), 0 10px 28px -14px rgba(21, 38, 65, 0.14);
+  --k-shadow-2: 0 2px 4px rgba(21, 38, 65, 0.06), 0 30px 60px -28px rgba(21, 38, 65, 0.28);
   /* motion */
   --k-ease: cubic-bezier(0.22, 0.8, 0.25, 1);
   --k-spring: cubic-bezier(0.34, 1.56, 0.64, 1);

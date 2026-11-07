@@ -48,7 +48,7 @@ export const BUSINESSES = {
     assets: usual.ASSETS,
     storefront: usual.STOREFRONT,
     seedOrderLines: usual.seedOrderLines,
-    previewPhoto: "/images/usual/interior.jpg",
+    previewPhoto: "/images/usual/the-usual.jpg",
   },
 };
 

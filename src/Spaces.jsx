@@ -1,3 +1,4 @@
+import CompanyWordmark from "./CompanyWordmark";
 import React, { useState, useEffect, useRef, useId } from "react";
 import {
   ArrowRight,
@@ -232,7 +233,7 @@ export default function Spaces({ Workspace }) {
               chooseScenario();
             }}
           >
-            <span>k✳</span>kawing.
+            <CompanyWordmark />
           </a>
           <span>THE INTERACTIVE PRODUCT EXPERIENCE</span>
           <CommandTrigger />
@@ -241,7 +242,7 @@ export default function Spaces({ Workspace }) {
           <div className="spaces-collage" aria-hidden="true">
             {[
               ["c1", "/images/matcha/latte-iced.jpg", "Matcha Mood", "Matcha café"],
-              ["c2", "/images/usual/interior.jpg", "the usual.", "Neighbourhood coffee bar"],
+              ["c2", "/images/usual/the-usual.jpg", "the usual.", "Neighbourhood coffee bar"],
               ["c3", "/images/market-stall.jpg", "The Sunday Commons", "Pop-up market"],
             ].map(([cls, src, name, kind]) => (
               <figure className={cls} key={cls}>
@@ -304,7 +305,7 @@ export default function Spaces({ Workspace }) {
               <div className="scenario-art" aria-hidden="true">
                 <div className="art-split">
                   <ProgressiveImage src="/images/matcha/latte-iced.jpg" alt="" loading="lazy" width="1024" height="1280" />
-                  <ProgressiveImage src="/images/usual/interior.jpg" alt="" loading="lazy" width="1170" height="1414" />
+                  <ProgressiveImage src="/images/usual/the-usual.jpg" alt="" loading="lazy" width="1170" height="1414" />
                 </div>
                 <span className="art-label">
                   <Check size={13} /> Two businesses, two looks
@@ -520,7 +521,7 @@ export function SessionHeader({
         className="space-wordmark"
         aria-label="Kawing demo: choose a scenario"
       >
-        kawing<span>✳</span>
+        <CompanyWordmark />
       </a>
       <p className="session-context" aria-label="Demo session">
         <span>{SCENARIOS[scenario].label}</span>

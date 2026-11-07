@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-07 — Company palette and signature-drink poster
+
+- Applied navy/white company tokens and a Kawing & Co. text-name fallback in the
+  entry, session header and merchant sidebar. Merchant themes remain independent.
+- Replaced the usual. interior photo on entry posters and business previews with
+  the owner-confirmed "the usual" signature drink photo. Interior/gallery assets remain.
+- Exact supplied logo artwork is pending original PNG/SVG/ZIP files; the text fallback
+  is explicitly not a reproduction of that artwork. See .codex/CURRENT.md.
+- Production build and 22 session/merchant browser regressions passed. Compiled preview
+  at 360/1440px: no console errors or page overflow; screenshots inspected.
+
 ## 2026-11-06 — Kawing identity restored; second merchant "the usual."
 
 - The platform is Kawing again: the entry page is paper, ink and forest with a swipeable collage of
