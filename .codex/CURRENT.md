@@ -170,3 +170,11 @@ Completed photo correction: eight breakfast references, explicit single-dish fra
 for 27 category-image product entries, shared card/sheet framing, photo attribution
 link, imagery-only persistence migration. 14 targeted checks passed, screenshot
 review complete. No GitHub push; release existing public Site from local main.
+2026-11-08 owner-authorized branding cleanup: cut out the exterior white backgrounds
+and trim excess canvas around the Blackball cup and wordmark. Preserve original
+source assets in docs/sources/blackball-original-branding. Remove CSS crop/blend
+workarounds and render isolated assets using contain/intrinsic proportions. Verify
+mobile/desktop and checkout, build and publish existing public Site; no GitHub push.
+Cutout slice complete: transparent PNGs at existing logo paths; contained cup and
+trimmed wordmark viewport, no multiply blending. Original source files archived.
+RGBA verified, mobile/desktop screenshots inspected and four Blackball checks pass.

@@ -65,9 +65,9 @@ html body .sf-blackball .sf-brand-hero { background:#eee3d2; color:#33261d; }
 html body .sf-blackball .sf-brand-hero::before { display:none; }
 html body .sf-blackball .sf-brand-copy { position:relative; z-index:2; background:#eee3d2ed; border-radius:18px; padding:22px; }
 html body .sf-blackball .sf-brand-copy :is(h1,p,.sf-kicker,.sf-welcome) { color:#33261d; }
-html body .sf-blackball .blackball-symbol { width:72px; height:72px; border:0; border-radius:0; object-fit:cover; mix-blend-mode:multiply; margin:0 0 18px; }
-.blackball-wordmark { display:block; position:relative; width:min(300px,100%); aspect-ratio:5.5; overflow:hidden; mix-blend-mode:multiply; }
-.blackball-wordmark img { position:absolute; width:110%; max-width:none; left:-5%; top:50%; transform:translateY(-50%); }
+html body .sf-blackball .blackball-symbol { width:72px; height:72px; border:0; border-radius:0; object-fit:contain; mix-blend-mode:normal; margin:0 0 18px; }
+.blackball-wordmark { display:block; position:relative; width:min(300px,100%); aspect-ratio:7.37; overflow:hidden; mix-blend-mode:normal; }
+.blackball-wordmark img { position:absolute; width:103.43%; height:254.04%; max-width:none; left:-1.57%; top:-74.74%; transform:none; object-fit:fill; }
 html body .sf-blackball .sf-primary { color:#33261d; }
 html body .business-picker { flex-wrap:wrap; }
 html body .sf-blackball .blackball-symbol { background:transparent; box-shadow:none; }

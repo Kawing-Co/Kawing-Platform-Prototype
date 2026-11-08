@@ -7,7 +7,7 @@ GitHub push remains deferred. No production integration or merchant affiliation 
 Source: https://wally.my.canva.site/blackball-cafe-menu (retrieved 2026-11-08).
 The published Canva page supplied its menu as structured slide text and public media.
 Source top page was opened in Chromium and visually inspected. Original symbol and
-wordmark were downloaded separately; original bitmap files remain unchanged. The UI
+wordmark were downloaded separately; unaltered source bitmaps are archived in docs/sources/blackball-original-branding. Transparent display cutouts now replace the public logo assets. The UI
 crops/blends their artboards in layout. The company identity remains separate.
 
 104 orderable entries are transcribed from legible name/price rows: coffee, sea salt,
@@ -49,7 +49,7 @@ feedback. Unverified loyalty, promotions, reviews and Wi-Fi are disabled until t
 chooses to demonstrate them. Optional Wi-Fi uses an explicitly fictional Blackball
 password rather than another merchant's sample. The unrelated decorative welcome star
 was removed alongside the card accent cleanup. Merchant symbol/wordmark are separate
-and the source symbol artboard is cropped only by layout.
+and the logo backgrounds are removed in the display assets; the wordmark has an explicit tight layout viewport.
 
 Verification: 26-check integration run passed 24 initially; two Studio draft tests still
 assumed automatic Studio entry. Updated those workflows to choose Customize → Brand;
