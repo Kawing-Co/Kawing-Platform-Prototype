@@ -494,7 +494,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.33,
+      0.48,
+      0.16,
+      0.2
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 18,
@@ -739,7 +747,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.3214,
+      0.6234,
+      0.3672,
+      0.2232
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 31,
@@ -757,7 +773,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.0886,
+      0.3106,
+      0.3528,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 32,
@@ -775,7 +799,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.5844,
+      0.3106,
+      0.3312,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 33,
@@ -793,7 +825,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.3488,
+      0.2778,
+      0.3024,
+      0.1944
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 34,
@@ -811,7 +851,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.076,
+      0.4406,
+      0.288,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 35,
@@ -829,7 +877,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.2942,
+      0.6178,
+      0.3816,
+      0.1944
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 36,
@@ -847,7 +903,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.689,
+      0.4264,
+      0.252,
+      0.1872
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 37,
@@ -865,7 +929,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.2942,
+      0.6178,
+      0.3816,
+      0.1944
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 38,
@@ -883,7 +955,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.4654,
+      0.5488,
+      0.4392,
+      0.3024
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 39,
@@ -901,7 +981,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.2654,
+      0.2892,
+      0.4392,
+      0.2016
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 40,
@@ -1100,17 +1188,18 @@
     "price": 455,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/reference/steak.jpg",
+    "image": "/images/blackball/reference/lechon-kawali.jpg",
     "dir": "blackball",
     "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "reference/steak",
+      "base": "reference/lechon-kawali",
       "rules": []
     },
     "options": [],
     "glow": "#dba574",
-    "illustrative": true
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 51,
@@ -1119,17 +1208,18 @@
     "price": 455,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/reference/steak.jpg",
+    "image": "/images/blackball/reference/karaage.jpg",
     "dir": "blackball",
     "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "reference/steak",
+      "base": "reference/karaage",
       "rules": []
     },
     "options": [],
     "glow": "#dba574",
-    "illustrative": true
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 52,
@@ -1222,7 +1312,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.0788,
+      0.3592,
+      0.3024,
+      0.2016
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 57,
@@ -1240,7 +1338,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.6116,
+      0.3392,
+      0.3168,
+      0.2016
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 58,
@@ -1258,7 +1364,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.41,
+      0.5334,
+      0.36,
+      0.2232
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 59,
@@ -1276,7 +1390,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.3074,
+      0.1722,
+      0.2952,
+      0.1656
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 60,
@@ -1294,7 +1416,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.56,
+      0.722,
+      0.36,
+      0.216
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 61,
@@ -1312,7 +1442,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.083,
+      0.6174,
+      0.324,
+      0.2952
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 62,
@@ -1330,7 +1468,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.6202,
+      0.3206,
+      0.3096,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 63,
@@ -1348,7 +1494,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.6202,
+      0.6806,
+      0.3096,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 64,
@@ -1366,7 +1520,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.1902,
+      0.6906,
+      0.3096,
+      0.2088
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 65,
@@ -1384,7 +1546,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.2916,
+      0.4878,
+      0.3168,
+      0.1944
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 66,
@@ -1402,7 +1572,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.0688,
+      0.322,
+      0.3024,
+      0.216
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 67,
@@ -1420,7 +1598,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.3002,
+      0.1378,
+      0.3096,
+      0.1944
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 68,
@@ -1429,16 +1615,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/corned-beef.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/corned-beef",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 69,
@@ -1447,16 +1635,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/beef-tapa.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/beef-tapa",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 70,
@@ -1465,16 +1655,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/bacon.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/bacon",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 71,
@@ -1483,16 +1675,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/bangus.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/bangus",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 72,
@@ -1501,16 +1695,18 @@
     "price": 355,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/bangus.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/bangus",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 73,
@@ -1519,16 +1715,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/lechon-kawali.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/lechon-kawali",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 74,
@@ -1537,16 +1735,18 @@
     "price": 395,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/karaage.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/karaage",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 75,
@@ -1555,16 +1755,18 @@
     "price": 355,
     "category": "All-Day Breakfast",
     "description": "",
-    "image": "/images/blackball/breakfast.png",
+    "image": "/images/blackball/reference/sausage.jpg",
     "dir": "blackball",
-    "photoExt": "png",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "breakfast",
+      "base": "reference/sausage",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 76,
@@ -1991,17 +2193,18 @@
     "price": 1595,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/reference/tea.jpg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
     "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "reference/tea",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
     "glow": "#dba574",
-    "illustrative": true
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 99,
@@ -2010,17 +2213,18 @@
     "price": 1895,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/reference/tea.jpg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
     "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "reference/tea",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
     "glow": "#dba574",
-    "illustrative": true
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 100,
@@ -2029,17 +2233,18 @@
     "price": 2195,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/reference/tea.jpg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
     "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "reference/tea",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
     "glow": "#dba574",
-    "illustrative": true
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 101,
@@ -2057,7 +2262,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.129,
+      0.222,
+      0.252,
+      0.216
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 102,
@@ -2075,7 +2288,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.1332,
+      0.5676,
+      0.2736,
+      0.2448
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 103,
@@ -2093,7 +2314,15 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.563,
+      0.3192,
+      0.324,
+      0.2016
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   },
   {
     "id": 104,
@@ -2111,6 +2340,14 @@
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "photoCrop": [
+      0.5686,
+      0.6348,
+      0.3528,
+      0.2304
+    ],
+    "illustrative": true,
+    "photoRevision": 2
   }
 ]

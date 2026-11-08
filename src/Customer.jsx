@@ -24,7 +24,7 @@ import {
 import ItemSheet from "./CustomerSheet.jsx";
 import Odometer from "./ds/Odometer.jsx";
 import { flyTo, burst } from "./ds/fx.js";
-import { cleanSel, defaultSel, hasOptions, orderLine, sigOf, summarize } from "./merchant";
+import { cleanSel, defaultSel, photoCropStyle, hasOptions, orderLine, sigOf, summarize } from "./merchant";
 
 const peso = (n) =>
   new Intl.NumberFormat("en-PH", {
@@ -454,6 +454,7 @@ export default function Customer({
                   {filtered.length} {craft ? "items" : "items"} to discover
                 </span>
               </div>
+              {brand.identity === "blackball" && <p className="product-photo-note">Reference photos are illustrative; serving and presentation may vary. <a href="/images/blackball/reference/CREDITS.txt" target="_blank" rel="noopener noreferrer">Photo credits & licenses</a></p>}
               <div className="cx-grid">
                 {filtered.map((item, index) => {
                   const dl = defaultLine(item);
@@ -474,6 +475,7 @@ export default function Customer({
                         {item.image ? (
                           <ProgressiveImage
                             src={item.image}
+                            style={photoCropStyle(item)}
                             alt={item.name}
                             loading="lazy"
                             width="1024"

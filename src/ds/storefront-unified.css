@@ -101,3 +101,6 @@ html body .cx-unified {
   --cx-ink: var(--k-ink); --cx-ink-2: var(--k-ink-2);
   --cx-surface: var(--k-surface); --cx-paper: var(--k-paper);
 }
+.cx-food-visual .progressive-image { position: relative; overflow: hidden; }
+.product-photo-note { color: var(--k-ink-2); font: 400 12px/1.6 var(--k-sans); margin: 0 0 18px; }
+.product-photo-note a { color: var(--k-ink); text-underline-offset: 3px; }

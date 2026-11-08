@@ -982,3 +982,13 @@ const NAMES = {
 };
 /** Plain-language name for an approved image path (used for labels and alt text). */
 export const assetName = (path) => NAMES[String(path).replace(/^.*\//, "").replace(/(-sm)?\.(jpg|svg)$/, "")] || "Photo";
+
+// Viewport composition only: retain the published image bytes and isolate one serving.
+export function photoCropStyle(item) {
+  const crop = item?.photoCrop;
+  if (!Array.isArray(crop) || crop.length !== 4 || !crop.every(Number.isFinite)) return undefined;
+  const [x,y,w,h] = crop;
+  if (x<0 || y<0 || w<=0 || h<=0 || x+w>1.001 || y+h>1.001) return undefined;
+  return {position:'absolute', width:`${100/w}%`, height:`${100/h}%`, maxWidth:'none',
+    left:`${-100*x/w}%`, top:`${-100*y/h}%`, objectFit:'fill', transform:'none'};
+}

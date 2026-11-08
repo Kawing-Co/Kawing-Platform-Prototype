@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Check, Minus, Plus, X } from "lucide-react";
-import { cleanSel, pickImage, photoPath, scaleOf, toneOf, summarize, unitPrice } from "./merchant";
+import { cleanSel, photoCropStyle, pickImage, photoPath, scaleOf, toneOf, summarize, unitPrice } from "./merchant";
 import Odometer from "./ds/Odometer.jsx";
 import { burst } from "./ds/fx.js";
 import { spring } from "./ds/spring.js";
@@ -102,7 +102,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
         {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b><small>Illustrative photo</small></span>}
         <div className="k-sheet-photo" style={{ "--sc": scaleOf(item, sel), filter: toneOf(item, sel) || undefined }}>
           {layers.map((l) => (
-            <img key={l.k} className={"k-layer" + (l.first ? "" : " k-iris")} src={photoPath(item, l.name)} alt={l.first ? item.name : ""} width="1024" height="1280" draggable="false" />
+            <img key={l.k} className={"k-layer" + (l.first ? "" : " k-iris")} style={photoCropStyle(item)} src={photoPath(item, l.name)} alt={l.first ? item.name : ""} width="1024" height="1280" draggable="false" />
           ))}
         </div>
         <div className="k-sheet-glow" /><div className={"k-sheet-candle" + (celebrate ? " on" : "")} />

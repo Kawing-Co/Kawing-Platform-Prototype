@@ -109,8 +109,8 @@ function loadBusiness(id) {
       return extend({...v, menu: v.menu.map(item => {
         const current = b.menu.find(next => next.id === item.id);
         // Refresh only retired placeholder imagery; preserve owner edits and transaction state.
-        return id === 'blackball' && item.image?.startsWith('/images/blackball/category-') && current?.illustrative
-          ? {...item, image:current.image, images:current.images, photoExt:current.photoExt, illustrative:true}
+        return id === 'blackball' && (item.image?.startsWith('/images/blackball/category-') || (current?.photoRevision === 2 && !item.photoRevision && /^\/images\/blackball\/(breakfast|sandwiches|rice-bowls|salads|pizza|pasta|fries|matcha-tray|reference\/(steak|tea))\.(png|jpg)$/.test(item.image))) && current?.illustrative
+          ? {...item, image:current.image, images:current.images, photoExt:current.photoExt, illustrative:true, photoCrop:current.photoCrop, photoRevision:current.photoRevision}
           : item;
       })}, id);
   } catch {}

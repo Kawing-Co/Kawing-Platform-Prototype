@@ -160,3 +160,13 @@ image fix; six licensed reference photos with separate brand/illustrative UI lab
 placeholder-only persistent imagery migration. 37 targeted checks passed (affected
 artifact-collision checks rerun sequentially); mobile/desktop screenshots inspected.
 No menu pricing, transaction or seed reset. Publish local main; GitHub push still deferred.
+2026-11-08 owner follow-up: retire product-card category collages and unrelated
+category reference photos. Source dish-specific, single-serving internet photos;
+retain source/license metadata and visible illustrative/credit disclosure. Preserve
+menu IDs/prices/options, merchant custom photos, orders and seed markers. Baseline
+84fd9a5 / public Site22. Test catalog paths, persistent imagery migration and mobile
+cards; build, inspect screenshots and publish existing Site. GitHub push deferred.
+Completed photo correction: eight breakfast references, explicit single-dish frames
+for 27 category-image product entries, shared card/sheet framing, photo attribution
+link, imagery-only persistence migration. 14 targeted checks passed, screenshot
+review complete. No GitHub push; release existing public Site from local main.
