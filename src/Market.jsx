@@ -1,3 +1,4 @@
+import {BUSINESSES} from "./businesses";
 import { seedMarket, validateLayout } from "./market-layout";
 export { seedMarket, validateLayout } from "./market-layout";
 import BoothMap from "./BoothMap";
@@ -446,10 +447,10 @@ export default function Market({ role }) {
                         </button>
                       )}
                       <h3>A taste of what’s here</h3>
-                      {publicProfile.id === "salo" ? (
+                      {BUSINESSES[publicProfile.id] ? (
                         <div className="booth-products">
                           {(
-                            commerce?.menu || [
+                            (publicProfile.id === "salo" ? commerce?.menu : null) || BUSINESSES[publicProfile.id]?.menu || [
                               {
                                 name: "Matcha Latte",
                                 price: 230,

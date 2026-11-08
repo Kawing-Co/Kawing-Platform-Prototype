@@ -7,7 +7,7 @@ test('supplied brand SVGs are served and the compact wordmark loads as artwork',
     expect(await r.text()).toContain('<svg');
   }
   await page.goto('/');
-  const logo=page.locator('.spaces-brand a');
+  const logo=page.locator('.spaces-brand .entry-wordmark');
   await expect(logo.getByRole('img',{name:'Kawing & Co.'})).toBeVisible();
   const art=logo.locator('img.art-flat');
   await expect.poll(()=>art.evaluate(e=>e.complete && e.naturalWidth>0)).toBe(true);
@@ -18,13 +18,13 @@ test('supplied brand SVGs are served and the compact wordmark loads as artwork',
 
 test('logo hover reveals the supplied depth variant and keyboard navigation still works', async ({page}) => {
   await page.goto('/');
-  const logo=page.locator('.spaces-brand a');
+  const logo=page.locator('.spaces-brand .entry-wordmark');
   await logo.hover();
   await expect.poll(()=>logo.locator('.art-depth').evaluate(e=>Number(getComputedStyle(e).opacity))).toBe(1);
   await page.mouse.move(0,0);
   await expect.poll(()=>logo.locator('.art-depth').evaluate(e=>Number(getComputedStyle(e).opacity))).toBe(0);
   await page.goto('/?scenario=standard');
-  await page.locator('.spaces-brand a').focus();
+  await page.locator('.spaces-brand .entry-wordmark').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('.demo-introduction')).toBeVisible();
 });
@@ -46,10 +46,10 @@ test('button press gives immediate feedback and keeps the experience action func
 test('reduced motion disables logo movement and confirmations while actions remain usable', async ({page}) => {
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
-  const logo=page.locator('.spaces-brand a');
+  const logo=page.locator('.spaces-brand .entry-wordmark');
   await logo.hover();
   expect(await logo.locator('.company-wordmark').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
-  expect(await logo.locator('.brand-symbol').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
+  expect(await page.locator('.entry-symbol .brand-symbol').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
   expect(await page.getByRole('button',{name:'Choose your experience',exact:true}).evaluate(e=>getComputedStyle(e).transform)).toBe('none');
   await page.getByRole('button',{name:'Choose your experience',exact:true}).click();
   await expect(page.locator('#experience-choices')).toBeFocused();

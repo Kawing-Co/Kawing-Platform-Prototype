@@ -45,3 +45,16 @@ html body .entry-mobile-first .spaces-footer > .company-wordmark.company-mark-co
 @media(max-width:750px) {
  html body .intro-screen .spaces-footer > .company-wordmark.company-mark-compact { display:none; }
 }
+/* Separate brand roles: home symbol at the edge, independent centered signature. */
+html body .entry-mobile-first .spaces-brand { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:16px; align-items:center; }
+html body .spaces-brand .entry-symbol { display:inline-flex; align-items:center; justify-content:flex-start; min-width:44px; min-height:44px; justify-self:start; }
+html body .entry-symbol .company-mark-symbol { display:inline-flex; align-items:center; width:30px; height:36px; }
+html body .spaces-brand .entry-wordmark { display:flex; align-items:center; justify-content:center; min-height:44px; }
+html body .entry-wordmark .company-mark-wordmark { display:block; width:166px; height:36px; }
+html body .entry-wordmark .brand-wordmark { width:166px; height:36px; }
+html body .spaces-brand .entry-header-tools { justify-self:end; text-align:right; }
+html body .entry-header-tools > span { max-width:230px; font-size:9px; letter-spacing:.12em; }
+@media(max-width:750px) {
+ html body .entry-mobile-first .spaces-brand { gap:8px; }
+ html body .entry-wordmark .company-mark-wordmark, html body .entry-wordmark .brand-wordmark { width:142px; height:31px; }
+}

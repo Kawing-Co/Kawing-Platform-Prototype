@@ -1,6 +1,8 @@
+export const MARKET_USUAL = {id:"usual",name:"the usual.",category:"Food & drinks",bio:"Your neighborhood coffee bar. Familiar favorites, made your way.",temporary:false};
 // Serializable demo fixture and layout invariants, independent of the UI.
 export const seedMarket = () => ({
   version: 1,
+  catalogRevision: 2,
   name: "The Sunday Commons",
   venue: "Riverside Pavilion · Fictional event",
   status: "active",
@@ -11,7 +13,7 @@ export const seedMarket = () => ({
     w: 14,
     h: 15,
     category:
-      i === 1
+      (i === 1 || i === 3)
         ? "Food & drinks"
         : i === 6
           ? "Crafts"
@@ -19,9 +21,10 @@ export const seedMarket = () => ({
             ? "Crafts"
             : "Food & drinks",
     blocked: i === 8,
-    merchant: i === 1 ? "salo" : i === 6 ? "luna" : null,
+    merchant: i === 1 ? "salo" : i === 3 ? "usual" : i === 6 ? "luna" : null,
   })),
   profiles: [
+    MARKET_USUAL,
     {
       id: "salo",
       name: "Matcha Mood",

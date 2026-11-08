@@ -225,15 +225,16 @@ export default function Spaces({ Workspace }) {
       <UndoHost />
       <main data-page-hidden={!motion.pageVisible} data-motion={motion.enabled?"on":"off"} className={"spaces-landing premium-landing entry-mobile-first" + (step === "landing" ? " intro-screen" : "") + (step === "view" ? " view-picker" : "")}>
         <header className="spaces-brand">
-          <a
+          <a className="entry-symbol"
             href="/"
             onClick={(e) => {
               e.preventDefault();
               goHome();
             }}
           >
-            <CompanyWordmark />
+            <CompanyWordmark variant="symbol" />
           </a>
+          <a className="entry-wordmark" href="/" onClick={e=>{e.preventDefault();goHome();}}><CompanyWordmark variant="wordmark" /></a>
           <div className="entry-header-tools"><span>THE INTERACTIVE PRODUCT EXPERIENCE</span></div>
 
         </header>

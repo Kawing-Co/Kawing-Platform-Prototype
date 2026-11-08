@@ -1,3 +1,4 @@
+import {MARKET_USUAL} from "./market-layout";
 export const needTypes = [
   ["tent", "Tent & weather cover"],
   ["power", "Power connection"],
@@ -9,7 +10,7 @@ export const needTypes = [
 ];
 export function vendorOps(p) {
   const defaults =
-    p.id === "salo"
+    ["salo","usual"].includes(p.id)
       ? {
           tent: true,
           power: true,
@@ -47,6 +48,16 @@ export function vendorOps(p) {
   };
 }
 export function normalizeMarket(d) {
+  // One-time catalog reconciliation preserves assignments and owner removals thereafter.
+  if ((d.catalogRevision || 0) < 2) {
+    const profiles=d.profiles.some(p=>p.id==='usual')?d.profiles:[...d.profiles,{...MARKET_USUAL}];
+    let booths=d.booths;
+    if(d.status==='active'&&!booths.some(b=>b.merchant==='usual')) {
+      const spot=booths.find(b=>b.id==='B04'&&!b.merchant&&!b.blocked)||booths.find(b=>!b.merchant&&!b.blocked&&b.category==='Food & drinks');
+      if(spot)booths=booths.map(b=>b.id===spot.id?{...b,merchant:'usual',category:'Food & drinks'}:b);
+    }
+    d={...d,profiles,booths,catalogRevision:2};
+  }
   return {
     ...d,
     issues: Array.isArray(d.issues) ? d.issues : [],

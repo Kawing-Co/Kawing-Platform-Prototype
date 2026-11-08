@@ -96,3 +96,24 @@ compiled responsive review passed. Desktop/phone screenshots inspected and retai
 Design contract: docs/NEUTRAL_DESIGN_SYSTEM.md. Full suite not rerun; existing bundle
 advisory remains. Publish exact local main to existing public Site; rollback Site18.
 Record actual returned version in .git/kawing-brand-release.json. GitHub push deferred.
+
+2026-11-08 owner amendment: separate the header symbol and typography. Use a clear
+three-column entry masthead: left home symbol, independently centered wordmark, right
+supporting label (hidden on phones). Preserve supplied SVG sources, neutral palette,
+responsive landing fit, navigation and workspace state. This is a conventional editorial
+placement, not a claim of measured conversion improvement. Verify branding/motion and
+viewport tests/build; publish exact local main to existing public Site. Rollback Site19;
+GitHub push remains deferred.
+
+Owner steering: reconcile missing the usual. in Pop-up Market. Add standard merchant
+profile and default B04 booth; one-time catalog migration appends the missing profile
+and uses only an available booth, preserving existing assignments, blocked booths,
+closed-event behavior and subsequent owner removals. Existing usual catalog/storage
+routing remains authoritative. Generalize sample menu preview to standard merchants.
+Verify migration idempotency and actual usual ordering entry alongside header checks.
+Header/map/migration focused run: 17 passed after updating the reduced-motion selector
+for the separated symbol. Additional usual checkout check and build run before release.
+Preserve original identity SVGs and existing layouts/assignments. No real transactions.
+Additional checkout/migration run: 2 passed; actual usual item customization and order
+submission succeeded using its own merchant record. Build and diff checks passed.
+Publish exact local main to existing public Site; GitHub push remains deferred.

@@ -174,3 +174,10 @@
 - Updated entry, shell, Studio, admin, map and shared chrome; corrected logo blending,
   footer composition and compact Studio rail overflow. Preserved ordering and motion.
 - Added contrast/action regression checks and design guidance with verified screenshots.
+
+## 2026-11-08 — Independent masthead and the usual. market reconciliation
+
+- Separated the entry symbol at left from the centered wordmark and right-hand caption.
+- Added the usual. as a standard market merchant with B04 in the default layout.
+- Reconciled older local catalogs once without overwriting occupied/blocked booths;
+  retained later owner removals. Standard merchants show their real demo menu samples.

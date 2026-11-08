@@ -24,7 +24,7 @@ export default function CompanyWordmark({ variant = "compact" }) {
         e.currentTarget.style.setProperty('--logo-x', ((e.clientX-r.left)/r.width-.5)*2 + 'px');
         e.currentTarget.style.setProperty('--logo-y', ((e.clientY-r.top)/r.height-.5)*1.5 + 'px');
       }} onPointerLeave={reset} onPointerCancel={reset}>
-      {variant === 'stacked' ? <span className="brand-stacked" aria-hidden="true" /> : variant === 'reversed' ?
+      {variant === 'symbol' ? <span className="brand-symbol" aria-hidden="true" /> : variant === 'wordmark' ? <span className="brand-wordmark" aria-hidden="true"><WordmarkArt tone="flat" /><WordmarkArt tone="depth" /></span> : variant === 'stacked' ? <span className="brand-stacked" aria-hidden="true" /> : variant === 'reversed' ?
         <span className="brand-wordmark brand-reversed" aria-hidden="true"><WordmarkArt tone="reversed" /></span> : <>
           <span className="brand-symbol" aria-hidden="true" />
           <span className="brand-wordmark" aria-hidden="true"><WordmarkArt tone="flat" /><WordmarkArt tone="depth" /></span>
