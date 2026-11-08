@@ -1,4 +1,4 @@
-import {MARKET_USUAL} from "./market-layout";
+import {MARKET_USUAL,MARKET_BLACKBALL} from "./market-layout";
 export const needTypes = [
   ["tent", "Tent & weather cover"],
   ["power", "Power connection"],
@@ -10,7 +10,7 @@ export const needTypes = [
 ];
 export function vendorOps(p) {
   const defaults =
-    ["salo","usual"].includes(p.id)
+    ["salo","usual","blackball"].includes(p.id)
       ? {
           tent: true,
           power: true,
@@ -57,6 +57,15 @@ export function normalizeMarket(d) {
       if(spot)booths=booths.map(b=>b.id===spot.id?{...b,merchant:'usual',category:'Food & drinks'}:b);
     }
     d={...d,profiles,booths,catalogRevision:2};
+  }
+  if ((d.catalogRevision || 0) < 3) {
+    const profiles=d.profiles.some(p=>p.id==='blackball')?d.profiles:[...d.profiles,{...MARKET_BLACKBALL}];
+    let booths=d.booths;
+    if(d.status==='active'&&!booths.some(b=>b.merchant==='blackball')) {
+      const spot=booths.find(b=>b.id==='B05'&&!b.merchant&&!b.blocked)||booths.find(b=>!b.merchant&&!b.blocked&&b.category==='Food & drinks');
+      if(spot)booths=booths.map(b=>b.id===spot.id?{...b,merchant:'blackball',category:'Food & drinks'}:b);
+    }
+    d={...d,profiles,booths,catalogRevision:3};
   }
   return {
     ...d,
@@ -109,6 +118,15 @@ export function updateVendor(d, id, patch) {
 }
 export function resolveIssue(d, id, note) {
   if (!note?.trim()) return d;
+  if ((d.catalogRevision || 0) < 3) {
+    const profiles=d.profiles.some(p=>p.id==='blackball')?d.profiles:[...d.profiles,{...MARKET_BLACKBALL}];
+    let booths=d.booths;
+    if(d.status==='active'&&!booths.some(b=>b.merchant==='blackball')) {
+      const spot=booths.find(b=>b.id==='B05'&&!b.merchant&&!b.blocked)||booths.find(b=>!b.merchant&&!b.blocked&&b.category==='Food & drinks');
+      if(spot)booths=booths.map(b=>b.id===spot.id?{...b,merchant:'blackball',category:'Food & drinks'}:b);
+    }
+    d={...d,profiles,booths,catalogRevision:3};
+  }
   return {
     ...d,
     issues: d.issues.map((i) =>
@@ -124,6 +142,15 @@ export function resolveIssue(d, id, note) {
   };
 }
 export function addIssue(d, record) {
+  if ((d.catalogRevision || 0) < 3) {
+    const profiles=d.profiles.some(p=>p.id==='blackball')?d.profiles:[...d.profiles,{...MARKET_BLACKBALL}];
+    let booths=d.booths;
+    if(d.status==='active'&&!booths.some(b=>b.merchant==='blackball')) {
+      const spot=booths.find(b=>b.id==='B05'&&!b.merchant&&!b.blocked)||booths.find(b=>!b.merchant&&!b.blocked&&b.category==='Food & drinks');
+      if(spot)booths=booths.map(b=>b.id===spot.id?{...b,merchant:'blackball',category:'Food & drinks'}:b);
+    }
+    d={...d,profiles,booths,catalogRevision:3};
+  }
   return {
     ...d,
     issues: [

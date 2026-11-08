@@ -58,3 +58,18 @@ html body .entry-header-tools > span { max-width:230px; font-size:9px; letter-sp
  html body .entry-mobile-first .spaces-brand { gap:8px; }
  html body .entry-wordmark .company-mark-wordmark, html body .entry-wordmark .brand-wordmark { width:142px; height:31px; }
 }
+/* A neutral perimeter, without a decorative crescent at the top of selected cards. */
+html body .booth-detail[data-selected=true] { border:1px solid var(--k-line); }
+/* The merchant's original cup mark and wordmark have independent placement. */
+html body .sf-blackball .sf-brand-hero { background:#eee3d2; color:#33261d; }
+html body .sf-blackball .sf-brand-hero::before { display:none; }
+html body .sf-blackball .sf-brand-copy { position:relative; z-index:2; background:#eee3d2ed; border-radius:18px; padding:22px; }
+html body .sf-blackball .sf-brand-copy :is(h1,p,.sf-kicker,.sf-welcome) { color:#33261d; }
+html body .sf-blackball .blackball-symbol { width:72px; height:72px; border:0; border-radius:0; object-fit:cover; mix-blend-mode:multiply; margin:0 0 18px; }
+.blackball-wordmark { display:block; position:relative; width:min(300px,100%); aspect-ratio:5.5; overflow:hidden; mix-blend-mode:multiply; }
+.blackball-wordmark img { position:absolute; width:110%; max-width:none; left:-5%; top:50%; transform:translateY(-50%); }
+html body .sf-blackball .sf-primary { color:#33261d; }
+html body .business-picker { flex-wrap:wrap; }
+html body .sf-blackball .blackball-symbol { background:transparent; box-shadow:none; }
+html body .intro-heading::after, html body .pilot-card .spark { display:none; }
+html body .sf-blackball .blackball-symbol { width:100px; height:64px; }

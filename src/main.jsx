@@ -143,9 +143,7 @@ function readPage() {
       ? "Storefront"
       : pages.includes(p)
         ? p
-        : new URLSearchParams(location.search).get("workspace") === "merchant"
-          ? "Storefront"
-          : "Start here";
+        : "Start here";
   } catch {
     return "Start here";
   }
@@ -737,6 +735,7 @@ function App({
           <main className="content">
             {page === "Start here" && (
               <DemoHome
+                merchantName={data.brand.name}
                 navigate={navigate}
                 startGuide={startGuide}
                 guide={guide}

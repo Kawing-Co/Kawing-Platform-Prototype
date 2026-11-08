@@ -117,3 +117,29 @@ Preserve original identity SVGs and existing layouts/assignments. No real transa
 Additional checkout/migration run: 2 passed; actual usual item customization and order
 submission succeeded using its own merchant record. Build and diff checks passed.
 Publish exact local main to existing public Site; GitHub push remains deferred.
+
+2026-11-08 owner-approved slice: remove decorative crescent/top card borders; add
+Blackball Cafe as an independent standard merchant with source-backed branding/menu
+from the owner's public Canva menu URL. Preserve original raster source assets;
+separate logo and wordmark in the merchant identity. Menu labels/prices must be checked
+against source; ambiguous rows must not invent prices. Keep ordering browser-local,
+independent merchant records, Studio/pilot/demo flows and neutral company chrome.
+Owner steering: Standard Merchant → Merchant View defaults to Start here; Customize
+still opens Studio, explicit deep links preserved. Include Blackball in market catalog
+through one-time non-destructive reconciliation. Verify menu prices, migration, checkout,
+start/customize routing, mobile and build. Publish existing Site; GitHub push deferred.
+Source read: public HTML/embedded menu data plus running page screenshot. Canva connector
+accepts design IDs rather than this published menu URL, so direct public-page read used.
+
+Completed: Blackball standard profile and catalog migration3, B05/fallback free booth,
+104 source-backed prices and original separated raster identity; published-media
+provenance recorded. Ambiguous bar-chow rows/services omitted from checkout and original
+menu linked. Card accent arc/decorative welcome star removed. Start here default and
+selected-merchant welcome applied; Customize/deep links retain Studio.
+Verification: initial core26 run24 passed, then two outdated Studio-flow tests updated
+for Customize→Brand and passed. Additional Blackball, usual, commerce, founder/mobile
+and neutral checks passed: 39 distinct targeted tests covered across runs. All104 menu
+image paths checked. Build/diff passed; compiled six-case mobile/desktop review passed;
+actual screenshots inspected. Full suite not rerun; existing bundle advisory retained.
+Next: exact-source local main commit and existing public Site publish; record final
+version/source in .git/kawing-brand-release.json. GitHub push remains deferred.

@@ -5,8 +5,10 @@
 // `kawing-demo-v1`), "usual" is the usual. (`kawing-merchant-v2:usual`).
 import * as matcha from "./merchant";
 import * as usual from "./usual";
+import * as blackball from "./blackball";
 
 export const BUSINESSES = {
+  blackball: {id:"blackball",name:"Blackball Cafe",kind:"Café & restaurant",seed:"blackball-1",brand:blackball.BRAND,menu:blackball.MENU_ITEMS,assets:blackball.ASSETS,storefront:blackball.STOREFRONT,seedOrderLines:blackball.seedOrderLines,previewPhoto:"/images/blackball/matcha-tray.png"},
   salo: {
     id: "salo",
     name: "Matcha Mood",

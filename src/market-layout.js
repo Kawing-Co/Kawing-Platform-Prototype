@@ -1,8 +1,9 @@
+export const MARKET_BLACKBALL = {id:"blackball",name:"Blackball Cafe",category:"Food & drinks",bio:"Coffee, matcha and all-day dining. Menu adapted from the published Blackball Cafe menu; local demo ordering only.",temporary:false};
 export const MARKET_USUAL = {id:"usual",name:"the usual.",category:"Food & drinks",bio:"Your neighborhood coffee bar. Familiar favorites, made your way.",temporary:false};
 // Serializable demo fixture and layout invariants, independent of the UI.
 export const seedMarket = () => ({
   version: 1,
-  catalogRevision: 2,
+  catalogRevision: 3,
   name: "The Sunday Commons",
   venue: "Riverside Pavilion · Fictional event",
   status: "active",
@@ -21,10 +22,11 @@ export const seedMarket = () => ({
             ? "Crafts"
             : "Food & drinks",
     blocked: i === 8,
-    merchant: i === 1 ? "salo" : i === 3 ? "usual" : i === 6 ? "luna" : null,
+    merchant: i === 1 ? "salo" : i === 3 ? "usual" : i === 4 ? "blackball" : i === 6 ? "luna" : null,
   })),
   profiles: [
     MARKET_USUAL,
+    MARKET_BLACKBALL,
     {
       id: "salo",
       name: "Matcha Mood",

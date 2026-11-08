@@ -157,7 +157,7 @@ export default function StorefrontHub({
   const count = latest ? latest.items.reduce((s, i) => s + i.qty, 0) : 0;
   return (
     <div
-      className={`sf-shell sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? (onEdit ? "sf-editor-preview" : "sf-preview") : ""}`}
+      className={`sf-shell ${b.identity==='blackball'?'sf-blackball':''} sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? (onEdit ? "sf-editor-preview" : "sf-preview") : ""}`}
       style={themeTokens(c)}
       onClickCapture={(e) => {
         if (!onEdit) return;
@@ -252,7 +252,7 @@ export default function StorefrontHub({
             )}
             <div className="sf-brand-copy">
               <img
-                className="sf-logo"
+                className={b.identity==='blackball'?"sf-logo blackball-symbol":"sf-logo"}
                 src={c.logo}
                 alt={`${b.name} logo demo`}
               />
@@ -262,7 +262,7 @@ export default function StorefrontHub({
                     ? "MADE BY YOUR NEIGHBORS"
                     : "YOUR NEIGHBORHOOD TABLE")}
               </div>
-              <h1>{b.name || "Your restaurant"}</h1>
+              <h1>{b.identity==='blackball'?<span className="blackball-wordmark"><img src={b.wordmark} alt={b.name}/></span>:b.name || "Your restaurant"}</h1>
               <p>{b.tagline}</p>
               <div className="sf-welcome">
                 {guest

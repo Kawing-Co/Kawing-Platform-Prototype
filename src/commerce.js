@@ -250,7 +250,7 @@ export function config(raw = {}) {
       ...d.wifi,
       ...raw.wifi,
       name: text(raw.wifi?.name, d.wifi.name, 50),
-      password: pick(raw.wifi?.password, ["fictional-matcha-2026", "fictional-usual-2026"], d.wifi.password),
+      password: pick(raw.wifi?.password, ["fictional-matcha-2026", "fictional-usual-2026", "fictional-blackball-2026"], d.wifi.password),
       instructions: text(raw.wifi?.instructions, d.wifi.instructions, 300),
     },
     loyalty: {

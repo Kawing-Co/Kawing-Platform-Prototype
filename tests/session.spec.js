@@ -202,6 +202,8 @@ test("Reset is scenario-scoped, confirmed, and keeps the Studio draft unless ask
   await page.getByRole("button", { name: "Packages", exact: true }).click();
   await page.getByRole("button", { name: /Bespoke/ }).first().click();
   await switchTo(page, "Merchant View");
+  await page.getByRole("button",{name:"Customize",exact:true}).click();
+  await page.getByRole("tab",{name:"Brand",exact:true}).click();
   await page.getByLabel("Restaurant name", { exact: true }).fill("Draft Name");
   await expect
     .poll(() => page.evaluate(() => !!localStorage.getItem("kawing-studio-draft")))

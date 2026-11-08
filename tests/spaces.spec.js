@@ -24,7 +24,7 @@ test("two simulations lead immediately to exactly three spaces", async ({
   await expect(page.locator(".space-role-cards>button")).toHaveCount(3);
   await page.getByRole("button", { name: /Enter Merchant View/ }).click();
   await expect(
-    page.getByRole("heading", { name: /Kawing Studio/ }),
+    page.getByRole("heading", { name: /A whole business, connected/ }),
   ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Customization", exact: true }),
@@ -167,6 +167,8 @@ test("Studio drafts survive view changes and package media limits are functional
   page,
 }) => {
   await enter(page, "Explore a business", "Merchant View");
+  await page.getByRole("button",{name:"Customize",exact:true}).click();
+  await page.getByRole("tab",{name:"Brand",exact:true}).click();
   await page
     .getByLabel("Restaurant name", { exact: true })
     .fill("Draft Coffee");
@@ -180,6 +182,8 @@ test("Studio drafts survive view changes and package media limits are functional
   ).toBeVisible();
   await page.getByRole("button", { name: "Switch View", exact: true }).click();
   await page.getByRole("button", { name: "Merchant View", exact: true }).click();
+  await page.getByRole("button",{name:"Customize",exact:true}).click();
+  await page.getByRole("tab",{name:"Brand",exact:true}).click();
   await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue(
     "Draft Coffee",
   );

@@ -50,7 +50,7 @@ export function sessionHref(current, { scenario = null, view = null, customize =
   if (scenario && view && customize) u.searchParams.set("customize", "1");
   u.hash =
     scenario === "standard" && view
-      ? { customer: "Customer", merchant: "Customization", admin: "Admin" }[view]
+      ? { customer: "Customer", merchant: customize ? "Customization" : "Start here", admin: "Admin" }[view]
       : "";
   return u.toString();
 }

@@ -181,3 +181,12 @@
 - Added the usual. as a standard market merchant with B04 in the default layout.
 - Reconciled older local catalogs once without overwriting occupied/blocked booths;
   retained later owner removals. Standard merchants show their real demo menu samples.
+
+## 2026-11-08 — Blackball Cafe and merchant entry
+
+- Added independent Blackball Cafe branding, 104 source-backed menu entries and local
+  ordering, plus safe one-time Pop-up Market catalog reconciliation.
+- Preserved separate original cup/wordmark imagery; documented source prices, media
+  and ambiguous menu rows excluded from checkout. Linked the published original menu.
+- Standard Merchant View opens Start here; Customize still opens Studio. Welcome copy
+  follows the selected merchant. Removed selected-card top arcs and decorative stars.

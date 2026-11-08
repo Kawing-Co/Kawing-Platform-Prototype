@@ -48,8 +48,8 @@ const VIEW_TAGS = {
 const VIEW_COPY = {
   standard: {
     merchant: [
-      "Opens Kawing Studio.",
-      "Shape {business}'s business profile, menu and modules, then run orders and payment checks.",
+      "Opens Start here.",
+      "Get oriented, then explore {business}'s menu, operations and Kawing Studio.",
     ],
     customer: [
       "Opens {business}'s finished page.",
@@ -279,7 +279,7 @@ export default function Spaces({ Workspace }) {
                   <ProgressiveImage src="/images/usual/the-usual.jpg" alt="" loading="lazy" width="1170" height="1414" />
                 </div>
                 <span className="art-label">
-                  <Check size={13} /> Two businesses, two looks
+                  <Check size={13} /> Independent businesses, distinct identities
                 </span>
               </div>
               <div className="scenario-card-copy">
