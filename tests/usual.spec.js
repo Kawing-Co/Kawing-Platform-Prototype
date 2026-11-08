@@ -76,7 +76,7 @@ test.describe("the platform keeps Kawing's identity", () => {
     await group.getByRole("radio", { name: /the usual\./ }).click();
     await expect(page.locator(".selected-experience .demo-eyebrow")).toContainText("THE USUAL.");
     await page.getByRole("button", { name: /Enter Merchant View/ }).click();
-    await expect(page.getByLabel("Restaurant name", { exact: true })).toHaveValue("the usual.");
+    await expect(page.getByRole("heading", { name: /A whole business, connected/ })).toBeVisible();
     expect(new URL(page.url()).searchParams.get("business")).toBe("usual");
     await expect(page.locator(".session-context")).toContainText("the usual.");
     // Matcha Mood's own record is untouched
@@ -89,18 +89,18 @@ test.describe("the usual. as a merchant profile", () => {
     await page.goto("/?surface=guest&merchant=usual&entry=table&table=05#Customer");
   });
 
-  test("its own theme: greige paper, geometric lowercase type, black pills", async ({ page }) => {
+  test("shared neutral canvas preserves lowercase identity and black actions", async ({ page }) => {
     const shell = page.locator(".sf-shell").first();
     await expect(page.getByRole("heading", { name: "the usual.", exact: true })).toBeVisible();
     const t = await shell.evaluate((e) => {
       const cs = getComputedStyle(e), h = getComputedStyle(e.querySelector("h1"));
       return { bg: cs.getPropertyValue("--sf-bg").trim(), primary: cs.getPropertyValue("--sf-primary").trim(), display: cs.getPropertyValue("--sf-display").trim(), caseTok: cs.getPropertyValue("--sf-case").trim(), h1Font: h.fontFamily, h1Case: h.textTransform };
     });
-    expect(t.bg).toBe("#eaebe0");
+    expect(t.bg).toBe("#eaebe0"); // saved theme retained; shared canvas is a presentation layer;
     expect(t.primary).toBe("#141412");
     expect(t.display).toContain("Jost");
     expect(t.caseTok).toBe("lowercase");
-    expect(t.h1Font).toContain("Jost");
+    expect(t.h1Font).toContain("Manrope");
     expect(t.h1Case).toBe("lowercase");
   });
 

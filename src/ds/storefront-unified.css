@@ -1,0 +1,103 @@
+/* Shared hospitality composition. Merchant identity lives in logos, content and actions;
+   the canvas and reading hierarchy stay consistent, including legacy dark-stage saves. */
+html body .sf-shell.sf-unified {
+  color: var(--k-ink); background: var(--k-paper);
+}
+html body .sf-shell.sf-unified .sf-brand-hero {
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: stretch;
+  padding: 0; min-height: 360px; background: var(--k-surface); color: var(--k-ink);
+  border: 1px solid var(--k-line); border-radius: 28px; corner-shape: round;
+}
+html body .sf-shell.sf-unified .sf-brand-hero::before,
+html body .sf-shell.sf-unified .sf-promo-teaser::before { display: none; }
+html body .sf-shell.sf-unified .sf-hero-media {
+  position: relative; inset: auto; grid-column: 2; grid-row: 1; z-index: auto;
+  min-height: 360px; mask-image: none; -webkit-mask-image: none; overflow: hidden;
+}
+html body .sf-shell.sf-unified .sf-hero-media .progressive-image { position: absolute; inset: 0; }
+html body .sf-shell.sf-unified .sf-hero-media img.sf-cover {
+  position: absolute; inset: 0; width: 100%; height: 100%; max-height: none;
+  min-height: 100%; object-fit: cover; object-position: center; animation: none; transform: none;
+}
+html body .sf-shell.sf-unified .sf-brand-copy {
+  grid-column: 1; grid-row: 1; align-self: center; padding: clamp(22px,4vw,40px);
+  background: transparent; border-radius: 0; min-width: 0; max-width: none;
+}
+html body .sf-shell.sf-unified .sf-brand-hero h1 {
+  font: 500 clamp(34px,5.2vw,60px)/1.06 var(--k-head); letter-spacing: -.025em;
+  color: var(--k-ink); margin: 14px 0; overflow-wrap: anywhere;
+}
+html body .sf-shell.sf-unified .sf-brand-hero p {
+  font: 400 clamp(18px,2.2vw,23px)/1.45 var(--k-sans); color: var(--k-ink);
+}
+html body .sf-shell.sf-unified :is(.sf-kicker,.sf-welcome) { color: var(--k-ink-2); }
+html body .sf-shell.sf-unified .sf-logo { border: 0; box-shadow: none; margin-bottom: 12px; }
+html body .sf-shell.sf-unified .sf-brand-hero .sf-primary {
+  background: var(--sf-primary); color: var(--sf-on-primary); min-width: 0;
+  max-width: 100%; box-shadow: var(--k-shadow-1);
+}
+html body .sf-shell.sf-unified.sf-minimal .sf-brand-hero { grid-template-columns: 1fr; min-height: 0; }
+html body .sf-shell.sf-unified.sf-quick .sf-brand-hero { min-height: 260px; }
+html body .sf-shell.sf-unified.sf-quick .sf-hero-media { min-height: 260px; }
+html body .sf-shell.sf-unified .sf-promo-teaser {
+  display: grid; grid-template-columns: 1fr 36%; min-height: 180px;
+  background: var(--k-surface); color: var(--k-ink); border: 1px solid var(--k-line);
+  border-radius: 22px; text-align: left;
+}
+html body .sf-shell.sf-unified .sf-promo-teaser > img {
+  position: absolute; inset: 0 0 0 auto; width: 36%; height: 100%; z-index: auto;
+  object-fit: cover; transform: none;
+}
+html body .sf-shell.sf-unified .sf-promo-teaser > span {
+  grid-column: 1; min-height: 180px; padding: 24px; position: relative;
+}
+html body .sf-shell.sf-unified .sf-promo-teaser strong { font: 500 clamp(24px,3.6vw,32px)/1.15 var(--k-head); color: var(--k-ink); }
+html body .sf-shell.sf-unified .sf-promo-teaser :is(small,span > span) { color: var(--k-ink-2); }
+/* The ordering screen follows the same image/text separation as its entry hub. */
+html body .cx-unified .cx-hero {
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: stretch; padding: 0;
+  background: var(--k-surface); color: var(--k-ink); border: 1px solid var(--k-line);
+  border-radius: 24px; corner-shape: round; min-height: 300px;
+}
+html body .cx-unified .cx-hero::before { display: none; }
+html body .cx-unified .cx-hero-media { position: relative; inset: auto; grid-column: 2; grid-row: 1; z-index: auto; min-height: 300px; }
+html body .cx-unified .cx-hero-media img { animation: none; transform: none; }
+html body .cx-unified .cx-hero-copy { padding: 28px; grid-column: 1; grid-row: 1; align-self: center; min-width: 0; }
+html body .cx-unified .cx-hero :is(h1,p,.cx-eyebrow,.cx-hero-meta) { color: var(--k-ink); }
+html body .cx-unified .cx-hero h1 { font: 500 clamp(30px,5vw,48px)/1.1 var(--k-head); }
+html body .cx-unified .cx-hero p { font: 400 18px/1.45 var(--k-sans); }
+.merchant-photo-stamp {
+  position: absolute; z-index: 3; bottom: 12px; right: 12px; display: grid; gap: 2px;
+  text-align: left; padding: 8px 11px; border-radius: 10px; background: #f5f2ecf5;
+  color: #1d2430; box-shadow: 0 2px 10px #14284b14; pointer-events: none;
+}
+.merchant-photo-stamp b { font: 700 13px/1.2 var(--k-sans); color: #b04405; }
+.merchant-photo-stamp small { font: 400 10px/1.3 var(--k-sans); color: #60656c; }
+@media (max-width: 600px) {
+  html body .sf-shell.sf-unified .sf-brand-hero,
+  html body .cx-unified .cx-hero { grid-template-columns: 1fr; }
+  html body .sf-shell.sf-unified .sf-hero-media,
+  html body .cx-unified .cx-hero-media { grid-column: 1; grid-row: 1; min-height: 220px; height: 220px; }
+  html body .sf-shell.sf-unified .sf-brand-copy,
+  html body .cx-unified .cx-hero-copy { grid-row: 2; padding: 24px; }
+  html body .sf-shell.sf-unified .sf-brand-hero h1 { font-size: 38px; }
+  html body .sf-shell.sf-unified.sf-minimal .sf-brand-copy { grid-row: 1; }
+  html body .sf-shell.sf-unified.sf-quick .sf-hero-media { min-height: 160px; height: 160px; }
+  html body .sf-shell.sf-unified .sf-promo-teaser { grid-template-columns: 1fr 32%; }
+  html body .sf-shell.sf-unified .sf-promo-teaser > img { width: 32%; }
+  html body .sf-shell.sf-unified .sf-promo-teaser > span { padding: 20px; }
+}
+
+html body .sf-shell.sf-unified .sf-brand-copy :is(h1,p,.sf-kicker,.sf-welcome) { color: var(--k-ink); }
+html body .sf-shell.sf-unified .sf-brand-copy :is(.sf-kicker,.sf-welcome) { color: var(--k-ink-2); }
+html body .sf-shell.sf-unified .sf-logo { background: transparent; }
+
+/* Descendants use neutral reading surfaces without mutating saved Studio tokens. */
+html body .sf-shell.sf-unified > * {
+  --sf-ink: var(--k-ink); --sf-muted: var(--k-ink-2);
+  --sf-surface: var(--k-surface); --sf-line: var(--k-line);
+}
+html body .cx-unified {
+  --cx-ink: var(--k-ink); --cx-ink-2: var(--k-ink-2);
+  --cx-surface: var(--k-surface); --cx-paper: var(--k-paper);
+}

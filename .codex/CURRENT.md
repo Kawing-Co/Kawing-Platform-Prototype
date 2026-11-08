@@ -143,3 +143,20 @@ image paths checked. Build/diff passed; compiled six-case mobile/desktop review 
 actual screenshots inspected. Full suite not rerun; existing bundle advisory retained.
 Next: exact-source local main commit and existing public Site publish; record final
 version/source in .git/kawing-brand-release.json. GitHub push remains deferred.
+
+2026-11-08 active owner slice: repair Blackball missing menu imagery and hero clipping;
+use licensed internet reference photos with separate brand stamp/illustrative labeling.
+Keep downloaded photo bytes intact; compose the stamp as responsive UI, not a claim of
+actual merchant product photography. Source photo pages/license read; retain provenance.
+Owner steering: reconcile Matcha Mood/usual/Blackball into a common storefront design
+philosophy: neutral surfaces, shared type/layout, separate image/text, brand action
+accents only. Preserve merchant names, logos, menus, selected Studio layouts/config,
+order/payment states and customizations. No record reset or seed change.
+Baseline ade3ee6 / public Site21; GitHub push remains deferred. Verify natural image
+loading, no hero height truncation, shared style across all3, mobile, checkout, build,
+actual screenshot review; publish exact local main to existing public Site.
+Completed slice: shared neutral storefront and ordering composition; full-height hero
+image fix; six licensed reference photos with separate brand/illustrative UI labels;
+placeholder-only persistent imagery migration. 37 targeted checks passed (affected
+artifact-collision checks rerun sequentially); mobile/desktop screenshots inspected.
+No menu pricing, transaction or seed reset. Publish local main; GitHub push still deferred.

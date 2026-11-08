@@ -106,7 +106,13 @@ function loadBusiness(id) {
   try {
     const v = JSON.parse(localStorage.getItem(businessKey(id)));
     if (v?.seed === b.seed && v.brand && Array.isArray(v.menu) && Array.isArray(v.orders))
-      return extend(v, id);
+      return extend({...v, menu: v.menu.map(item => {
+        const current = b.menu.find(next => next.id === item.id);
+        // Refresh only retired placeholder imagery; preserve owner edits and transaction state.
+        return id === 'blackball' && item.image?.startsWith('/images/blackball/category-') && current?.illustrative
+          ? {...item, image:current.image, images:current.images, photoExt:current.photoExt, illustrative:true}
+          : item;
+      })}, id);
   } catch {}
   return freshBusiness(id);
 }

@@ -80,12 +80,12 @@
     "price": 155,
     "category": "Coffee",
     "description": "",
-    "image": "/images/blackball/category-coffee.svg",
+    "image": "/images/blackball/reference/coffee.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-coffee",
+      "base": "reference/coffee",
       "rules": []
     },
     "options": [
@@ -108,7 +108,8 @@
         ]
       }
     ],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 4,
@@ -520,16 +521,17 @@
     "price": 195,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 20,
@@ -538,16 +540,17 @@
     "price": 195,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 21,
@@ -556,16 +559,17 @@
     "price": 195,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 22,
@@ -574,16 +578,17 @@
     "price": 195,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 23,
@@ -592,16 +597,17 @@
     "price": 195,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 24,
@@ -610,16 +616,17 @@
     "price": 255,
     "category": "Frappe",
     "description": "",
-    "image": "/images/blackball/category-frappe.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-frappe",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 25,
@@ -628,16 +635,17 @@
     "price": 140,
     "category": "Tea",
     "description": "",
-    "image": "/images/blackball/category-tea.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-tea",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 26,
@@ -646,16 +654,17 @@
     "price": 140,
     "category": "Tea",
     "description": "",
-    "image": "/images/blackball/category-tea.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-tea",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 27,
@@ -664,16 +673,17 @@
     "price": 140,
     "category": "Tea",
     "description": "",
-    "image": "/images/blackball/category-tea.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-tea",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 28,
@@ -682,16 +692,17 @@
     "price": 150,
     "category": "Tea",
     "description": "",
-    "image": "/images/blackball/category-tea.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-tea",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 29,
@@ -700,16 +711,17 @@
     "price": 150,
     "category": "Tea",
     "description": "",
-    "image": "/images/blackball/category-tea.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-tea",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 30,
@@ -898,16 +910,17 @@
     "price": 395,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 41,
@@ -916,16 +929,17 @@
     "price": 695,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 42,
@@ -934,16 +948,17 @@
     "price": 995,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 43,
@@ -952,16 +967,17 @@
     "price": 415,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 44,
@@ -970,16 +986,17 @@
     "price": 595,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 45,
@@ -988,16 +1005,17 @@
     "price": 395,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 46,
@@ -1006,16 +1024,17 @@
     "price": 495,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 47,
@@ -1024,16 +1043,17 @@
     "price": 435,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 48,
@@ -1042,16 +1062,17 @@
     "price": 495,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 49,
@@ -1060,16 +1081,17 @@
     "price": 455,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 50,
@@ -1078,16 +1100,17 @@
     "price": 455,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 51,
@@ -1096,16 +1119,17 @@
     "price": 455,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 52,
@@ -1114,16 +1138,17 @@
     "price": 695,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 53,
@@ -1132,16 +1157,17 @@
     "price": 595,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 54,
@@ -1168,16 +1194,17 @@
     "price": 425,
     "category": "Mains",
     "description": "",
-    "image": "/images/blackball/category-mains.svg",
+    "image": "/images/blackball/reference/steak.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-mains",
+      "base": "reference/steak",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 56,
@@ -1546,16 +1573,17 @@
     "price": 320,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 77,
@@ -1564,16 +1592,17 @@
     "price": 225,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 78,
@@ -1582,16 +1611,17 @@
     "price": 255,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 79,
@@ -1600,16 +1630,17 @@
     "price": 225,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 80,
@@ -1618,16 +1649,17 @@
     "price": 295,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 81,
@@ -1636,16 +1668,17 @@
     "price": 295,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 82,
@@ -1654,16 +1687,17 @@
     "price": 255,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 83,
@@ -1672,16 +1706,17 @@
     "price": 295,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 84,
@@ -1690,16 +1725,17 @@
     "price": 495,
     "category": "Desserts",
     "description": "",
-    "image": "/images/blackball/category-desserts.svg",
+    "image": "/images/blackball/reference/dessert.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-desserts",
+      "base": "reference/dessert",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 85,
@@ -1708,16 +1744,17 @@
     "price": 225,
     "category": "Shakes",
     "description": "",
-    "image": "/images/blackball/category-shakes.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-shakes",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 86,
@@ -1726,16 +1763,17 @@
     "price": 225,
     "category": "Shakes",
     "description": "",
-    "image": "/images/blackball/category-shakes.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-shakes",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 87,
@@ -1744,16 +1782,17 @@
     "price": 225,
     "category": "Shakes",
     "description": "",
-    "image": "/images/blackball/category-shakes.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-shakes",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 88,
@@ -1762,16 +1801,17 @@
     "price": 225,
     "category": "Shakes",
     "description": "",
-    "image": "/images/blackball/category-shakes.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-shakes",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 89,
@@ -1780,16 +1820,17 @@
     "price": 225,
     "category": "Shakes",
     "description": "",
-    "image": "/images/blackball/category-shakes.svg",
+    "image": "/images/blackball/reference/shake.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-shakes",
+      "base": "reference/shake",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 90,
@@ -1798,16 +1839,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 91,
@@ -1816,16 +1858,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 92,
@@ -1834,16 +1877,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 93,
@@ -1852,16 +1896,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 94,
@@ -1870,16 +1915,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 95,
@@ -1888,16 +1934,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 96,
@@ -1906,16 +1953,17 @@
     "price": 185,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 97,
@@ -1924,70 +1972,74 @@
     "price": 230,
     "category": "Juices",
     "description": "",
-    "image": "/images/blackball/category-juices.svg",
+    "image": "/images/blackball/reference/juice.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-juices",
+      "base": "reference/juice",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 98,
     "slug": "angus-ribeye-steak-usda-approved-angus-ribeye-steak-300-grams",
-    "name": "USDA Approved Angus Ribeye Steak \u2014 300 grams",
+    "name": "USDA Approved Angus Ribeye Steak — 300 grams",
     "price": 1595,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/category-angus-ribeye-steak.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-angus-ribeye-steak",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 99,
     "slug": "angus-ribeye-steak-usda-approved-angus-ribeye-steak-350-grams",
-    "name": "USDA Approved Angus Ribeye Steak \u2014 350 grams",
+    "name": "USDA Approved Angus Ribeye Steak — 350 grams",
     "price": 1895,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/category-angus-ribeye-steak.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-angus-ribeye-steak",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 100,
     "slug": "angus-ribeye-steak-usda-approved-angus-ribeye-steak-380-grams",
-    "name": "USDA Approved Angus Ribeye Steak \u2014 380 grams",
+    "name": "USDA Approved Angus Ribeye Steak — 380 grams",
     "price": 2195,
     "category": "Angus Ribeye Steak",
     "description": "",
-    "image": "/images/blackball/category-angus-ribeye-steak.svg",
+    "image": "/images/blackball/reference/tea.jpg",
     "dir": "blackball",
-    "photoExt": "svg",
+    "photoExt": "jpg",
     "available": true,
     "images": {
-      "base": "category-angus-ribeye-steak",
+      "base": "reference/tea",
       "rules": []
     },
     "options": [],
-    "glow": "#dba574"
+    "glow": "#dba574",
+    "illustrative": true
   },
   {
     "id": 101,

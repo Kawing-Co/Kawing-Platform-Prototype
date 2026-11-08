@@ -99,6 +99,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
     >
       <div className="k-sheet-grab" data-grab aria-hidden="true"><i /></div>
       <div className="k-sheet-stage" data-grab ref={stage}>
+        {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b><small>Illustrative photo</small></span>}
         <div className="k-sheet-photo" style={{ "--sc": scaleOf(item, sel), filter: toneOf(item, sel) || undefined }}>
           {layers.map((l) => (
             <img key={l.k} className={"k-layer" + (l.first ? "" : " k-iris")} src={photoPath(item, l.name)} alt={l.first ? item.name : ""} width="1024" height="1280" draggable="false" />

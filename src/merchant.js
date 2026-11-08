@@ -884,7 +884,7 @@ export const MENU_ITEMS = [
 // Photograph variants live next to their business: /images/<dir>/<name>[-sm].jpg (dir defaults to matcha).
 export const photoPath = (item, name, sm = false) => {
   const ext=['png','svg'].includes(item?.photoExt)?item.photoExt:'jpg';
-  return `/images/${item?.dir || "matcha"}/${name}${sm&&ext==='jpg'?"-sm":""}.${ext}`;
+  return `/images/${item?.dir || "matcha"}/${name}${sm&&ext==='jpg'&&!item?.illustrative?"-sm":""}.${ext}`;
 };
 export const itemOptions = (item) => item.options || [];
 export const hasOptions = (item) => itemOptions(item).length > 0;

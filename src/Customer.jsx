@@ -251,7 +251,7 @@ export default function Customer({
   const heroPhoto = craft ? "/images/market-stall.jpg" : brand.heroPhoto || "/images/matcha/latte-iced.jpg";
   return (
     <div
-      className="cx-shell"
+      className={`cx-shell ${craft ? "" : "cx-unified"}`}
       style={{ "--cx-brand": brand.accent || "#1f4d3a" }}
     >
       {placed ? (
@@ -484,6 +484,7 @@ export default function Customer({
                             <UtensilsCrossed size={35} />
                           </div>
                         )}
+                        {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b><small>Illustrative photo</small></span>}
                         {item.available === false ? (
                           <span className="cx-food-label">Back soon</span>
                         ) : (

@@ -157,7 +157,7 @@ export default function StorefrontHub({
   const count = latest ? latest.items.reduce((s, i) => s + i.qty, 0) : 0;
   return (
     <div
-      className={`sf-shell ${b.identity==='blackball'?'sf-blackball':''} sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? (onEdit ? "sf-editor-preview" : "sf-preview") : ""}`}
+      className={`sf-shell ${b.category === "Crafts" ? "" : "sf-unified"} ${b.identity==='blackball'?'sf-blackball':''} sf-${c.layout} sf-menu-${c.theme.menu} sf-cards-${c.theme.cards} sf-modules-${c.theme.modules} sf-hero-${c.theme.hero} ${preview ? (onEdit ? "sf-editor-preview" : "sf-preview") : ""}`}
       style={themeTokens(c)}
       onClickCapture={(e) => {
         if (!onEdit) return;

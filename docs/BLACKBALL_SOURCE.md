@@ -26,8 +26,10 @@ payments remain local fictional demo records. Rewards are disabled for this merc
 Tagline, welcome text and descriptive interface copy are demo editorial copy.
 
 Published item cutouts are used where identifiable. Some food pictures are composite
-category menu photographs. Categories without a suitable photo use a clearly labeled
-non-photographic placeholder; unrelated borrowed stock is not substituted. Asset
+category menu photographs. Categories without a suitable merchant photo now use licensed reference photography,
+with a separate Blackball UI stamp and explicit “Illustrative photo” label. These
+represent categories rather than verified photos of the merchant’s actual products.
+See STOREFRONT_RECONCILIATION.md and the reference/CREDITS.txt asset file. Asset
 provenance is in docs/sources/blackball-assets.json. No Canva credentials were needed.
 
 Blackball is a third independent Standard Merchant (blackball, blackball-1 seed,
