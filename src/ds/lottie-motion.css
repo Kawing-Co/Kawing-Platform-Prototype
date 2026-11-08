@@ -65,3 +65,43 @@ html body .demo-purpose-note { margin-top:20px; }
 .motion-credits { color:inherit; display:inline-block; margin-left:12px; text-underline-offset:3px; font-size:10px; opacity:.85; }
 
 .entry-mobile-first[data-page-hidden=true] * { animation-play-state:paused!important; }
+/* A concise, viewport-sized introduction; content remains scrollable under text zoom. */
+html body .intro-screen { min-height:100svh; padding-block:0; display:flex; flex-direction:column; }
+html body .intro-screen .spaces-brand { height:64px; flex:none; }
+html body .intro-screen .demo-introduction { flex:1; padding:20px 0; gap:36px; }
+html body .intro-screen .demo-introduction h1 { font-size:clamp(44px,5vw,66px); }
+html body .intro-screen .demo-purpose-card { padding:24px; }
+html body .intro-screen .logo-stage { width:90px; height:90px; margin-bottom:12px; }
+html body .intro-screen .logo-stage .company-mark-stacked { width:90px; height:90px; }
+html body .intro-screen .demo-purpose-card h2 { font-size:32px; margin:10px 0 14px; }
+html body .intro-screen .visit-step { padding:8px; }
+html body .intro-screen .visit-description { font-size:12px; }
+html body .intro-screen .visit-preview { min-height:72px; margin-top:12px; padding:10px; }
+html body .intro-screen .demo-purpose-note { margin-top:12px; padding-top:12px; font-size:11px; }
+html body .intro-screen .spaces-footer { flex:none; margin:0 0 12px; padding:10px 18px; min-height:44px; }
+html body .intro-screen .spaces-footer .company-wordmark { width:120px; height:26px; margin:0; }
+@media(max-width:750px) {
+ html body .intro-screen .spaces-brand { height:54px; }
+ html body .intro-screen .demo-introduction { display:flex; flex-direction:column; justify-content:center; align-items:stretch; gap:16px; padding:14px 0; }
+ html body .intro-screen .demo-eyebrow { font-size:9px; }
+ html body .intro-screen .connection-badge { margin-top:4px; }
+ html body .intro-screen .demo-introduction h1 { font-size:clamp(36px,10vw,46px); margin:8px 0 12px; }
+ html body .intro-screen .demo-introduction-copy > p { font-size:14px; line-height:1.5; }
+ html body .intro-screen .demo-start { margin:14px 0 8px; min-height:48px; padding:8px 16px; }
+ html body .intro-screen .demo-introduction-copy > small { font-size:10px; }
+ html body .intro-screen .demo-purpose-card { padding:16px; border-radius:18px; }
+ html body .intro-screen .logo-stage, html body .intro-screen .demo-purpose-card > .demo-eyebrow, html body .intro-screen .visit-description, html body .intro-screen .visit-index, html body .intro-screen .visit-indicator, html body .intro-screen .demo-purpose-note, html body .intro-screen .visit-hint { display:none; }
+ html body .intro-screen .demo-purpose-card h2 { font-size:23px; margin:0 0 12px; }
+ html body .intro-screen .demo-purpose-card h2 br { display:none; }
+ html body .intro-screen .connected-visit ol { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px; }
+ html body .intro-screen .visit-step { display:block; padding:8px 5px; text-align:center; min-height:44px; }
+ html body .intro-screen .visit-step b { font-size:10px; }
+ html body .intro-screen .visit-preview { min-height:64px; margin-top:8px; padding:8px; }
+ html body .intro-screen .visit-preview p { font-size:11px; }
+ html body .intro-screen .spaces-footer { font-size:9px; padding:8px 12px; gap:6px; margin-bottom:8px; }
+ html body .intro-screen .spaces-footer > .company-wordmark { display:none; }
+}
+@media(max-width:750px) and (max-height:700px) {
+ html body .intro-screen .connection-badge { display:none; }
+ html body .intro-screen .demo-introduction { gap:12px; padding:10px 0; }
+}

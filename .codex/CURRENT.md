@@ -66,3 +66,12 @@ and public verification in .git/kawing-brand-release.json. GitHub push remains d
 section from the landing page. Remove only its entry render/import; preserve the
 primary introduction, connected-visit card, experience selection and operational views.
 Publish to existing public Site; GitHub push remains deferred. Prior Site16 is rollback.
+
+2026-11-08 owner amendment: fit the introduction within normal desktop/phone viewport
+and remove visible Pause motion. Use compact responsive composition, preserving readable
+content and text-zoom scrolling. Replace continuous decorative playback/automatic story
+rotation with finite entrance and manual story selection. Preserve reduced motion.
+Publish to existing public Site; GitHub push remains deferred.
+Verification: ten branding/motion/viewport checks passed, including no scrolling at
+360x640,390x844,768x1024 and1440x900. Diff reviewed. Build/package and publish exact
+local main; GitHub push deferred. Current rollback: Site17.

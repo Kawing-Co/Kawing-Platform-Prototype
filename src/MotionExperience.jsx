@@ -60,7 +60,7 @@ export function ConnectedVisit({motion}){
   const [active,setActive]=useState(0),[interacted,setInteracted]=useState(false),[visible,setVisible]=useState(false),[pageVisible,setPageVisible]=useState(!document.hidden);
   const card=useRef(null);
   useEffect(()=>{const o=new IntersectionObserver(e=>{const showing=e[0].isIntersecting;setVisible(showing);card.current?.closest('.demo-purpose-card')?.setAttribute('data-card-visible',String(showing));},{threshold:.25});o.observe(card.current);const change=()=>setPageVisible(!document.hidden);document.addEventListener('visibilitychange',change);return()=>{o.disconnect();document.removeEventListener('visibilitychange',change);};},[]);
-  useEffect(()=>{if(!motion.enabled||!visible||!pageVisible||interacted)return;const id=setInterval(()=>setActive(v=>(v+1)%3),4500);return()=>clearInterval(id);},[motion.enabled,visible,pageVisible,interacted]);
+
   return <div ref={card} className="connected-visit" data-active-step={active}>
     <ol>{steps.map((step,i)=><li key={step.title}><button className="visit-step" aria-pressed={active===i} onClick={()=>{setActive(i);setInteracted(true);}}><span className="visit-index">0{i+1}</span><span><b>{step.title}</b><span className="visit-description">{step.copy}</span></span><span className="visit-indicator"><Check size={14}/></span></button></li>)}</ol>
     <div className="visit-preview" key={active}><MotionGlyph name={steps[active].clip} enabled={motion.enabled} tone="light"/><div><small>{steps[active].label} perspective · Demo</small><p>{steps[active].sample}</p></div></div>

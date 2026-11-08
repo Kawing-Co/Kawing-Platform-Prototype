@@ -159,3 +159,9 @@
   retained drafts, review, profile details, media quotas and optional tier controls.
 - Preserved existing commerce, legacy hashes, simulation boundaries and public Site ID.
 - See docs/SPACES_STUDIO_AMENDMENT.md and docs/SPACES_STUDIO_GUIDE.md for scope/limits.
+
+## 2026-11-08 — Compact introduction
+
+- Fit the landing introduction to standard phone, tablet and desktop viewports.
+- Removed Pause motion; decorative playback is finite and story steps advance manually.
+- Retained accessible text zoom scrolling and system reduced-motion support.

@@ -1,5 +1,5 @@
 import CompanyWordmark from "./CompanyWordmark";
-import {useDemoMotion, MotionControl, MotionGlyph, ConnectedVisit} from "./MotionExperience";
+import {useDemoMotion, MotionGlyph, ConnectedVisit} from "./MotionExperience";
 import React, { useState, useEffect, useRef, useId } from "react";
 import {
   ArrowRight,
@@ -223,7 +223,7 @@ export default function Spaces({ Workspace }) {
   return (
     <>
       <UndoHost />
-      <main data-page-hidden={!motion.pageVisible} data-motion={motion.enabled?"on":"off"} className={"spaces-landing premium-landing entry-mobile-first" + (step === "view" ? " view-picker" : "")}>
+      <main data-page-hidden={!motion.pageVisible} data-motion={motion.enabled?"on":"off"} className={"spaces-landing premium-landing entry-mobile-first" + (step === "landing" ? " intro-screen" : "") + (step === "view" ? " view-picker" : "")}>
         <header className="spaces-brand">
           <a
             href="/"
@@ -234,14 +234,14 @@ export default function Spaces({ Workspace }) {
           >
             <CompanyWordmark />
           </a>
-          <div className="entry-header-tools"><span>THE INTERACTIVE PRODUCT EXPERIENCE</span><MotionControl motion={motion}/></div>
+          <div className="entry-header-tools"><span>THE INTERACTIVE PRODUCT EXPERIENCE</span></div>
 
         </header>
         {step === "landing" ? (
           <section className="demo-introduction" aria-labelledby="demo-title">
             <div className="demo-introduction-copy">
               <span className="demo-eyebrow">THE KAWING &amp; CO. PRODUCT DEMO</span>
-              <div className="connection-badge"><MotionGlyph enabled={motion.enabled} loop/><span>Small businesses. Lasting connections.</span></div>
+              <div className="connection-badge"><MotionGlyph enabled={motion.enabled}/><span>Small businesses. Lasting connections.</span></div>
               <h1 id="demo-title" tabIndex={-1}>Good business.<br /><em>Closer connections.</em></h1>
               <p>See how one customer visit connects a branded menu, an order, the team behind it, and a reason to return.</p>
               <button className="demo-start" data-tactile onClick={() => go({ screen: "experiences" })}>Choose your experience <MotionGlyph name="nudge" enabled={motion.enabled} tone="light" className="motion-forward"/></button>

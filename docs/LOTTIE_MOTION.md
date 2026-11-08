@@ -75,3 +75,9 @@ Hosted-page correction: nested credits.html returned an empty response from Site
 The visible link now opens /motion/CREDITS.txt, using the same static delivery path
 as the verified license files. Targeted runtime-fallback/credits check passed again;
 this follow-up does not change playback or operational behavior.
+
+2026-11-08: owner requested a viewport-fitting introduction and removal of Pause motion.
+Entry now uses compact responsive composition; phone narrative descriptions yield to
+three directly selectable steps and their preview. Decorative playback is finite, and
+story rotation is manual. System reduced motion remains respected. At increased text
+zoom or unusually short viewports, natural scrolling remains available for accessibility.
