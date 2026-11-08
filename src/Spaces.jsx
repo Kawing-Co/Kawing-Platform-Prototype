@@ -18,7 +18,6 @@ import { CustomerPreview } from "./Viewport";
 import Market from "./Market";
 import {
   UndoHost,
-  ProductStory,
   BackPreview,
   useEditorialMotion,
 } from "./PremiumExperience";
@@ -376,7 +375,6 @@ export default function Spaces({ Workspace }) {
             </div>
           </>
         ) : null}
-        {step === "landing" && <ProductStory />}
         <footer className="spaces-footer">
           <span>
             <span className="online-dot" /> Interactive demo · Fictional

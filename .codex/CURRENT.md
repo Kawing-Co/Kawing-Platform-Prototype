@@ -61,3 +61,8 @@ Verification: all nine motion/branding tests passed; production build and comple
 review passed. No operational source changed. Existing bundle-size advisory remains.
 Publish exact local main to the existing Sites source remote; record actual deployment
 and public verification in .git/kawing-brand-release.json. GitHub push remains deferred.
+
+2026-11-08 owner amendment: remove the pictured optional product-story/film/3D
+section from the landing page. Remove only its entry render/import; preserve the
+primary introduction, connected-visit card, experience selection and operational views.
+Publish to existing public Site; GitHub push remains deferred. Prior Site16 is rollback.
