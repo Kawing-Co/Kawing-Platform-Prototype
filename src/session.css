@@ -20,7 +20,7 @@
 }
 .spaces-step > li > .current,
 .spaces-step > li > .done {
-  color: #fff;
+  color: #f5f2ec;
   background: var(--sp-green);
   border-color: var(--sp-green);
 }
@@ -70,7 +70,7 @@
   display: grid;
   gap: 2px;
   padding: 6px;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 10px;
   box-shadow: 0 14px 40px rgba(15, 29, 55, 0.122);
@@ -122,7 +122,7 @@
   border: 0;
   border-radius: 17px;
   padding: 36px;
-  background: #fffefa;
+  background: #f5f2ec;
   color: var(--sp-ink);
   box-shadow: 0 25px 100px #192a3020;
 }

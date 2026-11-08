@@ -165,3 +165,12 @@
 - Fit the landing introduction to standard phone, tablet and desktop viewports.
 - Removed Pause motion; decorative playback is finite and story steps advance manually.
 - Retained accessible text zoom scrolling and system reduced-motion support.
+
+## 2026-11-08 — Neutral functional design system
+
+- Replaced decorative navy panels with warm paper and stone surfaces; reserved navy
+  for primary actions and used navy-tinted charcoal for dark text.
+- Migrated pure UI extremes to tinted materials; preserved independent merchant brands.
+- Updated entry, shell, Studio, admin, map and shared chrome; corrected logo blending,
+  footer composition and compact Studio rail overflow. Preserved ordering and motion.
+- Added contrast/action regression checks and design guidance with verified screenshots.

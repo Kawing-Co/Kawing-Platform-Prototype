@@ -1,8 +1,8 @@
 .sf-shell {
   --sf-primary: #245642;
-  --sf-on-primary: #fff;
-  --sf-bg: #f7f7f0;
-  --sf-surface: #fffefa;
+  --sf-on-primary: #f5f2ec;
+  --sf-bg: #f5f2ec;
+  --sf-surface: #f5f2ec;
   --sf-ink: #243c30;
   --sf-muted: #61745c;
   --sf-line: #dce5d5;
@@ -670,7 +670,7 @@
 .sf-loyalty-card img {
   width: 47px;
   height: 47px;
-  border: 3px solid white;
+  border: 3px solid #f5f2ec;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1029,7 +1029,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: white;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 7px;
   padding: 10px;
@@ -2035,7 +2035,7 @@
   padding: 14px 24px;
   font-size: 11px;
   color: #6b805d;
-  background: #fffefa;
+  background: #f5f2ec;
   border-bottom: 1px solid #dce5d3;
   text-align: center;
 }

@@ -1,0 +1,47 @@
+/* Neutral material system: identity on marks, brand color on primary actions. */
+html body, html body:has(.entry-mobile-first), html body .entry-mobile-first { background:var(--k-paper); color:var(--k-ink); }
+html body .app { --brand:var(--k-action); }
+html body .entry-mobile-first .demo-purpose-card { background:var(--k-sage); color:var(--k-ink); border:1px solid var(--k-line); box-shadow:none; }
+html body .logo-stage .company-wordmark.company-mark-stacked { color:var(--k-ink); }
+html body .demo-introduction h1, html body .demo-introduction h1 em, html body .demo-purpose-card h2 { color:var(--k-ink); }
+html body .demo-purpose-card :is(.demo-eyebrow,.demo-purpose-note,.visit-description,.visit-index,.visit-hint,.visit-indicator) { color:var(--k-ink-2); }
+html body .demo-purpose-note { border-color:var(--k-line); }
+html body .visit-step { color:var(--k-ink); }
+html body .visit-step:hover { background:var(--k-surface); }
+html body .visit-step[aria-pressed=true] { background:var(--k-surface); border-color:var(--k-line-strong); }
+html body .visit-preview { background:var(--k-surface); border-color:var(--k-line); }
+html body .visit-preview :is(p,.motion-glyph) { color:var(--k-ink); }
+html body .visit-preview small, html body .connection-badge { color:var(--k-ink-2); }
+html body .entry-mobile-first .spaces-footer { background:transparent; color:var(--k-ink-2); border-top:1px solid var(--k-line); border-radius:0; }
+html body :is(.panel,.stat-card,.menu-card,.order-card,.modal,.workspace,.topbar,.sidebar,.studio-toolbar,.studio-inspector,.booth-detail,.map-explorer,.session-menu) { background-color:var(--k-surface); }
+html body :is(.welcome-banner,.vision-hero,.connection-card,.pilot-card,.studio-preview-toolbar,.studio-save-bar,.view-context) { background:var(--k-sage); color:var(--k-ink); }
+html body .welcome-banner :is(h1,h2,h3,p,span,strong,small), html body .connection-card :is(h2,p) { color:var(--k-ink); }
+html body .market-workspace .market-heading { background:var(--k-sage); color:var(--k-ink); border:1px solid var(--k-line); }
+html body .market-workspace .market-heading :is(h1,p,.spaces-eyebrow,.market-lifecycle,.market-simulation) { color:var(--k-ink); }
+html body .market-workspace .market-heading :is(.market-lifecycle,.market-simulation) { background:var(--k-surface); border-color:var(--k-line); }
+html body .map-mode .market-heading { background:var(--k-surface); }
+html body .map-stage { background:var(--k-sage); }
+html body .map-spot.occupied .booth-footprint { fill:#626b70; stroke:#626b70; }
+html body .map-spot.selected .booth-footprint { fill:#dedfd8; stroke:var(--k-ink); }
+html body .map-spot.selected text { fill:var(--k-ink); }
+html body .studio-toolbar [role=tablist] { background:var(--k-sage); }
+html body .sidebar nav button.active::before { background:var(--k-ink-2); }
+html body :is(.chart-bar,.bar-fill,.sales-bar) { background:#8b9690; }
+/* Specific action contract wins over neutral surfaces without recoloring merchant themes. */
+html body :is(.demo-start,.space-primary,.button.primary,.studio-heading .button.primary,.studio-save-bar .button.primary) { background:var(--k-action); border-color:var(--k-action); color:var(--k-surface); }
+html body :is(.demo-start,.space-primary,.button.primary):hover { background:var(--k-action-hover); }
+html body .visit-step:focus-visible { outline-color:var(--k-ink-2); }
+html body .legend i { background:#8b9690; }
+html body .map-explorer .map-legend .legend-occupied { background:#626b70; border-color:#626b70; }
+/* Blend original SVG artboards into tinted paper without editing identity files. */
+html body .company-wordmark { mix-blend-mode:multiply; }
+html body .company-wordmark .wordmark-art { filter:grayscale(1); }
+html body .spaces-footer .company-mark-compact { display:inline-flex; align-items:center; gap:8px; width:176px; height:36px; }
+@media(min-width:1000px) {
+ html body .app:has(.studio-interactive) .sidebar .logo .brand-wordmark { display:none; }
+ html body .app:has(.studio-interactive) .sidebar .logo .company-mark-compact { width:26px; }
+}
+html body .entry-mobile-first .spaces-footer > .company-wordmark.company-mark-compact { display:inline-flex; align-items:center; gap:8px; width:176px; height:36px; flex:none; }
+@media(max-width:750px) {
+ html body .intro-screen .spaces-footer > .company-wordmark.company-mark-compact { display:none; }
+}

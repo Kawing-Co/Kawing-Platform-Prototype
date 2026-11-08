@@ -9,7 +9,7 @@ const icons={connection:Connection,cart:ShoppingBag,nudge:ArrowDown};
 function animationData(name,tone){
   const data=JSON.parse(JSON.stringify(clips[name]));
   if(tone==='light'){
-    const walk=value=>{if(Array.isArray(value))value.forEach(walk);else if(value&&typeof value==='object'){if(['fl','st'].includes(value.ty)&&value.c&&!value.c.a){const white=value.c.k[0]>.95;value.c.k=white?[20/255,40/255,75/255,1]:[1,1,1,1];}Object.values(value).forEach(walk);}};
+    const walk=value=>{if(Array.isArray(value))value.forEach(walk);else if(value&&typeof value==='object'){if(['fl','st'].includes(value.ty)&&value.c&&!value.c.a){const white=value.c.k[0]>.95;value.c.k=white?[20/255,40/255,75/255,1]:[245/255,242/255,236/255,1];}Object.values(value).forEach(walk);}};
     walk(data);
   }
   return data;
@@ -63,7 +63,7 @@ export function ConnectedVisit({motion}){
 
   return <div ref={card} className="connected-visit" data-active-step={active}>
     <ol>{steps.map((step,i)=><li key={step.title}><button className="visit-step" aria-pressed={active===i} onClick={()=>{setActive(i);setInteracted(true);}}><span className="visit-index">0{i+1}</span><span><b>{step.title}</b><span className="visit-description">{step.copy}</span></span><span className="visit-indicator"><Check size={14}/></span></button></li>)}</ol>
-    <div className="visit-preview" key={active}><MotionGlyph name={steps[active].clip} enabled={motion.enabled} tone="light"/><div><small>{steps[active].label} perspective · Demo</small><p>{steps[active].sample}</p></div></div>
+    <div className="visit-preview" key={active}><MotionGlyph name={steps[active].clip} enabled={motion.enabled} tone="ink"/><div><small>{steps[active].label} perspective · Demo</small><p>{steps[active].sample}</p></div></div>
     <small className="visit-hint">Select a step to explore the connection.</small>
   </div>;
 }

@@ -75,3 +75,24 @@ Publish to existing public Site; GitHub push remains deferred.
 Verification: ten branding/motion/viewport checks passed, including no scrolling at
 360x640,390x844,768x1024 and1440x900. Diff reviewed. Build/package and publish exact
 local main; GitHub push deferred. Current rollback: Site17.
+
+2026-11-08 active owner amendment: neutral functional design system. Navy brand is an
+action accent, not a decorative panel/chart/background color. Use warm complementary
+paper/surfaces with >=5% visible tint and navy-tinted near-black ink; no pure white/black
+UI literals. Preserve original identity assets and merchant-specific brand identities.
+Scope: shared tokens, company presentation/shell/Studio/map/admin chrome, neutral text
+and surfaces, primary action contracts. No routes/data/operational changes. Verify
+contrast, representative workspaces, viewport fit and relevant regressions, then publish
+exact local main to existing public Site. GitHub push remains deferred; rollback Site18.
+
+Completed neutral design slice: warm tinted surfaces/legacy extremes migrated; charcoal
+text, stone panels, navy primary actions, neutral map and illustration colors. Original
+identity sources preserved with blend/grayscale presentation, compact footer adapted;
+Studio rail logo overflow fixed. Data/operational contracts unchanged.
+Verification: 21/24 initial checks; updated legacy neutral-color expectation and fixed
+footer viewport layout, then 15/15 passed including all three failures and map controls.
+29 distinct relevant checks covered. Production build, contrast smoke and 12-case
+compiled responsive review passed. Desktop/phone screenshots inspected and retained.
+Design contract: docs/NEUTRAL_DESIGN_SYSTEM.md. Full suite not rerun; existing bundle
+advisory remains. Publish exact local main to existing public Site; rollback Site18.
+Record actual returned version in .git/kawing-brand-release.json. GitHub push deferred.

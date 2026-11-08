@@ -52,7 +52,7 @@ html body .sf-brand-hero .sf-primary { width: auto; min-width: 200px; min-height
 @media (max-width: 700px) { html body .sf-brand-hero .sf-primary { width: 100%; } }
 @media (min-width: 761px) {
   /* the photograph sits right and melts into the panel */
-  html body .sf-hero-media { left: 34%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 40%); mask-image: linear-gradient(90deg, transparent 0, #000 40%); }
+  html body .sf-hero-media { left: 34%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #1d2430 40%); mask-image: linear-gradient(90deg, transparent 0, #1d2430 40%); }
   html body .sf-brand-hero::before { background: linear-gradient(90deg, rgba(var(--sf-tint-rgb, 12, 24, 17), 0.5) 0%, rgba(var(--sf-tint-rgb, 12, 24, 17), 0) 55%), linear-gradient(0deg, rgba(var(--sf-tint-rgb, 12, 24, 17), 0.6), transparent 50%); }
 }
 /* the minimal composition stays a quiet, paper-coloured header */

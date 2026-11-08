@@ -3,7 +3,7 @@
   --premium-ink: var(--k-ink);
   --premium-muted: var(--k-ink);
   --premium-line: var(--k-sage);
-  --premium-paper: #fbfaf6;
+  --premium-paper: #f5f2ec;
   --premium-green: var(--k-ink);
   --premium-ease: cubic-bezier(0.22, 0.8, 0.25, 1);
 }
@@ -61,11 +61,11 @@ button:active:not(:disabled) {
   max-width: 1360px;
   padding: 0 52px;
   margin: auto;
-  background: #fbfaf6;
+  background: #f5f2ec;
   isolation: isolate;
 }
 body:has(.premium-landing) {
-  background: #fbfaf6;
+  background: #f5f2ec;
 }
 .premium-landing .spaces-brand {
   height: 95px;
@@ -133,7 +133,7 @@ body:has(.premium-landing) {
   border: 1px solid var(--k-sage);
   border-radius: 18px;
   box-shadow: none;
-  background: #fffefa;
+  background: #f5f2ec;
   overflow: hidden;
   transition:
     transform 0.24s var(--premium-ease),
@@ -219,7 +219,7 @@ body:has(.premium-landing) {
   border-radius: 15px;
   box-shadow: none;
   min-height: 310px;
-  background: #fffefa;
+  background: #f5f2ec;
   border-color: var(--k-sage);
 }
 .premium-landing .space-role-cards h2 {
@@ -311,7 +311,7 @@ body:has(.premium-landing) {
 .story-copy {
   min-width: 0;
   padding: 37px 35px;
-  background: #fffefa;
+  background: #f5f2ec;
 }
 .story-stage-tabs {
   display: flex;
@@ -447,7 +447,7 @@ body:has(.premium-landing) {
   border: 1px solid var(--k-sage);
   border-radius: 16px;
   padding: 0;
-  background: #fbfaf6;
+  background: #f5f2ec;
   max-height: 90dvh;
   overflow: auto;
   color: var(--k-ink);
@@ -503,7 +503,7 @@ body:has(.premium-landing) {
   font:
     10px "DM Sans",
     sans-serif;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 4px;
   padding: 2px 5px;
@@ -515,7 +515,7 @@ body:has(.premium-landing) {
   padding: 0;
   border: 1px solid var(--k-sage);
   border-radius: 16px;
-  background: #fffefa;
+  background: #f5f2ec;
   color: var(--k-ink);
   box-shadow: 0 30px 100px rgba(15, 29, 55, 0.145);
   max-height: 74dvh;
@@ -670,7 +670,7 @@ body:has(.premium-landing) {
   align-items: center;
   gap: 13px;
   background: var(--k-ink);
-  color: #fffefa;
+  color: #f5f2ec;
   border: 1px solid var(--k-ink);
   box-shadow: 0 8px 40px rgba(15, 29, 55, 0.141);
   padding: 9px 11px 9px 17px;
@@ -691,7 +691,7 @@ body:has(.premium-landing) {
   min-height: 35px;
   padding: 8px 10px;
   background: var(--k-ink);
-  color: #fffefa;
+  color: #f5f2ec;
   border-radius: 6px;
   font-size: 11px;
   white-space: nowrap;
@@ -716,7 +716,7 @@ body:has(.premium-landing) {
   width: 235px;
   z-index: 10;
   padding: 14px 17px;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 9px;
   box-shadow: 0 8px 24px rgba(20, 40, 75, 0.063);
@@ -863,7 +863,7 @@ body:has(.premium-landing) {
 .admin-task-panel,
 .vendor-dossier,
 .studio-controls {
-  background: #fffefa;
+  background: #f5f2ec;
 }
 .admin-command-heading p,
 .admin-business-card p,

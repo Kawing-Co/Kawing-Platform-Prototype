@@ -1,4 +1,4 @@
-/* Kawing design system — tokens. Navy / white company identity; merchant themes remain independent. */
+/* Kawing design system — warm neutral materials, navy action accent; merchant identities remain independent. */
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-300-normal.woff2) format("woff2"); font-weight: 300; font-display: swap; }
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2"); font-weight: 500 700; font-display: swap; }
 @font-face { font-family: "Cormorant Garamond"; src: url(/fonts/cormorant-garamond-latin-400-italic.woff2) format("woff2"); font-weight: 400 600; font-style: italic; font-display: swap; }
@@ -6,17 +6,19 @@
 @font-face { font-family: "Jost"; src: url(/fonts/jost-latin-wght-normal.woff2) format("woff2"); font-weight: 100 900; font-display: swap; }
 
 :root {
-  /* colour */
-  --k-paper: #ffffff;
-  --k-surface: #ffffff;
-  --k-ink: #14284b;
-  --k-ink-2: #526077;          /* muted text on the company surface */
-  --k-forest: #14284b;
-  --k-forest-2: #304d72;
-  --k-sage: #edf1f7;
-  --k-sage-2: #dce4ef;
-  --k-moss: #526b8b;
-  --k-night: #101c33;          /* photographic dark, shared with the Matcha Mood site */
+  /* Neutral material palette; brand is reserved for primary actions. */
+  --k-action: #14284b;
+  --k-action-hover: #263e62;
+  --k-paper: #f0eee9;
+  --k-surface: #f5f2ec;
+  --k-ink: #1d2430;
+  --k-ink-2: #60656c;          /* muted text on the company surface */
+  --k-forest: #1d2430;
+  --k-forest-2: #48515d;
+  --k-sage: #e7e6e1;
+  --k-sage-2: #dbddd9;
+  --k-moss: #6a706b;
+  --k-night: #1d2430;          /* photographic dark, shared with the Matcha Mood site */
   --k-amber: #b9741f;          /* pending / offline only */
   --k-line: rgba(21, 38, 65, 0.12);
   --k-line-strong: rgba(21, 38, 65, 0.22);

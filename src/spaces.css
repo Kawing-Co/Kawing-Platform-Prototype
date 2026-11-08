@@ -2,12 +2,12 @@
   --sp-ink: var(--k-night);
   --sp-muted: var(--k-ink);
   --sp-line: var(--k-sage);
-  --sp-bg: #f7f8f2;
+  --sp-bg: #f5f2ec;
   --sp-green: var(--k-ink);
 }
 .spaces-landing {
   min-height: 100vh;
-  background: #f7f8f2;
+  background: #f5f2ec;
   color: var(--sp-ink);
   padding: 0 max(28px, calc((100vw - 1200px) / 2));
 }
@@ -78,7 +78,7 @@
 }
 .spaces-step > .current,
 .spaces-step > .done {
-  color: #fff;
+  color: #f5f2ec;
   background: var(--k-ink);
   border-color: var(--k-ink);
 }
@@ -119,7 +119,7 @@
   margin: 0 auto 46px;
 }
 .scenario-card {
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 18px;
   overflow: hidden;
@@ -158,7 +158,7 @@
 .mini-shop {
   width: 205px;
   height: 168px;
-  background: #fffefa;
+  background: #f5f2ec;
   box-shadow: 0 10px 20px rgba(20, 40, 75, 0.071);
   position: relative;
   transform: rotate(-5deg);
@@ -232,7 +232,7 @@
   place-items: center;
   width: 52px;
   height: 45px;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid #e0d9c9;
   border-radius: 8px;
   box-shadow: 0 5px 8px #61553608;
@@ -242,7 +242,7 @@
 }
 .mini-map > i.occupied {
   background: var(--k-ink);
-  color: #fff;
+  color: #f5f2ec;
 }
 .mini-map > i.path {
   background: transparent;
@@ -314,7 +314,7 @@
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 15px;
   padding: 29px;
@@ -375,7 +375,7 @@
   justify-content: space-between;
   gap: 20px;
   padding: 0 28px;
-  background: #fffefa;
+  background: #f5f2ec;
   border-bottom: 1px solid var(--k-sage);
   position: sticky;
   top: 0;
@@ -443,7 +443,7 @@
   padding: 12px 17px;
   border-radius: 8px;
   background: var(--k-ink);
-  color: white;
+  color: #f5f2ec;
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
@@ -562,7 +562,7 @@
   max-width: 430px;
   width: 100%;
   border: 1px solid var(--k-sage);
-  background: #fffefa;
+  background: #f5f2ec;
   border-radius: 8px;
   padding: 11px 14px;
   color: var(--k-ink-2);
@@ -584,7 +584,7 @@
   display: flex;
   gap: 5px;
   align-items: center;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 8px;
   padding: 3px;
@@ -611,7 +611,7 @@
   align-items: start;
 }
 .venue-map {
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 13px;
   padding: 20px;
@@ -726,7 +726,7 @@
   background: #d0ac77;
 }
 .booth-detail {
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 13px;
   padding: 25px;
@@ -875,7 +875,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 10px;
   padding: 15px;
@@ -907,7 +907,7 @@
   opacity: 0.4;
 }
 .booth-list {
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 12px;
   padding: 23px;
@@ -966,7 +966,7 @@
 .market-pager > button {
   border: 1px solid var(--k-sage);
   border-radius: 5px;
-  background: #fffefa;
+  background: #f5f2ec;
   color: var(--k-ink-2);
   font-size: 10px;
   padding: 9px 12px;
@@ -975,7 +975,7 @@
   opacity: 0.4;
 }
 .market-panel {
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 13px;
   padding: 30px;
@@ -1048,7 +1048,7 @@
 .admin-summary > article {
   border: 1px solid var(--k-sage);
   border-radius: 10px;
-  background: #fffefa;
+  background: #f5f2ec;
   padding: 23px;
 }
 .admin-summary span {
@@ -1082,7 +1082,7 @@
 }
 .tier-panel {
   padding: 25px;
-  background: #fffefa;
+  background: #f5f2ec;
   border: 1px solid var(--k-sage);
   border-radius: 12px;
 }

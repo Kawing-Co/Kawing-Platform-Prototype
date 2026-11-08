@@ -381,7 +381,7 @@ export default function Spaces({ Workspace }) {
             businesses · Browser-local data
             <a className="motion-credits" href="/motion/CREDITS.txt" target="_blank" rel="noopener noreferrer">Animation credits</a>
           </span>
-          <CompanyWordmark variant="reversed" />
+          <CompanyWordmark variant="compact" />
         </footer>
       </main>
     </>

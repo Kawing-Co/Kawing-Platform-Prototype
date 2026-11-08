@@ -6,7 +6,7 @@
   padding: 18px;
   border: 1px solid #e2e6dc;
   border-radius: 14px;
-  background: #fafbf6;
+  background: #f5f2ec;
   text-align: left;
 }
 .cx-pay-badge {
@@ -25,7 +25,7 @@
   text-decoration: none;
 }
 .cx-pay-fallback {
-  background: #fff;
+  background: #f5f2ec;
   border: 1px solid #e6e8df;
   border-radius: 10px;
   padding: 14px 16px;
@@ -59,7 +59,7 @@
   padding: 12px;
   border: 1px solid #dfe5d7;
   border-radius: 9px;
-  background: #fff;
+  background: #f5f2ec;
   color: var(--cx-accent);
   font-size: 12px;
 }

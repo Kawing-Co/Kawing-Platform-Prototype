@@ -13,7 +13,7 @@ test('supplied brand SVGs are served and the compact wordmark loads as artwork',
   await expect.poll(()=>art.evaluate(e=>e.complete && e.naturalWidth>0)).toBe(true);
   expect(await page.locator('link[rel=icon]').getAttribute('href')).toBe('/branding/kawing-symbol.svg');
   await expect(page.locator('.brand-stacked')).toBeVisible();
-  await expect(page.locator('.company-mark-reversed img')).toHaveAttribute('src','/branding/kawing-wordmark-reversed.svg');
+  await expect(page.locator('.spaces-footer .art-flat')).toHaveAttribute('src','/branding/kawing-wordmark-flat.svg');
 });
 
 test('logo hover reveals the supplied depth variant and keyboard navigation still works', async ({page}) => {

@@ -44,17 +44,17 @@ export default function BoothMap({booths, profiles, visible, selected, onSelect,
       <svg ref={svg} viewBox={`${view.x} ${view.y} ${100/view.zoom} ${70/view.zoom}`} role="group" tabIndex={0} aria-label="Booth layout" aria-describedby="map-instructions" style={{touchAction:gestures?'none':'pan-y'}} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={e=>{points.current.clear();start.current=null;suppress.current=true;setDragging(false);}} onKeyDown={e=>{
         if(e.target!==e.currentTarget)return;const keys={ArrowLeft:[-5,0],ArrowRight:[5,0],ArrowUp:[0,-5],ArrowDown:[0,5]};if(keys[e.key]){e.preventDefault();update({...view,x:view.x+keys[e.key][0],y:view.y+keys[e.key][1]});}else if(['+','=','-','Home'].includes(e.key)){e.preventDefault();e.key==='Home'?fit():zoomBy(e.key==='-'?-.25:.25);}
       }}>
-        <rect width="100" height="70" rx="3" fill="#f3f6fb"/>
-        <rect x="3" y="5" width="94" height="21" rx="2.2" fill="#e4eaf3"/>
-        <rect x="3" y="44" width="94" height="21" rx="2.2" fill="#e4eaf3"/>
-        <path d="M0 35H100" stroke="#fff" strokeWidth="12"/>
-        <path d="M59.5 0V70" stroke="#fff" strokeWidth="5"/>
-        <path d="M0 35H100M59.5 0V70" stroke="#d1dcea" strokeWidth=".3" strokeDasharray="1 1"/>
-        <text x="28" y="36" textAnchor="middle" fontSize="2" fill="#526077" letterSpacing=".25">CENTRAL WALKWAY</text>
-        <text x="59.5" y="4" textAnchor="middle" fontSize="1.7" fill="#526077">ACCESS</text>
-        <g className="map-entrances" fill="#14284b">
-          <circle cx="3" cy="35" r="2.4"/><path d="M1.5 35h3m-1-1 1 1-1 1" stroke="#fff" strokeWidth=".4" fill="none"/>
-          <circle cx="97" cy="35" r="2.4"/><path d="M98.5 35h-3m1-1-1 1 1 1" stroke="#fff" strokeWidth=".4" fill="none"/>
+        <rect width="100" height="70" rx="3" fill="#eeede7"/>
+        <rect x="3" y="5" width="94" height="21" rx="2.2" fill="#e3e3dc"/>
+        <rect x="3" y="44" width="94" height="21" rx="2.2" fill="#e3e3dc"/>
+        <path d="M0 35H100" stroke="#f5f2ec" strokeWidth="12"/>
+        <path d="M59.5 0V70" stroke="#f5f2ec" strokeWidth="5"/>
+        <path d="M0 35H100M59.5 0V70" stroke="#ced0c9" strokeWidth=".3" strokeDasharray="1 1"/>
+        <text x="28" y="36" textAnchor="middle" fontSize="2" fill="#60656c" letterSpacing=".25">CENTRAL WALKWAY</text>
+        <text x="59.5" y="4" textAnchor="middle" fontSize="1.7" fill="#60656c">ACCESS</text>
+        <g className="map-entrances" fill="#1d2430">
+          <circle cx="3" cy="35" r="2.4"/><path d="M1.5 35h3m-1-1 1 1-1 1" stroke="#f5f2ec" strokeWidth=".4" fill="none"/>
+          <circle cx="97" cy="35" r="2.4"/><path d="M98.5 35h-3m1-1-1 1 1 1" stroke="#f5f2ec" strokeWidth=".4" fill="none"/>
           <text x="9" y="32" fontSize="1.7">ENTRY A</text><text x="83" y="32" fontSize="1.7">ENTRY B</text>
           <text x="59.5" y="68" textAnchor="middle" fontSize="1.7">ACCESS</text>
         </g>

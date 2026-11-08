@@ -19,7 +19,7 @@ html body .premium-landing .spaces-intro > p { grid-area: lede; font-size: 16px;
 html body .premium-landing .spaces-step > li { color: var(--k-ink-2); }
 html body .premium-landing .spaces-step > li[aria-current="step"] { color: var(--k-ink); font-weight: 600; }
 html body .premium-landing .spaces-step > li > span { height: 24px; width: 24px; font-size: 11px; }
-html body .premium-landing .spaces-step > li > span.current, html body .premium-landing .spaces-step > li > span.done { background: var(--k-forest); color: #fff; }
+html body .premium-landing .spaces-step > li > span.current, html body .premium-landing .spaces-step > li > span.done { background: var(--k-forest); color: #f5f2ec; }
 
 /* the collage: three real businesses, drifting gently; a swipeable strip on phones */
 .spaces-collage { grid-area: collage; position: relative; min-height: clamp(380px, 42vw, 520px); }
