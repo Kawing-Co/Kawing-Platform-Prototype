@@ -178,3 +178,8 @@ mobile/desktop and checkout, build and publish existing public Site; no GitHub p
 Cutout slice complete: transparent PNGs at existing logo paths; contained cup and
 trimmed wordmark viewport, no multiply blending. Original source files archived.
 RGBA verified, mobile/desktop screenshots inspected and four Blackball checks pass.
+
+2026-11-08 owner copy cleanup: remove “Illustrative photo” from image stamps in menu
+and modifier sheets. Keep brand stamp, reference-photo note and attribution link.
+Baseline 1a7a5a3/Site24. No image, transaction or persistence change. Verify relevant
+render path/build, commit local main and publish existing Site; GitHub push deferred.

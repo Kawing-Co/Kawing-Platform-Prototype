@@ -22,5 +22,5 @@ test('old placeholder photos migrate without losing merchant records',async({pag
  await page.reload();await expect.poll(()=>page.evaluate(id=>{const d=JSON.parse(localStorage.getItem('kawing-merchant-v2:blackball'));return d.menu.find(x=>x.id===id).image},result.id)).toContain('/reference/');
  const record=await page.evaluate(()=>JSON.parse(localStorage.getItem('kawing-merchant-v2:blackball')));const item=record.menu.find(x=>x.id===result.id);
  expect(item.price).toBe(777);expect(item.available).toBe(false);expect(record.brand.tagline).toBe('Owner custom copy');expect(record.orders).toEqual(result.orders);
- await page.getByRole('button',{name:'Order now',exact:true}).click();await expect(page.locator('.merchant-photo-stamp').first()).toContainText('Illustrative photo');
+ await page.getByRole('button',{name:'Order now',exact:true}).click();await expect(page.locator('.merchant-photo-stamp').first()).toHaveText('blackball cafe');
 });

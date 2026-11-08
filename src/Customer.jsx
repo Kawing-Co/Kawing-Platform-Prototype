@@ -486,7 +486,7 @@ export default function Customer({
                             <UtensilsCrossed size={35} />
                           </div>
                         )}
-                        {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b><small>Illustrative photo</small></span>}
+                        {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b></span>}
                         {item.available === false ? (
                           <span className="cx-food-label">Back soon</span>
                         ) : (
