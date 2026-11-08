@@ -1,3 +1,4 @@
+import BlackballShowcase from "./BlackballShowcase";
 import { receiptKey } from "./experience";
 import ProgressiveImage from "./ProgressiveImage";
 import React, { useEffect, useLayoutEffect, useMemo, useState, useRef } from "react";
@@ -47,6 +48,8 @@ export default function Customer({
   onCartStart,
   onReceiptChange,
   merchantId = "salo",
+  initialProductId,
+  onInitialProductConsumed,
 }) {
   const craft = brand.category === "Crafts";
   const [category, setCategory] = useState("All");
@@ -89,7 +92,8 @@ export default function Customer({
   const [payment, setPayment] = useState("GCash");
   // Opened only by an explicit "Continue with …" tap; never changes payment status.
   const [payGuide, setPayGuide] = useState(null);
-  const [sheet, setSheet] = useState(null);       // item being customized
+  const [sheet, setSheet] = useState(()=>menu.find(i=>i.id===initialProductId&&i.available!==false)||null);       // item being customized
+  useEffect(()=>{if(initialProductId)onInitialProductConsumed?.();},[initialProductId,onInitialProductConsumed]);
   const [bagOpen, setBagOpen] = useState(false);  // phone: the order sheet
   const [placed, setPlaced] = useState(() => {
     try {
@@ -174,7 +178,7 @@ export default function Customer({
     if (!rect) return;
     flyTo({ from: { x: rect.left + rect.width / 2, y: rect.top + rect.height * 0.5 }, src, target: bagPoint(), size }).then(() => {
       const t = bagPoint();
-      burst(t.x, t.y, ["#cfe79a", "#7da24a", "#eef3dc"], 12, { spread: 64, gravity: 28 });
+      burst(t.x, t.y, brand.identity === "blackball" ? ["#fb6301", "#f5f2ec", "#d4b99f"] : ["#cfe79a", "#7da24a", "#eef3dc"], 12, { spread: 64, gravity: 28 });
       const pill = document.querySelector(".cx-mobile-bag");
       pill?.classList.remove("k-squish"); void pill?.offsetWidth; pill?.classList.add("k-squish");
     });
@@ -357,6 +361,10 @@ export default function Customer({
               ? "Your order is shared with this merchant. Updates appear here as they prepare your pickup."
               : "Your order is shared with the café team. Follow it in the kitchen, then come back to see its progress."}
           </p>
+          {brand.identity === 'blackball' && onAction && status !== 'queued' && status !== 'refunded' && <details className="bb-simulator">
+            <summary>Try the fulfillment demo</summary><p>Presenter controls · Each action simulates the café team using this same order. No payment is processed.</p>
+            {statusIndex === 3 ? <p role="status">Demo complete. Your order is served.</p> : liveOrder.paymentStatus === 'selected' && liveOrder.payment !== 'Cash' ? <p>Use the payment guide above to simulate sending payment first.</p> : liveOrder.paymentStatus === 'selected' || liveOrder.paymentStatus === 'claimed' ? <button onClick={()=>onAction(liveOrder.id,'review')}>Cashier: review demo payment</button> : liveOrder.paymentStatus === 'reviewing' ? <button onClick={()=>onAction(liveOrder.id,'confirm')}>Cashier: confirm demo payment</button> : liveOrder.paymentStatus === 'confirmed' ? <button onClick={()=>onAction(liveOrder.id,'advance')}>{statusIndex===0?'Kitchen: start preparing':statusIndex===1?'Kitchen: mark ready':'Team: mark served'}</button> : null}
+          </details>}
           {onNavigate && (
             <button className="cx-primary" onClick={() => onNavigate("Orders")}>
               Follow this order in the kitchen <ArrowUpRight size={15} />
@@ -368,7 +376,7 @@ export default function Customer({
         </section>
       ) : (
         <>
-          <header className="cx-hero">
+          {brand.identity === "blackball" ? <section className="bb-order-intro"><div className="bb-order-copy"><img className="bb-intro-logo" src="/images/blackball/symbol.png" alt="Blackball Cafe" width="88" height="56"/><h1>Your craving.<br/>Your way.</h1><p>Swipe. Choose. Make it yours.</p><small>Menu prices in PHP · Orders and payments are demos</small></div><BlackballShowcase menu={menu} onChoose={setSheet}/></section> : <header className="cx-hero">
             <div className="cx-hero-media" aria-hidden="true">
               <ProgressiveImage src={heroPhoto} alt="" width="1024" height="1280" />
             </div>
@@ -409,7 +417,7 @@ export default function Customer({
               <span>You’re at</span>
               <strong>{contextLabel(context)}</strong>
             </div>
-          </header>
+          </header>}
           {offline && (
             <div className="cx-offline">
               <WifiOff size={15} /> Offline simulation · Your order will be

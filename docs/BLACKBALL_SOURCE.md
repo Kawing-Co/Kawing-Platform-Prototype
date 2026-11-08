@@ -62,3 +62,8 @@ passed; existing large-main-bundle advisory remains. No configured lint/typechec
 Compiled phone390/desktop1440 review covered hub, Start here and business picker with
 zero overflow or page errors. Actual screenshots inspected; stored in screenshots/blackball.
 No physical-device certification or complete accessibility audit is claimed.
+
+Current mobile ordering amendment: BLACKBALL_MOBILE_ORDERING_SPEC.md adds explicitly
+fictional size/topping contracts to four drinks, beyond the source-backed base menu.
+Those options and surcharges are not represented as published merchant offerings.
+See BLACKBALL_MOBILE_ORDERING_GUIDE.md for the connected demonstration and verification.

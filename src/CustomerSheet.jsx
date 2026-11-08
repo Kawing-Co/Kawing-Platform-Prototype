@@ -78,7 +78,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
     const r = stage.current?.getBoundingClientRect();
     if (r) burst(r.left + r.width / 2, r.top + r.height * 0.55, colors, 16, { spread: 110 });
   };
-  const setOne = (o, v) => { if (sel[o.id] === v) return; setSel((s) => ({ ...s, [o.id]: v })); spark([item.glow || "#7da24a", "#eef3dc", "#cfe79a"]); navigator.vibrate?.(8); };
+  const setOne = (o, v) => { if (sel[o.id] === v) return; setSel((s) => ({ ...s, [o.id]: v })); spark(item.dir === "blackball" ? ["#fb6301", "#f5f2ec", "#d4b99f"] : [item.glow || "#7da24a", "#eef3dc", "#cfe79a"]); navigator.vibrate?.(8); };
   const toggle = (o, c) => {
     const on = !(sel[o.id] || []).includes(c.id);
     setSel((s) => ({ ...s, [o.id]: on ? [...(s[o.id] || []), c.id] : (s[o.id] || []).filter((x) => x !== c.id) }));
@@ -99,6 +99,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
     >
       <div className="k-sheet-grab" data-grab aria-hidden="true"><i /></div>
       <div className="k-sheet-stage" data-grab ref={stage}>
+        {item.demoOptionsVersion && <span className="bb-preview-caption">Visual preview · Demo options</span>}
         {item.illustrative && <span className="merchant-photo-stamp" aria-hidden="true"><b>blackball cafe</b></span>}
         <div className="k-sheet-photo" style={{ "--sc": scaleOf(item, sel), filter: toneOf(item, sel) || undefined }}>
           {layers.map((l) => (
@@ -112,6 +113,7 @@ export default function ItemSheet({ item, initial, onClose, onAdd }) {
       </div>
       <div className="k-sheet-body">
         <p className="k-sheet-desc">{item.description}</p>
+        {item.demoOptionsVersion && <p className="bb-demo-options-note">Try a size or topping. These choices and surcharges are fictional demo options; photo previews are approximate. The published base price is unchanged.</p>}
         {item.options.map((o) => (
           <fieldset className="k-opt" key={o.id}>
             <legend>{o.label}{o.type === "multi" && <em>optional</em>}{o.type === "range" && <em className="tnum">{sel[o.id]}{o.suffix}</em>}</legend>

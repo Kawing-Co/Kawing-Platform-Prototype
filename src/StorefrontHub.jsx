@@ -23,6 +23,7 @@ import {
   UtensilsCrossed,
   RefreshCw,
 } from "lucide-react";
+import BlackballShowcase from "./BlackballShowcase";
 import Customer from "./Customer";
 import { allAssets } from "./businesses";
 import ProgressiveImage from "./ProgressiveImage";
@@ -70,6 +71,7 @@ export default function StorefrontHub({
     [notice, setNotice] = useState(""),
     [receiptVersion, setReceiptVersion] = useState(0),
     [showReceipt, setShowReceipt] = useState(false);
+  const [requestedProduct,setRequestedProduct] = useState(null);
   const focus = useRef(null);
   const reviewView = useRef(null);
   const emit = (type, detail = "") => {
@@ -240,14 +242,14 @@ export default function StorefrontHub({
               </button>
             )}
             {c.layout !== "minimal" && (
-              <div className="sf-hero-media" aria-hidden="true">
-                <ProgressiveImage
+              <div className="sf-hero-media" aria-hidden={b.identity === "blackball" ? undefined : true}>
+                {b.identity === "blackball" ? <BlackballShowcase menu={data.menu} onChoose={item=>{setRequestedProduct(item.id);open("order");}}/> : <ProgressiveImage
                   className="sf-cover"
                   src={c.cover}
                   alt=""
                   width="1024"
                   height="1280"
-                />
+                />}
               </div>
             )}
             <div className="sf-brand-copy">
@@ -467,6 +469,8 @@ export default function StorefrontHub({
           {pane === "order" && (
             <Customer
               key={context.kind + context.table + receiptVersion}
+              initialProductId={requestedProduct}
+              onInitialProductConsumed={()=>setRequestedProduct(null)}
               onReceiptChange={setShowReceipt}
               merchantId={data.merchantId || "salo"}
               menu={data.menu}

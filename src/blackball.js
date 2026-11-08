@@ -1,7 +1,8 @@
 // Published menu labels/prices, retrieved 2026-11-08. See docs/BLACKBALL_SOURCE.md.
 import menu from './blackball-menu.json' with {type:'json'};
+import {withBlackballOptions} from './blackballOptions';
 import {orderLine} from './merchant';
-export const MENU_ITEMS=menu;
+export const MENU_ITEMS=menu.map(withBlackballOptions);
 const image=n=>`/images/blackball/${n}.png`;
 export const BRAND={name:'Blackball Cafe',accent:'#fb6301',tagline:'Coffee, good food, and a place at the table.',kicker:'COFFEE · MATCHA · ALL-DAY DINING',eyebrow:'Coffee · Matcha · All-day dining',searchHint:'Find your Blackball favorite',category:'Café & restaurant',welcome:'Explore the menu. Make it your usual.',wordmark:image('wordmark'),identity:'blackball',heroPhoto:image('matcha-tray'),bannerPhoto:image('matcha-tray'),heroLines:['Coffee, food,','a little company.'],bio:'Blackball Cafe menu demonstration, adapted from the merchant’s published menu. Ordering and business data are simulated.'};
 export const ASSETS={logos:[image('symbol')],covers:[image('matcha-tray'),image('burger'),image('pizza')],promos:[image('matcha-tray'),image('sandwiches')]};

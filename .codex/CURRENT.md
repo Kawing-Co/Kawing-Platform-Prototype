@@ -183,3 +183,14 @@ RGBA verified, mobile/desktop screenshots inspected and four Blackball checks pa
 and modifier sheets. Keep brand stamp, reference-photo note and attribution link.
 Baseline 1a7a5a3/Site24. No image, transaction or persistence change. Verify relevant
 render path/build, commit local main and publish existing Site; GitHub push deferred.
+2026-11-08 active owner upgrade: Blackball immersive mobile ordering. Bounded owner
+request recorded in docs/BLACKBALL_MOBILE_ORDERING_SPEC.md. Add swipeable featured
+gallery, explicitly simulated size/toppings and changing visual/price, connected
+checkout/fulfillment demonstration. Preserve all records, neutral styling and logos.
+Baseline 337d6d8 / public Site25. Verify/build/publish existing Site; GitHub push deferred.
+Blackball mobile slice complete: touch/keyboard featured gallery in hub and ordering,
+finite product motion, curated demo options with animated photo/price changes, cart
+flight, and explicit cashier/kitchen simulation through served. 18 targeted tests pass;
+360/390/1440px reviews show no overflow or page errors; screenshots inspected. Source
+menu/seed/orders preserved; four drink customizations disclosed as fictional. Guide:
+docs/BLACKBALL_MOBILE_ORDERING_GUIDE.md. Build and publish local main; GitHub deferred.

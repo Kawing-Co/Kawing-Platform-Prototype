@@ -4,12 +4,12 @@ import {photoPath} from '../src/merchant.js';
 for(const width of [390,1440])for(const merchant of ['salo','usual','blackball'])test(`${merchant} shared neutral storefront at ${width}px`,async({page})=>{
  await page.setViewportSize({width,height:900});await page.goto(`/?surface=guest&merchant=${merchant}&entry=table&table=05`);
  const hero=page.locator('.sf-brand-hero');await expect(hero).toHaveCSS('background-color','rgb(245, 242, 236)');
- await expect.poll(()=>page.locator('.sf-cover').evaluate(e=>e.complete&&e.naturalWidth>0)).toBe(true);
- const bounds=await page.locator('.sf-cover').evaluate(e=>{const p=e.closest('.sf-hero-media');return {width:e.clientWidth,height:e.clientHeight,parent:p.clientHeight}});
+ await expect.poll(()=>page.locator(merchant==='blackball'?'.bb-product-photo img':'.sf-cover').first().evaluate(e=>e.complete&&e.naturalWidth>0)).toBe(true);
+ const bounds=await page.locator(merchant==='blackball'?'.bb-product-photo img':'.sf-cover').first().evaluate(e=>{const p=e.closest('.sf-hero-media');return {width:e.clientWidth,height:e.clientHeight,parent:e.closest('.bb-product-photo')?.clientHeight||p.clientHeight}});
  expect(bounds.width).toBeGreaterThan(100);expect(bounds.height).toBe(bounds.parent);expect(bounds.height).toBeGreaterThan(150);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false);
  await page.getByRole('button',{name:'Order now',exact:true}).click();await expect(page.locator('.cx-grid')).toBeVisible();
- await expect(page.locator('.cx-hero')).toHaveCSS('background-color','rgb(245, 242, 236)');
+ if(merchant==='blackball')await expect(page.locator('.bb-order-intro')).toBeVisible();else await expect(page.locator('.cx-hero')).toHaveCSS('background-color','rgb(245, 242, 236)');
 });
 test('Blackball reference photos resolve in list and modifier paths',async({request})=>{
  const paths=[...new Set(MENU_ITEMS.flatMap(i=>[i.image,photoPath(i,i.images.base),photoPath(i,i.images.base,true)]))];
